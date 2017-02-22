@@ -61,7 +61,9 @@
                 return false;
             }
             if($('#code').val().trim().length != 4){
-               layer.tips('验证码长度为4!', '#code'); 
+               layer.tips('验证码长度为4!', '#code',{
+                    tips: [4]
+               }); 
                $('#code').focus();
                return false;
             }
@@ -73,7 +75,6 @@
                 success:function(result){
                     var status = result.status;
                     if(status == 1){
-                        //提示层
                         layer.msg(result.msg);
                         $('#code').val('').focus();
                         $('.verify').trigger('click');

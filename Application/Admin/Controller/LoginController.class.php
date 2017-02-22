@@ -13,6 +13,7 @@
 					session('uid',$result['user']['id']);
 					session('uname',$result['user']['username']);
 					session('logintime',$result['user']['lastlogintime']);
+					session('ip',$result['user']['lastloginip']);
 				}
 				$this -> ajaxReturn($result);
 			}else{
