@@ -33,14 +33,14 @@
         <div class="sidebar-content">
             <ul class="sidebar-list">
                 <li>
-                    <a href="javascript:;"><i class="icon-font">&#xe003;</i>内容管理</a>
+                    <a href="#"><i class="icon-font">&#xe003;</i>内容管理</a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo U('Article/index');?>"><i class="icon-font">&#xe008;</i>文章管理</a></li>
-                        <li><a href="<?php echo U('Category/index');?>"><i class="icon-font">&#xe005;</i>栏目管理</a></li>
-                        <li><a href="<?php echo U('Contact/index');?>"><i class="icon-font">&#xe006;</i>留言管理</a></li>
-                        <li><a href="<?php echo U('Comment/index');?>"><i class="icon-font">&#xe012;</i>评论管理</a></li>
-                        <li><a href="<?php echo U('Links/index');?>"><i class="icon-font">&#xe052;</i>友情链接</a></li>
-                        <li><a href="<?php echo U('Banner/index');?>"><i class="icon-font">&#xe033;</i>广告管理</a></li>
+                        <li><a href="design.html"><i class="icon-font">&#xe008;</i>文章管理</a></li>
+                        <li><a href="design.html"><i class="icon-font">&#xe005;</i>栏目管理</a></li>
+                        <li><a href="design.html"><i class="icon-font">&#xe006;</i>留言管理</a></li>
+                        <li><a href="design.html"><i class="icon-font">&#xe012;</i>评论管理</a></li>
+                        <li><a href="design.html"><i class="icon-font">&#xe052;</i>友情链接</a></li>
+                        <li><a href="design.html"><i class="icon-font">&#xe033;</i>广告管理</a></li>
                     </ul>
                 </li>
                 <li>
@@ -75,45 +75,34 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="/jscss/admin/design/">文章管理</a></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="/jscss/admin/design/">管理员</a><span class="crumb-step">&gt;</span><span>修改密码</span></div>
         </div>
-    
+
         <div class="result-wrap">
             <div class="result-content">
-                <form action="/jscss/admin/design/add" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                <form action="<?php echo U('Admin/edit');?>" method="post" id="editForm">
                     <table class="insert-tab" width="100%">
-                        <tbody><tr>
-                            <th width="120"><i class="require-red">*</i>分类：</th>
-                            <td>
-                                <select name="colId" id="catid" class="required common-text">
-                                    <option value="">请选择</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
-                                </select>
-                            </td>
-                        </tr>
+                        <tbody>
                             <tr>
-                                <th><i class="require-red">*</i>标题：</th>
+                                <th>用户名：</th>
                                 <td>
-                                    <input class="common-text required" id="title" name="title" size="50" value="" type="text">
+                                    <input disabled="disabled" class="common-text required disabled" id="uname" name="username" size="50" value="<?php echo ($admin["username"]); ?>" type="text">
                                 </td>
                             </tr>
                             <tr>
-                                <th>作者：</th>
-                                <td><input class="common-text" name="author" size="50" value="admin" type="text"></td>
+                                <th>新密码：</th>
+                                <td><input id="pwd" class="common-text" name="password" size="50" value="" type="text"></td>
                             </tr>
                             <tr>
-                                <th><i class="require-red">*</i>缩略图：</th>
-                                <td><input name="smallimg" id="" type="file"><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>--></td>
-                            </tr>
-                            <tr>
-                                <th>内容：</th>
-                                <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                <th>确认密码：</th>
+                                <td><input id="pwd2" class="common-text" name="password2" size="50" value="" type="text"></td>
                             </tr>
                             <tr>
                                 <th></th>
                                 <td>
+                                    <input type="hidden" name="id" value="<?php echo ($admin["id"]); ?>">
                                     <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
-                                    <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                                    <input class="btn btn6" value="重置" type="reset">
                                 </td>
                             </tr>
                         </tbody>
@@ -138,6 +127,49 @@
 	      layer.close(index);
 	    });   
 	});
+</script>
+<script type="text/javascript">
+    $(function(){
+        $('#editForm').submit(function(){
+            $pwd = $('#pwd').val().trim();
+            $pwd2 = $('#pwd2').val().trim();
+            if($pwd == ""){
+                layer.tips('密码不能为空哦!', '#pwd');
+                $('#pwd').val('').focus();
+                return false;
+            }
+            if($pwd.length < 5 || $pwd.length>10){
+                layer.tips('密码长度为6-10个字符!', '#pwd');
+                $('#pwd').val('').focus();
+                return false;
+            }
+            if($pwd !== $pwd2){
+                layer.tips('两次输入的密码不一致', '#pwd');
+                $('#pwd2').val('').focus();
+                return false;
+            }
+            $('#uname').removeAttr('disabled');
+            $.ajax({
+                type:'post',
+                url:'<?php echo U("edit");?>',
+                data:$('#editForm').serialize(),
+                dataType: 'json',
+                success:function(result){
+                    if(result.status == 1){
+                        layer.msg(result.msg);
+                    }else{
+                        layer.msg(result.msg);
+                    }
+                    return false;
+                },
+                error:function(result){
+                    layer.msg('修改失败!');
+                }
+            });
+            $('#uname').attr('disabled','disabled');
+            return false;
+        });
+    });
 </script>
 </body>
 </html>

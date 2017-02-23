@@ -1,0 +1,87 @@
+<include file="Public:header"/>
+<div class="container clearfix">
+    <include file="Public:left"/>
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="/jscss/admin/design/">管理员</a><span class="crumb-step">&gt;</span><span>修改密码</span></div>
+        </div>
+
+        <div class="result-wrap">
+            <div class="result-content">
+                <form action="{:U('Admin/edit')}" method="post" id="editForm">
+                    <table class="insert-tab" width="100%">
+                        <tbody>
+                            <tr>
+                                <th>用户名：</th>
+                                <td>
+                                    <input disabled="disabled" class="common-text required disabled" id="uname" name="username" size="50" value="{$admin.username}" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>新密码：</th>
+                                <td><input id="pwd" class="common-text" name="password" size="50" value="" type="text"></td>
+                            </tr>
+                            <tr>
+                                <th>确认密码：</th>
+                                <td><input id="pwd2" class="common-text" name="password2" size="50" value="" type="text"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <input type="hidden" name="id" value="{$admin.id}">
+                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                                    <input class="btn btn6" value="重置" type="reset">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+<include file="Public:footer" />
+<script type="text/javascript">
+    $(function(){
+        $('#editForm').submit(function(){
+            $pwd = $('#pwd').val().trim();
+            $pwd2 = $('#pwd2').val().trim();
+            if($pwd == ""){
+                layer.tips('密码不能为空哦!', '#pwd');
+                $('#pwd').val('').focus();
+                return false;
+            }
+            if($pwd.length < 5 || $pwd.length>10){
+                layer.tips('密码长度为6-10个字符!', '#pwd');
+                $('#pwd').val('').focus();
+                return false;
+            }
+            if($pwd !== $pwd2){
+                layer.tips('两次输入的密码不一致', '#pwd');
+                $('#pwd2').val('').focus();
+                return false;
+            }
+            $('#uname').removeAttr('disabled');
+            $.ajax({
+                type:'post',
+                url:'{:U("edit")}',
+                data:$('#editForm').serialize(),
+                dataType: 'json',
+                success:function(result){
+                    layer.msg(result.msg);
+                    return false;
+                },
+                error:function(result){
+                    layer.msg('修改失败!');
+                }
+            });
+            $('#uname').attr('disabled','disabled');
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

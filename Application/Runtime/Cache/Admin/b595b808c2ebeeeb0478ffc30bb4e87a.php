@@ -5,7 +5,7 @@
     <title>ThinkphpCms</title>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/main.css"/>
-    <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
+   
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -19,7 +19,7 @@
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
                 <li><a href="#">更新缓存</a></li>
-                <li><a href="<?php echo U('edit',array('id' => $_SESSION['uid']));?>">修改密码</a></li>
+                <li><a href="<?php echo U('Admin/edit',array('id' => $_SESSION['uid']));?>">修改密码</a></li>
                 <li><a href="javascript:;" class="logout">退出</a></li>
             </ul>
         </div>
@@ -33,14 +33,14 @@
         <div class="sidebar-content">
             <ul class="sidebar-list">
                 <li>
-                    <a href="#"><i class="icon-font">&#xe003;</i>内容管理</a>
+                    <a href="javascript:;"><i class="icon-font">&#xe003;</i>内容管理</a>
                     <ul class="sub-menu">
-                        <li><a href="design.html"><i class="icon-font">&#xe008;</i>文章管理</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe005;</i>栏目管理</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe006;</i>留言管理</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe012;</i>评论管理</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe052;</i>友情链接</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe033;</i>广告管理</a></li>
+                        <li><a href="<?php echo U('Article/index');?>"><i class="icon-font">&#xe008;</i>文章管理</a></li>
+                        <li><a href="<?php echo U('Category/index');?>"><i class="icon-font">&#xe005;</i>栏目管理</a></li>
+                        <li><a href="<?php echo U('Contact/index');?>"><i class="icon-font">&#xe006;</i>留言管理</a></li>
+                        <li><a href="<?php echo U('Comment/index');?>"><i class="icon-font">&#xe012;</i>评论管理</a></li>
+                        <li><a href="<?php echo U('Links/index');?>"><i class="icon-font">&#xe052;</i>友情链接</a></li>
+                        <li><a href="<?php echo U('Banner/index');?>"><i class="icon-font">&#xe033;</i>广告管理</a></li>
                     </ul>
                 </li>
                 <li>
@@ -138,24 +138,24 @@
     </div>
     <!--/main-->
 </div>
+<script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
-
+<script type="text/javascript" src="/./Application/Admin/Public/js/common.js"></script>
+<script type="text/javascript">
+	$('.logout').on('click',function(){
+	    //询问框
+	    layer.confirm('您确定要退出?', {icon: 3, title:'提示'}, function(index){
+	        $.get('<?php echo U("Index/logout");?>',function(){
+	            window.location.href = "<?php echo U('Login/index');?>";
+	        });              
+	      layer.close(index);
+	    });   
+	});
+</script>
 <script type="text/javascript">
     $(function(){
-        $('.logout').on('click',function(){
-            //询问框
-            layer.confirm('您确定要退出?', {icon: 3, title:'提示'}, function(index){
-                $.get('<?php echo U("logout");?>',function(){
-                    window.location.href = "<?php echo U('Login/index');?>";
-                });              
-              layer.close(index);
-            });   
-        });
-        $('.sidebar-list>li>a').on('click',function(){
-            $(this).next('.sub-menu').stop(true).slideDown('slow');
-            $(this).parents('li').not(this).find('.sub-menu').stop(true).slideUp('slow');
-        });
+        
         //获取当前时间
         var t = null;
         t = setTimeout(time,1000);//开始执行
