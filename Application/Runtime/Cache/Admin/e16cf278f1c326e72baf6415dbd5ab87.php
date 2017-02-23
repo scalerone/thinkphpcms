@@ -5,7 +5,7 @@
     <title>ThinkphpCms</title>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/main.css"/>
-   
+    <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/layui/css/layui.css"/>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -80,15 +80,18 @@
     
         <div class="result-wrap">
             <div class="result-content">
-                <form action="/jscss/admin/design/add" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                <form class="layui-form" action="/jscss/admin/design/add" method="post" enctype="multipart/form-data">
                     <table class="insert-tab" width="100%">
                         <tbody><tr>
                             <th width="120"><i class="require-red">*</i>分类：</th>
                             <td>
-                                <select name="colId" id="catid" class="required common-text">
-                                    <option value="">请选择</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
-                                </select>
+                              <select name="city" lay-verify="required">
+                                <option value="0">北京</option>
+                                <option value="1">上海</option>
+                                <option value="2">广州</option>
+                                <option value="3">深圳</option>
+                                <option value="4">杭州</option>
+                              </select>
                             </td>
                         </tr>
                             <tr>
@@ -103,7 +106,7 @@
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>缩略图：</th>
-                                <td><input name="smallimg" id="" type="file"><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>--></td>
+                                <td><input name="smallimg" id="" type="file"></td>
                             </tr>
                             <tr>
                                 <th>内容：</th>

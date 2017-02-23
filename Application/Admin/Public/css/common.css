@@ -39,6 +39,19 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{di
 .pl10{padding-left:10px;}
 .ptb20{padding:20px 0;}
 .grayc{color:#ccc}
+.common-text-center{width: 25px;
+    text-align: center;}
+.text-info{    background-color: #5bc0de;
+    color: #fff;
+    padding: 3px;
+    border-radius: 2px;margin-right:2px;}
+ .text-success{
+ 	background-color: #5cb85c;
+ 	color: #fff;
+    padding: 3px;
+    border-radius: 2px;
+    margin-right:2px;
+ }
 .gray6{color:#666}
 .gray9{color:#999}
 .emstyle{font-style:italic}

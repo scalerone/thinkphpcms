@@ -5,7 +5,7 @@
     <title>ThinkphpCms</title>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/main.css"/>
-   
+    <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/layui/css/layui.css"/>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -33,14 +33,14 @@
         <div class="sidebar-content">
             <ul class="sidebar-list">
                 <li>
-                    <a href="#"><i class="icon-font">&#xe003;</i>内容管理</a>
+                    <a href="javascript:;"><i class="icon-font">&#xe003;</i>内容管理</a>
                     <ul class="sub-menu">
-                        <li><a href="design.html"><i class="icon-font">&#xe008;</i>文章管理</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe005;</i>栏目管理</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe006;</i>留言管理</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe012;</i>评论管理</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe052;</i>友情链接</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe033;</i>广告管理</a></li>
+                        <li><a href="<?php echo U('Article/index');?>"><i class="icon-font">&#xe008;</i>文章管理</a></li>
+                        <li><a href="<?php echo U('Category/index');?>"><i class="icon-font">&#xe005;</i>栏目管理</a></li>
+                        <li><a href="<?php echo U('Contact/index');?>"><i class="icon-font">&#xe006;</i>留言管理</a></li>
+                        <li><a href="<?php echo U('Comment/index');?>"><i class="icon-font">&#xe012;</i>评论管理</a></li>
+                        <li><a href="<?php echo U('Links/index');?>"><i class="icon-font">&#xe052;</i>友情链接</a></li>
+                        <li><a href="<?php echo U('Banner/index');?>"><i class="icon-font">&#xe033;</i>广告管理</a></li>
                     </ul>
                 </li>
                 <li>
@@ -155,11 +155,7 @@
                 data:$('#editForm').serialize(),
                 dataType: 'json',
                 success:function(result){
-                    if(result.status == 1){
-                        layer.msg(result.msg);
-                    }else{
-                        layer.msg(result.msg);
-                    }
+                    layer.msg(result.msg);
                     return false;
                 },
                 error:function(result){
