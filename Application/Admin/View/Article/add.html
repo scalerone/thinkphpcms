@@ -5,52 +5,82 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="/jscss/admin/design/">文章管理</a></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:U('Index/index')}">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="{:U('Article/index')}">文章管理</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="{:U('Article/add')}">添加文章</a></div>
         </div>
-    
+
         <div class="result-wrap">
             <div class="result-content">
-                <form class="layui-form" action="/jscss/admin/design/add" method="post" enctype="multipart/form-data">
-                    <table class="insert-tab" width="100%">
-                        <tbody><tr>
-                            <th width="120"><i class="require-red">*</i>分类：</th>
-                            <td>
-                              <select name="city" lay-verify="required">
-                                <option value="0">北京</option>
-                                <option value="1">上海</option>
-                                <option value="2">广州</option>
-                                <option value="3">深圳</option>
-                                <option value="4">杭州</option>
-                              </select>
-                            </td>
-                        </tr>
-                            <tr>
-                                <th><i class="require-red">*</i>标题：</th>
-                                <td>
-                                    <input class="common-text required" id="title" name="title" size="50" value="" type="text">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>作者：</th>
-                                <td><input class="common-text" name="author" size="50" value="admin" type="text"></td>
-                            </tr>
-                            <tr>
-                                <th><i class="require-red">*</i>缩略图：</th>
-                                <td><input name="smallimg" id="" type="file"></td>
-                            </tr>
-                            <tr>
-                                <th>内容：</th>
-                                <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>
-                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
-                                    <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+               <form class="layui-form" action="{:U('Article/add')}" method="post" enctype="multipart/form-data">
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">栏目：</label>
+                    <div class="layui-input-block w200" >
+                      <select name="catid" lay-verify="required">
+                        <option value="0">新闻中心</option>
+                        <option value="1">产品中心</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">标题：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">内容：</label>
+                    <div class="layui-input-block">
+                      <textarea name="content" class="layui-textarea" id="LAY_edit" style="display: none"></textarea>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">缩略图：</label>
+                    <div class="layui-input-block">
+                        <img src="" class="hide" id="thumb-img" height="100px" width="auto">
+                        <input type="hidden" name="thumb" id="thumb-input" value="">
+                        <input type="file" name="_thumb" class="layui-upload-file" lay-title="文章缩略图">
+                        <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">状态：</label>
+                    <div class="layui-input-block">
+                      <input type="checkbox" name="attr[]" title="置顶" value="1">
+                      <input type="checkbox" name="attr[]" title="推荐" checked="" value="2">
+                      <input type="checkbox" name="attr[]" title="热门" value="3">
+                    </div>
+                  </div>
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">摘要：</label>
+                    <div class="layui-input-block w500">
+                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"></textarea>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <div class="layui-inline">
+                      <label class="layui-form-label">添加日期：</label>
+                      <div class="layui-input-block">
+                        <input type="text" name="addtime" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                      </div>
+                    </div>
+                    <div class="layui-inline">
+                      <label class="layui-form-label">作者：</label>
+                      <div class="layui-input-block">
+                        <input type="tel" name="author" autocomplete="off" class="layui-input">
+                      </div>
+                    </div>
+                    <div class="layui-inline">
+                      <label class="layui-form-label">别名：</label>
+                      <div class="layui-input-block">
+                        <input type="tel" name="alias" autocomplete="off" class="layui-input">
+                      </div>
+                    </div>
+                  </div>
+                  
+                   <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <button class="layui-btn" lay-submit="" >添加</button>
+                    </div>
+                  </div>
                 </form>
             </div>
         </div>
@@ -58,5 +88,34 @@
     <!--/main-->
 </div>
 <include file="Public:footer" />
+<script type="text/javascript">
+    layui.use(['form', 'layedit', 'laydate','upload'], function(){
+      var form = layui.form()
+      ,layer = layui.layer
+      ,layedit = layui.layedit
+      ,laydate = layui.laydate;
+
+      //创建一个编辑器
+        var editIndex = layedit.build('LAY_edit');
+        //文章缩略图上传
+        layui.upload({
+            url: '{:U("Article/upload")}'
+            ,method: 'post' //上传接口的http类型
+            ,success: function(res){
+              if(res.status == 1){
+                $('#thumb-img').attr('src',res.src).removeClass('hide').show();
+                $('#thumb-input').val(res.src);
+                $('#del-thumb').removeClass('hide').show();
+              }
+            }
+        });
+        $('#del-thumb').click(function(){
+            $('#thumb-img').attr('src','').hide();
+            $('#thumb-input').val('');
+            $(this).hide();
+            return false;
+        });
+    });
+</script>
 </body>
 </html>

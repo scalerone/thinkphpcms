@@ -1,6 +1,6 @@
 @charset "utf-8";
-.sidebar-wrap{float: left;width: 15%;min-height:700px;background: #f2f2f2;border-right:1px solid #ccc;/*cursor:e-resize;*/}
-.main-wrap{/* margin-left: 190px; */min-height:100%;width: 84%;float: left;}
+.sidebar-wrap{float: left;width: 15%;height:100%;background: #f2f2f2;border-right:1px solid #ccc;/*cursor:e-resize;*/}
+.main-wrap{/* margin-left: 190px; */height:100%;width: 84%;float: left;}
 .sidebar-title{height: 40px;line-height: 40px;text-indent:1em;font-size: 24px;text-align: left;}
 .sidebar-title h1{font-weight: normal;}
 .sidebar-content{padding-top: 5px;}
@@ -24,7 +24,7 @@
 .search-tab th{text-align: right;padding-right:10px;font-weight: normal;}
 .search-tab td{padding: 0 5px;}
 .common-text{height: 23px;line-height: 23px;padding: 2px 4px;border: 1px solid #ccc;background: #fff;border-radius:5px;}
-.result-wrap{padding:10px 20px;border-bottom: 1px solid #e5e5e5;}
+.result-wrap{padding:10px;border-bottom: 1px solid #e5e5e5;}
 .result-title{line-height: 35px;padding-bottom: 5px;overflow: hidden;}
 .comment-title{line-height: 35px;margin-bottom: 10px;overflow: hidden;}
 .result-list a{margin-right: 15px;}

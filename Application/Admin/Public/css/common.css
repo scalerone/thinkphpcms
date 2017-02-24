@@ -1,6 +1,6 @@
 @charset "utf-8";
 html{height:100%;}
-body{font:14px/1.5 '微软雅黑';word-wrap:break-word;word-break:break-all;-webkit-text-size-adjust:none;background:#fff;color:#333;}
+body{height:100%;font:14px/1.5 '微软雅黑';word-wrap:break-word;word-break:break-all;-webkit-text-size-adjust:none;background:#fff;color:#333;}
 body,dl,dd,h1,h2,h3,h4,h5,h6,p,form,ul,ol,blockquote{margin:0}
 img{border:0 none;vertical-align:middle}
 input,select,textarea{font-size:14px;color:#333}
@@ -135,3 +135,22 @@ textarea:focus,input[type="text"]:focus,input[type="password"]:focus,input[type=
 .list-page a:hover{background:#e4e4e4;border:1px solid #908f8f;}
 .list-page .current{margin:0 5px;padding:2px 7px;background:#f60;border:1px solid #fe8101;color:#fff;}
 .disabled{cursor: no-drop;background-color: #efecec !important;}
+.w100{width:100px;}
+.w200{width:200px;}
+.w300{width:300px;}
+.w400{width:400px;}
+.w500{width:500px;}
+.w600{width:600px;}
+.w700{width:700px;}
+.h100{height: 100px;}
+.h200{height: 200px;}
+.h300{height: 300px;}
+.h400{height: 400px;}
+.h500{height: 500px;}
+.h600{height: 600px;}
+.h700{height: 700px;}
+.h800{height: 800px;}
+.h900{height: 900px;}
+.container{height: 100%;}
+.hide{display: none !important;}
+

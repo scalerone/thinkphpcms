@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 �?02 �?22 �?17:42
+-- 生成日期: 2017 �?02 �?24 �?17:36
 -- 服务器版本: 5.5.47
 -- PHP 版本: 5.5.30
 
@@ -42,7 +42,28 @@ CREATE TABLE IF NOT EXISTS `cms_admin` (
 --
 
 INSERT INTO `cms_admin` (`id`, `username`, `password`, `email`, `lastlogintime`, `lastloginip`, `status`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1487756359, '127.0.0.1', 1);
+(1, 'admin', '3b674368dda3dad11a1d4ff26d7733c0', NULL, 1487920039, '127.0.0.1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `cms_article`
+--
+
+CREATE TABLE IF NOT EXISTS `cms_article` (
+  `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `summary` varchar(255) DEFAULT NULL,
+  `content` text NOT NULL,
+  `catid` mediumint(10) NOT NULL,
+  `addtime` int(10) NOT NULL,
+  `author` varchar(35) DEFAULT '',
+  `alias` varchar(35) DEFAULT NULL,
+  `thumb` varchar(50) DEFAULT NULL,
+  `sort` mediumint(10) DEFAULT '0',
+  `status` int(1) DEFAULT '1' COMMENT '1:显示，2:回收站，0:锁定',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
