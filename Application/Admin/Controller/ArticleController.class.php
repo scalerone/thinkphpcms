@@ -10,6 +10,7 @@
 		public function add() {
 			if(IS_POST){
 				p($_POST);die;
+
 			}
 			$this -> display();
 		}
@@ -24,6 +25,14 @@
 
 		public function select() {
 			$this -> display();
+		}
+
+		public function remove() {
+
+		}
+
+		public function search(){
+			
 		}
 
 		public function upload() {

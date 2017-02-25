@@ -141,6 +141,7 @@
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
+<script type="text/javascript" src="/./Application/Admin/Public/layui/layui.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/common.js"></script>
 <script type="text/javascript">
 	$('.logout').on('click',function(){

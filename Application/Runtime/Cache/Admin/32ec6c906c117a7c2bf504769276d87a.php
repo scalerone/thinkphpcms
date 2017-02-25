@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>后台登录</title>
     <link href="/./Application/Admin/Public/css/admin_login.css" rel="stylesheet" type="text/css" />
+    <link href="/./Application/Admin/Public/layui/css/layui.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="admin_login_wrap">
@@ -28,7 +29,7 @@
                         <img title="点击图片更换验证码" class="verify" src="<?php echo U('verify');?>" width="138px"></div>
                     </li>
                     <li>
-                        <input type="submit" tabindex="3" value="提交" class="btn btn-primary" />
+                        <input type="submit" tabindex="3" value="登录" class="layui-btn" />
                     </li>
                 </ul>
             </form>

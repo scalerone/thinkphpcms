@@ -91,7 +91,7 @@
                             </td>
                             <th width="70">关键字:</th>
                             <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
-                            <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
+                            <td><input class="layui-btn layui-btn-small btn2" name="sub" value="查询" type="submit"></td>
                         </tr>
                     </table>
                 </form>
