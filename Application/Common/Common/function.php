@@ -11,15 +11,16 @@
 	 * @param $html  添加的html
 	 * @param $level 栏目等级
 	 */
-	function reorgnCates($cates, $pid = 0, $html = "&nbsp;&nbsp;&nbsp;", $level = 0){
+	function reorgnCates($cates, $ext = '├─',$pid = 0, $html = "&nbsp;&nbsp;&nbsp;", $level = 0){
 		$arr = array();
 		foreach($cates as $v){
 			if($v['pid'] == $pid){
 				$v['level'] = $level + 1;
 				$v['html']	= str_repeat($html, $level);
+				if($v['level'] > 1) $v['html'] = $v['html'] . $ext;
 				//$v['end']   = str_repeat('├─', $level);
 				$arr[] = $v;
-				$arr = array_merge($arr, reorgnCates($cates,$v['id'],$html,$level + 1));
+				$arr = array_merge($arr, reorgnCates($cates,$ext,$v['id'],$html,$level + 1));
 			}	
 		}
 		return $arr;

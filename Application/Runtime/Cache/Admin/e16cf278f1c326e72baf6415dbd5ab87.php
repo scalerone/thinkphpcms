@@ -80,7 +80,7 @@
 
         <div class="result-wrap">
             <div class="result-content">
-               <form class="layui-form" action="<?php echo U('Article/add');?>" method="post" enctype="multipart/form-data">
+               <form class="layui-form" action="<?php echo U('Article/add');?>" method="post" enctype="multipart/form-data" id="addForm">
                   <div class="layui-form-item">
                     <label class="layui-form-label">栏目：</label>
                     <div class="layui-input-block w200" >
@@ -93,7 +93,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label ">标题：</label>
                     <div class="layui-input-block w500">
-                      <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                      <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
                     </div>
                   </div>
                   <div class="layui-form-item">
@@ -107,7 +107,10 @@
                     <div class="layui-input-block">
                         <img src="" class="hide" id="thumb-img" height="100px" width="auto">
                         <input type="hidden" name="thumb" id="thumb-input" value="">
-                        <input type="file" name="_thumb" class="layui-upload-file" lay-title="文章缩略图">
+                        <input type="file" name="_thumb" id="_thumb" class="hide">
+                        <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                          <i class="layui-icon">&#xe608;</i> 文章缩略图
+                        </button>
                         <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
                     </div>
                   </div>
@@ -129,7 +132,7 @@
                     <div class="layui-inline">
                       <label class="layui-form-label">添加日期：</label>
                       <div class="layui-input-block">
-                        <input type="text" name="addtime" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                        <input type="text" name="addtime" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD'})">
                       </div>
                     </div>
                     <div class="layui-inline">
@@ -148,7 +151,7 @@
                   
                    <div class="layui-form-item">
                     <div class="layui-input-block">
-                      <button class="layui-btn" lay-submit="" >添加</button>
+                      <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
                     </div>
                   </div>
                 </form>
@@ -174,32 +177,77 @@
 	});
 </script>
 <script type="text/javascript">
-    layui.use(['form', 'layedit', 'laydate','upload'], function(){
+    layui.use(['form', 'layedit', 'laydate'], function(){
       var form = layui.form()
       ,layer = layui.layer
       ,layedit = layui.layedit
       ,laydate = layui.laydate;
 
       //创建一个编辑器
-        var editIndex = layedit.build('LAY_edit');
-        //文章缩略图上传
-        layui.upload({
-            url: '<?php echo U("Article/upload");?>'
-            ,method: 'post' //上传接口的http类型
-            ,success: function(res){
-              if(res.status == 1){
-                $('#thumb-img').attr('src',res.src).removeClass('hide').show();
-                $('#thumb-input').val(res.src);
-                $('#del-thumb').removeClass('hide').show();
-              }
-            }
+        layedit.set({
+          uploadImage: {
+            url: '<?php echo U("Article/editImgUpload");?>'
+          }
         });
+        var editIndex = layedit.build('LAY_edit');
+
+        //文章缩略图上传
+        $('#_thumb').bind('change',function(){
+          fileUpload('#_thumb','<?php echo U("Article/upload");?>');
+          
+        });
+        function fileUpload(id,url){
+            var formData = new FormData();
+            formData.append("file",$(id)[0].files[0]);
+            $.ajax({ 
+              url : url, 
+              type : 'POST', 
+              data : formData, 
+              // 告诉jQuery不要去处理发送的数据
+              processData : false, 
+              // 告诉jQuery不要去设置Content-Type请求头
+              contentType : false,
+              beforeSend:function(){
+                $('.upload-btn').html('<i class="layui-icon">&#xe608;</i>正在上传...');
+              },
+              success : function(msg) { 
+                $('#thumb-img').attr('src',msg.src).removeClass('hide').show();
+                $('#thumb-input').val(msg.src);
+                $('#_thumb').val('');
+                $('.upload-btn').html('<i class="layui-icon">&#xe608;</i>文章缩略图').addClass('layui-btn-disabled');
+                $('#del-thumb').removeClass('hide').show();
+              }, 
+              error : function(responseStr) { 
+                console.log("error");
+                } 
+            });
+        }
+        //删除缩略图
         $('#del-thumb').click(function(){
             $('#thumb-img').attr('src','').hide();
             $('#thumb-input').val('');
+            $('#_thumb').val('');
             $(this).hide();
+            $('.upload-btn').removeClass('layui-btn-disabled');
             return false;
         });
+
+        //添加文章
+        /*$('.submit').on('click',function(){
+          $.ajax({
+            url: '<?php echo U("Article/add");?>',
+            type: 'POST',
+            dataType: 'json',
+            data: $('#addForm').serialize(),
+            success: function(data){
+              layer.msg(data.msg, {icon: 6});
+              window.setTimeout(function(){
+                window.location.href = "<?php echo U('Article/index');?>";
+              },1200);
+            }
+          });
+          return false;
+        });*/
     });
 </script>
 </body>
