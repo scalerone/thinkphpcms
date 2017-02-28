@@ -75,70 +75,71 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/index');?>">栏目管理</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/add');?>">添加栏目</a></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/index');?>">栏目管理</a><span class="crumb-step">&gt;</span><a class="crumb-name">修改栏目</a></div>
         </div>
 
         <div class="result-wrap">
             <div class="result-content">
-               <form class="layui-form" action="<?php echo U('Category/add');?>" method="post" enctype="multipart/form-data" id="addForm">
+               <form class="layui-form" action="<?php echo U('Category/edit');?>" method="post" enctype="multipart/form-data" id="addForm">
                   <div class="layui-form-item">
                     <label class="layui-form-label">上级栏目：</label>
                     <div class="layui-input-block w200" >
                       <select name="pid" lay-verify="required">
                         <option value="0">==顶级栏目==</option>
-                        <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$pid?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+                        <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$cate['pid']?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
                       </select>
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label ">栏目名称：</label>
                     <div class="layui-input-block w500">
-                      <input type="text" name="catname" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+                      <input type="text" name="catname" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="<?php echo ($cate["catname"]); ?>">
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label ">栏目类型：</label>
                     <div class="layui-input-block">
-                      <input type="radio" name="type" value="1" title="栏目" checked>
-                      <input type="radio" name="type" value="2" title="单篇" >
-                      <input type="radio" name="type" value="3" title="链接" >
+                      <input <?php echo ($cate['type']==1?'checked':''); ?> type="radio" name="type" value="1" title="栏目">
+                      <input <?php echo ($cate['type']==2?'checked':''); ?> type="radio" name="type" value="2" title="单篇" >
+                      <input <?php echo ($cate['type']==3?'checked':''); ?> type="radio" name="type" value="3" title="链接" >
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label">缩略图：</label>
                     <div class="layui-input-block">
-                        <img src="" class="hide" id="thumb-img" height="100px" width="auto">
+                      <img src="<?php echo ($cate['thumb']); ?>" <?php echo ($cate['thumb']==''?'class="hide"':'class=""'); ?> id="thumb-img" height="100px" width="auto">
                         <input type="hidden" name="thumb" id="thumb-input" value="">
                         <input type="file" name="_thumb" id="_thumb" class="hide">
                         <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
                           <i class="layui-icon">&#xe608;</i> 栏目缩略图
                         </button>
-                        <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+                        <button id="del-thumb" class="layui-btn layui-btn-primary <?php echo ($cate['thumb']==''?'hide':''); ?>">删除</button>
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label">状态：</label>
                     <div class="layui-input-block">
-                      <input type="checkbox" name="status" lay-skin="switch" checked="checked" value="1">
+                      <input type="checkbox" name="status" lay-skin="switch" <?php echo ($cate['status']==1?'checked="checked"':''); ?> value="1">
                     </div>
                   </div>
                   <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">描述：</label>
                     <div class="layui-input-block w500">
-                      <textarea name="summary" placeholder="栏目描述..." class="layui-textarea"></textarea>
+                      <textarea name="summary" placeholder="栏目描述..." class="layui-textarea"><?php echo ($cate['summary']); ?></textarea>
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <div class="layui-inline">
                       <label class="layui-form-label">别名：</label>
                       <div class="layui-input-block">
-                        <input type="tel" name="alias" autocomplete="off" class="layui-input">
+                        <input type="tel" name="alias" autocomplete="off" class="layui-input" value="<?php echo ($cate['alias']); ?>">
                       </div>
                     </div>
                   </div>
                    <div class="layui-form-item">
                     <div class="layui-input-block">
-                      <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
+                      <input type="hidden" name="id" value="<?php echo ($cate["id"]); ?>">
+                      <button type="submit" class="layui-btn submit" lay-submit="" >修改</button>
                       <a href="javascript:window.history.go(-1);" class="layui-btn layui-btn-warm">返回</a>
                     </div>
                   </div>
@@ -212,11 +213,12 @@
         //添加栏目
         $('.submit').on('click',function(){
           $.ajax({
-            url: '<?php echo U("Category/add");?>',
+            url: '<?php echo U("Category/edit");?>',
             type: 'POST',
             dataType: 'json',
             data: $('#addForm').serialize(),
             success: function(res){
+              console.log(res);
               if(res.status == 0){
                 layer.msg(res.msg, {icon: 2});
               }else{

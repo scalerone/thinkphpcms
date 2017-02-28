@@ -44,4 +44,22 @@
 		}
 		return $arr;
 	}
+
+	/**
+	 * 通过ID获取所有的子栏目
+	 * @param  [array] $cates [所有栏目]
+	 * @param  [id]   $id    [栏目ID]
+	 * @return [array]        [返回栏目数组]
+	 */
+	function getChildsById($cates, $pid = 0) {
+		$arr = array();
+
+		foreach ($cates as $v) {
+			if($v['pid'] == $pid){
+				$arr[] = $v;
+				$arr = array_merge($arr, getChildsById($cates,$v['id']));
+			}
+		}
+		return $arr;
+	}
 ?>

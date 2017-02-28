@@ -7,32 +7,33 @@
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">栏目管理</span></div>
         </div>
+
         <div class="result-wrap">
-            <form method="post">
+            <form method="post" action="{:U('Category/updateSort')}" class="catesForm">
                 <div class="result-title">
                     <div class="result-list">
                         <a href="{:U('Category/add')}"><i class="icon-font"></i>新增栏目</a>
-                        <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                        <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                        <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
+                        <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
                     </div>
                 </div>
-                <div class="result-content">
+                <div class="result-content" style="max-height: 850px;overflow: auto;">
                     <table class="layui-table">
                       <thead>
                         <tr>
-                            <th width="3%"><input name="" type="checkbox"></th>
+                            <th width="3%"><input type="checkbox"></th>
                             <th width="5%">排序</th>
                             <th>名称</th>
-                            <th width="10%" align="center">栏目类型</th>
+                            <th width="8%" align="center">栏目类型</th>
                             <th width="6%">状态</th>
-                            <th width="12%">操作</th>
-                        </tr> 
+                            <th width="14%">操作</th>
+                        </tr>
                       </thead>
                       <tbody>
                     <volist name="categories" id="vo">
-                        <tr>
-                            <td><input name="id[]" value="59" type="checkbox"></td>
-                            <td><input class="common-text common-text-center" size="3" type="text" value="{$vo.sort}" name="sort"></td>
+                        <tr data-id={$vo.id} data-pid="{$vo.pid}">
+                            <td><input class="set" type="checkbox"></td>
+                            <td><input class="common-text common-text-center" size="3" type="text" value="{$vo.sort}" name="{$vo.id}"></td>
                             <td>{$vo.html}{$vo.catname}</td>
                             <td>
                                 <switch name="vo.type">
@@ -42,17 +43,18 @@
                                 </switch>
                             </td>
                             <td class="layui-form">
-                                <input value="1" type="checkbox" name="status" lay-skin="switch" {$vo["status"]==1?'checked':''}>
+                             
+                                <input type="checkbox" {$vo["status"]==1?'checked=""':''} name="status" value="1" lay-skin="switch" lay-filter="switchTest" lay-text="显示|隐藏">
                                 </td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a title="添加子栏目" href="{:U('Article/add')}" class="layui-btn layui-btn-small">
+                                    <a title="添加子栏目" href="{:U('Category/add',array('pid'=>$vo['id']))}" class="layui-btn layui-btn-small">
                                         <i class="layui-icon">&#xe654;</i>
                                     </a>
-                                    <a title="修改" class="layui-btn layui-btn-small" href="{:U('Article/edit')}">
+                                    <a title="修改" class="layui-btn layui-btn-small" href="{:U('Category/edit',array('id'=>$vo['id']))}">
                                         <i class="layui-icon">&#xe642;</i>
                                     </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger" href="javascript:;">
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOne" href="javascript:;" data-id="{$vo.id}">
                                         <i class="layui-icon">&#xe640;</i>
                                     </a>
                                 </div>
@@ -64,11 +66,10 @@
                     <div class="result-title">
                         <div class="result-list">
                             <a href="{:U('Article/add')}"><i class="icon-font"></i>新增栏目</a>
-                            <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                            <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                            <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
+                            <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
                         </div>
                     </div>
-                    <div id="pages"></div>
                 </div>
             </form>
         </div>
@@ -78,16 +79,103 @@
 <include file="Public:footer"/>
 <script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['laypage', 'layer','form'], function(){
-      var laypage = layui.laypage,
-      form = layui.form(),
-      layer = layui.layer;
-      laypage({
-        cont: 'pages',
-        pages: 100,//总页数
-        groups: 5 //连续显示分页数
+    layui.use(['form','layer'], function(){
+      layer = layui.layer,
+      form = layui.form();
+
+      //监听指定开关
+      form.on('switch(switchTest)', function(data){
+        layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+          offset: '6px'
+        });
+        layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
       });
 });
+    $(function(){
+        //全选
+        var $table = $('.result-content table');
+        var $setAll = $table.find('thead input[type=checkbox]');
+        var $inputs = $table.find('tbody .set');
+        if(!$table || !$setAll) return false;
+        $setAll.on('click',function(){
+            if($(this).prop('checked')){
+                $inputs.prop('checked',true);
+            }else{
+                $inputs.prop('checked',false);
+            }
+        });
+        $inputs.on('click',function(){
+            var seles = $inputs.filter(function(index) {
+                return !$(this).prop('checked');
+            });
+            if(seles.length == 0){
+                $setAll.prop('checked',true);
+            }else{
+                $setAll.prop('checked',false);
+            }
+        });
+
+        //更新排序
+        $('.updateOrd').on('click',function(){
+            $('.catesForm').submit();
+            return false;
+        });
+
+        //ajax修改状态
+        $('.layui-unselect').on('click',function(){
+            alert(1);
+        });
+
+        //删除单个栏目
+        $('.delOne').on('click',function(){
+            var $id = $(this).data('id');//获取当前栏目ID
+            var $deltr = $(this).parents('tr');//获取当前栏目所在的tr节点
+            var $trs = $('.result-content table tbody tr');//获取所有的栏目所在的tr节点
+            var $deltrs = getChildsById($trs,$id);//获取当前栏目的子栏目所在tr节点
+            
+            //递归获取当前栏目的所有子栏目的节点数组
+            function getChildsById(trs,pid) {
+                var arr = [],length = trs.length;
+
+                for (var i = 0; i < length; i++) {
+                    if($(trs[i]).attr('data-pid') == pid){
+                        arr.push(trs[i]);
+                        arr = arr.concat(getChildsById(trs,$(trs[i]).attr('data-id')));
+                    }
+                }
+                return arr;
+            }
+
+            layer.confirm('确定要删除栏目已经其子栏目？', {icon: 3, title:'提示'}, function(index){
+                    //删除并移除已经删除的节点
+                    doDel($id);
+                    layer.close(index);
+            });
+            function doDel(id){
+                var url = '{:U("Category/del")}';
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    data: {'id':id},
+                    datatype: 'json',
+                    success: function(res){
+                        if(res.status == 1){
+                            layer.alert(res.msg,{icon:1});
+                            //移除已经删除的节点
+                            $deltr.remove();
+                            $($deltrs).remove();
+                        }else{
+                            layer.alert(res.msg,{icon:2});
+                        }
+                    },
+                    error: function(res){
+                        layer.alert(res.msg,{icon:2});
+                    }
+                }); 
+            }
+            
+        });
+    });
 </script>
 </body>
 </html>

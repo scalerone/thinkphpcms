@@ -27,7 +27,7 @@
 		}
 
 		public function edit() {
-			$this -> display();
+			
 		}
 
 		public function select() {

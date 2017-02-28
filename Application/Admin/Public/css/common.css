@@ -153,4 +153,5 @@ textarea:focus,input[type="text"]:focus,input[type="password"]:focus,input[type=
 .h900{height: 900px;}
 .container{height: 100%;}
 .hide{display: none !important;}
+.show{display: block !important;}
 

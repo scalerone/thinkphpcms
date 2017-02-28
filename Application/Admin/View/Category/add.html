@@ -17,7 +17,7 @@
                       <select name="pid" lay-verify="required">
                         <option value="0">==顶级栏目==</option>
                         <volist name="categories" id="c">
-                          <option value="{$c.id}">{$c.html}{$c.catname}</option>
+                          <option value="{$c.id}" {$c['id']==$pid?'selected="selected"':''}>{$c.html}{$c.catname}</option>
                         </volist>
                       </select>
                     </div>

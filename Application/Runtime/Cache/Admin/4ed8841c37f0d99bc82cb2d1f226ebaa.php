@@ -18,7 +18,7 @@
     <div class="head"><span>跳转提示信息:</span></div>
     <div class="content">
     <?php if(isset($message)) {?>
-    <p class="success"><?php echo($message); ?></p>
+    <p class="success">(:<?php echo($message); ?></p>
     <?php }else{?>
     <p class="error">:( <?php echo($error); ?></p>
     <?php }?>
