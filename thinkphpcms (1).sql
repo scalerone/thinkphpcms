@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 �?02 �?27 �?17:49
+-- 生成日期: 2017 �?02 �?28 �?17:44
 -- 服务器版本: 5.5.47
 -- PHP 版本: 5.5.30
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `cms_admin` (
 --
 
 INSERT INTO `cms_admin` (`id`, `username`, `password`, `email`, `lastlogintime`, `lastloginip`, `status`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488158291, '127.0.0.1', 1);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488244111, '127.0.0.1', 1);
 
 -- --------------------------------------------------------
 
@@ -93,19 +93,17 @@ CREATE TABLE IF NOT EXISTS `cms_category` (
   `type` smallint(1) DEFAULT '1' COMMENT '1:栏目2:单篇3:链接',
   `summary` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=48 ;
 
 --
 -- 转存表中的数据 `cms_category`
 --
 
 INSERT INTO `cms_category` (`id`, `catname`, `sort`, `pid`, `thumb`, `addtime`, `alias`, `status`, `type`, `summary`) VALUES
-(1, '三语课堂', 0, 0, './Uploads/2017-02-27/58b3e98d5a838.jpg', 1488185754, '别名', 1, 1, '描述'),
+(1, '三语课堂', 1, 0, './Uploads/2017-02-27/58b3e98d5a838.jpg', 1488185754, '别名', 1, 1, '描述'),
 (2, '招聘信息', 0, 0, '', 1488185971, '', 1, 2, ''),
-(3, '什么贵', 0, 0, '', 1488186010, '', 1, 1, ''),
-(4, '课堂一', 0, 1, '', 1488187594, '', 1, 1, ''),
-(5, '111', 0, 2, '', 1488187795, '', 1, 1, ''),
-(6, '122', 0, 4, '', 1488188014, '', 1, 1, '');
+(46, '测试', 0, 0, './Uploads/2017-02-28/58b5343147cd7.jpg', 1488270397, '栏目别名', 1, 3, '测试栏目描述'),
+(47, '测试22', 0, 46, '', 1488270895, '栏目别名1222', 2, 3, '测试栏目描述122');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
