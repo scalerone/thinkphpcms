@@ -75,7 +75,7 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">作品管理</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a>首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">文章管理</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
@@ -86,7 +86,7 @@
                             <td>
                                 <select style="height:28px;" name="search-sort" id="" class="common-text">
                                     <option value="">全部</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
+                                    <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$pid?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
                                 </select>
                             </td>
                             <th width="70">关键字:</th>
@@ -98,12 +98,12 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form method="post">
+            <form method="post" action="<?php echo U('Article/updateSort');?>" class="sortForm">
                 <div class="result-title">
                     <div class="result-list">
                         <a href="<?php echo U('Article/add');?>"><i class="icon-font"></i>新增文章</a>
-                        <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                        <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                        <a id="batchDelArticle" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
+                        <a id="updateSortArticle" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
                         <a id="removeAll" href="javascript:void(0)"><i class="layui-icon">&#xe60a;</i>批量移动</a>
                     </div>
                 </div>
@@ -117,54 +117,42 @@
                             <th width="6%">点击</th>
                             <th width="10%">发布人</th>
                             <th width="15%">添加时间</th>
-                            <th width="10%">状态</th>
+                            <th width="12%">状态</th>
                             <th width="12%">操作</th>
                         </tr> 
                       </thead>
                       <tbody>
-                        <tr>
-                            <td><input name="id[]" value="59" type="checkbox"></td>
-                            <td><input class="common-text common-text-center" size="3" type="text" value="0" name=""></td>
-                            <td>发哥经典发哥经典发哥经典发哥经典…
-                            </td>
-                            <td>2</td>
-                            <td>admin</td>
-                            <td>2014-03-15 21:11:01</td>
-                            <td><span class="text-info">推荐</span></td>
-                            <td>
-                                <div class="layui-btn-group">
-                                    <a title="修改" class="layui-btn layui-btn-small" href="<?php echo U('Article/edit');?>">
-                                        <i class="layui-icon">&#xe642;</i>
-                                    </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger" href="javascript:;">
-                                        <i class="layui-icon">&#xe640;</i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input name="id[]" value="59" type="checkbox"></td>
-                            <td><input class="common-text common-text-center" size="3" type="text" value="0" name=""></td>
-                            <td>发哥经典发哥经典发哥经典发哥经典…
-                            </td>
-                            <td>2</td>
-                            <td>admin</td>
-                            <td>2014-03-15 21:11:01</td>
-                            <td><span class="text-info">推荐</span><span class="text-success">置顶</span></td>
-                            <td>
-                                <div class="layui-btn-group">
-                                    <a title="修改" class="layui-btn layui-btn-small" href="<?php echo U('Article/edit');?>">
-                                        <i class="layui-icon">&#xe642;</i>
-                                    </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger" href="javascript:;">
-                                        <i class="layui-icon">&#xe640;</i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        <?php if(is_array($articles)): $i = 0; $__LIST__ = $articles;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$a): $mod = ($i % 2 );++$i;?><tr data-id="<?php echo ($a["id"]); ?>">
+                                <td><input class="set" value="<?php echo ($a["id"]); ?>" type="checkbox"></td>
+                                <td><input class="common-text common-text-center" size="3" type="text" value="<?php echo ($a["sort"]); ?>" name="<?php echo ($a["id"]); ?>"></td>
+                                <td><?php echo (substr($a["title"],0,27)); ?>
+                                <?php if($a["thumb"] != '' ): ?><i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="<?php echo ($a["thumb"]); ?>">&#xe64a;</i>
+                                <?php else: endif; ?>
+                                </td>
+                                <td><?php echo ($a["hits"]); ?></td>
+                                <td><?php echo ($a["author"]); ?></td>
+                                <td><?php echo (date("Y-m-d h:m:s",$a["addtime"])); ?></td>
+                                <td>
+                                    <?php echo ($a['is_rec']==1?'<span class="text-info">推荐</span>':''); ?>
+                                    <?php echo ($a['is_top']==1?'<span class="text-success">置顶</span>':''); ?>
+                                    <?php echo ($a['is_hot']==1?'<span class="text-hot">热门</span>':''); ?>
+                                </td>
+                                <td>
+                                    <div class="layui-btn-group">
+                                        <a title="修改" class="layui-btn layui-btn-small" href="<?php echo U('Article/edit',array('id'=>$a['id']));?>">
+                                            <i class="layui-icon">&#xe642;</i>
+                                        </a>
+                                        <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneArticle" href="javascript:;">
+                                            <i class="layui-icon">&#xe640;</i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr><?php endforeach; endif; else: echo "" ;endif; ?>
                       </tbody>
                     </table>
-                    <div id="pages"></div>
+                    <div id="pages">
+                        <?php echo ($page); ?>
+                    </div>
                 </div>
             </form>
         </div>
@@ -176,6 +164,7 @@
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/layui/layui.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/common.js"></script>
+<script type="text/javascript" src="/./Application/Admin/Public/js/function.js"></script>
 <script type="text/javascript">
 	$('.logout').on('click',function(){
 	    //询问框
@@ -189,15 +178,65 @@
 </script>
 <script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['laypage', 'layer'], function(){
-      var laypage = layui.laypage
-      ,layer = layui.layer;
-      laypage({
-        cont: 'pages',
-        pages: 100,//总页数
-        groups: 5 //连续显示分页数
-      });
-});
+    layui.use(['layer'], function(){
+          var layer = layui.layer;
+    });
+    //删除单个文章
+    $(function(){
+        $('.delOneArticle').on('click',function(){
+                $trEle = $(this).parents('tr');//当前栏目的tr节点
+                var url = "<?php echo U('Article/del');?>";//提交删除的地址
+                var eleId = $trEle.data('id');//当前文章的id
+                var flag = true;
+                //提示
+                layer.confirm('确定要删除该文章？', {icon: 3, title:'提示'}, function(index){
+                delArticleById(eleId,url,'get',$trEle);
+            });
+        });
+    });
+    //批量删除文章
+    $(function(){
+        $('#batchDelArticle').on('click',function(){
+            //获取所有选中的文章
+            $trs = $('.result-content table tbody tr input:checked');
+            
+            //获取选中的ID
+            var ids = [];
+            $trs.filter(function(index) {
+                return ids.push($($trs[index]).val());
+            });
+
+            var url = "<?php echo U('Article/del');?>";//提交删除的地址
+            ids = ids.join(',');
+            $elems = $trs.parents('tr');
+            //提示
+            layer.confirm('确定要删除所有的文章吗？', {icon: 3, title:'提示'}, function(index){
+                delArticleById(ids,url,'get',$elems);
+            });
+        });
+    });
+    //鼠标移动显示文章缩略图
+    $(function(){
+        $('.icon-thumb').hover(function(e) {
+            var src = $(this).data('src');
+            var xx = e.originalEvent.x || e.originalEvent.layerX || 0; 
+            var yy = e.originalEvent.y || e.originalEvent.layerY || 0; 
+            yy = yy - 50;
+            xx = xx + 30;
+            var html = '<img class="_img" src="'+src+'" style="display:none; max-height:100px;width:auto;position: fixed;z-index: 999;left:'+xx+'px;top:'+yy+'px;">';
+            $('body').append(html);
+            $('._img').fadeIn('slow');
+
+        }, function(e) {
+            $('._img').fadeOut('slow').remove();
+        });
+    });
+    //批量更新栏目排序
+    $(function(){
+        $('#updateSortArticle').on('click',function(){
+          $('.sortForm').submit();return;
+        });
+    });
 </script>
 </body>
 </html>

@@ -80,13 +80,12 @@
 
         <div class="result-wrap">
             <div class="result-content">
-               <form class="layui-form" action="<?php echo U('Article/add');?>" method="post" enctype="multipart/form-data" id="addForm">
+               <form class="layui-form " action="<?php echo U('Article/add');?>" method="post" enctype="multipart/form-data" id="addForm">
                   <div class="layui-form-item">
                     <label class="layui-form-label">栏目：</label>
                     <div class="layui-input-block w200" >
                       <select name="catid" lay-verify="required">
-                        <option value="0">新闻中心</option>
-                        <option value="1">产品中心</option>
+                        <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$pid?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
                       </select>
                     </div>
                   </div>
@@ -165,6 +164,7 @@
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/layui/layui.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/common.js"></script>
+<script type="text/javascript" src="/./Application/Admin/Public/js/function.js"></script>
 <script type="text/javascript">
 	$('.logout').on('click',function(){
 	    //询问框
@@ -176,10 +176,10 @@
 	    });   
 	});
 </script>
+
 <script type="text/javascript">
     layui.use(['form', 'layedit', 'laydate'], function(){
       var form = layui.form()
-      ,layer = layui.layer
       ,layedit = layui.layedit
       ,laydate = layui.laydate;
 
@@ -189,47 +189,17 @@
             url: '<?php echo U("Article/editImgUpload");?>'
           }
         });
+
         var editIndex = layedit.build('LAY_edit');
 
         //文章缩略图上传
         $('#_thumb').bind('change',function(){
-          fileUpload('#_thumb','<?php echo U("Article/upload");?>');
-          
-        });
-        function fileUpload(id,url){
-            var formData = new FormData();
-            formData.append("file",$(id)[0].files[0]);
-            $.ajax({ 
-              url : url, 
-              type : 'POST', 
-              data : formData, 
-              // 告诉jQuery不要去处理发送的数据
-              processData : false, 
-              // 告诉jQuery不要去设置Content-Type请求头
-              contentType : false,
-              beforeSend:function(){
-                $('.upload-btn').html('<i class="layui-icon">&#xe608;</i>正在上传...');
-              },
-              success : function(msg) { 
-                $('#thumb-img').attr('src',msg.src).removeClass('hide').show();
-                $('#thumb-input').val(msg.src);
-                $('#_thumb').val('');
-                $('.upload-btn').html('<i class="layui-icon">&#xe608;</i>文章缩略图').addClass('layui-btn-disabled');
-                $('#del-thumb').removeClass('hide').show();
-              }, 
-              error : function(responseStr) { 
-                console.log("error");
-                } 
-            });
-        }
-        //删除缩略图
-        $('#del-thumb').click(function(){
-            $('#thumb-img').attr('src','').hide();
-            $('#thumb-input').val('');
-            $('#_thumb').val('');
-            $(this).hide();
-            $('.upload-btn').removeClass('layui-btn-disabled');
-            return false;
+          //限制文件类型与大小
+          var options = {
+            'filePath': $(this).val()
+          };
+          //调用上传方法
+          fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
         });
 
         //添加文章

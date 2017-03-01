@@ -41,17 +41,48 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{di
 .grayc{color:#ccc}
 .common-text-center{width: 25px;
     text-align: center;}
-.text-info{    background-color: #5bc0de;
+.text-info{    
+	background-color: #5bc0de;
     color: #fff;
     padding: 3px;
-    border-radius: 2px;margin-right:2px;}
+    border-radius: 2px;margin-right:2px;font-size: 12px;
+    cursor: pointer;
+}
  .text-success{
  	background-color: #5cb85c;
  	color: #fff;
     padding: 3px;
     border-radius: 2px;
     margin-right:2px;
+    font-size: 12px;
+    cursor: pointer;
  }
+ .text-hot{
+ 	background-color: #FF5722;
+ 	color: #fff;
+    padding: 3px;
+    border-radius: 2px;
+    margin-right:2px;
+    font-size: 12px;
+    cursor: pointer;
+ }
+ #pages a,#pages span{
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 15px;
+    border: 1px solid #e2e2e2;
+    height: 28px;
+    line-height: 28px;
+    margin: 0 -5px 5px 0;
+    background-color: #fff;
+    color: #333;
+    font-size: 12px;
+}
+#pages .current{
+    background-color: #009688;
+    border-color: #009688;
+    color: #fff;
+}
 .gray6{color:#666}
 .gray9{color:#999}
 .emstyle{font-style:italic}

@@ -110,9 +110,8 @@
                                     <?php case "3": ?>链接<?php break; endswitch;?>
                             </td>
                             <td class="layui-form">
-                             
-                                <input type="checkbox" <?php echo ($vo["status"]==1?'checked=""':''); ?> name="status" value="1" lay-skin="switch" lay-filter="switchTest" lay-text="显示|隐藏">
-                                </td>
+                                <input type="checkbox" <?php echo ($vo["status"]==1?'checked=""':''); ?> name="status" data-id="<?php echo ($vo["id"]); ?>" value="1" lay-skin="switch" lay-filter="status">
+                            </td>
                             <td>
                                 <div class="layui-btn-group">
                                     <a title="添加子栏目" href="<?php echo U('Category/add',array('pid'=>$vo['id']));?>" class="layui-btn layui-btn-small">
@@ -147,6 +146,7 @@
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/layui/layui.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/common.js"></script>
+<script type="text/javascript" src="/./Application/Admin/Public/js/function.js"></script>
 <script type="text/javascript">
 	$('.logout').on('click',function(){
 	    //询问框
@@ -161,50 +161,36 @@
 <script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
     layui.use(['form','layer'], function(){
-      layer = layui.layer,
-      form = layui.form();
+        var layer = layui.layer
+        ,form = layui.form();
 
-      //监听指定开关
-      form.on('switch(switchTest)', function(data){
-        layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
-          offset: '6px'
+      //更新栏目status状态
+      form.on('switch(status)', function(data){
+            var elem = data.elem;
+            var id = $(elem).attr('data-id');
+            var status = 2;//默认不显示1为显示
+            if(elem.checked){
+                status = 1;//显示
+            }
+            //ajax更新栏目状态
+            $.ajax({
+                url: '<?php echo U("Category/updateStatus");?>', 
+                data: {'id':id,'status':status},
+                datatype: 'json',
+                success: function(res){
+                    layer.msg(res.msg);
+                },
+                error: function(res) {
+                    layer.msg('出现错误！');
+                }                   
+            }); 
         });
-        layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-      });
 });
     $(function(){
-        //全选
-        var $table = $('.result-content table');
-        var $setAll = $table.find('thead input[type=checkbox]');
-        var $inputs = $table.find('tbody .set');
-        if(!$table || !$setAll) return false;
-        $setAll.on('click',function(){
-            if($(this).prop('checked')){
-                $inputs.prop('checked',true);
-            }else{
-                $inputs.prop('checked',false);
-            }
-        });
-        $inputs.on('click',function(){
-            var seles = $inputs.filter(function(index) {
-                return !$(this).prop('checked');
-            });
-            if(seles.length == 0){
-                $setAll.prop('checked',true);
-            }else{
-                $setAll.prop('checked',false);
-            }
-        });
-
         //更新排序
         $('.updateOrd').on('click',function(){
             $('.catesForm').submit();
             return false;
-        });
-
-        //ajax修改状态
-        $('.layui-unselect').on('click',function(){
-            alert(1);
         });
 
         //删除单个栏目
@@ -215,6 +201,12 @@
             var $deltrs = getChildsById($trs,$id);//获取当前栏目的子栏目所在tr节点
             
             //递归获取当前栏目的所有子栏目的节点数组
+            /**
+             * [getChildsById description]
+             * @param  {[array]} trs [tr节点数组]
+             * @param  {[int]} pid [tr节点父栏目ID]
+             * @return {[array]}     [重组后的array]
+             */
             function getChildsById(trs,pid) {
                 var arr = [],length = trs.length;
 
@@ -226,12 +218,17 @@
                 }
                 return arr;
             }
-
+            //提示
             layer.confirm('确定要删除栏目已经其子栏目？', {icon: 3, title:'提示'}, function(index){
                     //删除并移除已经删除的节点
                     doDel($id);
                     layer.close(index);
             });
+            /**
+             * ajax删除并移除已经删除的节点方法
+             * @param  {[栏目ID]} id [description]
+             * @return {[null]}    [无返回值]
+             */
             function doDel(id){
                 var url = '<?php echo U("Category/del");?>';
                 $.ajax({
@@ -254,7 +251,6 @@
                     }
                 }); 
             }
-            
         });
     });
 </script>

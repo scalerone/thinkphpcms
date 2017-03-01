@@ -154,6 +154,7 @@
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/layui/layui.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/common.js"></script>
+<script type="text/javascript" src="/./Application/Admin/Public/js/function.js"></script>
 <script type="text/javascript">
 	$('.logout').on('click',function(){
 	    //询问框
@@ -174,42 +175,14 @@
 
       //栏目缩略图上传
         $('#_thumb').bind('change',function(){
-          fileUpload('#_thumb','<?php echo U("Article/upload");?>');
-          
+          //限制文件类型与大小
+          var options = {
+            'filePath': $(this).val()
+          };
+          //调用上传方法
+          fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
         });
-        function fileUpload(id,url){
-            var formData = new FormData();
-            formData.append("file",$(id)[0].files[0]);
-            $.ajax({ 
-              url : url, 
-              type : 'POST', 
-              data : formData, 
-              processData : false, 
-              contentType : false,
-              beforeSend:function(){
-                $('.upload-btn').html('<i class="layui-icon">&#xe608;</i>正在上传...');
-              },
-              success : function(msg) { 
-                $('#thumb-img').attr('src',msg.src).removeClass('hide').show();
-                $('#thumb-input').val(msg.src);
-                $('#_thumb').val('');
-                $('.upload-btn').html('<i class="layui-icon">&#xe608;</i>文章缩略图').addClass('layui-btn-disabled');
-                $('#del-thumb').removeClass('hide').show();
-              }, 
-              error : function(responseStr) { 
-                console.log("error");
-                } 
-            });
-        }
-        //删除缩略图
-        $('#del-thumb').click(function(){
-            $('#thumb-img').attr('src','').hide();
-            $('#thumb-input').val('');
-            $('#_thumb').val('');
-            $(this).hide();
-            $('.upload-btn').removeClass('layui-btn-disabled');
-            return false;
-        });
+        
         //添加栏目
         $('.submit').on('click',function(){
           $.ajax({

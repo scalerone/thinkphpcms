@@ -4,9 +4,22 @@
 
 	class ArticleController extends CommonController {
 		public function index() {
+			$category = M('Category')->field('id,catname,pid')->order('sort ASC')-> select();
+			//分页
+			$model = M('Article');
+			$count = $model -> count();
+			$Page = new \Think\Page($count,10);
+			$Page -> setConfig('prev','上一页');
+			$Page -> setConfig('next','下一页');
+			$show = $Page -> show();
+
+			$this -> articles = $model->field('id,sort,thumb,title,hits,author,addtime,is_top,is_rec,is_hot')->order('sort ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
+			$this -> page = $show;
+			$this -> categories = reorgnCates($category,'├');
 			$this -> display();
 		}
 
+		//添加文章
 		public function add() {
 			if(IS_POST){
 				$post = I('post.');
@@ -18,12 +31,19 @@
 					$this -> error('添加失败!');
 				}
 			}else{
+				$category = M('Category')->field('id,catname,pid')->order('sort ASC')-> select();
+				$this -> categories = reorgnCates($category,'├');
 				$this -> display();	
 			}
 		}
 
 		public function del() {
-			
+			$result = M('Article') -> delete(I('get.id'));
+			if($result){
+				$this -> ajaxReturn(array('status'=>1));
+			}else{
+				$this -> ajaxReturn(array('status'=>0));
+			}
 		}
 
 		public function edit() {
@@ -42,10 +62,20 @@
 			
 		}
 
+		//更新排序
+		public function updateSort() {
+			$post = I('post.');
+			$model = M('Article');
+			foreach ($post as $id => $sort) {
+				$model -> where(array('id' => $id))->setField('sort',$sort);
+			}
+			$this -> success('更新排序成功!',U('Article/index'));
+		}
+
 		public function upload() {
 			$upload = new \Think\Upload();// 实例化上传类 
-			$upload->maxSize = 3145728 ;// 设置附件上传大小 
-			$upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型 
+			$upload->maxSize = 2097152;// 设置附件上传大小 
+			$upload->exts = array('jpg','jpeg','png','gif','bmp');// 设置附件上传类型 
 			$upload->rootPath = './Uploads/'; // 设置附件上传根目录 // 上传单个文件
 			$info = $upload->uploadOne($_FILES['file']); 
 			if(!$info) {// 上传错误提示错误信息 
@@ -59,8 +89,8 @@
 		
 		public function editImgUpload(){
 			$upload = new \Think\Upload();// 实例化上传类 
-			$upload->maxSize = 3145728 ;// 设置附件上传大小 
-			$upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型 
+			$upload->maxSize = 2097152 ;// 设置附件上传大小 
+			$upload->exts = array('jpg','jpeg','png','gif','bmp');// 设置附件上传类型 
 			$upload->rootPath = './Uploads/'; // 设置附件上传根目录 // 上传单个文件
 			$info = $upload->uploadOne($_FILES['file']); 
 			if(!$info) {// 上传错误提示错误信息 

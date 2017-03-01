@@ -4,20 +4,14 @@
 
 	class CategoryController extends CommonController {
 
+		//栏目列表
 		public function index () {
-			$model = M('Category');
-			//分页
-			$count = $model -> count();
-			$page = new \Think\Page($count,20);
-			$show = $page->show();
-
-			$category = $model->field('id,catname,pid,status,type,sort')->order('sort ASC') -> limit($page->firstRow.','.$page->listRows)->select();
-			//p($category);die;
+			$category = M('Category')->field('id,catname,pid,status,type,sort')->order('sort ASC')->select();
 			$this -> categories = reorgnCates($category);
-			$this -> page = $show;// 赋值分页输出
 			$this -> display();
 		}
 
+		//添加栏目
 		public function add () {
 			if(IS_POST){
 				$post = I('post.');
@@ -49,6 +43,7 @@
 			$this -> ajaxReturn(array('status'=>1,'msg'=>'删除成功!'));
 		}
 
+		//修改栏目
 		public function edit() {
 			if(IS_POST){
 				$post = I('post.');
@@ -79,6 +74,16 @@
 				$category -> where(array('id'=>$id)) -> setField('sort',$value);
 			}
 			$this -> success('更新排序成功!',U('Category/index'));
+		}
+
+		//更新栏目状态
+		public function updateStatus() {
+			$result = M('Category') -> save(I('get.'));
+			if($result != false){
+				$this -> ajaxReturn(array('status'=>1,'msg'=>'操作成功!'));
+			}else{
+				$this -> ajaxReturn(array('status'=>0,'msg'=>'操作失败!'));
+			}
 		}
 
 	}
