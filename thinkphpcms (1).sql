@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 �?02 �?28 �?17:44
+-- 生成日期: 2017 �?03 �?01 �?17:43
 -- 服务器版本: 5.5.47
 -- PHP 版本: 5.5.30
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `cms_admin` (
 --
 
 INSERT INTO `cms_admin` (`id`, `username`, `password`, `email`, `lastlogintime`, `lastloginip`, `status`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488244111, '127.0.0.1', 1);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488330405, '127.0.0.1', 1);
 
 -- --------------------------------------------------------
 
@@ -59,21 +59,23 @@ CREATE TABLE IF NOT EXISTS `cms_article` (
   `addtime` int(10) NOT NULL,
   `author` varchar(35) DEFAULT '',
   `alias` varchar(35) DEFAULT NULL,
-  `thumb` varchar(50) DEFAULT NULL,
+  `thumb` varchar(50) DEFAULT '',
   `sort` mediumint(10) DEFAULT '0',
   `status` int(1) DEFAULT '1' COMMENT '1:显示，2:回收站，0:锁定',
   `is_top` int(1) NOT NULL DEFAULT '0' COMMENT '置顶',
   `is_rec` int(1) NOT NULL DEFAULT '0' COMMENT '推荐',
   `is_hot` int(1) NOT NULL DEFAULT '0' COMMENT '热门',
+  `hits` int(10) DEFAULT '0' COMMENT '点击数',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
 -- 转存表中的数据 `cms_article`
 --
 
-INSERT INTO `cms_article` (`id`, `title`, `summary`, `content`, `catid`, `addtime`, `author`, `alias`, `thumb`, `sort`, `status`, `is_top`, `is_rec`, `is_hot`) VALUES
-(37, 'asdasd', 'asdasdasd', 'asdasd&lt;img src=&quot;./Uploads/2017-02-27/58b3d1e58abc8.jpg&quot; alt=&quot;58b3d1e58abc8.jpg&quot;&gt;', 0, 1488124800, '', '', './Uploads/2017-02-27/58b3d1d092540.jpg', 0, 1, 1, 1, 0);
+INSERT INTO `cms_article` (`id`, `title`, `summary`, `content`, `catid`, `addtime`, `author`, `alias`, `thumb`, `sort`, `status`, `is_top`, `is_rec`, `is_hot`, `hits`) VALUES
+(62, 'asdasd', 'asd', 'asdasd', 2, 1488297600, '', '', '', 0, 1, 1, 0, 0, 0),
+(63, 'asdas', 'asd', 'dasdad', 2, 1488297600, '', '', './Uploads/2017-03-01/58b694f7d3e2f.jpg', 0, 1, 0, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -103,7 +105,7 @@ INSERT INTO `cms_category` (`id`, `catname`, `sort`, `pid`, `thumb`, `addtime`, 
 (1, '三语课堂', 1, 0, './Uploads/2017-02-27/58b3e98d5a838.jpg', 1488185754, '别名', 1, 1, '描述'),
 (2, '招聘信息', 0, 0, '', 1488185971, '', 1, 2, ''),
 (46, '测试', 0, 0, './Uploads/2017-02-28/58b5343147cd7.jpg', 1488270397, '栏目别名', 1, 3, '测试栏目描述'),
-(47, '测试22', 0, 46, '', 1488270895, '栏目别名1222', 2, 3, '测试栏目描述122');
+(47, '测试22', 0, 46, './Uploads/2017-03-01/58b662e4e405a.jpg', 1488270895, '栏目别名1222', 1, 3, '测试栏目描述122');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
