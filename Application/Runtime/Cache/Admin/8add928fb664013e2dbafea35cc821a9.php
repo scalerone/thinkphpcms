@@ -73,67 +73,57 @@
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
+
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font">&#xe06b;</i><span>欢迎<?php echo (session('uname')); ?>登录，上次登录时间：<?php echo (date('Y年m月d日 H:i:s',session('logintime'))); ?>，登录IP：<?php echo (session('ip')); ?></span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">友情链接</span></div>
         </div>
+
         <div class="result-wrap">
-            <div class="result-title">
-                <h1>快捷操作</h1>
-            </div>
-            <div class="result-content">
-                <div class="short-wrap">
-                    <a href="#"><i class="icon-font">&#xe001;</i>添加内容</a>
-                    <a href="#"><i class="icon-font">&#xe005;</i>添加栏目</a>
-                    <a href="#"><i class="icon-font">&#xe048;</i>内容管理</a>
-                    <a href="#"><i class="icon-font">&#xe041;</i>栏目管理</a>
-                    <a href="#"><i class="icon-font">&#xe01e;</i>系统设置</a>
+            <form method="post" action="<?php echo U('Links/updateSort');?>" class="catesForm">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a href="<?php echo U('Links/add');?>"><i class="icon-font"></i>新增链接</a>
+                        <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
+                        <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="result-wrap">
-            <div class="result-title">
-                <h1>系统基本信息</h1>
-            </div>
-            <div class="result-content">
-                <ul class="sys-info-list">
-                    <li>
-                        <label class="res-lab">操作系统</label><span class="res-info"><?php echo ($system["name"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">运行环境</label><span class="res-info"><?php echo ($system["hj"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">上传附件限制</label><span class="res-info "><?php echo ($system["uploadSize"]); ?>M</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">北京时间</label><span class="res-info" id="time"></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">服务器域名</label><span class="res-info"><?php echo ($system["siteUrl"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">Host</label><span class="res-info"><?php echo ($system["host"]); ?></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="result-wrap">
-            <div class="result-title">
-                <h1>使用帮助</h1>
-            </div>
-            <div class="result-content">
-                <ul class="sys-info-list">
-                    <li>
-                        <label class="res-lab">客服QQ：</label><span class="res-info">848464730</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">微信：</label><span class="res-info">848464730</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">E-mail：</label><span class="res-info">848464730@qq.com</span>
-                    </li>
-                </ul>
-            </div>
+                <div class="result-content" style="max-height: 850px;overflow: auto;">
+                    <table class="layui-table">
+                      <thead>
+                        <tr>
+                            <th width="3%"><input type="checkbox"></th>
+                            <th width="5%">排序</th>
+                            <th>名称</th>
+                            <th width="14%">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    <?php if(is_array($links)): $i = 0; $__LIST__ = $links;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
+                            <td><input class="set" type="checkbox"></td>
+                            <td><input class="common-text common-text-center" size="3" type="text" value="<?php echo ($vo["sort"]); ?>" name="<?php echo ($vo["id"]); ?>"></td>
+                            <td><?php echo ($vo["title"]); ?></td>
+                            <td>
+                                <div class="layui-btn-group">
+                                    <a title="修改" class="editLink layui-btn layui-btn-small" data-href="<?php echo U('Links/edit',array('id'=>$vo['id']));?>">
+                                        <i class="layui-icon">&#xe642;</i>
+                                    </a>
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOne" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                      </tbody>
+                    </table>
+                    <div class="result-title">
+                        <div class="result-list">
+                            <a href="<?php echo U('Links/add');?>"><i class="icon-font"></i>新增链接</a>
+                            <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
+                            <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <!--/main-->
@@ -155,28 +145,25 @@
 	    });   
 	});
 </script>
+<script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
+    layui.use(['form','layer'], function(){
+        var layer = layui.layer
+        ,form = layui.form();
+});
+    //修改链接
     $(function(){
-        
-        //获取当前时间
-        var t = null;
-        t = setTimeout(time,1000);//开始执行
-        function time()
-        {
-           clearTimeout(t);//清除定时器
-           dt = new Date();
-           var yy = dt.getYear();   
-            if(yy<1900) yy = yy+1900;   
-            var MM = dt.getMonth()+1;   
-            if(MM<10) MM = '0' + MM;   
-            var dd = dt.getDate();   
-            if(dd<10) dd = '0' + dd; 
-           var h=dt.getHours();
-           var m=dt.getMinutes();
-           var s=dt.getSeconds();
-           document.getElementById("time").innerHTML =  yy+"年"+MM+"月"+dd+"日 "+h+":"+m+":"+s;
-           t = setTimeout(time,1000); //设定定时器，循环执行             
-        } 
+        $('.editLink').click(function(){
+            var $url = $(this).data('href');
+            layer.open({
+              type: 2,
+              title: 'layer mobile页',
+              shadeClose: true,
+              shade: 0.8,
+              area: ['360px', '90%'],
+              content: $url //iframe的url
+            }); 
+        });
     });
 </script>
 </body>

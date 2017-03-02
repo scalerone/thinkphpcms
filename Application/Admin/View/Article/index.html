@@ -5,25 +5,25 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a>首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">文章管理</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:U('Index/index')}">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">文章管理</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="/jscss/admin/design/index" method="post">
+                <form action="{:U('Article/search')}" method="post" class="searchForm">
                     <table class="search-tab">
                         <tr>
                             <th width="120">选择分类:</th>
                             <td>
-                                <select style="height:28px;" name="search-sort" id="" class="common-text">
-                                    <option value="">全部</option>
+                                <select style="height:28px;" name="catid" class="common-text">
+                                    <option value="0">全部</option>
                                     <volist name="categories" id="c">
-                                      <option value="{$c.id}" {$c['id']==$pid?'selected="selected"':''}>{$c.html}{$c.catname}</option>
+                                      <option value="{$c.id}" {($c['id']==$pid || $c['id']==$post['catid'])?'selected="selected"':''}>{$c.html}{$c.catname}</option>
                                     </volist>
                                 </select>
                             </td>
                             <th width="70">关键字:</th>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
-                            <td><input class="layui-btn layui-btn-small btn2" name="sub" value="查询" type="submit"></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" value="{$post.keywords}" type="text"></td>
+                            <td><input class="layui-btn layui-btn-small btn2" value="查询" type="submit"></td>
                         </tr>
                     </table>
                 </form>
@@ -36,14 +36,22 @@
                         <a href="{:U('Article/add')}"><i class="icon-font"></i>新增文章</a>
                         <a id="batchDelArticle" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
                         <a id="updateSortArticle" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
-                        <a id="removeAll" href="javascript:void(0)"><i class="layui-icon">&#xe60a;</i>批量移动</a>
+                        <div class="inline-block removebox">
+                            <select style="height:28px;" name="catid" class="common-text selectCatid">
+                                <option value="0">全部</option>
+                                <volist name="categories" id="c">
+                                  <option value="{$c.id}" {($c['id']==$pid || $c['id']==$post['catid'])?'selected="selected"':''}>{$c.html}{$c.catname}</option>
+                                </volist>
+                            </select>
+                            <input id="removeArticle" class="ml10 layui-btn layui-btn-small btn2" value="批量移动" type="button">
+                        </div>
                     </div>
                 </div>
                 <div class="result-content">
                     <table class="layui-table">
                       <thead>
                         <tr>
-                            <th width="3%"><input name="" type="checkbox"></th>
+                            <th width="3%"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
                             <th width="5%">排序</th>
                             <th>标题</th>
                             <th width="6%">点击</th>
@@ -100,6 +108,46 @@
     layui.use(['layer'], function(){
           var layer = layui.layer;
     });
+    //复选框选中后显示移动栏目下拉菜单和按钮
+    $('#removeArticle').on('click',function(){
+        $trs = $('.result-content table tbody tr input:checked');
+        if(!$trs.length){
+            layer.alert('请选中需要移动的文章!', {icon: 2});
+            return;
+        }
+        //获取选中的ID
+        var ids = [];
+        $trs.filter(function(index) {
+            return ids.push($($trs[index]).val());
+        });
+        //ids = ids.join(',');
+        //获取移动到的栏目的ID
+        var $catid = $('.selectCatid').val();
+        var url = '{:U("Article/remove")}';
+        var redirectUrl = '{:U("Article/index")}';
+        removeArticle(ids,url,$catid,redirectUrl);
+        //ajax移动文章
+        function removeArticle(ids,url,catid,redirectUrl){
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                data: {'ids': ids,'catid': catid},
+                success: function(res){
+                    if(res.status == 1){
+                        layer.alert(res.msg, {icon: 1});
+                        window.setTimeout(function(){
+                            window.location.href = redirectUrl;
+                        },1500);
+                    }else{
+                        layer.alert(res.msg, {icon: 2});
+                    }
+                },
+                error: function(res){
+                    layer.alert(res.msg, {icon: 2});
+                }
+            })
+        }
+    });
     //删除单个文章
     $(function(){
         $('.delOneArticle').on('click',function(){
@@ -118,7 +166,10 @@
         $('#batchDelArticle').on('click',function(){
             //获取所有选中的文章
             $trs = $('.result-content table tbody tr input:checked');
-            
+            if(!$trs.length){
+                layer.alert('请选中需要删除的文章!', {icon: 2});
+                return;
+            }
             //获取选中的ID
             var ids = [];
             $trs.filter(function(index) {
@@ -129,7 +180,7 @@
             ids = ids.join(',');
             $elems = $trs.parents('tr');
             //提示
-            layer.confirm('确定要删除所有的文章吗？', {icon: 3, title:'提示'}, function(index){
+            layer.confirm('确定要删除选中的文章吗？', {icon: 3, title:'提示'}, function(index){
                 delArticleById(ids,url,'get',$elems);
             });
         });

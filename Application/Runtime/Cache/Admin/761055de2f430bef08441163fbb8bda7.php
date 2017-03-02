@@ -75,82 +75,83 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/index');?>">文章管理</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/add');?>">添加文章</a></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/index');?>">文章管理</a><span class="crumb-step">&gt;</span><a class="crumb-name">修改文章</a></div>
         </div>
 
         <div class="result-wrap">
             <div class="result-content">
-               <form class="layui-form " action="<?php echo U('Article/add');?>" method="post" enctype="multipart/form-data" id="addForm">
+               <form class="layui-form " action="<?php echo U('Article/edit');?>" method="post" enctype="multipart/form-data" id="addForm">
                   <div class="layui-form-item">
                     <label class="layui-form-label">栏目：</label>
                     <div class="layui-input-block w200" >
                       <select name="catid" lay-verify="required">
-                        <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$pid?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+                        <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$article['catid']?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
                       </select>
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label ">标题：</label>
                     <div class="layui-input-block w500">
-                      <input type="text" name="title" lay-verify="required" placeholder="请输入标题"  class="layui-input" value="">
+                      <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="<?php echo ($article["title"]); ?>">
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label ">内容：</label>
                     <div class="layui-input-block">
-                      <textarea name="content" class="layui-textarea" id="LAY_edit" style="display: none"></textarea>
+                      <textarea name="content" class="layui-textarea" id="LAY_edit" style="display: none"><?php echo ($article["content"]); ?></textarea>
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label">缩略图：</label>
                     <div class="layui-input-block">
-                        <img src="" class="hide" id="thumb-img" height="100px" width="auto">
-                        <input type="hidden" name="thumb" id="thumb-input" value="">
+                        <img src="<?php echo ($article["thumb"]); ?>" <?php echo ($article['thumb']==''?'class="hide"':''); ?> id="thumb-img" height="100px" width="auto">
+                        <input type="hidden" name="thumb" id="thumb-input" value="<?php echo ($article["thumb"]); ?>">
                         <input type="file" name="_thumb" id="_thumb" class="hide">
                         <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
                           <i class="layui-icon">&#xe608;</i> 文章缩略图
                         </button>
-                        <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+                        <button id="del-thumb" class="layui-btn layui-btn-primary <?php echo ($article['thumb']==''?'hide':''); ?>">删除</button>
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label">状态：</label>
                     <div class="layui-input-block">
-                      <input type="checkbox" name="is_top" title="置顶" value="1">
-                      <input type="checkbox" name="is_rec" title="推荐" checked="" value="1">
-                      <input type="checkbox" name="is_hot" title="热门" value="1">
+                      <input type="checkbox" name="is_top" title="置顶" value="1" <?php echo ($article['is_top']=='1'?'checked=""':''); ?>>
+                      <input type="checkbox" name="is_rec" title="推荐" <?php echo ($article['is_rec']=='1'?'checked=""':''); ?> value="1">
+                      <input type="checkbox" name="is_hot" title="热门" value="1" <?php echo ($article['is_hot']=='1'?'checked=""':''); ?>>
                     </div>
                   </div>
                   <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">摘要：</label>
                     <div class="layui-input-block w500">
-                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"></textarea>
+                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"><?php echo ($article["summary"]); ?></textarea>
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <div class="layui-inline">
                       <label class="layui-form-label">添加日期：</label>
                       <div class="layui-input-block">
-                        <input type="text" name="addtime" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD'})">
+                        <input type="text" name="addtime" value="<?php echo (date('Y-m-d',$article["addtime"])); ?>" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD'})">
                       </div>
                     </div>
                     <div class="layui-inline">
                       <label class="layui-form-label">作者：</label>
                       <div class="layui-input-block">
-                        <input type="tel" name="author" autocomplete="off" class="layui-input">
+                        <input type="tel" value="<?php echo ($article["author"]); ?>" name="author" autocomplete="off" class="layui-input">
                       </div>
                     </div>
                     <div class="layui-inline">
                       <label class="layui-form-label">别名：</label>
                       <div class="layui-input-block">
-                        <input type="tel" name="alias" autocomplete="off" class="layui-input">
+                        <input type="tel" name="alias" value="<?php echo ($article["alias"]); ?>" autocomplete="off" class="layui-input">
                       </div>
                     </div>
                   </div>
                   
                    <div class="layui-form-item">
                     <div class="layui-input-block">
-                      <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
+                      <input type="hidden" name="id" value="<?php echo ($article["id"]); ?>">
+                      <button type="submit" class="layui-btn submit" lay-submit="" >修改</button>
                     </div>
                   </div>
                 </form>
@@ -201,23 +202,6 @@
           //调用上传方法
           fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
         });
-
-        //添加文章
-        /*$('.submit').on('click',function(){
-          $.ajax({
-            url: '<?php echo U("Article/add");?>',
-            type: 'POST',
-            dataType: 'json',
-            data: $('#addForm').serialize(),
-            success: function(data){
-              layer.msg(data.msg, {icon: 6});
-              window.setTimeout(function(){
-                window.location.href = "<?php echo U('Article/index');?>";
-              },1200);
-            }
-          });
-          return false;
-        });*/
     });
 </script>
 </body>

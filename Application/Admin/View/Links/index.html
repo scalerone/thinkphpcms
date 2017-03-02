@@ -1,0 +1,86 @@
+<include file="Public:header"/>
+<div class="container clearfix">
+    <include file="Public:left"/>
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">友情链接</span></div>
+        </div>
+
+        <div class="result-wrap">
+            <form method="post" action="{:U('Links/updateSort')}" class="catesForm">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a href="{:U('Links/add')}"><i class="icon-font"></i>新增链接</a>
+                        <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
+                        <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                    </div>
+                </div>
+                <div class="result-content" style="max-height: 850px;overflow: auto;">
+                    <table class="layui-table">
+                      <thead>
+                        <tr>
+                            <th width="3%"><input type="checkbox"></th>
+                            <th width="5%">排序</th>
+                            <th>名称</th>
+                            <th width="14%">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    <volist name="links" id="vo">
+                        <tr data-id={$vo.id}>
+                            <td><input class="set" type="checkbox"></td>
+                            <td><input class="common-text common-text-center" size="3" type="text" value="{$vo.sort}" name="{$vo.id}"></td>
+                            <td>{$vo.title}</td>
+                            <td>
+                                <div class="layui-btn-group">
+                                    <a title="修改" class="editLink layui-btn layui-btn-small" data-href="{:U('Links/edit',array('id'=>$vo['id']))}">
+                                        <i class="layui-icon">&#xe642;</i>
+                                    </a>
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOne" href="javascript:;" data-id="{$vo.id}">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </volist>
+                      </tbody>
+                    </table>
+                    <div class="result-title">
+                        <div class="result-list">
+                            <a href="{:U('Links/add')}"><i class="icon-font"></i>新增链接</a>
+                            <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
+                            <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+<include file="Public:footer"/>
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form','layer'], function(){
+        var layer = layui.layer
+        ,form = layui.form();
+});
+    //修改链接
+    $(function(){
+        $('.editLink').click(function(){
+            var $url = $(this).data('href');
+            layer.open({
+              type: 2,
+              title: 'layer mobile页',
+              shadeClose: true,
+              shade: 0.8,
+              area: ['360px', '600px'],
+              content: $url //iframe的url
+            }); 
+        });
+    });
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 �?03 �?01 �?17:43
+-- 生成日期: 2017 �?03 �?02 �?17:43
 -- 服务器版本: 5.5.47
 -- PHP 版本: 5.5.30
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `cms_admin` (
 --
 
 INSERT INTO `cms_admin` (`id`, `username`, `password`, `email`, `lastlogintime`, `lastloginip`, `status`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488330405, '127.0.0.1', 1);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488422697, '127.0.0.1', 1);
 
 -- --------------------------------------------------------
 
@@ -67,15 +67,17 @@ CREATE TABLE IF NOT EXISTS `cms_article` (
   `is_hot` int(1) NOT NULL DEFAULT '0' COMMENT '热门',
   `hits` int(10) DEFAULT '0' COMMENT '点击数',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
 
 --
 -- 转存表中的数据 `cms_article`
 --
 
 INSERT INTO `cms_article` (`id`, `title`, `summary`, `content`, `catid`, `addtime`, `author`, `alias`, `thumb`, `sort`, `status`, `is_top`, `is_rec`, `is_hot`, `hits`) VALUES
-(62, 'asdasd', 'asd', 'asdasd', 2, 1488297600, '', '', '', 0, 1, 1, 0, 0, 0),
-(63, 'asdas', 'asd', 'dasdad', 2, 1488297600, '', '', './Uploads/2017-03-01/58b694f7d3e2f.jpg', 0, 1, 0, 1, 0, 0);
+(65, 'sdasdasd', 'asd', 'adsa', 46, 1488384000, '', '', '', 0, 1, 1, 1, 0, 0),
+(64, 'sanyuketang111', '课堂111', '2宇铿发阿斯达斯的&lt;img src=&quot;./Uploads/2017-03-02/58b78fb3929cd.jpg&quot; alt=&quot;58b78fb3929cd.jpg&quot;&gt;', 2, 1488384000, 'admin11', '三语课程111', '', 1, 1, 0, 0, 1, 0),
+(62, 'asdasd', 'asd', 'asdasd', 2, 1488297600, '', '', '', 2, 1, 1, 0, 0, 0),
+(63, 'asdas', 'asd', 'dasdad', 47, 1488297600, '', '', './Uploads/2017-03-01/58b694f7d3e2f.jpg', 0, 1, 0, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -95,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `cms_category` (
   `type` smallint(1) DEFAULT '1' COMMENT '1:栏目2:单篇3:链接',
   `summary` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=48 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
 
 --
 -- 转存表中的数据 `cms_category`
@@ -105,7 +107,32 @@ INSERT INTO `cms_category` (`id`, `catname`, `sort`, `pid`, `thumb`, `addtime`, 
 (1, '三语课堂', 1, 0, './Uploads/2017-02-27/58b3e98d5a838.jpg', 1488185754, '别名', 1, 1, '描述'),
 (2, '招聘信息', 0, 0, '', 1488185971, '', 1, 2, ''),
 (46, '测试', 0, 0, './Uploads/2017-02-28/58b5343147cd7.jpg', 1488270397, '栏目别名', 1, 3, '测试栏目描述'),
-(47, '测试22', 0, 46, './Uploads/2017-03-01/58b662e4e405a.jpg', 1488270895, '栏目别名1222', 1, 3, '测试栏目描述122');
+(47, '测试22', 0, 46, './Uploads/2017-03-01/58b662e4e405a.jpg', 1488270895, '栏目别名1222', 1, 3, '测试栏目描述122'),
+(48, 'asdasd', 0, 0, '', 1488442235, '', 1, 1, 'asd');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `cms_links`
+--
+
+CREATE TABLE IF NOT EXISTS `cms_links` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(35) NOT NULL,
+  `desc` varchar(255) DEFAULT '',
+  `thumb` varchar(55) DEFAULT '',
+  `url` varchar(55) DEFAULT '',
+  `sort` mediumint(8) DEFAULT '20',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `cms_links`
+--
+
+INSERT INTO `cms_links` (`id`, `title`, `desc`, `thumb`, `url`, `sort`) VALUES
+(1, '百度', '百度地址', './Uploads/2017-03-02/58b7e3785401e.jpg', 'http://www.baidu.com', 20),
+(3, '新浪', '新浪地址', './Uploads/2017-03-02/58b7e3785401e.jpg', 'http://www.sina.com.cn', 20);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
