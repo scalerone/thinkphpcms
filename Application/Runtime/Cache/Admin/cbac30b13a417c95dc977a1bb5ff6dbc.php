@@ -75,82 +75,58 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/index');?>">文章管理</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/add');?>">添加文章</a></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name">会员管理</a><span class="crumb-step">&gt;</span><a class="crumb-name">添加会员</a></div>
         </div>
 
         <div class="result-wrap">
             <div class="result-content">
-               <form class="layui-form " action="<?php echo U('Article/add');?>" method="post" enctype="multipart/form-data" id="addForm">
+               <form class="layui-form" action="<?php echo U('Member/add');?>" method="post" enctype="multipart/form-data" id="addForm">
+                  
                   <div class="layui-form-item">
-                    <label class="layui-form-label">栏目：</label>
-                    <div class="layui-input-block w200" >
-                      <select name="catid" lay-verify="required">
-                        <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$pid?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label ">标题：</label>
+                    <label class="layui-form-label ">会员名：</label>
                     <div class="layui-input-block w500">
-                      <input type="text" name="title" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+                      <input type="text" name="name" lay-verify="required" placeholder="请输入会员名" autocomplete="off" class="layui-input" value="">
                     </div>
                   </div>
+
                   <div class="layui-form-item">
-                    <label class="layui-form-label ">内容：</label>
-                    <div class="layui-input-block">
-                      <textarea name="content" class="layui-textarea" id="LAY_edit" style="display: none"></textarea>
+                    <label class="layui-form-label ">密码：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="pass" required  lay-verify="required|url" placeholder="密码" autocomplete="off" class="layui-input" value="">
                     </div>
                   </div>
+
                   <div class="layui-form-item">
-                    <label class="layui-form-label">缩略图：</label>
+                    <label class="layui-form-label ">性别：</label>
+                    <div class="layui-input-block w200">
+                      <input type="text" name="sex" required  lay-verify="required" placeholder="请输入性别" autocomplete="off" class="layui-input" value="20">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">头像：</label>
                     <div class="layui-input-block">
                         <img src="" class="hide" id="thumb-img" height="100px" width="auto">
-                        <input type="hidden" name="thumb" id="thumb-input" value="">
+                        <input type="hidden" name="avatar" id="thumb-input" value="">
                         <input type="file" name="_thumb" id="_thumb" class="hide">
                         <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
-                          <i class="layui-icon">&#xe608;</i> 文章缩略图
+                          <i class="layui-icon">&#xe608;</i> 添加头像
                         </button>
                         <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
                     </div>
                   </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">状态：</label>
-                    <div class="layui-input-block">
-                      <input type="checkbox" name="is_top" title="置顶" value="1">
-                      <input type="checkbox" name="is_rec" title="推荐" checked="" value="1">
-                      <input type="checkbox" name="is_hot" title="热门" value="1">
-                    </div>
-                  </div>
+                  
                   <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">摘要：</label>
+                    <label class="layui-form-label">个人简介：</label>
                     <div class="layui-input-block w500">
-                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"></textarea>
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <div class="layui-inline">
-                      <label class="layui-form-label">添加日期：</label>
-                      <div class="layui-input-block">
-                        <input type="text" name="addtime" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD'})">
-                      </div>
-                    </div>
-                    <div class="layui-inline">
-                      <label class="layui-form-label">作者：</label>
-                      <div class="layui-input-block">
-                        <input type="tel" name="author" autocomplete="off" class="layui-input">
-                      </div>
-                    </div>
-                    <div class="layui-inline">
-                      <label class="layui-form-label">别名：</label>
-                      <div class="layui-input-block">
-                        <input type="tel" name="alias" autocomplete="off" class="layui-input">
-                      </div>
+                      <textarea name="intro" placeholder="个人简介..." class="layui-textarea"></textarea>
                     </div>
                   </div>
                   
                    <div class="layui-form-item">
                     <div class="layui-input-block">
                       <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
+                      <a href="<?php echo U('Member/index');?>" class="layui-btn" >返回会员列表</a>
                     </div>
                   </div>
                 </form>
@@ -176,22 +152,9 @@
 	    });   
 	});
 </script>
-
 <script type="text/javascript">
-    layui.use(['form', 'layedit', 'laydate'], function(){
-      var form = layui.form()
-      ,layedit = layui.layedit
-      ,laydate = layui.laydate;
-
-      //创建一个编辑器
-        layedit.set({
-          uploadImage: {
-            url: '<?php echo U("Article/editImgUpload");?>'
-          }
-        });
-
-        var editIndex = layedit.build('LAY_edit');
-
+    layui.use(['form'], function(){
+      var form = layui.form();
         //文章缩略图上传
         $('#_thumb').bind('change',function(){
           //限制文件类型与大小
@@ -201,24 +164,8 @@
           //调用上传方法
           fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
         });
-
-        //添加文章
-        /*$('.submit').on('click',function(){
-          $.ajax({
-            url: '<?php echo U("Article/add");?>',
-            type: 'POST',
-            dataType: 'json',
-            data: $('#addForm').serialize(),
-            success: function(data){
-              layer.msg(data.msg, {icon: 6});
-              window.setTimeout(function(){
-                window.location.href = "<?php echo U('Article/index');?>";
-              },1200);
-            }
-          });
-          return false;
-        });*/
     });
+   
 </script>
 </body>
 </html>

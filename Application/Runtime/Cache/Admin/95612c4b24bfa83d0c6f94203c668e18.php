@@ -46,18 +46,18 @@
                 <li>
                     <a href="#"><i class="icon-font">&#xe003;</i>用户管理</a>
                     <ul class="sub-menu">
-                        <li><a href="design.html"><i class="icon-font">&#xe008;</i>网站会员</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe005;</i>管理员</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe033;</i>管理员组</a></li>
+                        <li><a href="<?php echo U('Member/index');?>"><i class="icon-font">&#xe008;</i>网站会员</a></li>
+                        <li><a href="<?php echo U('Admin/index');?>"><i class="icon-font">&#xe005;</i>管理员</a></li>
+                        <li><a href="<?php echo U('AdminGroup/index');?>"><i class="icon-font">&#xe033;</i>管理员组</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
                     <ul class="sub-menu">
-                        <li><a href="system.html"><i class="icon-font">&#xe017;</i>系统信息</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe037;</i>清理缓存</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe046;</i>数据备份</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe045;</i>数据还原</a></li>
+                        <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统信息</a></li>
+                        <li><a href="<?php echo U('Cache/index');?>"><i class="icon-font">&#xe037;</i>清理缓存</a></li>
+                        <li><a href="<?php echo U('Data/backup');?>"><i class="icon-font">&#xe046;</i>数据备份</a></li>
+                        <li><a href="<?php echo U('Data/reduct');?>"><i class="icon-font">&#xe045;</i>数据还原</a></li>
                     </ul>
                 </li>
                 <li>
@@ -138,7 +138,7 @@
                   </div>
                    <div class="layui-form-item">
                     <div class="layui-input-block">
-                      <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
+                      <button type="submit" class="layui-btn submit" lay-submit="" lay-filter="*">添加</button>
                       <a href="javascript:window.history.go(-1);" class="layui-btn layui-btn-warm">返回</a>
                     </div>
                   </div>
@@ -168,11 +168,10 @@
 <script type="text/javascript">
     layui.use(['form', 'layedit', 'laydate'], function(){
       var form = layui.form()
-      ,layer = layui.layer
       ,layedit = layui.layedit
       ,laydate = layui.laydate;
 
-      //文章缩略图上传
+        //文章缩略图上传
         $('#_thumb').bind('change',function(){
           //限制文件类型与大小
           var options = {
@@ -182,7 +181,26 @@
           fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
         });
 
-        //添加栏目
+        form.on('submit(*)', function(data){
+          $.ajax({
+            url: '<?php echo U("Category/add");?>',
+            type: 'POST',
+            dataType: 'json',
+            data: $('#addForm').serialize(),
+            success: function(res){
+              if(res.status == 0){
+                layer.msg(res.msg, {icon: 2});
+              }else{
+                layer.msg(res.msg, {icon: 1});
+                window.setTimeout(function(){
+                  window.location.href = "<?php echo U('Category/index');?>";
+                },1500);
+              }
+            }
+          });
+          return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+        /*//添加栏目
         $('.submit').on('click',function(){
           $.ajax({
             url: '<?php echo U("Category/add");?>',
@@ -201,7 +219,7 @@
             }
           });
           return false;
-        });
+        });*/
     });
 </script>
 </body>

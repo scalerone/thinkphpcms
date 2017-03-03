@@ -38,7 +38,6 @@
                         <a id="updateSortArticle" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
                         <div class="inline-block removebox">
                             <select style="height:28px;" name="catid" class="common-text selectCatid">
-                                <option value="0">全部</option>
                                 <volist name="categories" id="c">
                                   <option value="{$c.id}" {($c['id']==$pid || $c['id']==$post['catid'])?'selected="selected"':''}>{$c.html}{$c.catname}</option>
                                 </volist>
@@ -185,22 +184,7 @@
             });
         });
     });
-    //鼠标移动显示文章缩略图
-    $(function(){
-        $('.icon-thumb').hover(function(e) {
-            var src = $(this).data('src');
-            var xx = e.originalEvent.x || e.originalEvent.layerX || 0; 
-            var yy = e.originalEvent.y || e.originalEvent.layerY || 0; 
-            yy = yy - 50;
-            xx = xx + 30;
-            var html = '<img class="_img" src="'+src+'" style="display:none; max-height:100px;width:auto;position: fixed;z-index: 999;left:'+xx+'px;top:'+yy+'px;">';
-            $('body').append(html);
-            $('._img').fadeIn('slow');
-
-        }, function(e) {
-            $('._img').fadeOut('slow').remove();
-        });
-    });
+    
     //批量更新栏目排序
     $(function(){
         $('#updateSortArticle').on('click',function(){

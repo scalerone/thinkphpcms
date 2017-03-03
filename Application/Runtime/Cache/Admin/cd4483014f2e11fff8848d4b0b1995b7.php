@@ -75,16 +75,14 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">友情链接</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">会员管理</span></div>
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="<?php echo U('Links/updateSort');?>" class="sortForm">
+            <form method="post" action="" class="sortForm">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="<?php echo U('Links/add');?>"><i class="icon-font"></i>新增链接</a>
-                        <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                        <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                        <a class="addMember" href="#"><i class="icon-font"></i>添加会员</a>
                     </div>
                 </div>
                 <div class="result-content" style="max-height: 850px;overflow: auto;">
@@ -98,10 +96,10 @@
                         </tr>
                       </thead>
                       <tbody>
-                    <?php if(is_array($links)): $i = 0; $__LIST__ = $links;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
+                    <?php if(is_array($members)): $i = 0; $__LIST__ = $members;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
                             <td><input class="set" type="checkbox" value="<?php echo ($vo["id"]); ?>"></td>
                             <td><input class="common-text common-text-center" size="3" type="text" value="<?php echo ($vo["sort"]); ?>" name="<?php echo ($vo["id"]); ?>"></td>
-                            <td><?php echo ($vo["title"]); ?>
+                            <td><?php echo ($vo["name"]); ?>
                                 <?php if($vo["thumb"] != '' ): ?><i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="<?php echo ($vo["thumb"]); ?>">&#xe64a;</i>
                                 <?php else: endif; ?>
                             </td>
@@ -120,17 +118,64 @@
                     </table>
                     <div class="result-title">
                         <div class="result-list">
-                            <a href="<?php echo U('Links/add');?>"><i class="icon-font"></i>新增链接</a>
-                            <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                            <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                            <a class="addMember" href="#"><i class="icon-font"></i>添加会员</a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <div id="addWrap" style="padding-top:10px;padding-right:10px;padding-bottom: 10px;">
+        <form class="layui-form" action="">
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">用户名</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="name" required  lay-verify="required" placeholder="请输入标用户名" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">密码</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="pass" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">邮箱</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="email" required  lay-verify="" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">头像</label>
+            <div class="layui-input-block margin-left80">
+                <img src="" class="hide" id="thumb-img" height="80px" width="auto">
+                <input type="hidden" name="thumb" id="thumb-input" value="">
+                <input type="file" id="_thumb" class="hide">
+                <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                  <i class="layui-icon">&#xe608;</i> 上传头像
+                </button>
+                <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+            </div>
+          </div>
+
+          <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label wid_auto">简介</label>
+            <div class="layui-input-block margin-left80">
+              <textarea name="intro" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>
+            </div>
+          </div>
+        </form>
+    </div>
     <!--/main-->
-</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -153,33 +198,42 @@
     layui.use(['form','layer'], function(){
         var layer = layui.layer
         ,form = layui.form();
-});
-    //删除
-    $('.batchDel').on('click',function(){
-        //获取所有选中的文章
-        $trs = $('.result-content table tbody tr input:checked');
-        if(!$trs.length){
-            layer.alert('请选中需要删除的链接!', {icon: 2});
-            return;
-        }
-        //获取选中的ID
-        var ids = [];
-        $trs.filter(function(index) {
-            return ids.push($($trs[index]).val());
-        });
 
-        var url = '<?php echo U("Links/del");?>';
-        ids = ids.join(',');
-        var $elems = $trs.parents('tr');
-        layer.confirm('确定要删除选中的链接吗？', {icon: 3, title:'提示'}, function(index){
-            ajaxDeleteElems(ids,url,'post',$elems);
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+          $.ajax({
+            url: '<?php echo U("Member/add");?>',
+            type: 'post',
+            dataType: 'json',
+            data: $(data.form).serialize(),
+            success: function(res){
+              if(res.status == 1){
+                layer.alert(res.msg,{icon:1});   
+                window.setTimeout(function(){
+                  window.location.href = "<?php echo U('Member/index');?>";
+                },1500);
+              }else{
+                layer.alert(res.msg,{icon:2}); 
+              }
+            },
+            error: function(res){
+              console.log(res);
+            }
+          });
+          return false;
         });
+});
+
+    //文章缩略图上传
+    $('#_thumb').bind('change',function(){
+      //限制文件类型与大小
+      var options = {
+        'filePath': $(this).val()
+      };
+      //调用上传方法
+      fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
     });
-    //更新排序
-    $('.updateOrd').on('click',function(){
-        $('.sortForm').submit();
-        return false;
-    });
+
     //删除单个
     $(function(){
         $('.delOneLink').on('click',function(){
@@ -192,7 +246,18 @@
             });
         });
     });
-    
+    //添加会员
+    $('.addMember').click(function(){
+        layer.open({
+          type: 1,
+          title: '添加会员',
+          closeBtn: 1,
+          area: ['460px', 'auto'],
+          shadeClose: true,
+          content: $('#addWrap')
+        });
+    });
+
 </script>
 </body>
 </html>

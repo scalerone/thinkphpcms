@@ -70,7 +70,7 @@
                   </div>
                    <div class="layui-form-item">
                     <div class="layui-input-block">
-                      <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
+                      <button type="submit" class="layui-btn submit" lay-submit="" lay-filter="*">添加</button>
                       <a href="javascript:window.history.go(-1);" class="layui-btn layui-btn-warm">返回</a>
                     </div>
                   </div>
@@ -84,11 +84,10 @@
 <script type="text/javascript">
     layui.use(['form', 'layedit', 'laydate'], function(){
       var form = layui.form()
-      ,layer = layui.layer
       ,layedit = layui.layedit
       ,laydate = layui.laydate;
 
-      //文章缩略图上传
+        //文章缩略图上传
         $('#_thumb').bind('change',function(){
           //限制文件类型与大小
           var options = {
@@ -98,8 +97,7 @@
           fileUpload(options,'#_thumb','{:U("Article/upload")}');
         });
 
-        //添加栏目
-        $('.submit').on('click',function(){
+        form.on('submit(*)', function(data){
           $.ajax({
             url: '{:U("Category/add")}',
             type: 'POST',
@@ -116,7 +114,7 @@
               }
             }
           });
-          return false;
+          return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
     });
 </script>

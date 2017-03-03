@@ -1,0 +1,115 @@
+<include file="Public:header" />
+<div class="container clearfix">
+    <include file="Public:left" />
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:U('Index/index')}">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name">链接管理</a><span class="crumb-step">&gt;</span><a class="crumb-name">修改链接</a></div>
+        </div>
+
+        <div class="result-wrap">
+            <div class="result-content">
+               <form class="layui-form" action="{:U('Links/edit')}" method="post" enctype="multipart/form-data" id="addForm">
+                  
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">链接名称：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="title" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="{$link.title}">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">链接地址：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="url" required  lay-verify="required|url" placeholder="http://www.baidu.com" autocomplete="off" class="layui-input" value="{$link.url}">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">排序：</label>
+                    <div class="layui-input-block w200">
+                      <input type="text" name="sort" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="{$link.sort}">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">缩略图：</label>
+                    <div class="layui-input-block">
+                        <img src="{$link.thumb}" class="{$link['thumb']==''?'hide':''}" id="thumb-img" height="100px" width="auto">
+                        <input type="hidden" name="thumb" id="thumb-input" value="{$link.thumb}">
+                        <input type="file" name="_thumb" id="_thumb" class="hide">
+                        <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                          <i class="layui-icon">&#xe608;</i> 链接缩略图
+                        </button>
+                        <button id="del-thumb" class="layui-btn layui-btn-primary {$link['thumb']==''?'hide':''}">删除</button>
+                    </div>
+                  </div>
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">描述：</label>
+                    <div class="layui-input-block w500">
+                      <textarea name="desc" placeholder="链接描述..." class="layui-textarea">{$link.desc}</textarea>
+                    </div>
+                  </div>
+                  
+                   <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <input type="hidden" name="id" value="{$link.id}">
+                      <button type="submit" class="layui-btn submit" lay-submit="" >修改</button>
+                      <a href="javascript:window.history.go(-1);" class="layui-btn layui-btn-warm" >返回</a>
+                      <a href="{:U('Links/index')}" class="layui-btn" >查看链接</a>
+                    </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+<include file="Public:footer" />
+<script type="text/javascript">
+    layui.use(['form'], function(){
+      var form = layui.form();
+
+        //文章缩略图上传
+        $('#_thumb').bind('change',function(){
+          //限制文件类型与大小
+          var options = {
+            'filePath': $(this).val()
+          };
+          //调用上传方法
+          fileUpload(options,'#_thumb','{:U("Article/upload")}');
+        });
+    });
+    //ajax修改友情链接
+    $(function(){
+      $('.submit').on('click',function(){
+        var url = '{:U("Links/edit")}';
+        ajaxAddLinks(url);
+        function ajaxAddLinks(url){
+          $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'json',
+            data: $('#addForm').serialize(),
+            success:function(res){
+              if(res.status == 1){
+                layer.msg(res.msg,{icon:1});
+                window.setTimeout(function(){
+                  window.location.href = "{:U('Links/index')}";
+                },1500);
+              }else{
+                layer.msg(res.msg,{icon:2});
+              }
+            },
+            error:function(res){
+              layer.msg('出现错误！',{icon:2});
+            }
+          })
+        }
+        return false;
+      });
+    });
+</script>
+</body>
+</html>

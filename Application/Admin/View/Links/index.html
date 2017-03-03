@@ -9,7 +9,7 @@
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="{:U('Links/updateSort')}" class="catesForm">
+            <form method="post" action="{:U('Links/updateSort')}" class="sortForm">
                 <div class="result-title">
                     <div class="result-list">
                         <a href="{:U('Links/add')}"><i class="icon-font"></i>新增链接</a>
@@ -30,15 +30,19 @@
                       <tbody>
                     <volist name="links" id="vo">
                         <tr data-id={$vo.id}>
-                            <td><input class="set" type="checkbox"></td>
+                            <td><input class="set" type="checkbox" value="{$vo.id}"></td>
                             <td><input class="common-text common-text-center" size="3" type="text" value="{$vo.sort}" name="{$vo.id}"></td>
-                            <td>{$vo.title}</td>
+                            <td>{$vo.title}
+                                <if condition="$vo.thumb neq '' ">
+                                    <i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="{$vo.thumb}">&#xe64a;</i>
+                                <else /></if>
+                            </td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a title="修改" class="editLink layui-btn layui-btn-small" data-href="{:U('Links/edit',array('id'=>$vo['id']))}">
+                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="{:U('Links/edit',array('id'=>$vo['id']))}">
                                         <i class="layui-icon">&#xe642;</i>
                                     </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOne" href="javascript:;" data-id="{$vo.id}">
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="{$vo.id}">
                                         <i class="layui-icon">&#xe640;</i>
                                     </a>
                                 </div>
@@ -67,20 +71,45 @@
         var layer = layui.layer
         ,form = layui.form();
 });
-    //修改链接
-    $(function(){
-        $('.editLink').click(function(){
-            var $url = $(this).data('href');
-            layer.open({
-              type: 2,
-              title: 'layer mobile页',
-              shadeClose: true,
-              shade: 0.8,
-              area: ['360px', '600px'],
-              content: $url //iframe的url
-            }); 
+    //删除
+    $('.batchDel').on('click',function(){
+        //获取所有选中的文章
+        $trs = $('.result-content table tbody tr input:checked');
+        if(!$trs.length){
+            layer.alert('请选中需要删除的链接!', {icon: 2});
+            return;
+        }
+        //获取选中的ID
+        var ids = [];
+        $trs.filter(function(index) {
+            return ids.push($($trs[index]).val());
+        });
+
+        var url = '{:U("Links/del")}';
+        ids = ids.join(',');
+        var $elems = $trs.parents('tr');
+        layer.confirm('确定要删除选中的链接吗？', {icon: 3, title:'提示'}, function(index){
+            ajaxDeleteElems(ids,url,'post',$elems);
         });
     });
+    //更新排序
+    $('.updateOrd').on('click',function(){
+        $('.sortForm').submit();
+        return false;
+    });
+    //删除单个
+    $(function(){
+        $('.delOneLink').on('click',function(){
+                $trEle = $(this).parents('tr');//当前的tr节点
+                var url = "{:U('Links/del')}";//提交删除的地址
+                var eleId = $trEle.data('id');//当前的id
+                //提示
+                layer.confirm('确定要删除该链接？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(eleId,url,'post',$trEle);
+            });
+        });
+    });
+    
 </script>
 </body>
 </html>

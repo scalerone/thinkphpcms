@@ -1,0 +1,180 @@
+<include file="Public:header"/>
+<div class="container clearfix">
+    <include file="Public:left"/>
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">会员管理</span></div>
+        </div>
+
+        <div class="result-wrap">
+            <form method="post" action="" class="sortForm">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a class="addMember" href="#"><i class="icon-font"></i>添加会员</a>
+                    </div>
+                </div>
+                <div class="result-content" style="max-height: 850px;overflow: auto;">
+                    <table class="layui-table">
+                      <thead>
+                        <tr>
+                            <th width="3%"><input type="checkbox"></th>
+                            <th width="5%">排序</th>
+                            <th>名称</th>
+                            <th width="14%">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    <volist name="members" id="vo">
+                        <tr data-id={$vo.id}>
+                            <td><input class="set" type="checkbox" value="{$vo.id}"></td>
+                            <td><input class="common-text common-text-center" size="3" type="text" value="{$vo.sort}" name="{$vo.id}"></td>
+                            <td>{$vo.name}
+                                <if condition="$vo.thumb neq '' ">
+                                    <i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="{$vo.thumb}">&#xe64a;</i>
+                                <else /></if>
+                            </td>
+                            <td>
+                                <div class="layui-btn-group">
+                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="{:U('Links/edit',array('id'=>$vo['id']))}">
+                                        <i class="layui-icon">&#xe642;</i>
+                                    </a>
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="{$vo.id}">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </volist>
+                      </tbody>
+                    </table>
+                    <div class="result-title">
+                        <div class="result-list">
+                            <a class="addMember" href="#"><i class="icon-font"></i>添加会员</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="addWrap" style="padding-top:10px;padding-right:10px;padding-bottom: 10px;">
+        <form class="layui-form" action="">
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">用户名</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="name" required  lay-verify="required" placeholder="请输入标用户名" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">密码</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="pass" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">邮箱</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="email" required  lay-verify="" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">头像</label>
+            <div class="layui-input-block margin-left80">
+                <img src="" class="hide" id="thumb-img" height="80px" width="auto">
+                <input type="hidden" name="thumb" id="thumb-input" value="">
+                <input type="file" id="_thumb" class="hide">
+                <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                  <i class="layui-icon">&#xe608;</i> 上传头像
+                </button>
+                <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+            </div>
+          </div>
+
+          <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label wid_auto">简介</label>
+            <div class="layui-input-block margin-left80">
+              <textarea name="intro" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>
+            </div>
+          </div>
+        </form>
+    </div>
+    <!--/main-->
+<include file="Public:footer"/>
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form','layer'], function(){
+        var layer = layui.layer
+        ,form = layui.form();
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+          $.ajax({
+            url: '{:U("Member/add")}',
+            type: 'post',
+            dataType: 'json',
+            data: $(data.form).serialize(),
+            success: function(res){
+              if(res.status == 1){
+                layer.alert(res.msg,{icon:1});   
+                window.setTimeout(function(){
+                  window.location.href = "{:U('Member/index')}";
+                },1500);
+              }else{
+                layer.alert(res.msg,{icon:2}); 
+              }
+            },
+            error: function(res){
+              console.log(res);
+            }
+          });
+          return false;
+        });
+});
+
+    //文章缩略图上传
+    $('#_thumb').bind('change',function(){
+      //限制文件类型与大小
+      var options = {
+        'filePath': $(this).val()
+      };
+      //调用上传方法
+      fileUpload(options,'#_thumb','{:U("Article/upload")}');
+    });
+
+    //删除单个
+    $(function(){
+        $('.delOneLink').on('click',function(){
+                $trEle = $(this).parents('tr');//当前的tr节点
+                var url = "{:U('Links/del')}";//提交删除的地址
+                var eleId = $trEle.data('id');//当前的id
+                //提示
+                layer.confirm('确定要删除该链接？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(eleId,url,'post',$trEle);
+            });
+        });
+    });
+    //添加会员
+    $('.addMember').click(function(){
+        layer.open({
+          type: 1,
+          title: '添加会员',
+          closeBtn: 1,
+          area: ['460px', 'auto'],
+          shadeClose: true,
+          content: $('#addWrap')
+        });
+    });
+
+</script>
+</body>
+</html>

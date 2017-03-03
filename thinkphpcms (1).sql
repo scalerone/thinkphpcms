@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 �?03 �?02 �?17:43
+-- 生成日期: 2017 �?03 �?03 �?17:25
 -- 服务器版本: 5.5.47
 -- PHP 版本: 5.5.30
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `cms_admin` (
 --
 
 INSERT INTO `cms_admin` (`id`, `username`, `password`, `email`, `lastlogintime`, `lastloginip`, `status`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488422697, '127.0.0.1', 1);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488505773, '127.0.0.1', 1);
 
 -- --------------------------------------------------------
 
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `cms_category` (
   `type` smallint(1) DEFAULT '1' COMMENT '1:栏目2:单篇3:链接',
   `summary` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
 --
 -- 转存表中的数据 `cms_category`
@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS `cms_category` (
 INSERT INTO `cms_category` (`id`, `catname`, `sort`, `pid`, `thumb`, `addtime`, `alias`, `status`, `type`, `summary`) VALUES
 (1, '三语课堂', 1, 0, './Uploads/2017-02-27/58b3e98d5a838.jpg', 1488185754, '别名', 1, 1, '描述'),
 (2, '招聘信息', 0, 0, '', 1488185971, '', 1, 2, ''),
+(52, 'asdasd', 0, 0, '', 1488513209, 'asd', 1, 1, ''),
 (46, '测试', 0, 0, './Uploads/2017-02-28/58b5343147cd7.jpg', 1488270397, '栏目别名', 1, 3, '测试栏目描述'),
 (47, '测试22', 0, 46, './Uploads/2017-03-01/58b662e4e405a.jpg', 1488270895, '栏目别名1222', 1, 3, '测试栏目描述122'),
 (48, 'asdasd', 0, 0, '', 1488442235, '', 1, 1, 'asd');
@@ -124,15 +125,67 @@ CREATE TABLE IF NOT EXISTS `cms_links` (
   `url` varchar(55) DEFAULT '',
   `sort` mediumint(8) DEFAULT '20',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- 转存表中的数据 `cms_links`
 --
 
 INSERT INTO `cms_links` (`id`, `title`, `desc`, `thumb`, `url`, `sort`) VALUES
-(1, '百度', '百度地址', './Uploads/2017-03-02/58b7e3785401e.jpg', 'http://www.baidu.com', 20),
-(3, '新浪', '新浪地址', './Uploads/2017-03-02/58b7e3785401e.jpg', 'http://www.sina.com.cn', 20);
+(1, '百度', '百度地址', './Uploads/2017-03-02/58b7e3785401e.jpg', 'http://www.baidu.com', 0),
+(8, '腾讯', '', '', 'http://www.qq.com', 2),
+(7, 'sina', '', '', 'http://www.sina.com.cn', 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `cms_member`
+--
+
+CREATE TABLE IF NOT EXISTS `cms_member` (
+  `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(55) NOT NULL DEFAULT '',
+  `pass` char(32) NOT NULL DEFAULT '',
+  `email` varchar(25) NOT NULL DEFAULT '',
+  `phone` varchar(25) NOT NULL DEFAULT '',
+  `member_group_id` mediumint(8) NOT NULL COMMENT '会员类型(注册会员，普通会员，VIP会员等)',
+  `en_name` varchar(55) NOT NULL DEFAULT '',
+  `sex` smallint(1) NOT NULL DEFAULT '1' COMMENT '1:男2:女',
+  `avatar` varchar(55) NOT NULL DEFAULT '' COMMENT '头像',
+  `intro` varchar(255) NOT NULL DEFAULT '' COMMENT '个人介绍',
+  `registertime` int(10) DEFAULT '0' COMMENT '注册时间',
+  `lastlogintime` int(10) DEFAULT '0',
+  `lastloginip` int(10) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `cms_member`
+--
+
+INSERT INTO `cms_member` (`id`, `name`, `pass`, `email`, `phone`, `member_group_id`, `en_name`, `sex`, `avatar`, `intro`, `registertime`, `lastlogintime`, `lastloginip`) VALUES
+(1, 'admin', '123', 'asdasd@qq.com', '', 0, '', 1, '', '内能够', 1488532755, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `cms_member_group`
+--
+
+CREATE TABLE IF NOT EXISTS `cms_member_group` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(55) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `cms_member_group`
+--
+
+INSERT INTO `cms_member_group` (`id`, `type_name`) VALUES
+(1, '注册会员'),
+(2, '普通会员'),
+(3, 'VIP会员');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -46,18 +46,18 @@
                 <li>
                     <a href="#"><i class="icon-font">&#xe003;</i>用户管理</a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo U('Member/index');?>"><i class="icon-font">&#xe008;</i>网站会员</a></li>
-                        <li><a href="<?php echo U('Admin/index');?>"><i class="icon-font">&#xe005;</i>管理员</a></li>
-                        <li><a href="<?php echo U('AdminGroup/index');?>"><i class="icon-font">&#xe033;</i>管理员组</a></li>
+                        <li><a href="design.html"><i class="icon-font">&#xe008;</i>网站会员</a></li>
+                        <li><a href="design.html"><i class="icon-font">&#xe005;</i>管理员</a></li>
+                        <li><a href="design.html"><i class="icon-font">&#xe033;</i>管理员组</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统信息</a></li>
-                        <li><a href="<?php echo U('Cache/index');?>"><i class="icon-font">&#xe037;</i>清理缓存</a></li>
-                        <li><a href="<?php echo U('Data/backup');?>"><i class="icon-font">&#xe046;</i>数据备份</a></li>
-                        <li><a href="<?php echo U('Data/reduct');?>"><i class="icon-font">&#xe045;</i>数据还原</a></li>
+                        <li><a href="system.html"><i class="icon-font">&#xe017;</i>系统信息</a></li>
+                        <li><a href="system.html"><i class="icon-font">&#xe037;</i>清理缓存</a></li>
+                        <li><a href="system.html"><i class="icon-font">&#xe046;</i>数据备份</a></li>
+                        <li><a href="system.html"><i class="icon-font">&#xe045;</i>数据还原</a></li>
                     </ul>
                 </li>
                 <li>
@@ -75,82 +75,59 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/index');?>">文章管理</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/add');?>">添加文章</a></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name">链接管理</a><span class="crumb-step">&gt;</span><a class="crumb-name">修改链接</a></div>
         </div>
 
         <div class="result-wrap">
             <div class="result-content">
-               <form class="layui-form " action="<?php echo U('Article/add');?>" method="post" enctype="multipart/form-data" id="addForm">
+               <form class="layui-form" action="<?php echo U('Links/edit');?>" method="post" enctype="multipart/form-data" id="addForm">
+                  
                   <div class="layui-form-item">
-                    <label class="layui-form-label">栏目：</label>
-                    <div class="layui-input-block w200" >
-                      <select name="catid" lay-verify="required">
-                        <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$pid?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label ">标题：</label>
+                    <label class="layui-form-label ">链接名称：</label>
                     <div class="layui-input-block w500">
-                      <input type="text" name="title" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+                      <input type="text" name="title" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="<?php echo ($link["title"]); ?>">
                     </div>
                   </div>
+
                   <div class="layui-form-item">
-                    <label class="layui-form-label ">内容：</label>
-                    <div class="layui-input-block">
-                      <textarea name="content" class="layui-textarea" id="LAY_edit" style="display: none"></textarea>
+                    <label class="layui-form-label ">链接地址：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="url" required  lay-verify="required|url" placeholder="http://www.baidu.com" autocomplete="off" class="layui-input" value="<?php echo ($link["url"]); ?>">
                     </div>
                   </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">排序：</label>
+                    <div class="layui-input-block w200">
+                      <input type="text" name="sort" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="<?php echo ($link["sort"]); ?>">
+                    </div>
+                  </div>
+
                   <div class="layui-form-item">
                     <label class="layui-form-label">缩略图：</label>
                     <div class="layui-input-block">
-                        <img src="" class="hide" id="thumb-img" height="100px" width="auto">
-                        <input type="hidden" name="thumb" id="thumb-input" value="">
+                        <img src="<?php echo ($link["thumb"]); ?>" class="<?php echo ($link['thumb']==''?'hide':''); ?>" id="thumb-img" height="100px" width="auto">
+                        <input type="hidden" name="thumb" id="thumb-input" value="<?php echo ($link["thumb"]); ?>">
                         <input type="file" name="_thumb" id="_thumb" class="hide">
                         <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
-                          <i class="layui-icon">&#xe608;</i> 文章缩略图
+                          <i class="layui-icon">&#xe608;</i> 链接缩略图
                         </button>
-                        <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">状态：</label>
-                    <div class="layui-input-block">
-                      <input type="checkbox" name="is_top" title="置顶" value="1">
-                      <input type="checkbox" name="is_rec" title="推荐" checked="" value="1">
-                      <input type="checkbox" name="is_hot" title="热门" value="1">
+                        <button id="del-thumb" class="layui-btn layui-btn-primary <?php echo ($link['thumb']==''?'hide':''); ?>">删除</button>
                     </div>
                   </div>
                   <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">摘要：</label>
+                    <label class="layui-form-label">描述：</label>
                     <div class="layui-input-block w500">
-                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"></textarea>
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <div class="layui-inline">
-                      <label class="layui-form-label">添加日期：</label>
-                      <div class="layui-input-block">
-                        <input type="text" name="addtime" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD'})">
-                      </div>
-                    </div>
-                    <div class="layui-inline">
-                      <label class="layui-form-label">作者：</label>
-                      <div class="layui-input-block">
-                        <input type="tel" name="author" autocomplete="off" class="layui-input">
-                      </div>
-                    </div>
-                    <div class="layui-inline">
-                      <label class="layui-form-label">别名：</label>
-                      <div class="layui-input-block">
-                        <input type="tel" name="alias" autocomplete="off" class="layui-input">
-                      </div>
+                      <textarea name="desc" placeholder="链接描述..." class="layui-textarea"><?php echo ($link["desc"]); ?></textarea>
                     </div>
                   </div>
                   
                    <div class="layui-form-item">
                     <div class="layui-input-block">
-                      <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
+                      <input type="hidden" name="id" value="<?php echo ($link["id"]); ?>">
+                      <button type="submit" class="layui-btn submit" lay-submit="" >修改</button>
+                      <a href="javascript:window.history.go(-1);" class="layui-btn layui-btn-warm" >返回</a>
+                      <a href="<?php echo U('Links/index');?>" class="layui-btn" >查看链接</a>
                     </div>
                   </div>
                 </form>
@@ -176,21 +153,9 @@
 	    });   
 	});
 </script>
-
 <script type="text/javascript">
-    layui.use(['form', 'layedit', 'laydate'], function(){
-      var form = layui.form()
-      ,layedit = layui.layedit
-      ,laydate = layui.laydate;
-
-      //创建一个编辑器
-        layedit.set({
-          uploadImage: {
-            url: '<?php echo U("Article/editImgUpload");?>'
-          }
-        });
-
-        var editIndex = layedit.build('LAY_edit');
+    layui.use(['form'], function(){
+      var form = layui.form();
 
         //文章缩略图上传
         $('#_thumb').bind('change',function(){
@@ -201,23 +166,35 @@
           //调用上传方法
           fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
         });
-
-        //添加文章
-        /*$('.submit').on('click',function(){
+    });
+    //ajax修改友情链接
+    $(function(){
+      $('.submit').on('click',function(){
+        var url = '<?php echo U("Links/edit");?>';
+        ajaxAddLinks(url);
+        function ajaxAddLinks(url){
           $.ajax({
-            url: '<?php echo U("Article/add");?>',
+            url: url,
             type: 'POST',
             dataType: 'json',
             data: $('#addForm').serialize(),
-            success: function(data){
-              layer.msg(data.msg, {icon: 6});
-              window.setTimeout(function(){
-                window.location.href = "<?php echo U('Article/index');?>";
-              },1200);
+            success:function(res){
+              if(res.status == 1){
+                layer.msg(res.msg,{icon:1});
+                window.setTimeout(function(){
+                  window.location.href = "<?php echo U('Links/index');?>";
+                },1500);
+              }else{
+                layer.msg(res.msg,{icon:2});
+              }
+            },
+            error:function(res){
+              layer.msg('出现错误！',{icon:2});
             }
-          });
-          return false;
-        });*/
+          })
+        }
+        return false;
+      });
     });
 </script>
 </body>

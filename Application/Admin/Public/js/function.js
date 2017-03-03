@@ -130,3 +130,69 @@ function fileUpload(opt,id,url){
               }
           });
       }
+      /**
+       * [deleteLinks description]
+       * @param  {[array|int]} id  [需要删除的ID数组或者单个ID]
+       * @param  {[str]} url [提交删除的地址]
+       * @return {[null]}     []
+       */
+      function ajaxDeleteElems(ids,url,method,elem) {
+           $.ajax({
+              type: method,
+              url: url,
+              data: {'id':ids},
+              dataType: 'json',
+              success: function(res){
+                  layer.msg(res.msg);
+                  if(res.status == 1){
+                      //移除已经删除的TR节点
+                      elem.remove().hide('slow');
+                  }
+              },
+              error: function(res){
+                  layer.msg('出现错误!');
+              }
+          });
+      }
+      /**
+       * [ajaxUpdateSort 更新排序]
+       * @param  {[type]} ids    [需要更新的ID]
+       * @param  {[type]} url    [更新的URL地址]
+       * @param  {[type]} method [方法get|post]
+       * @return {[null]}        [无返回值]
+       */
+      function ajaxUpdateSort(ids,url,method) {
+           $.ajax({
+              type: method,
+              url: url,
+              data: {'id':ids},
+              dataType: 'json',
+              success: function(res){
+                  layer.msg(res.msg);
+                  if(res.status == 1){
+                      //移除已经删除的TR节点
+                      elem.remove().hide('slow');
+                  }
+              },
+              error: function(res){
+                  layer.msg('出现错误!');
+              }
+          });
+      }
+
+      //鼠标移动显示文章缩略图
+    $(function(){
+        $('.icon-thumb').hover(function(e) {
+            var src = $(this).data('src');
+            var xx = e.originalEvent.x || e.originalEvent.layerX || 0; 
+            var yy = e.originalEvent.y || e.originalEvent.layerY || 0; 
+            yy = yy - 50;
+            xx = xx + 30;
+            var html = '<img class="_img" src="'+src+'" style="display:none; max-height:100px;width:auto;position: fixed;z-index: 999;left:'+xx+'px;top:'+yy+'px;">';
+            $('body').append(html);
+            $('._img').fadeIn('slow');
+
+        }, function(e) {
+            $('._img').fadeOut('slow').remove();
+        });
+    });

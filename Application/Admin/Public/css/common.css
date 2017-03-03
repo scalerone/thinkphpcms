@@ -39,8 +39,15 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{di
 .pl10{padding-left:10px;}
 .ptb20{padding:20px 0;}
 .grayc{color:#ccc}
+.layui-form-label.wid_auto{width: auto;}
+.layui-input-block.margin-left80{margin-left: 80px;}
 .common-text-center{width: 25px;
     text-align: center;}
+.skin-addMember{
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
 .text-info{    
 	background-color: #5bc0de;
     color: #fff;

@@ -1,0 +1,85 @@
+<include file="Public:header" />
+<div class="container clearfix">
+    <include file="Public:left" />
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:U('Index/index')}">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name">会员管理</a><span class="crumb-step">&gt;</span><a class="crumb-name">添加会员</a></div>
+        </div>
+
+        <div class="result-wrap">
+            <div class="result-content">
+               <form class="layui-form" action="{:U('Member/add')}" method="post" enctype="multipart/form-data" id="addForm">
+                  
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">会员名：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="name" lay-verify="required" placeholder="请输入会员名" autocomplete="off" class="layui-input" value="">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">密码：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="pass" required  lay-verify="required|url" placeholder="密码" autocomplete="off" class="layui-input" value="">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">性别：</label>
+                    <div class="layui-input-block w200">
+                      <input type="text" name="sex" required  lay-verify="required" placeholder="请输入性别" autocomplete="off" class="layui-input" value="20">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">头像：</label>
+                    <div class="layui-input-block">
+                        <img src="" class="hide" id="thumb-img" height="100px" width="auto">
+                        <input type="hidden" name="avatar" id="thumb-input" value="">
+                        <input type="file" name="_thumb" id="_thumb" class="hide">
+                        <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                          <i class="layui-icon">&#xe608;</i> 添加头像
+                        </button>
+                        <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+                    </div>
+                  </div>
+                  
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">个人简介：</label>
+                    <div class="layui-input-block w500">
+                      <textarea name="intro" placeholder="个人简介..." class="layui-textarea"></textarea>
+                    </div>
+                  </div>
+                  
+                   <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
+                      <a href="{:U('Member/index')}" class="layui-btn" >返回会员列表</a>
+                    </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+<include file="Public:footer" />
+<script type="text/javascript">
+    layui.use(['form'], function(){
+      var form = layui.form();
+        //文章缩略图上传
+        $('#_thumb').bind('change',function(){
+          //限制文件类型与大小
+          var options = {
+            'filePath': $(this).val()
+          };
+          //调用上传方法
+          fileUpload(options,'#_thumb','{:U("Article/upload")}');
+        });
+    });
+   
+</script>
+</body>
+</html>

@@ -46,18 +46,18 @@
                 <li>
                     <a href="#"><i class="icon-font">&#xe003;</i>用户管理</a>
                     <ul class="sub-menu">
-                        <li><a href="design.html"><i class="icon-font">&#xe008;</i>网站会员</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe005;</i>管理员</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe033;</i>管理员组</a></li>
+                        <li><a href="<?php echo U('Member/index');?>"><i class="icon-font">&#xe008;</i>网站会员</a></li>
+                        <li><a href="<?php echo U('Admin/index');?>"><i class="icon-font">&#xe005;</i>管理员</a></li>
+                        <li><a href="<?php echo U('AdminGroup/index');?>"><i class="icon-font">&#xe033;</i>管理员组</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
                     <ul class="sub-menu">
-                        <li><a href="system.html"><i class="icon-font">&#xe017;</i>系统信息</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe037;</i>清理缓存</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe046;</i>数据备份</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe045;</i>数据还原</a></li>
+                        <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统信息</a></li>
+                        <li><a href="<?php echo U('Cache/index');?>"><i class="icon-font">&#xe037;</i>清理缓存</a></li>
+                        <li><a href="<?php echo U('Data/backup');?>"><i class="icon-font">&#xe046;</i>数据备份</a></li>
+                        <li><a href="<?php echo U('Data/reduct');?>"><i class="icon-font">&#xe045;</i>数据还原</a></li>
                     </ul>
                 </li>
                 <li>
@@ -106,7 +106,6 @@
                         <a id="updateSortArticle" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
                         <div class="inline-block removebox">
                             <select style="height:28px;" name="catid" class="common-text selectCatid">
-                                <option value="0">全部</option>
                                 <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" {($c['id']==$pid || $c['id']==$post['catid'])?'selected="selected"':''}><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
                             </select>
                             <input id="removeArticle" class="ml10 layui-btn layui-btn-small btn2" value="批量移动" type="button">
@@ -264,22 +263,7 @@
             });
         });
     });
-    //鼠标移动显示文章缩略图
-    $(function(){
-        $('.icon-thumb').hover(function(e) {
-            var src = $(this).data('src');
-            var xx = e.originalEvent.x || e.originalEvent.layerX || 0; 
-            var yy = e.originalEvent.y || e.originalEvent.layerY || 0; 
-            yy = yy - 50;
-            xx = xx + 30;
-            var html = '<img class="_img" src="'+src+'" style="display:none; max-height:100px;width:auto;position: fixed;z-index: 999;left:'+xx+'px;top:'+yy+'px;">';
-            $('body').append(html);
-            $('._img').fadeIn('slow');
-
-        }, function(e) {
-            $('._img').fadeOut('slow').remove();
-        });
-    });
+    
     //批量更新栏目排序
     $(function(){
         $('#updateSortArticle').on('click',function(){
