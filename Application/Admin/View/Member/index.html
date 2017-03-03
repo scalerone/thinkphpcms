@@ -20,8 +20,8 @@
                       <thead>
                         <tr>
                             <th width="3%"><input type="checkbox"></th>
-                            <th width="5%">排序</th>
-                            <th>名称</th>
+                            <th width="10%">用户名</th>
+                            <th>邮箱</th>
                             <th width="14%">操作</th>
                         </tr>
                       </thead>
@@ -29,15 +29,15 @@
                     <volist name="members" id="vo">
                         <tr data-id={$vo.id}>
                             <td><input class="set" type="checkbox" value="{$vo.id}"></td>
-                            <td><input class="common-text common-text-center" size="3" type="text" value="{$vo.sort}" name="{$vo.id}"></td>
                             <td>{$vo.name}
-                                <if condition="$vo.thumb neq '' ">
-                                    <i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="{$vo.thumb}">&#xe64a;</i>
+                                <if condition="$vo.avatar neq '' ">
+                                    <i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="{$vo.avatar}">&#xe64a;</i>
                                 <else /></if>
                             </td>
+                            <td>{$vo.email}</td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="{:U('Links/edit',array('id'=>$vo['id']))}">
+                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="{:U('Member/edit',array('id'=>$vo['id']))}">
                                         <i class="layui-icon">&#xe642;</i>
                                     </a>
                                     <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="{$vo.id}">
@@ -58,7 +58,7 @@
             </form>
         </div>
     </div>
-    <div id="addWrap" style="padding-top:10px;padding-right:10px;padding-bottom: 10px;">
+    <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
         <form class="layui-form" action="">
           <div class="layui-form-item">
             <label class="layui-form-label wid_auto">用户名</label>
@@ -85,7 +85,7 @@
             <label class="layui-form-label wid_auto">头像</label>
             <div class="layui-input-block margin-left80">
                 <img src="" class="hide" id="thumb-img" height="80px" width="auto">
-                <input type="hidden" name="thumb" id="thumb-input" value="">
+                <input type="hidden" name="avatar" id="thumb-input" value="">
                 <input type="file" id="_thumb" class="hide">
                 <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
                   <i class="layui-icon">&#xe608;</i> 上传头像
@@ -155,10 +155,10 @@
     $(function(){
         $('.delOneLink').on('click',function(){
                 $trEle = $(this).parents('tr');//当前的tr节点
-                var url = "{:U('Links/del')}";//提交删除的地址
+                var url = "{:U('Member/del')}";//提交删除的地址
                 var eleId = $trEle.data('id');//当前的id
                 //提示
-                layer.confirm('确定要删除该链接？', {icon: 3, title:'提示'}, function(index){
+                layer.confirm('确定要删除该用户？', {icon: 3, title:'提示'}, function(index){
                 ajaxDeleteElems(eleId,url,'post',$trEle);
             });
         });
@@ -171,7 +171,7 @@
           closeBtn: 1,
           area: ['460px', 'auto'],
           shadeClose: true,
-          content: $('#addWrap')
+          content: $('#addWrap'),
         });
     });
 

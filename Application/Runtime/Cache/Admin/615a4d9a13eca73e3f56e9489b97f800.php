@@ -73,66 +73,65 @@
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
+
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font">&#xe06b;</i><span>欢迎<?php echo (session('uname')); ?>登录，上次登录时间：<?php echo (date('Y年m月d日 H:i:s',session('logintime'))); ?>，登录IP：<?php echo (session('ip')); ?></span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name">会员管理</a><span class="crumb-step">&gt;</span><a class="crumb-name">修改会员</a></div>
         </div>
+
         <div class="result-wrap">
-            <div class="result-title">
-                <h1>快捷操作</h1>
-            </div>
             <div class="result-content">
-                <div class="short-wrap">
-                    <a href="#"><i class="icon-font">&#xe001;</i>添加内容</a>
-                    <a href="#"><i class="icon-font">&#xe005;</i>添加栏目</a>
-                    <a href="#"><i class="icon-font">&#xe048;</i>内容管理</a>
-                    <a href="#"><i class="icon-font">&#xe041;</i>栏目管理</a>
-                    <a href="#"><i class="icon-font">&#xe01e;</i>系统设置</a>
-                </div>
-            </div>
-        </div>
-        <div class="result-wrap">
-            <div class="result-title">
-                <h1>系统基本信息</h1>
-            </div>
-            <div class="result-content">
-                <ul class="sys-info-list">
-                    <li>
-                        <label class="res-lab">操作系统</label><span class="res-info"><?php echo ($system["name"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">运行环境</label><span class="res-info"><?php echo ($system["hj"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">上传附件限制</label><span class="res-info "><?php echo ($system["uploadSize"]); ?>M</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">北京时间</label><span class="res-info" id="time"></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">服务器域名</label><span class="res-info"><?php echo ($system["siteUrl"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">Host</label><span class="res-info"><?php echo ($system["host"]); ?></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="result-wrap">
-            <div class="result-title">
-                <h1>使用帮助</h1>
-            </div>
-            <div class="result-content">
-                <ul class="sys-info-list">
-                    <li>
-                        <label class="res-lab">客服QQ：</label><span class="res-info">848464730</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">微信：</label><span class="res-info">848464730</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">E-mail：</label><span class="res-info">848464730@qq.com</span>
-                    </li>
-                </ul>
+               <form class="layui-form" action="<?php echo U('Member/edit');?>" method="post" enctype="multipart/form-data" id="addForm">
+                  
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">会员名：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="name" lay-verify="required" placeholder="请输入会员名" autocomplete="off" class="layui-input" value="<?php echo ($member["name"]); ?>">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">密码：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="pass" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input" value="">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">性别：</label>
+                    <div class="layui-input-block w200">
+                      <input type="radio" name="sex" value="1" title="男" <?php echo ($member['sex']==1?'checked=""':''); ?>>
+                      <input type="radio" name="sex" value="2" title="女" <?php echo ($member['sex']==2?'checked=""':''); ?>>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">头像：</label>
+                    <div class="layui-input-block">
+                        <img src="<?php echo ($member["avatar"]); ?>" class="<?php echo ($member['avatar']==''?'hide':''); ?>" id="thumb-img" height="100px" width="auto">
+                        <input type="hidden" name="avatar" id="thumb-input" value="<?php echo ($member["avatar"]); ?>">
+                        <input type="file" name="_thumb" id="_thumb" class="hide">
+                        <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                          <i class="layui-icon">&#xe608;</i> 添加头像
+                        </button>
+                        <button id="del-thumb" class="layui-btn layui-btn-primary <?php echo ($member['avatar']==''?'hide':''); ?>">删除</button>
+                    </div>
+                  </div>
+                  
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">个人简介：</label>
+                    <div class="layui-input-block w500">
+                      <textarea name="intro" placeholder="个人简介..." class="layui-textarea"><?php echo ($member["intro"]); ?></textarea>
+                    </div>
+                  </div>
+                  
+                   <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <button type="submit" class="layui-btn submit" lay-submit="" >修改</button>
+                      <input type="hidden" name="id" value="<?php echo ($member["id"]); ?>">
+                      <a href="<?php echo U('Member/index');?>" class="layui-btn" >返回会员列表</a>
+                    </div>
+                  </div>
+                </form>
             </div>
         </div>
     </div>
@@ -156,28 +155,19 @@
 	});
 </script>
 <script type="text/javascript">
-    $(function(){
-        
-        //获取当前时间
-        var t = null;
-        t = setTimeout(time,1000);//开始执行
-        function time()
-        {
-           clearTimeout(t);//清除定时器
-           dt = new Date();
-           var yy = dt.getYear();   
-            if(yy<1900) yy = yy+1900;   
-            var MM = dt.getMonth()+1;   
-            if(MM<10) MM = '0' + MM;   
-            var dd = dt.getDate();   
-            if(dd<10) dd = '0' + dd; 
-           var h=dt.getHours();
-           var m=dt.getMinutes();
-           var s=dt.getSeconds();
-           document.getElementById("time").innerHTML =  yy+"年"+MM+"月"+dd+"日 "+h+":"+m+":"+s;
-           t = setTimeout(time,1000); //设定定时器，循环执行             
-        } 
+    layui.use(['form'], function(){
+      var form = layui.form();
+        //文章缩略图上传
+        $('#_thumb').bind('change',function(){
+          //限制文件类型与大小
+          var options = {
+            'filePath': $(this).val()
+          };
+          //调用上传方法
+          fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
+        });
     });
+   
 </script>
 </body>
 </html>

@@ -52,6 +52,13 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#"><i class="icon-font">&#xe003;</i>权限管理</a>
+                    <ul class="sub-menu">
+                        <li><a href="<?php echo U('Rule/index');?>"><i class="icon-font">&#xe008;</i>权限列表</a></li>
+                        <li><a href="<?php echo U('Rule/add');?>"><i class="icon-font">&#xe005;</i>添加权限</a></li>
+                    </ul>
+                </li>
+                <li>
                     <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
                     <ul class="sub-menu">
                         <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统信息</a></li>
@@ -90,22 +97,22 @@
                       <thead>
                         <tr>
                             <th width="3%"><input type="checkbox"></th>
-                            <th width="5%">排序</th>
-                            <th>名称</th>
+                            <th width="10%">用户名</th>
+                            <th>邮箱</th>
                             <th width="14%">操作</th>
                         </tr>
                       </thead>
                       <tbody>
                     <?php if(is_array($members)): $i = 0; $__LIST__ = $members;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
                             <td><input class="set" type="checkbox" value="<?php echo ($vo["id"]); ?>"></td>
-                            <td><input class="common-text common-text-center" size="3" type="text" value="<?php echo ($vo["sort"]); ?>" name="<?php echo ($vo["id"]); ?>"></td>
                             <td><?php echo ($vo["name"]); ?>
-                                <?php if($vo["thumb"] != '' ): ?><i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="<?php echo ($vo["thumb"]); ?>">&#xe64a;</i>
+                                <?php if($vo["avatar"] != '' ): ?><i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="<?php echo ($vo["avatar"]); ?>">&#xe64a;</i>
                                 <?php else: endif; ?>
                             </td>
+                            <td><?php echo ($vo["email"]); ?></td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="<?php echo U('Links/edit',array('id'=>$vo['id']));?>">
+                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="<?php echo U('Member/edit',array('id'=>$vo['id']));?>">
                                         <i class="layui-icon">&#xe642;</i>
                                     </a>
                                     <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
@@ -125,7 +132,7 @@
             </form>
         </div>
     </div>
-    <div id="addWrap" style="padding-top:10px;padding-right:10px;padding-bottom: 10px;">
+    <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
         <form class="layui-form" action="">
           <div class="layui-form-item">
             <label class="layui-form-label wid_auto">用户名</label>
@@ -152,7 +159,7 @@
             <label class="layui-form-label wid_auto">头像</label>
             <div class="layui-input-block margin-left80">
                 <img src="" class="hide" id="thumb-img" height="80px" width="auto">
-                <input type="hidden" name="thumb" id="thumb-input" value="">
+                <input type="hidden" name="avatar" id="thumb-input" value="">
                 <input type="file" id="_thumb" class="hide">
                 <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
                   <i class="layui-icon">&#xe608;</i> 上传头像
@@ -238,10 +245,10 @@
     $(function(){
         $('.delOneLink').on('click',function(){
                 $trEle = $(this).parents('tr');//当前的tr节点
-                var url = "<?php echo U('Links/del');?>";//提交删除的地址
+                var url = "<?php echo U('Member/del');?>";//提交删除的地址
                 var eleId = $trEle.data('id');//当前的id
                 //提示
-                layer.confirm('确定要删除该链接？', {icon: 3, title:'提示'}, function(index){
+                layer.confirm('确定要删除该用户？', {icon: 3, title:'提示'}, function(index){
                 ajaxDeleteElems(eleId,url,'post',$trEle);
             });
         });
@@ -254,7 +261,7 @@
           closeBtn: 1,
           area: ['460px', 'auto'],
           shadeClose: true,
-          content: $('#addWrap')
+          content: $('#addWrap'),
         });
     });
 
