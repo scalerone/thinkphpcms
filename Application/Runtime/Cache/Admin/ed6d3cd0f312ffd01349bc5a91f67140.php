@@ -81,79 +81,37 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/index');?>">栏目管理</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/add');?>">添加栏目</a></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">管理员组管理</span></div>
         </div>
 
         <div class="result-wrap">
-            <div class="result-content">
-               <form class="layui-form" action="<?php echo U('Category/add');?>" method="post" enctype="multipart/form-data" id="addForm">
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">上级栏目：</label>
-                    <div class="layui-input-block w200" >
-                      <select name="pid" lay-verify="required">
-                        <option value="0">==顶级栏目==</option>
-                        <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$pid?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label ">栏目名称：</label>
-                    <div class="layui-input-block w500">
-                      <input type="text" name="catname" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label ">栏目类型：</label>
-                    <div class="layui-input-block">
-                      <input type="radio" name="type" value="1" title="栏目" checked>
-                      <input type="radio" name="type" value="2" title="单篇" >
-                      <input type="radio" name="type" value="3" title="链接" >
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">缩略图：</label>
-                    <div class="layui-input-block">
-                        <img src="" class="hide" id="thumb-img" height="100px" width="auto">
-                        <input type="hidden" name="thumb" id="thumb-input" value="">
-                        <input type="file" name="_thumb" id="_thumb" class="hide">
-                        <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
-                          <i class="layui-icon">&#xe608;</i> 栏目缩略图
-                        </button>
-                        <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">状态：</label>
-                    <div class="layui-input-block">
-                      <input type="checkbox" name="status" lay-skin="switch" checked="checked" value="1" lay-text="开启|关闭">
-                    </div>
-                  </div>
-                  <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">描述：</label>
-                    <div class="layui-input-block w500">
-                      <textarea name="summary" placeholder="栏目描述..." class="layui-textarea"></textarea>
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <div class="layui-inline">
-                      <label class="layui-form-label">别名：</label>
-                      <div class="layui-input-block">
-                        <input type="tel" name="alias" autocomplete="off" class="layui-input">
+            <form method="post" action="" class="layui-form sortForm">
+                <fieldset class="layui-elem-field">
+                  <legend>配置权限 - [<span style="color:#033b70;"><?php echo ($group["title"]); ?></span>]</legend>
+                  <div class="layui-field-box">
+                <?php if(is_array($rules)): $i = 0; $__LIST__ = $rules;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="block">
+                      <h2 class="controller"><a class="layui-btn layui-btn-normal layui-btn-small"><?php echo ($vo["title"]); ?></a></h2>
+                      <div class="action">
+                        <ul>
+                        <?php if(is_array($vo["child"])): $i = 0; $__LIST__ = $vo["child"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$child): $mod = ($i % 2 );++$i;?><li>
+                            <div class="layui-input-inline">
+                              <input type="checkbox" name="id[]" title="<?php echo ($child["title"]); ?>" lay-skin="primary" value="<?php echo ($child["id"]); ?>">
+                            </div>
+                          </li><?php endforeach; endif; else: echo "" ;endif; ?>
+                        </ul>
                       </div>
-                    </div>
-                  </div>
-                   <div class="layui-form-item">
-                    <div class="layui-input-block">
-                      <button type="submit" class="layui-btn submit" lay-submit="" lay-filter="*">添加</button>
-                      <a href="javascript:window.history.go(-1);" class="layui-btn layui-btn-warm">返回</a>
-                    </div>
-                  </div>
-                </form>
-            </div>
+                    </div><?php endforeach; endif; else: echo "" ;endif; ?>
+                </fieldset>
+               <div class="layui-form-item">
+                <div class="layui-input-block">
+                  <input type="hidden" name="group_id" value="<?php echo ($group["id"]); ?>">
+                  <button class="layui-btn" lay-submit="" lay-filter="submitRule">提交配置</button>
+                </div>
+              </div>
+            </form>
         </div>
     </div>
     <!--/main-->
-</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -171,42 +129,46 @@
 	    });   
 	});
 </script>
+<script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['form', 'layedit', 'laydate'], function(){
-      var form = layui.form()
-      ,layedit = layui.layedit
-      ,laydate = layui.laydate;
+    layui.use(['form','layer'], function(){
+        var layer = layui.layer
+        ,form = layui.form();
 
-        //文章缩略图上传
-        $('#_thumb').bind('change',function(){
-          //限制文件类型与大小
-          var options = {
-            'filePath': $(this).val()
-          };
-          //调用上传方法
-          fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
-        });
-
-        form.on('submit(*)', function(data){
+        //监听提交
+        form.on('submit(submitRule)', function(data){
           $.ajax({
-            url: '<?php echo U("Category/add");?>',
-            type: 'POST',
+            url: '<?php echo U("Admin/setRules");?>',
+            type: 'post',
             dataType: 'json',
-            data: $('#addForm').serialize(),
+            data: $(data.form).serialize(),
             success: function(res){
-              if(res.status == 0){
-                layer.msg(res.msg, {icon: 2});
-              }else{
-                layer.msg(res.msg, {icon: 1});
+              if(res.status == 1){
+                layer.alert(res.msg,{icon:1});   
                 window.setTimeout(function(){
-                  window.location.href = "<?php echo U('Category/index');?>";
+                  window.location.href = "<?php echo U('Admin/group');?>";
                 },1500);
+              }else{
+                layer.alert(res.msg,{icon:2}); 
               }
+            },
+            error: function(res){
+              console.log(res);
             }
           });
-          return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+          return false;
         });
-    });
+
+        //权限全选
+        $(function(){
+          $('.result-wrap .block .controller>a').on('click',function(){
+            var $actions = $(this).parent().next().find('input[type=checkbox]');
+            $actions.prop('checked',true);
+            form.render('checkbox');
+          });
+        });
+});
+    
 </script>
 </body>
 </html>

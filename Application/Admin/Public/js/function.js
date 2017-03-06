@@ -134,9 +134,12 @@ function fileUpload(opt,id,url){
        * [deleteLinks description]
        * @param  {[array|int]} id  [需要删除的ID数组或者单个ID]
        * @param  {[str]} url [提交删除的地址]
+       * @param  {[str]} default get[请求方式]
+       * @param  {[array]} elem[成功后需要移除的节点数组]
+       * @param  {[dom]} elem2[成功后需要移除的节点单个]
        * @return {[null]}     []
        */
-      function ajaxDeleteElems(ids,url,method,elem) {
+      function ajaxDeleteElems(ids,url,method,elem,elem2) {
            $.ajax({
               type: method,
               url: url,
@@ -146,7 +149,13 @@ function fileUpload(opt,id,url){
                   layer.msg(res.msg);
                   if(res.status == 1){
                       //移除已经删除的TR节点
-                      elem.remove().hide('slow');
+                      try{
+                        if(elem && elem.length>0) elem.remove().hide('slow');
+                      }catch(err){
+                        $(elem).remove();
+                      }finally{
+                        if(elem2) elem2.remove();
+                      }
                   }
               },
               error: function(res){

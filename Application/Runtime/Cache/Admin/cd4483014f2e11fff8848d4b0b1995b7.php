@@ -55,7 +55,6 @@
                     <a href="#"><i class="icon-font">&#xe003;</i>权限管理</a>
                     <ul class="sub-menu">
                         <li><a href="<?php echo U('Rule/index');?>"><i class="icon-font">&#xe008;</i>权限列表</a></li>
-                        <li><a href="<?php echo U('Rule/add');?>"><i class="icon-font">&#xe005;</i>添加权限</a></li>
                     </ul>
                 </li>
                 <li>

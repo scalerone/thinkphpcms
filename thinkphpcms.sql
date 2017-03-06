@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 �?03 �?03 �?17:25
--- 服务器版本: 5.5.47
--- PHP 版本: 5.5.30
+-- 生成日期: 2017 年 03 月 06 日 14:55
+-- 服务器版本: 5.5.53
+-- PHP 版本: 5.4.45
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `cms_admin` (
 --
 
 INSERT INTO `cms_admin` (`id`, `username`, `password`, `email`, `lastlogintime`, `lastloginip`, `status`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488505773, '127.0.0.1', 1);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488803954, '127.0.0.1', 1);
 
 -- --------------------------------------------------------
 
@@ -78,6 +78,81 @@ INSERT INTO `cms_article` (`id`, `title`, `summary`, `content`, `catid`, `addtim
 (64, 'sanyuketang111', '课堂111', '2宇铿发阿斯达斯的&lt;img src=&quot;./Uploads/2017-03-02/58b78fb3929cd.jpg&quot; alt=&quot;58b78fb3929cd.jpg&quot;&gt;', 2, 1488384000, 'admin11', '三语课程111', '', 1, 1, 0, 0, 1, 0),
 (62, 'asdasd', 'asd', 'asdasd', 2, 1488297600, '', '', '', 2, 1, 1, 0, 0, 0),
 (63, 'asdas', 'asd', 'dasdad', 47, 1488297600, '', '', './Uploads/2017-03-01/58b694f7d3e2f.jpg', 0, 1, 0, 1, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `cms_auth_group`
+--
+
+CREATE TABLE IF NOT EXISTS `cms_auth_group` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `title` char(100) NOT NULL DEFAULT '',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `rules` char(80) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `cms_auth_group`
+--
+
+INSERT INTO `cms_auth_group` (`id`, `title`, `status`, `rules`) VALUES
+(1, '超级管理员', 1, '4,5,6,9,24,8,10,11'),
+(2, '普通管理员', 1, ''),
+(3, '网站编辑', 1, ''),
+(4, '游客', 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `cms_auth_group_access`
+--
+
+CREATE TABLE IF NOT EXISTS `cms_auth_group_access` (
+  `uid` mediumint(8) unsigned NOT NULL,
+  `group_id` mediumint(8) unsigned NOT NULL,
+  UNIQUE KEY `uid_group_id` (`uid`,`group_id`),
+  KEY `uid` (`uid`),
+  KEY `group_id` (`group_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `cms_auth_rule`
+--
+
+CREATE TABLE IF NOT EXISTS `cms_auth_rule` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(80) NOT NULL DEFAULT '',
+  `title` char(20) NOT NULL DEFAULT '',
+  `type` tinyint(1) DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `condition` char(100) DEFAULT '',
+  `pid` mediumint(8) NOT NULL DEFAULT '0',
+  `sort` mediumint(8) DEFAULT '20',
+  `createtime` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+
+--
+-- 转存表中的数据 `cms_auth_rule`
+--
+
+INSERT INTO `cms_auth_rule` (`id`, `name`, `title`, `type`, `status`, `condition`, `pid`, `sort`, `createtime`) VALUES
+(1, 'Article', '文章管理', 1, 1, '', 0, 20, 1488605344),
+(2, 'Category', '栏目管理', 1, 1, '', 0, 20, 1488606145),
+(3, 'Member', '用户管理', 1, 1, '', 0, 20, 1488606167),
+(4, 'Article/index', '文章列表', 1, 1, '', 1, 20, 1488606201),
+(5, 'Article/add', '添加文章', 1, 1, '', 1, 20, 1488606219),
+(6, 'Article/del', '删除文章', 1, 1, '', 1, 20, 1488606240),
+(24, 'Category/index', '栏目列表', 1, 1, '', 2, 20, 1488804001),
+(8, 'Category/add', '添加栏目', 1, 1, '', 2, 20, 1488606786),
+(9, 'Article/edit', '修改文章', 1, 1, '', 1, 20, 1488606940),
+(10, 'Category/edit', '修改栏目', 1, 1, '', 2, 20, 1488606965),
+(11, 'Member/index', '用户列表', 1, 1, '', 3, 20, 1488606991);
 
 -- --------------------------------------------------------
 
@@ -157,14 +232,17 @@ CREATE TABLE IF NOT EXISTS `cms_member` (
   `lastlogintime` int(10) DEFAULT '0',
   `lastloginip` int(10) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `cms_member`
 --
 
 INSERT INTO `cms_member` (`id`, `name`, `pass`, `email`, `phone`, `member_group_id`, `en_name`, `sex`, `avatar`, `intro`, `registertime`, `lastlogintime`, `lastloginip`) VALUES
-(1, 'admin', '123', 'asdasd@qq.com', '', 0, '', 1, '', '内能够', 1488532755, 0, 0);
+(1, 'admin', '123', 'asdasd@qq.com', '', 0, '', 1, '', '内能够', 1488532755, 0, 0),
+(2, 'lisi', 'lisi', 'lisi@qq.com', '', 0, '', 1, '', 'asd', 1488547833, 0, 0),
+(4, 'asda', 'dasda', 'sdasd@qq.com', '', 0, '', 1, '', 'asdasd', 1488548063, 0, 0),
+(5, 'asd', 'admin', 'asdasd', '', 0, '', 1, './Uploads/2017-03-03/58b9762221d0d.jpg', 'asdasd', 1488548132, 0, 0);
 
 -- --------------------------------------------------------
 

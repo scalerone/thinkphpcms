@@ -48,7 +48,13 @@
                     <ul class="sub-menu">
                         <li><a href="<?php echo U('Member/index');?>"><i class="icon-font">&#xe008;</i>网站会员</a></li>
                         <li><a href="<?php echo U('Admin/index');?>"><i class="icon-font">&#xe005;</i>管理员</a></li>
-                        <li><a href="<?php echo U('AdminGroup/index');?>"><i class="icon-font">&#xe033;</i>管理员组</a></li>
+                        <li><a href="<?php echo U('Admin/group');?>"><i class="icon-font">&#xe033;</i>管理员组</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="icon-font">&#xe003;</i>权限管理</a>
+                    <ul class="sub-menu">
+                        <li><a href="<?php echo U('Rule/index');?>"><i class="icon-font">&#xe008;</i>权限列表</a></li>
                     </ul>
                 </li>
                 <li>
@@ -110,7 +116,7 @@
                                     <?php case "3": ?>链接<?php break; endswitch;?>
                             </td>
                             <td class="layui-form">
-                                <input type="checkbox" <?php echo ($vo["status"]==1?'checked=""':''); ?> name="status" data-id="<?php echo ($vo["id"]); ?>" value="1" lay-skin="switch" lay-filter="status">
+                                <input type="checkbox" <?php echo ($vo["status"]==1?'checked=""':''); ?> name="status" data-id="<?php echo ($vo["id"]); ?>" value="1" lay-skin="switch" lay-filter="status" lay-text="开启|关闭">
                             </td>
                             <td>
                                 <div class="layui-btn-group">

@@ -59,3 +59,15 @@
 .res-info{font-size: 15px;}
 .sort-input{width: 25px;text-align: center;}
 .result-content .layui-table td, .result-content .layui-table th{padding: 5px 15px;}
+.result-wrap .block{
+	padding: 5px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.result-wrap .block .action{
+	padding-left: 15px;
+	padding-top: 10px;
+    padding-bottom: 10px;
+}
+.result-wrap .block .action ul li{display: inline-block;*zoom:1;display:inline;}

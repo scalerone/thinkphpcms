@@ -1,0 +1,86 @@
+<include file="Public:header"/>
+<div class="container clearfix">
+    <include file="Public:left"/>
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">管理员组管理</span></div>
+        </div>
+
+        <div class="result-wrap">
+            <form method="post" action="" class="layui-form sortForm">
+                <fieldset class="layui-elem-field">
+                  <legend>配置权限 - [<span style="color:#033b70;">{$group.title}</span>]</legend>
+                  <div class="layui-field-box">
+                <volist name="rules" id="vo">    
+                    <div class="block">
+                      <h2 class="controller"><a class="layui-btn layui-btn-normal layui-btn-small">{$vo.title}</a></h2>
+                      <div class="action">
+                        <ul>
+                        <volist name="vo.child" id="child">
+                          <li>
+                            <div class="layui-input-inline">
+                              <input type="checkbox" name="id[]" title="{$child.title}" lay-skin="primary" value="{$child.id}">
+                            </div>
+                          </li>
+                        </volist>
+                        </ul>
+                      </div>
+                    </div>
+                </volist>
+                </fieldset>
+               <div class="layui-form-item">
+                <div class="layui-input-block">
+                  <input type="hidden" name="group_id" value="{$group.id}">
+                  <button class="layui-btn" lay-submit="" lay-filter="submitRule">提交配置</button>
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
+<!--/main-->
+<include file="Public:footer"/>
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form','layer'], function(){
+        var layer = layui.layer
+        ,form = layui.form();
+
+        //监听提交
+        form.on('submit(submitRule)', function(data){
+          $.ajax({
+            url: '{:U("Admin/setRules")}',
+            type: 'post',
+            dataType: 'json',
+            data: $(data.form).serialize(),
+            success: function(res){
+              if(res.status == 1){
+                layer.alert(res.msg,{icon:1});   
+                window.setTimeout(function(){
+                  window.location.href = "{:U('Admin/group')}";
+                },1500);
+              }else{
+                layer.alert(res.msg,{icon:2}); 
+              }
+            },
+            error: function(res){
+              console.log(res);
+            }
+          });
+          return false;
+        });
+
+        //权限全选
+        $(function(){
+          $('.result-wrap .block .controller>a').on('click',function(){
+            var $actions = $(this).parent().next().find('input[type=checkbox]');
+            $actions.prop('checked',true);
+            form.render('checkbox');
+          });
+        });
+});
+    
+</script>
+</body>
+</html>

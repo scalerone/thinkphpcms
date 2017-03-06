@@ -1,0 +1,214 @@
+<include file="Public:header"/>
+<div class="container clearfix">
+    <include file="Public:left"/>
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">权限管理</span></div>
+        </div>
+
+        <div class="result-wrap">
+            <form method="post" action="" class="sortForm">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a class="addRule" href="javascript:;"><i class="icon-font"></i>添加权限</a>
+                    </div>
+                </div>
+                <div class="result-content" style="max-height: 600px;overflow: auto;">
+                    <table class="layui-table">
+                      <thead>
+                        <tr>
+                            <!-- <th width="3%"><input type="checkbox"></th> -->
+                            <th width="15%">名称</th>
+                            <th width="25%">规则</th>
+                            <th width="15%">添加时间</th>
+                            <th width="10%">状态</th>
+                            <th width="10%">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    <volist name="rules" id="vo">
+                        <tr data-id={$vo.id} data-pid="{$vo.pid}">
+                            <!-- <td><input class="set" type="checkbox" value="{$vo.id}"></td> -->
+                            <td>{$vo.html}{$vo.title}</td>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.createtime|date='Y-m-d H:i:s',###}</td>
+                            <td class="layui-form">
+                              <input type="checkbox" value="{$vo.status}" name="status" lay-filter="status" lay-skin="switch" {$vo['status']=='1'?'checked="checked"':''}>
+                            </td>
+                            <td>
+                                <div class="layui-btn-group">
+                                    <!-- <a title="添加子权限" class="layui-btn layui-btn-small {$vo['pid']==0?'':'layui-btn-disabled'} addSub" href="javascript:;" data-id="{$vo.id}">
+                                        <i class="layui-icon">&#xe654;</i>
+                                    </a> -->
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOne" href="javascript:;" data-id="{$vo.id}">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </volist>
+                      </tbody>
+                    </table>
+                    <div class="result-title">
+                        <div class="result-list">
+                            <a class="addRule" href="#"><i class="icon-font"></i>添加权限</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
+        <form class="layui-form" action="">
+
+          <div class="layui-form-item">
+            <label class="layui-form-label ">上级权限</label>
+            <div class="layui-input-inline ">
+              <select name="pid" lay-verify="required">
+                <option value="0">==顶级权限==</option>
+                <volist name="topRule" id="top">
+                  <option value="{$top.id}">{$top.title}</option>
+                </volist>
+              </select>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label ">名称</label>
+            <div class="layui-input-inline ">
+              <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label ">规则</label>
+            <div class="layui-input-inline ">
+              <input type="text" name="name" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label ">状态</label>
+            <div class="layui-input-inline ">
+                <input type="checkbox" value="1" name="status" lay-skin="switch" checked="checked">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>
+            </div>
+          </div>
+        </form>
+    </div>
+    <!--/main-->
+<include file="Public:footer"/>
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form','layer'], function(){
+        var layer = layui.layer
+        ,form = layui.form();
+
+        //监听开关时间
+        form.on('switch(status)', function(data){
+          var id = $(data.elem).parents('tr').data('id');
+          var status = 0;
+          var url = "{:U('Rule/updateStatus')}";
+          if(data.elem.checked){
+            status = 1;
+          }
+          $.ajax({
+              url: url,
+              type: 'post',
+              dataType: 'json',
+              data: {'id': id,'status':status},
+              success: function(res){
+                if(res.status == 1){
+                  layer.msg(res.msg,{icon:1});
+                }else{
+                  layer.msg(res.msg,{icon:2});
+                }
+              },
+              error: function(res){
+                layer.msg('出现错误!',{icon:2});
+              }
+            });
+        });  
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+          $.ajax({
+            url: '{:U("Rule/add")}',
+            type: 'post',
+            dataType: 'json',
+            data: $(data.form).serialize(),
+            success: function(res){
+              if(res.status == 1){
+                layer.alert(res.msg,{icon:1});   
+                window.setTimeout(function(){
+                  window.location.href = "{:U('Rule/index')}";
+                },1500);
+              }else{
+                layer.alert(res.msg,{icon:2}); 
+              }
+            },
+            error: function(res){
+              console.log(res);
+            }
+          });
+          return false;
+        });
+});
+
+
+    //删除
+    $(function(){
+        $('.delOne').on('click',function(){
+                var $trEle = $(this).parents('tr');//当前的tr节点
+                var url = "{:U('Rule/del')}";//提交删除的地址
+                var eleId = $trEle.data('id');//当前的id
+
+                var $trs = $('.result-content table tbody tr');//获取所有的栏目所在的tr节点
+                var $deltrs = getChildsById($trs,eleId);//获取当前栏目的子栏目所在tr节点
+                console.log($deltrs);
+                debugger;
+                //递归获取当前栏目的所有子栏目的节点数组
+                /**
+                 * [getChildsById description]
+                 * @param  {[array]} trs [tr节点数组]
+                 * @param  {[int]} pid [tr节点父栏目ID]
+                 * @return {[array]}     [重组后的array]
+                 */
+                function getChildsById(trs,pid) {
+                    var arr = [],length = trs.length;
+
+                    for (var i = 0; i < length; i++) {
+                        if($(trs[i]).data('pid') == pid){
+                            arr.push(trs[i]);
+                            arr = arr.concat(getChildsById(trs,$(trs[i]).data('id')));
+                        }
+                    }
+                    return arr;
+                }
+                //提示
+                layer.confirm('确定要删除该权限吗？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(eleId,url,'post',$deltrs,$trEle);
+            });
+        });
+    });
+    //添加权限
+    $('.addRule').click(function(){
+        layer.open({
+          type: 1,
+          title: '添加权限',
+          closeBtn: 1,
+          area: ['380px', 'auto'],
+          shadeClose: true,
+          content: $('#addWrap'),
+        });
+    });
+</script>
+</body>
+</html>

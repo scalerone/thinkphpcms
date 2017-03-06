@@ -1,0 +1,132 @@
+<include file="Public:header"/>
+<div class="container clearfix">
+    <include file="Public:left"/>
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">管理员组管理</span></div>
+        </div>
+
+        <div class="result-wrap">
+            <form method="post" action="" class="sortForm">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a class="addMember" href="#"><i class="icon-font"></i>添加管理员组</a>
+                    </div>
+                </div>
+                <div class="result-content" style="max-height: 850px;overflow: auto;">
+                    <table class="layui-table">
+                      <thead>
+                        <tr>
+                            <th width="5%">ID</th>
+                            <th>组名称</th>
+                            <th width="15%">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    <volist name="groups" id="vo">
+                        <tr data-id={$vo.id}>
+                            <td width="3%">{$vo.id}</td>
+                            <td>{$vo.title}
+                            </td>
+                            <td>
+                                <div class="layui-btn-group">
+                                    <a title="配置权限" class="editLink layui-btn layui-btn-small" href="{:U('Admin/setRules',array('id'=>$vo['id']))}">
+                                        <i class="layui-icon">&#xe642;</i>
+                                    </a>
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="{$vo.id}">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </volist>
+                      </tbody>
+                    </table>
+                    <div class="result-title">
+                        <div class="result-list">
+                            <a class="addMember" href="#"><i class="icon-font"></i>添加管理员组</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
+        <form class="layui-form" action="">
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">名称</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="title" required  lay-verify="required" placeholder="请输入管理员组名称" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>
+            </div>
+          </div>
+        </form>
+    </div>
+    <!--/main-->
+<include file="Public:footer"/>
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form','layer'], function(){
+        var layer = layui.layer
+        ,form = layui.form();
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+          $.ajax({
+            url: '{:U("Admin/addGroup")}',
+            type: 'post',
+            dataType: 'json',
+            data: $(data.form).serialize(),
+            success: function(res){
+              if(res.status == 1){
+                layer.alert(res.msg,{icon:1});   
+                window.setTimeout(function(){
+                  window.location.href = "{:U('Admin/group')}";
+                },1500);
+              }else{
+                layer.alert(res.msg,{icon:2}); 
+              }
+            },
+            error: function(res){
+              console.log(res);
+            }
+          });
+          return false;
+        });
+});
+
+
+    //删除单个
+    $(function(){
+        $('.delOneLink').on('click',function(){
+                $trEle = $(this).parents('tr');//当前的tr节点
+                var url = "{:U('Admin/delGroup')}";//提交删除的地址
+                var eleId = $trEle.data('id');//当前的id
+                //提示
+                layer.confirm('确定要删除该管理员组？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(eleId,url,'post',$trEle);
+            });
+        });
+    });
+    //添加会员
+    $('.addMember').click(function(){
+        layer.open({
+          type: 1,
+          title: '添加管理员组',
+          closeBtn: 1,
+          area: ['460px', 'auto'],
+          shadeClose: true,
+          content: $('#addWrap'),
+        });
+    });
+
+</script>
+</body>
+</html>
