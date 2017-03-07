@@ -69,9 +69,8 @@
                 <li>
                     <a href="#"><i class="icon-font">&#xe018;</i>扩展功能</a>
                     <ul class="sub-menu">
-                        <li><a href="system.html"><i class="icon-font">&#xe017;</i>图片/水印</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe037;</i>验证码</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe046;</i>语言</a></li>
+                        <li><a href="system.html"><i class="icon-font">&#xe017;</i>静态页面</a></li>
+                        <li><a href="system.html"><i class="icon-font">&#xe046;</i>语言设置</a></li>
                     </ul>
                 </li>
             </ul>
@@ -81,7 +80,7 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">权限管理</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a>首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">系统设置</span></div>
         </div>
 
         <div class="result-wrap">
@@ -94,9 +93,11 @@
                   <div class="layui-tab layui-tab-card">
                     <ul class="layui-tab-title">
                       <li class="layui-this">网站信息</li>
+                      <li>底部信息</li>
                       <li>SEO设置</li>
                       <li>附件上传</li>
                       <li>水印设置</li>
+                      <li>第三方代码</li>
                     </ul>
                     <div class="layui-tab-content" style="min-height: 360px;">
                       <div class="layui-tab-item layui-show">
@@ -113,9 +114,27 @@
                           </div>
                         </div>
                         <div class="layui-form-item">
-                          <label class="layui-form-label">ico图标</label>
-                          <div class="layui-input-block">
-                            <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="">
+                            <label class="layui-form-label">网站LOGO</label>
+                            <div class="layui-input-inline">
+                                <img src="" class="hide" id="thumb-img" height="100px" width="auto">
+                                <input type="hidden" name="thumb" id="thumb-input" value="">
+                                <input type="file" name="_thumb" id="_thumb" class="hide">
+                                <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                                  <i class="layui-icon">&#xe608;</i> 上传
+                                </button>
+                                <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+                            </div>
+                          </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">ICO图标</label>
+                          <div class="layui-input-inline">
+                              <img src="" class="hide" id="thumb-img" height="100px" width="auto">
+                              <input type="hidden" name="thumb" id="thumb-input" value="">
+                              <input type="file" name="_thumb" id="_thumb" class="hide">
+                              <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                                <i class="layui-icon">&#xe608;</i> 上传
+                              </button>
+                              <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
                           </div>
                         </div>
                         <div class="layui-form-item">
@@ -143,9 +162,149 @@
                           </div>
                         </div>
                       </div>
-                      <div class="layui-tab-item">2</div>
-                      <div class="layui-tab-item">3</div>
-                      <div class="layui-tab-item">4</div>
+
+                      <div class="layui-tab-item">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">版权信息</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">地址邮编</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="">
+                          </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                          <label class="layui-form-label">其他信息</label>
+                          <div class="layui-input-block">
+                            <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="layui-tab-item">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">Title</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="title" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">Keywords</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="keywords" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">Description</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="description" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="layui-tab-item">
+                         <div class="layui-form-item">
+                            <label class="layui-form-label">上传大小</label>
+                            <div class="layui-input-inline">
+                              <input type="text" name="description" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">单位MB</div>
+                          </div> 
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">允许类型</label>
+                            <div class="layui-input-inline">
+                              <input type="text" name="description" autocomplete="off" value="jpg|png|jpeg|rar|zip|doc|docx|gif|ppt|xsl|txt|mp3|mp4|avi" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">请使用|隔开</div>
+                          </div>
+                      </div>
+
+                      <div class="layui-tab-item">
+                          <div class="layui-form-item" style="border-bottom: 1px solid #eee;">
+                            <label class="layui-form-label">开启水印</label>
+                            <div class="layui-input-block">
+                              <input type="radio" name="sex" value="0" title="是">
+                              <input type="radio" name="sex" value="1" title="否" checked>
+                            </div>
+                          </div>
+                          <div class="layui-form-item" style="border-bottom: 1px solid #eee;">
+                            <label class="layui-form-label">水印类型</label>
+                            <div class="layui-input-block">
+                              <input type="radio" name="sex" value="0" title="图片水印">
+                              <input type="radio" name="sex" value="1" title="文字水印" checked>
+                            </div>
+                          </div>
+                          <div class="layui-form-item" style="border-bottom: 1px solid #eee;">
+                            <label class="layui-form-label">添加方式</label>
+                            <div class="layui-input-block">
+                              <input type="checkbox" name="like1[write]" lay-skin="primary" title="内容页图片添加" checked="">
+                              <input type="checkbox" name="like1[read]" lay-skin="primary" title="缩略图片添加">
+                            </div>
+                          </div>
+                          <div class="layui-form-item" style="border-bottom: 1px solid #eee;">
+                            <label class="layui-form-label">水印位置</label>
+                            <div class="layui-input-block">
+                              <input type="radio" name="sex" value="0" title="左上">
+                              <input type="radio" name="sex" value="1" title="顶中" checked>
+                              <input type="radio" name="sex" value="1" title="右上" checked>
+                              <br/>
+                              <input type="radio" name="sex" value="0" title="左中">
+                              <input type="radio" name="sex" value="1" title="中间" checked>
+                              <input type="radio" name="sex" value="1" title="右中" checked>
+                              <br/>
+                              <input type="radio" name="sex" value="0" title="左下">
+                              <input type="radio" name="sex" value="1" title="底中" checked>
+                              <input type="radio" name="sex" value="1" title="右下" checked>
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">缩略图水印</label>
+                            <div class="layui-input-inline">
+                                <img src="" class="hide" id="thumb-img" height="100px" width="auto">
+                                <input type="hidden" name="thumb" id="thumb-input" value="">
+                                <input type="file" name="_thumb" id="_thumb" class="hide">
+                                <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                                  <i class="layui-icon">&#xe608;</i> 上传
+                                </button>
+                                <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">仅支持.gif|.png格式</div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">内容图水印</label>
+                            <div class="layui-input-inline">
+                                <img src="" class="hide" id="thumb-img" height="100px" width="auto">
+                                <input type="hidden" name="thumb" id="thumb-input" value="">
+                                <input type="file" name="_thumb" id="_thumb" class="hide">
+                                <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                                  <i class="layui-icon">&#xe608;</i> 上传
+                                </button>
+                                <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">仅支持.gif|.png格式</div>
+                          </div>
+                      </div>
+                      
+                      <div class="layui-tab-item">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">顶部</label>
+                          <div class="layui-input-block">
+                            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                          </div>
+                          <div class="layui-word-aux" align="center">代码会放在 &lt;/head&gt; 标签以上</div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">底部</label>
+                          <div class="layui-input-block">
+                            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                          </div>
+                          <div class="layui-word-aux" align="center">代码会放在 &lt;/body&gt; 标签以上</div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -175,8 +334,9 @@
 </script>
 <script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['layer','element'], function(){
+    layui.use(['layer','element','form'], function(){
         var layer = layui.layer
+        ,form = layui.form()
         ,element = layui.element();
 });
       $(function(){
