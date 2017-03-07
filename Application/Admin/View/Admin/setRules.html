@@ -21,7 +21,7 @@
                         <volist name="vo.child" id="child">
                           <li>
                             <div class="layui-input-inline">
-                              <input type="checkbox" name="id[]" title="{$child.title}" lay-skin="primary" value="{$child.id}">
+                              <input type="checkbox" name="id[]" title="{$child.title}" lay-skin="primary" value="{$child.id}" {$child[_has]=='1'?'checked="checked"':''}>
                             </div>
                           </li>
                         </volist>

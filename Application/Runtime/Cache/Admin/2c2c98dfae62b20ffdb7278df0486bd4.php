@@ -48,13 +48,19 @@
                     <ul class="sub-menu">
                         <li><a href="<?php echo U('Member/index');?>"><i class="icon-font">&#xe008;</i>网站会员</a></li>
                         <li><a href="<?php echo U('Admin/index');?>"><i class="icon-font">&#xe005;</i>管理员</a></li>
-                        <li><a href="<?php echo U('AdminGroup/index');?>"><i class="icon-font">&#xe033;</i>管理员组</a></li>
+                        <li><a href="<?php echo U('Admin/group');?>"><i class="icon-font">&#xe033;</i>管理员组</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="icon-font">&#xe003;</i>权限管理</a>
+                    <ul class="sub-menu">
+                        <li><a href="<?php echo U('Rule/index');?>"><i class="icon-font">&#xe008;</i>权限列表</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统信息</a></li>
+                        <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统设置</a></li>
                         <li><a href="<?php echo U('Cache/index');?>"><i class="icon-font">&#xe037;</i>清理缓存</a></li>
                         <li><a href="<?php echo U('Data/backup');?>"><i class="icon-font">&#xe046;</i>数据备份</a></li>
                         <li><a href="<?php echo U('Data/reduct');?>"><i class="icon-font">&#xe045;</i>数据还原</a></li>
@@ -75,62 +81,81 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">友情链接</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">权限管理</span></div>
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="<?php echo U('Links/updateSort');?>" class="sortForm">
-                <div class="result-title">
-                    <div class="result-list">
-                        <a href="<?php echo U('Links/add');?>"><i class="icon-font"></i>新增链接</a>
-                        <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                        <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
-                    </div>
-                </div>
-                <div class="result-content" style="max-height: 850px;overflow: auto;">
-                    <table class="layui-table">
-                      <thead>
-                        <tr>
-                            <th width="3%"><input type="checkbox"></th>
-                            <th width="5%">排序</th>
-                            <th>名称</th>
-                            <th width="14%">操作</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                    <?php if(is_array($links)): $i = 0; $__LIST__ = $links;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
-                            <td><input class="set" type="checkbox" value="<?php echo ($vo["id"]); ?>"></td>
-                            <td><input class="common-text common-text-center" size="3" type="text" value="<?php echo ($vo["sort"]); ?>" name="<?php echo ($vo["id"]); ?>"></td>
-                            <td><?php echo ($vo["title"]); ?>
-                                <?php if($vo["thumb"] != '' ): ?><i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="<?php echo ($vo["thumb"]); ?>">&#xe64a;</i>
-                                <?php else: endif; ?>
-                            </td>
-                            <td>
-                                <div class="layui-btn-group">
-                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="<?php echo U('Links/edit',array('id'=>$vo['id']));?>">
-                                        <i class="layui-icon">&#xe642;</i>
-                                    </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
-                                        <i class="layui-icon">&#xe640;</i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
-                      </tbody>
-                    </table>
-                    <div class="result-title">
-                        <div class="result-list">
-                            <a href="<?php echo U('Links/add');?>"><i class="icon-font"></i>新增链接</a>
-                            <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                            <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+            <form method="post" action="" class="layui-form sortForm">
+                <div class="result-content" style="max-height: 600px;overflow: auto;">
+                    <fieldset class="layui-elem-field layui-field-title">
+                    <legend>系统设置</legend>
+                  </fieldset>
+                   
+                  <div class="layui-tab layui-tab-card">
+                    <ul class="layui-tab-title">
+                      <li class="layui-this">网站信息</li>
+                      <li>SEO设置</li>
+                      <li>附件上传</li>
+                      <li>水印设置</li>
+                    </ul>
+                    <div class="layui-tab-content" style="min-height: 360px;">
+                      <div class="layui-tab-item layui-show">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">站点标题</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="title" autocomplete="off" class="layui-input">
+                          </div>
                         </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">站点地址</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="http://www.baidu.com">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">ico图标</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">电话</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">手机</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">传真</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">Email</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="layui-tab-item">2</div>
+                      <div class="layui-tab-item">3</div>
+                      <div class="layui-tab-item">4</div>
                     </div>
+                  </div>
+                </div>
+                <div class="site-demo-button" style="margin-left: 50px;">
+                  <button class="layui-btn site-demo-active submit">保存设置</button>
                 </div>
             </form>
         </div>
     </div>
     <!--/main-->
-</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -150,49 +175,17 @@
 </script>
 <script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['form','layer'], function(){
+    layui.use(['layer','element'], function(){
         var layer = layui.layer
-        ,form = layui.form();
+        ,element = layui.element();
 });
-    //删除
-    $('.batchDel').on('click',function(){
-        //获取所有选中的文章
-        $trs = $('.result-content table tbody tr input:checked');
-        if(!$trs.length){
-            layer.alert('请选中需要删除的链接!', {icon: 2});
-            return;
-        }
-        //获取选中的ID
-        var ids = [];
-        $trs.filter(function(index) {
-            return ids.push($($trs[index]).val());
-        });
+      $(function(){
+        $('.submit').on('click',function(){
+          var url = "<?php echo U('System/set');?>";
 
-        var url = '<?php echo U("Links/del");?>';
-        ids = ids.join(',');
-        var $elems = $trs.parents('tr');
-        layer.confirm('确定要删除选中的链接吗？', {icon: 3, title:'提示'}, function(index){
-            ajaxDeleteElems(ids,url,'post',$elems);
+          return false;
         });
-    });
-    //更新排序
-    $('.updateOrd').on('click',function(){
-        $('.sortForm').submit();
-        return false;
-    });
-    //删除单个
-    $(function(){
-        $('.delOneLink').on('click',function(){
-                $trEle = $(this).parents('tr');//当前的tr节点
-                var url = "<?php echo U('Links/del');?>";//提交删除的地址
-                var eleId = $trEle.data('id');//当前的id
-                //提示
-                layer.confirm('确定要删除该链接？', {icon: 3, title:'提示'}, function(index){
-                ajaxDeleteElems(eleId,url,'post',$trEle);
-            });
-        });
-    });
-    
+      });
 </script>
 </body>
 </html>

@@ -48,7 +48,7 @@
                     <ul class="sub-menu">
                         <li><a href="<?php echo U('Member/index');?>"><i class="icon-font">&#xe008;</i>网站会员</a></li>
                         <li><a href="<?php echo U('Admin/index');?>"><i class="icon-font">&#xe005;</i>管理员</a></li>
-                        <li><a href="<?php echo U('AdminGroup/index');?>"><i class="icon-font">&#xe033;</i>管理员组</a></li>
+                        <li><a href="<?php echo U('Admin/group');?>"><i class="icon-font">&#xe033;</i>管理员组</a></li>
                     </ul>
                 </li>
                 <li>

@@ -35,7 +35,7 @@
                             <td>{$vo.name}</td>
                             <td>{$vo.createtime|date='Y-m-d H:i:s',###}</td>
                             <td class="layui-form">
-                              <input type="checkbox" value="{$vo.status}" name="status" lay-filter="status" lay-skin="switch" {$vo['status']=='1'?'checked="checked"':''}>
+                              <input type="checkbox" value="{$vo.status}" name="status" lay-filter="status" lay-skin="switch" lay-text="开启|关闭"{$vo['status']=='1'?'checked="checked"':''}>
                             </td>
                             <td>
                                 <div class="layui-btn-group">

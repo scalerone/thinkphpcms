@@ -60,7 +60,7 @@
                 <li>
                     <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统信息</a></li>
+                        <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统设置</a></li>
                         <li><a href="<?php echo U('Cache/index');?>"><i class="icon-font">&#xe037;</i>清理缓存</a></li>
                         <li><a href="<?php echo U('Data/backup');?>"><i class="icon-font">&#xe046;</i>数据备份</a></li>
                         <li><a href="<?php echo U('Data/reduct');?>"><i class="icon-font">&#xe045;</i>数据还原</a></li>
@@ -110,7 +110,7 @@
                             <td><?php echo ($vo["name"]); ?></td>
                             <td><?php echo (date('Y-m-d H:i:s',$vo["createtime"])); ?></td>
                             <td class="layui-form">
-                              <input type="checkbox" value="<?php echo ($vo["status"]); ?>" name="status" lay-filter="status" lay-skin="switch" <?php echo ($vo['status']=='1'?'checked="checked"':''); ?>>
+                              <input type="checkbox" value="<?php echo ($vo["status"]); ?>" name="status" lay-filter="status" lay-skin="switch" lay-text="开启|关闭"<?php echo ($vo['status']=='1'?'checked="checked"':''); ?>>
                             </td>
                             <td>
                                 <div class="layui-btn-group">

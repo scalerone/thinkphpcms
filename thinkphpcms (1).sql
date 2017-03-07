@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 年 03 月 06 日 14:55
--- 服务器版本: 5.5.53
--- PHP 版本: 5.4.45
+-- 生成日期: 2017 �?03 �?07 �?17:43
+-- 服务器版本: 5.5.47
+-- PHP 版本: 5.5.30
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -35,14 +35,17 @@ CREATE TABLE IF NOT EXISTS `cms_admin` (
   `lastloginip` varchar(20) DEFAULT '',
   `status` smallint(1) NOT NULL DEFAULT '1' COMMENT '1:正常0:锁定',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `cms_admin`
 --
 
 INSERT INTO `cms_admin` (`id`, `username`, `password`, `email`, `lastlogintime`, `lastloginip`, `status`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488803954, '127.0.0.1', 1);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 1488849919, '127.0.0.1', 1),
+(3, 'test', '098f6bcd4621d373cade4e832627b4f6', NULL, NULL, '', 1),
+(4, 'ads', '2deb000b57bfac9d72c14d4ed967b572', NULL, NULL, '', 1),
+(5, 'test2', 'ad0234829205b9033196ba818f7a872b', NULL, NULL, '', 1);
 
 -- --------------------------------------------------------
 
@@ -99,9 +102,8 @@ CREATE TABLE IF NOT EXISTS `cms_auth_group` (
 
 INSERT INTO `cms_auth_group` (`id`, `title`, `status`, `rules`) VALUES
 (1, '超级管理员', 1, '4,5,6,9,24,8,10,11'),
-(2, '普通管理员', 1, ''),
-(3, '网站编辑', 1, ''),
-(4, '游客', 1, '');
+(2, '普通管理员', 1, '4,5,6,9,24,8,10'),
+(3, '网站编辑', 1, '4,5,6,9');
 
 -- --------------------------------------------------------
 
@@ -116,6 +118,16 @@ CREATE TABLE IF NOT EXISTS `cms_auth_group_access` (
   KEY `uid` (`uid`),
   KEY `group_id` (`group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `cms_auth_group_access`
+--
+
+INSERT INTO `cms_auth_group_access` (`uid`, `group_id`) VALUES
+(1, 1),
+(3, 1),
+(4, 2),
+(5, 3);
 
 -- --------------------------------------------------------
 

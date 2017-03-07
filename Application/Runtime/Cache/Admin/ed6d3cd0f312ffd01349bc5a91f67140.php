@@ -95,7 +95,7 @@
                         <ul>
                         <?php if(is_array($vo["child"])): $i = 0; $__LIST__ = $vo["child"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$child): $mod = ($i % 2 );++$i;?><li>
                             <div class="layui-input-inline">
-                              <input type="checkbox" name="id[]" title="<?php echo ($child["title"]); ?>" lay-skin="primary" value="<?php echo ($child["id"]); ?>">
+                              <input type="checkbox" name="id[]" title="<?php echo ($child["title"]); ?>" lay-skin="primary" value="<?php echo ($child["id"]); ?>" <?php echo ($child[_has]=='1'?'checked="checked"':''); ?>>
                             </div>
                           </li><?php endforeach; endif; else: echo "" ;endif; ?>
                         </ul>
@@ -111,7 +111,7 @@
             </form>
         </div>
     </div>
-    <!--/main-->
+<!--/main-->
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
