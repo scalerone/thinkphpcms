@@ -6,7 +6,7 @@
 
 		//栏目列表
 		public function index () {
-			$category = M('Category')->field('id,catname,pid,status,type,sort')->order('sort ASC')->select();
+			$category = M('Category')->field('id,pid,catname,status,type,sort')->order('sort ASC')->select();
 			$this -> categories = reorgnCates($category);
 			$this -> display();
 		}

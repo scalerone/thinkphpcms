@@ -9,7 +9,7 @@
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="" class="sortForm">
+            <form method="post" action="" class="sortForm layui-form">
                 <div class="result-title">
                     <div class="result-list">
                         <a class="addMember" href="#"><i class="icon-font"></i>添加会员</a>
@@ -19,7 +19,7 @@
                     <table class="layui-table">
                       <thead>
                         <tr>
-                            <th width="3%"><input type="checkbox"></th>
+                            <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
                             <th width="10%">用户名</th>
                             <th>邮箱</th>
                             <th width="14%">操作</th>
@@ -28,7 +28,7 @@
                       <tbody>
                     <volist name="members" id="vo">
                         <tr data-id={$vo.id}>
-                            <td><input class="set" type="checkbox" value="{$vo.id}"></td>
+                            <td><input class="set" type="checkbox" value="{$vo.id}" lay-skin="primary"></td>
                             <td>{$vo.name}
                                 <if condition="$vo.avatar neq '' ">
                                     <i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="{$vo.avatar}">&#xe64a;</i>
@@ -84,13 +84,13 @@
           <div class="layui-form-item">
             <label class="layui-form-label wid_auto">头像</label>
             <div class="layui-input-block margin-left80">
-                <img src="" class="hide" id="thumb-img" height="80px" width="auto">
-                <input type="hidden" name="avatar" id="thumb-input" value="">
+                <img src="" class="hide thumb-img" height="80px" width="auto">
+                <input type="hidden" name="avatar" class="thumb-input" value="">
                 <input type="file" id="_thumb" class="hide">
                 <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
                   <i class="layui-icon">&#xe608;</i> 上传头像
                 </button>
-                <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+                <button class="del-thumb layui-btn layui-btn-primary hide">删除</button>
             </div>
           </div>
 
@@ -115,6 +115,15 @@
     layui.use(['form','layer'], function(){
         var layer = layui.layer
         ,form = layui.form();
+
+        //全选
+        form.on('checkbox(allChoose)', function(data){
+          var child = $(data.elem).parents('table').find('tbody .set');
+          child.each(function(index, item){
+            item.checked = data.elem.checked;
+          });
+          form.render('checkbox');
+        });
 
         //监听提交
         form.on('submit(formDemo)', function(data){

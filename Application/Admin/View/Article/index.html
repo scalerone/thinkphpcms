@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form method="post" action="{:U('Article/updateSort')}" class="sortForm">
+            <form method="post" action="{:U('Article/updateSort')}" class="sortForm ">
                 <div class="result-title">
                     <div class="result-list">
                         <a href="{:U('Article/add')}"><i class="icon-font"></i>新增文章</a>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="result-content">
-                    <table class="layui-table">
+                    <table class="layui-table layui-form">
                       <thead>
                         <tr>
                             <th width="3%"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
@@ -63,7 +63,7 @@
                       <tbody>
                         <volist name="articles" id="a">
                             <tr data-id="{$a.id}">
-                                <td><input class="set" value="{$a.id}" type="checkbox"></td>
+                                <td><input class="set" value="{$a.id}" type="checkbox" lay-skin="primary"></td>
                                 <td><input class="common-text common-text-center" size="3" type="text" value="{$a.sort}" name="{$a.id}"></td>
                                 <td>{$a.title|substr=0,27}
                                 <if condition="$a.thumb neq '' ">
@@ -104,8 +104,17 @@
 <include file="Public:footer"/>
 <script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['layer'], function(){
+    layui.use(['layer','form'], function(){
+            var form = layui.form();
           var layer = layui.layer;
+          //全选
+          form.on('checkbox(allChoose)', function(data){
+            var child = $(data.elem).parents('table').find('tbody .set');
+            child.each(function(index, item){
+              item.checked = data.elem.checked;
+            });
+            form.render('checkbox');
+          });
     });
     //复选框选中后显示移动栏目下拉菜单和按钮
     $('#removeArticle').on('click',function(){

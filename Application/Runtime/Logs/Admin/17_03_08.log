@@ -1,0 +1,270 @@
+[ 2017-03-08T17:14:37+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Cache&a=index&time=0.9717123915437242
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-03-08T17:15:24+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Category&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0060s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0060s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('47','333','1','','1','33','33','1488964524') [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:15:36+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Category&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0060s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('53','444','1','','1','444','44','1488964536') [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:15:44+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Category&a=updateStatus&id=53&status=2
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0060s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:15:48+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Category&a=updateStatus&id=53&status=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0060s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0010s ]
+
+[ 2017-03-08T17:16:34+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Rule&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0070s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0060s ]
+SQL: INSERT INTO `cms_auth_rule` (`pid`,`title`,`name`,`status`,`createtime`) VALUES ('1','文章移动','Article/remove','1','1488964594') [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:16:54+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Rule&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0060s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0050s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0050s ]
+SQL: INSERT INTO `cms_auth_rule` (`pid`,`title`,`name`,`status`,`createtime`) VALUES ('1','搜索文章','Article/search','1','1488964614') [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:17:12+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Rule&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0070s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0060s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: INSERT INTO `cms_auth_rule` (`pid`,`title`,`name`,`status`,`createtime`) VALUES ('1','更新排序','Article/updateSort','1','1488964632') [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:17:55+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Rule&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0060s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0060s ]
+SQL: INSERT INTO `cms_auth_rule` (`pid`,`title`,`name`,`status`,`createtime`) VALUES ('2','更新排序','Category/updateSort','1','1488964675') [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:18:16+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Rule&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0070s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0060s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: INSERT INTO `cms_auth_rule` (`pid`,`title`,`name`,`status`,`createtime`) VALUES ('2','更新状态','Category/updateStatus','1','1488964696') [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:19:44+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Rule&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0060s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: INSERT INTO `cms_auth_rule` (`pid`,`title`,`name`,`status`,`createtime`) VALUES ('0','友情链接','Links','1','1488964784') [ RunTime:0.0010s ]
+
+[ 2017-03-08T17:20:15+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Rule&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0060s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0060s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0060s ]
+SQL: INSERT INTO `cms_auth_rule` (`pid`,`title`,`name`,`status`,`createtime`) VALUES ('52','链接列表','Links/index','1','1488964815') [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:20:48+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Rule&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0070s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0060s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: INSERT INTO `cms_auth_rule` (`pid`,`title`,`name`,`status`,`createtime`) VALUES ('52','添加链接','Links/add','1','1488964848') [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:21:11+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Rule&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0070s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: INSERT INTO `cms_auth_rule` (`pid`,`title`,`name`,`status`,`createtime`) VALUES ('52','删除链接','Links/del','1','1488964871') [ RunTime:0.0010s ]
+
+[ 2017-03-08T17:21:27+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Rule&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0060s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0060s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: INSERT INTO `cms_auth_rule` (`pid`,`title`,`name`,`status`,`createtime`) VALUES ('52','修改链接','Links/edit','1','1488964887') [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:21:46+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Rule&a=add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0070s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0060s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: INSERT INTO `cms_auth_rule` (`pid`,`title`,`name`,`status`,`createtime`) VALUES ('52','更新排序','Links/updateSort','1','1488964906') [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:23:13+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Admin&a=setRules
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0070s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0060s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','24','8','10','34','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46') AND `type` = 1 AND `status` = 1  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_auth_group` SET `rules`='4,5,6,9,47,48,49,24,8,10,34,50,51,11,26,27,28,30,32,33,36,37,38,41,40,43,44,45,46,53,54,55,56,57' WHERE `id` = 1 [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:23:51+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Login&a=index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0080s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'admin' AND `password` = '21232f297a57a5a743894a0e4a801fc3' LIMIT 1   [ RunTime:0.0000s ]
+SQL: UPDATE `cms_admin` SET `username`='admin',`password`='21232f297a57a5a743894a0e4a801fc3',`email`=NULL,`lastlogintime`='1488965031',`lastloginip`='127.0.0.1',`status`='1' WHERE `id` = 1 [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:25:17+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Admin&a=setRules
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group` [ RunTime:0.0060s ]
+SQL: UPDATE `cms_auth_group` SET `rules`='4,5,6,9,47,48,49,24,8,10,34,50,51,11,26,27,28,30,32,33,36,37,38,41,40,43,44,45,46,53,54,55,56,57' WHERE `id` = 1 [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:25:53+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Admin&a=setRules
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0060s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','47','48','49','24','8','10','34','50','51','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46','53','54','55','56','57') AND `type` = 1 AND `status` = 1  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_auth_group` SET `rules`='4,5,6,9,47,48,49,24,8,10,34,50,51,11' WHERE `id` = 2 [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:26:32+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Admin&a=setRules
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0060s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','6','9','47','48','49','24','8','10','34','50','51','11','26','27','28','30','32','33','36','37','38','41','40','43','44','45','46','53','54','55','56','57') AND `type` = 1 AND `status` = 1  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group` [ RunTime:0.0060s ]
+SQL: UPDATE `cms_auth_group` SET `rules`='4,5,48,49,24,8,50,51' WHERE `id` = 3 [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:26:42+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Index&a=logout
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2017-03-08T17:26:49+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Login&a=index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0080s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'test2' AND `password` = 'ad0234829205b9033196ba818f7a872b' LIMIT 1   [ RunTime:0.0010s ]
+SQL: UPDATE `cms_admin` SET `username`='test2',`password`='ad0234829205b9033196ba818f7a872b',`email`=NULL,`lastlogintime`='1488965209',`lastloginip`='127.0.0.1',`status`='1' WHERE `id` = 5 [ RunTime:0.0010s ]
+
+[ 2017-03-08T17:27:03+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Article&a=remove&ids%5B%5D=63&ids%5B%5D=64&catid=2
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0090s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='5' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0080s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','48','49','24','8','50','51') AND `type` = 1 AND `status` = 1  [ RunTime:0.0000s ]
+
+[ 2017-03-08T17:27:17+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Article&a=del&id=63
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_group_access` [ RunTime:0.0080s ]
+SQL: SELECT `uid`,`group_id`,`title`,`rules` FROM cms_auth_group_access a INNER JOIN cms_auth_group g on a.group_id=g.id  WHERE ( a.uid='5' and g.status='1' )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0080s ]
+SQL: SELECT `condition`,`name` FROM `cms_auth_rule` WHERE `id` IN ('4','5','48','49','24','8','50','51') AND `type` = 1 AND `status` = 1  [ RunTime:0.0010s ]
+
+[ 2017-03-08T17:27:59+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Index&a=logout
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-03-08T17:28:05+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Login&a=index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0080s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'admin' AND `password` = '21232f297a57a5a743894a0e4a801fc3' LIMIT 1   [ RunTime:0.0010s ]
+SQL: UPDATE `cms_admin` SET `username`='admin',`password`='21232f297a57a5a743894a0e4a801fc3',`email`=NULL,`lastlogintime`='1488965285',`lastloginip`='127.0.0.1',`status`='1' WHERE `id` = 1 [ RunTime:0.0000s ]
+

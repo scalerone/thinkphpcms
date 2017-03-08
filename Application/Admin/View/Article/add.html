@@ -36,13 +36,13 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">缩略图：</label>
                     <div class="layui-input-block">
-                        <img src="" class="hide" id="thumb-img" height="100px" width="auto">
-                        <input type="hidden" name="thumb" id="thumb-input" value="">
-                        <input type="file" name="_thumb" id="_thumb" class="hide">
+                        <img src="" class="hide thumb-img" height="100px" width="auto">
+                        <input type="hidden" name="thumb" class="thumb-input" value="">
+                        <input type="file" id="_thumb" class="hide">
                         <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
                           <i class="layui-icon">&#xe608;</i> 文章缩略图
                         </button>
-                        <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+                        <button class="del-thumb layui-btn layui-btn-primary hide">删除</button>
                     </div>
                   </div>
                   <div class="layui-form-item">
@@ -112,28 +112,13 @@
         $('#_thumb').bind('change',function(){
           //限制文件类型与大小
           var options = {
-            'filePath': $(this).val()
+            'id'      : '#_thumb',
+            'filePath': $(this).val(),
+            'fileSize': {$Think.config.FILE_SIZE},
           };
           //调用上传方法
           fileUpload(options,'#_thumb','{:U("Article/upload")}');
         });
-
-        //添加文章
-        /*$('.submit').on('click',function(){
-          $.ajax({
-            url: '{:U("Article/add")}',
-            type: 'POST',
-            dataType: 'json',
-            data: $('#addForm').serialize(),
-            success: function(data){
-              layer.msg(data.msg, {icon: 6});
-              window.setTimeout(function(){
-                window.location.href = "{:U('Article/index')}";
-              },1200);
-            }
-          });
-          return false;
-        });*/
     });
 </script>
 </body>

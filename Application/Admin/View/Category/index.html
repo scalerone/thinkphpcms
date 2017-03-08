@@ -9,7 +9,7 @@
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="{:U('Category/updateSort')}" class="catesForm">
+            <form method="post" action="{:U('Category/updateSort')}" class="catesForm layui-form">
                 <div class="result-title">
                     <div class="result-list">
                         <a href="{:U('Category/add')}"><i class="icon-font"></i>新增栏目</a>
@@ -21,7 +21,7 @@
                     <table class="layui-table">
                       <thead>
                         <tr>
-                            <th width="3%"><input type="checkbox"></th>
+                            <th width="3%"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
                             <th width="5%">排序</th>
                             <th>名称</th>
                             <th width="8%" align="center">栏目类型</th>
@@ -32,7 +32,7 @@
                       <tbody>
                     <volist name="categories" id="vo">
                         <tr data-id={$vo.id} data-pid="{$vo.pid}">
-                            <td><input class="set" type="checkbox"></td>
+                            <td><input class="set" type="checkbox" lay-skin="primary"></td>
                             <td><input class="common-text common-text-center" size="3" type="text" value="{$vo.sort}" name="{$vo.id}"></td>
                             <td>{$vo.html}{$vo.catname}</td>
                             <td>
@@ -103,6 +103,14 @@
                 }                   
             }); 
         });
+      //全选
+      form.on('checkbox(allChoose)', function(data){
+        var child = $(data.elem).parents('table').find('tbody .set');
+        child.each(function(index, item){
+          item.checked = data.elem.checked;
+        });
+        form.render('checkbox');
+      });
 });
     $(function(){
         //更新排序
@@ -165,7 +173,7 @@
                         }
                     },
                     error: function(res){
-                        layer.alert(res.msg,{icon:2});
+                        layer.alert('出现错误！',{icon:2});
                     }
                 }); 
             }

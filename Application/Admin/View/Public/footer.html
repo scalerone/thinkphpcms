@@ -14,4 +14,32 @@
 	      layer.close(index);
 	    });   
 	});
+
+	$('.clearCache').on('click',function(){
+		layer.confirm('您确定要清除所有缓存文件?', {icon: 3, title:'提示'}, function(index){
+	        $.ajax({
+             	url: '{:U("Cache/index")}',
+             	dataType: 'json',
+             	data: {time: Math.random()},
+             	beforeSend: function () {
+			        layer.msg('正在清理...', {
+					  icon: 16
+					  ,shade: 0.01
+					});
+			    },
+			    success: function (res) {
+			        if (res.status == "1") {
+			            layer.alert(res.msg,{icon:1});
+			            window.setTimeout(function(){
+			            	window.location.reload();
+			            },1500);
+			        }else{
+			        	layer.alert(res.msg,{icon:3});
+			        }
+			    }
+             });
+	      layer.close(index);
+	    }); 
+		
+	});
 </script>

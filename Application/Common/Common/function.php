@@ -63,4 +63,68 @@
 		}
 		return $arr;
 	}
+
+	/**
+	 * 文件上传方法
+	 * @param  [array] $config [上传配置信息]
+	 * @return [array]         [返回值]
+	 */
+	function upload($config) {
+		$_config = array(
+				'size' 		=> '2097152',
+				'type'		=> 	array('jpg','jpeg','png','gif','bmp'),
+				'rootPath'	=>	'./Uploads/', 
+				'file'		=>	'file',
+				'autoSub'	=>  true,
+			);
+
+		$_config = array_merge($_config,$config);
+
+		$upload = new \Think\Upload();	//实例化上传类 
+		
+		$upload->maxSize = $_config['size'];// 设置附件上传大小 
+
+		$upload->exts = $_config['type'];// 设置附件上传类型 
+
+		$upload->autoSub = $_config['autoSub'];// 设置附件上传类型 
+
+		$upload->rootPath = $_config['rootPath']; // 设置附件上传根目录 // 上传单个文件
+
+		$info = $upload->uploadOne($_FILES[$_config['file']]); 
+
+		if(!$info) {// 上传错误提示错误信息 
+			$res = $upload->getError();
+			$res['status'] = '0';
+		}else{// 上传成功 获取上传文件信息 
+			$res['status'] = '1';
+			$res['src'] = $_config['rootPath'] . $info['savepath'].$info['savename'];
+		}
+
+		return $res;
+	}
+
+	/**
+	 * 删除指定目录下的所有文件和文件夹
+	 * @param  [str] $dir [目录路径]
+	 * @return [boolean]      [删除成功或失败]
+	 */
+	function del_dir($dir) {
+		$dh = opendir($dir);
+		while($file = readdir($dh)) {
+			if($file != "." && $file != "..") {
+				$fullpath = $dir."/".$file;
+				if(!is_dir($fullpath)) {
+					@unlink($fullpath);
+				}else{
+					del_dir($fullpath);
+				}
+			}
+		}
+		closedir($dh);
+		if(rmdir($dir)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 ?>

@@ -18,7 +18,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><a href="#">更新缓存</a></li>
+                <li><a href="javascript:;" class="clearCache">更新缓存</a></li>
                 <li><a href="<?php echo U('Admin/edit',array('id' => $_SESSION['uid']));?>">修改密码</a></li>
                 <li><a href="javascript:;" class="logout">退出</a></li>
             </ul>
@@ -60,8 +60,8 @@
                 <li>
                     <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统信息</a></li>
-                        <li><a href="<?php echo U('Cache/index');?>"><i class="icon-font">&#xe037;</i>清理缓存</a></li>
+                        <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统设置</a></li>
+                        <li><a href="javascript:;" class="clearCache"><i class="icon-font">&#xe037;</i>清空缓存</a></li>
                         <li><a href="<?php echo U('Data/backup');?>"><i class="icon-font">&#xe046;</i>数据备份</a></li>
                         <li><a href="<?php echo U('Data/reduct');?>"><i class="icon-font">&#xe045;</i>数据还原</a></li>
                     </ul>
@@ -69,9 +69,8 @@
                 <li>
                     <a href="#"><i class="icon-font">&#xe018;</i>扩展功能</a>
                     <ul class="sub-menu">
-                        <li><a href="system.html"><i class="icon-font">&#xe017;</i>图片/水印</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe037;</i>验证码</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe046;</i>语言</a></li>
+                        <li><a href="system.html"><i class="icon-font">&#xe017;</i>静态页面</a></li>
+                        <li><a href="system.html"><i class="icon-font">&#xe046;</i>语言设置</a></li>
                     </ul>
                 </li>
             </ul>
@@ -104,7 +103,7 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form method="post" action="<?php echo U('Article/updateSort');?>" class="sortForm">
+            <form method="post" action="<?php echo U('Article/updateSort');?>" class="sortForm ">
                 <div class="result-title">
                     <div class="result-list">
                         <a href="<?php echo U('Article/add');?>"><i class="icon-font"></i>新增文章</a>
@@ -119,7 +118,7 @@
                     </div>
                 </div>
                 <div class="result-content">
-                    <table class="layui-table">
+                    <table class="layui-table layui-form">
                       <thead>
                         <tr>
                             <th width="3%"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
@@ -134,7 +133,7 @@
                       </thead>
                       <tbody>
                         <?php if(is_array($articles)): $i = 0; $__LIST__ = $articles;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$a): $mod = ($i % 2 );++$i;?><tr data-id="<?php echo ($a["id"]); ?>">
-                                <td><input class="set" value="<?php echo ($a["id"]); ?>" type="checkbox"></td>
+                                <td><input class="set" value="<?php echo ($a["id"]); ?>" type="checkbox" lay-skin="primary"></td>
                                 <td><input class="common-text common-text-center" size="3" type="text" value="<?php echo ($a["sort"]); ?>" name="<?php echo ($a["id"]); ?>"></td>
                                 <td><?php echo (substr($a["title"],0,27)); ?>
                                 <?php if($a["thumb"] != '' ): ?><i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="<?php echo ($a["thumb"]); ?>">&#xe64a;</i>
@@ -186,11 +185,48 @@
 	      layer.close(index);
 	    });   
 	});
+
+	$('.clearCache').on('click',function(){
+		layer.confirm('您确定要清除所有缓存文件?', {icon: 3, title:'提示'}, function(index){
+	        $.ajax({
+             	url: '<?php echo U("Cache/index");?>',
+             	dataType: 'json',
+             	data: {time: Math.random()},
+             	beforeSend: function () {
+			        layer.msg('正在清理...', {
+					  icon: 16
+					  ,shade: 0.01
+					});
+			    },
+			    success: function (res) {
+			        if (res.status == "1") {
+			            layer.alert(res.msg,{icon:1});
+			            window.setTimeout(function(){
+			            	window.location.reload();
+			            },1500);
+			        }else{
+			        	layer.alert(res.msg,{icon:3});
+			        }
+			    }
+             });
+	      layer.close(index);
+	    }); 
+		
+	});
 </script>
 <script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['layer'], function(){
+    layui.use(['layer','form'], function(){
+            var form = layui.form();
           var layer = layui.layer;
+          //全选
+          form.on('checkbox(allChoose)', function(data){
+            var child = $(data.elem).parents('table').find('tbody .set');
+            child.each(function(index, item){
+              item.checked = data.elem.checked;
+            });
+            form.render('checkbox');
+          });
     });
     //复选框选中后显示移动栏目下拉菜单和按钮
     $('#removeArticle').on('click',function(){

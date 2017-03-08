@@ -50,10 +50,5 @@
  			}
  		}
 
- 		//查询会员
- 		public function search() {
- 			$this -> display();
- 		}
-
  	}
 ?>

@@ -31,27 +31,27 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label ">栏目类型：</label>
                     <div class="layui-input-block">
-                      <input {$cate['type']==1?'checked':''} type="radio" name="type" value="1" title="栏目">
-                      <input {$cate['type']==2?'checked':''} type="radio" name="type" value="2" title="单篇" >
-                      <input {$cate['type']==3?'checked':''} type="radio" name="type" value="3" title="链接" >
+                      <input {$cate['type']==1?'checked':''} disabled="" type="radio" name="type" value="1" title="栏目">
+                      <input {$cate['type']==2?'checked':''} disabled="" type="radio" name="type" value="2" title="单篇" >
+                      <input {$cate['type']==3?'checked':''} disabled="" type="radio" name="type" value="3" title="链接" >
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label">缩略图：</label>
                     <div class="layui-input-block">
-                      <img src="{$cate['thumb']}" {$cate['thumb']==''?'class="hide"':'class=""'} id="thumb-img" height="100px" width="auto">
-                        <input type="hidden" name="thumb" id="thumb-input" value="">
-                        <input type="file" name="_thumb" id="_thumb" class="hide">
+                      <img src="{$cate['thumb']}" class="{$cate['thumb']==''?'hide':''} thumb-img" height="100px" width="auto">
+                        <input type="hidden" name="thumb" class="thumb-input" value="">
+                        <input type="file" id="_thumb" class="hide">
                         <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
                           <i class="layui-icon">&#xe608;</i> 栏目缩略图
                         </button>
-                        <button id="del-thumb" class="layui-btn layui-btn-primary {$cate['thumb']==''?'hide':''}">删除</button>
+                        <button class="del-thumb layui-btn layui-btn-primary {$cate['thumb']==''?'hide':''}">删除</button>
                     </div>
                   </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label">状态：</label>
                     <div class="layui-input-block">
-                      <input type="checkbox" name="status" lay-skin="switch" {$cate['status']==1?'checked="checked"':''} value="1">
+                      <input type="checkbox" name="status" lay-skin="switch" {$cate['status']==1?'checked="checked"':''} value="1" lay-text="正常|锁定">
                     </div>
                   </div>
                   <div class="layui-form-item layui-form-text">
@@ -89,7 +89,7 @@
       ,layedit = layui.layedit
       ,laydate = layui.laydate;
 
-      //栏目缩略图上传
+        //文章缩略图上传
         $('#_thumb').bind('change',function(){
           //限制文件类型与大小
           var options = {

@@ -8,6 +8,7 @@
 function fileUpload(opt,id,url){
     //默认上传文件类型和大小
     var _defaulf = {
+      'id'      : '#_thumb',
       'fileSize': 2097152,
       'fileType': ['jpg','jpeg','png','gif','bmp'],
       'filePath': ''
@@ -54,31 +55,40 @@ function fileUpload(opt,id,url){
       // 告诉jQuery不要去设置Content-Type请求头
       contentType : false,
       beforeSend:function(){
-        $('.upload-btn').html('<i class="layui-icon">&#xe608;</i>正在上传...');
+        $(_defaulf.id).nextAll('.upload-btn').html('<i class="layui-icon">&#xe608;</i>正在上传...');
       },
-      success : function(msg) { 
-        $('#thumb-img').attr('src',msg.src).removeClass('hide').show();
-        $('#thumb-input').val(msg.src);
-        $('#_thumb').val('');
-        $('.upload-btn').html('<i class="layui-icon">&#xe608;</i>文章缩略图').addClass('layui-btn-disabled');
-        $('#del-thumb').removeClass('hide').show();
+      success : function(msg) {
+        var $thumb_img = $(_defaulf.id).prevAll('.thumb-img');
+        var $thumb_input = $(_defaulf.id).prevAll('.thumb-input');
+        var $upload_btn = $(_defaulf.id).nextAll('.upload-btn');
+        var $del_thumb = $(_defaulf.id).nextAll('.del-thumb');
+        if(!$thumb_img || !$thumb_input || !$upload_btn || !$del_thumb) return false;
+        
+        if(msg.status == '1'){
+          $thumb_img.attr('src',msg.src).removeClass('hide').show();
+          $thumb_input.val(msg.src);
+          $(_defaulf.id).val('');
+          $upload_btn.html('<i class="layui-icon">&#xe608;</i>上传').addClass('layui-btn-disabled');
+          $del_thumb.removeClass('hide').show();
+        }else{
+          $upload_btn.html('<i class="layui-icon">&#xe608;</i>上传' + msg.info);
+        }
+
       }, 
       error : function(responseStr) { 
         console.log("error");
         } 
     });
 }
-  //删除缩略图
-  $(function(){
-    $('#del-thumb').click(function(){
-      $('#thumb-img').attr('src','').hide();
-      $('#thumb-input').val('');
-      $('#_thumb').val('');
+    //删除缩略图
+    $('.del-thumb').on('click',function(){
+      $(this).prevAll('.thumb-img').attr('src','').hide();
+      $(this).prevAll('.thumb-input').val('');
+      $(this).prevAll('input[type=file]').val('');
       $(this).hide();
-      $('.upload-btn').removeClass('layui-btn-disabled');
+      $(this).prevAll('.upload-btn').removeClass('layui-btn-disabled');
       return false;
-  });
-  });
+    });
     //栏目和文章全选反选
     $(function(){
         var $table = $('.result-content table');

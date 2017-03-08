@@ -7,6 +7,19 @@
 			if(!session('uid')){
 				$this -> redirect('Login/index');
 			}
+			//权限认证
+			$auth = new \Think\Auth();
+			//不需要权限的rule
+			$rule_arr = C('AUTH_NOT_ACTION');
+			//当前rule
+			$rule = CONTROLLER_NAME .'/'. ACTION_NAME;
+			if(in_array($rule,$rule_arr)){
+				return true;
+			}else{
+				if(!$auth->check(CONTROLLER_NAME .'/'. ACTION_NAME,session('uid'))){
+		            $this->error('没有权限!');
+		       	}
+			}
 		}
 	}
 ?>
