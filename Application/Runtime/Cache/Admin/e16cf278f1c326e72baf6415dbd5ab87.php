@@ -62,8 +62,8 @@
                     <ul class="sub-menu">
                         <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统设置</a></li>
                         <li><a href="javascript:;" class="clearCache"><i class="icon-font">&#xe037;</i>清空缓存</a></li>
-                        <li><a href="<?php echo U('System/backup');?>"><i class="icon-font">&#xe046;</i>数据备份</a></li>
-                        <li><a href="<?php echo U('System/reduct');?>"><i class="icon-font">&#xe045;</i>数据还原</a></li>
+                        <li><a href="<?php echo U('Data/backup');?>"><i class="icon-font">&#xe046;</i>数据备份</a></li>
+                        <li><a href="<?php echo U('Data/reduct');?>"><i class="icon-font">&#xe045;</i>数据还原</a></li>
                     </ul>
                 </li>
                 <li>
@@ -78,66 +78,87 @@
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
+
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font">&#xe06b;</i><span>欢迎<?php echo (session('uname')); ?>登录，上次登录时间：<?php echo (date('Y年m月d日 H:i:s',session('logintime'))); ?>，登录IP：<?php echo (session('ip')); ?></span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/index');?>">文章管理</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/add');?>">添加文章</a></div>
         </div>
+
         <div class="result-wrap">
-            <div class="result-title">
-                <h1>快捷操作</h1>
-            </div>
             <div class="result-content">
-                <div class="short-wrap">
-                    <a href="<?php echo U('Article/add');?>"><i class="icon-font">&#xe001;</i>添加内容</a>
-                    <a href="<?php echo U('Category/add');?>"><i class="icon-font">&#xe005;</i>添加栏目</a>
-                    <a href="<?php echo U('Article/index');?>"><i class="icon-font">&#xe048;</i>内容管理</a>
-                    <a href="<?php echo U('Category/index');?>"><i class="icon-font">&#xe041;</i>栏目管理</a>
-                    <a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe01e;</i>系统设置</a>
-                </div>
-            </div>
-        </div>
-        <div class="result-wrap">
-            <div class="result-title">
-                <h1>系统基本信息</h1>
-            </div>
-            <div class="result-content">
-                <ul class="sys-info-list">
-                    <li>
-                        <label class="res-lab">操作系统：</label><span class="res-info"><?php echo ($system["name"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">运行环境：</label><span class="res-info"><?php echo ($system["hj"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">服务器上传附件限制：</label><span class="res-info "><?php echo ($system["uploadSize"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">北京时间：</label><span class="res-info" id="time"></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">服务器域名：</label><span class="res-info"><?php echo ($system["siteUrl"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">IP：</label><span class="res-info"><?php echo ($system["host"]); ?></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="result-wrap">
-            <div class="result-title">
-                <h1>使用帮助</h1>
-            </div>
-            <div class="result-content">
-                <ul class="sys-info-list">
-                    <li>
-                        <label class="res-lab">客服QQ：</label><span class="res-info">848464730</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">微信：</label><span class="res-info">848464730</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">E-mail：</label><span class="res-info">848464730@qq.com</span>
-                    </li>
-                </ul>
+               <form class="layui-form " action="<?php echo U('Article/add');?>" method="post" enctype="multipart/form-data" id="addForm">
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">栏目：</label>
+                    <div class="layui-input-block w200" >
+                      <select name="catid" lay-verify="required">
+                        <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$pid?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">标题：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="title" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">内容：</label>
+                    <div class="layui-input-block">
+                      <textarea name="content" class="layui-textarea" id="LAY_edit" style="display: none"></textarea>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">缩略图：</label>
+                    <div class="layui-input-block">
+                        <img src="" class="hide thumb-img" height="100px" width="auto">
+                        <input type="hidden" name="thumb" class="thumb-input" value="">
+                        <input type="file" id="_thumb" class="hide">
+                        <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                          <i class="layui-icon">&#xe608;</i> 文章缩略图
+                        </button>
+                        <button class="del-thumb layui-btn layui-btn-primary hide">删除</button>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">状态：</label>
+                    <div class="layui-input-block">
+                      <input type="checkbox" name="is_top" title="置顶" value="1">
+                      <input type="checkbox" name="is_rec" title="推荐" checked="" value="1">
+                      <input type="checkbox" name="is_hot" title="热门" value="1">
+                    </div>
+                  </div>
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">摘要：</label>
+                    <div class="layui-input-block w500">
+                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"></textarea>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <div class="layui-inline">
+                      <label class="layui-form-label">添加日期：</label>
+                      <div class="layui-input-block">
+                        <input type="text" name="addtime" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD'})">
+                      </div>
+                    </div>
+                    <div class="layui-inline">
+                      <label class="layui-form-label">作者：</label>
+                      <div class="layui-input-block">
+                        <input type="tel" name="author" autocomplete="off" class="layui-input">
+                      </div>
+                    </div>
+                    <div class="layui-inline">
+                      <label class="layui-form-label">别名：</label>
+                      <div class="layui-input-block">
+                        <input type="tel" name="alias" autocomplete="off" class="layui-input">
+                      </div>
+                    </div>
+                  </div>
+                  
+                   <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
+                    </div>
+                  </div>
+                </form>
             </div>
         </div>
     </div>
@@ -188,27 +209,33 @@
 		
 	});
 </script>
+
 <script type="text/javascript">
-    $(function(){
-        //获取当前时间
-        var t = null;
-        t = setTimeout(time,1000);//开始执行
-        function time()
-        {
-           clearTimeout(t);//清除定时器
-           dt = new Date();
-           var yy = dt.getYear();   
-            if(yy<1900) yy = yy+1900;   
-            var MM = dt.getMonth()+1;   
-            if(MM<10) MM = '0' + MM;   
-            var dd = dt.getDate();   
-            if(dd<10) dd = '0' + dd; 
-           var h=dt.getHours();
-           var m=dt.getMinutes();
-           var s=dt.getSeconds();
-           document.getElementById("time").innerHTML =  yy+"年"+MM+"月"+dd+"日 "+h+":"+m+":"+s;
-           t = setTimeout(time,1000); //设定定时器，循环执行             
-        } 
+    layui.use(['form', 'layedit', 'laydate'], function(){
+      var form = layui.form()
+      ,layedit = layui.layedit
+      ,laydate = layui.laydate;
+
+      //创建一个编辑器
+        layedit.set({
+          uploadImage: {
+            url: '<?php echo U("Article/editImgUpload");?>'
+          }
+        });
+
+        var editIndex = layedit.build('LAY_edit');
+
+        //文章缩略图上传
+        $('#_thumb').bind('change',function(){
+          //限制文件类型与大小
+          var options = {
+            'id'      : '#_thumb',
+            'filePath': $(this).val(),
+            'fileSize': <?php echo (C("FILE_SIZE")); ?>,
+          };
+          //调用上传方法
+          fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
+        });
     });
 </script>
 </body>

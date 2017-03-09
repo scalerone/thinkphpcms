@@ -6,10 +6,10 @@
 		public function index() {
 			$system = array();
 			$system['name'] = php_uname('s');
-			$system['hj'] = apache_get_version();
-			$system['uploadSize'] = 2;
-			$system['siteUrl'] = "localhost";
-			$system['host'] = "127.0.0.1";
+			$system['hj'] = $_SERVER["SERVER_SOFTWARE"];
+			$system['uploadSize'] = ini_get('upload_max_filesize');
+			$system['siteUrl'] = $_SERVER['SERVER_NAME'];
+			$system['host'] = gethostbyname($_SERVER['SERVER_NAME']);
 			$this -> system = $system;
 			$this -> display();
 		}

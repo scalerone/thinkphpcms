@@ -12,12 +12,7 @@
 			$siteinfo_file = CONF_PATH . 'system.config.php';
 	        if(file_exists($siteinfo_file)){
 	            if(IS_POST){
-	            	//p($_POST);die;
-	                // 写入文件，这里是关键
-	                // I() 方法获取提交的数据
-	                // var_export() 处理数组
 	                $post = I('post.');
-
 	                if(isset($post['WATE_ADD_WAY_1'])){
 	                	unset($post['WATE_ADD_WAY_1']);
 	                	if($post['WATE_ADD_WAY_2']){
@@ -27,7 +22,6 @@
 	                		$post['WATE_ADD_WAY'] = '1';
 	                	}
 	                }
-
 	                if(isset($post['WATE_ADD_WAY_2'])){
 	                	unset($post['WATE_ADD_WAY_2']);
 	                	if($post['WATE_ADD_WAY_1']){
@@ -51,6 +45,27 @@
 	        }
 		}
 
+		//数据备份
+		public function backup() {
+			if(IS_POST){
+				//备份数据库
+				$dbName = C('DB_NAME');
+				$path = $_SERVER['DOCUMENT_ROOT'] . '/Public/backup/' . time() . '.sql';
+				
+				$sql = "mysqldump -uroot -proot thinkphpcms > E:/phpstudy/WWW/thinkphpcms/Public/backup/1489047asdasd077.sql";
+				
+				exec($sql);
+				echo $sql;
+			}else{
+				$this -> display();
+			}
+			
+		}
+
+		//数据还原
+		public function reduct() {
+			$this -> display('System/backup');
+		}
 
 	}
 ?>

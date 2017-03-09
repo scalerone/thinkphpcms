@@ -78,71 +78,37 @@
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
+
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font">&#xe06b;</i><span>欢迎<?php echo (session('uname')); ?>登录，上次登录时间：<?php echo (date('Y年m月d日 H:i:s',session('logintime'))); ?>，登录IP：<?php echo (session('ip')); ?></span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a>首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">系统设置</span></div>
         </div>
+
         <div class="result-wrap">
-            <div class="result-title">
-                <h1>快捷操作</h1>
-            </div>
-            <div class="result-content">
-                <div class="short-wrap">
-                    <a href="<?php echo U('Article/add');?>"><i class="icon-font">&#xe001;</i>添加内容</a>
-                    <a href="<?php echo U('Category/add');?>"><i class="icon-font">&#xe005;</i>添加栏目</a>
-                    <a href="<?php echo U('Article/index');?>"><i class="icon-font">&#xe048;</i>内容管理</a>
-                    <a href="<?php echo U('Category/index');?>"><i class="icon-font">&#xe041;</i>栏目管理</a>
-                    <a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe01e;</i>系统设置</a>
+            <form method="post" action="<?php echo U('System/backup');?>" class="layui-form sortForm">
+                <div class="result-content" style="max-height: 600px;overflow: auto;">
+                  <div class="result-title">
+                      <div class="result-list">
+                          <div class="layui-btn-group">
+                            <a class="layui-btn">备份</a>
+                            <a class="layui-btn">还原</a>
+                            <a class="layui-btn">下载</a>
+                          </div>
+                      </div>
+                  </div>
+                  <fieldset class="layui-elem-field" style="min-height: 100px;">
+                    <div class="layui-inline">
+                      <legend>备份数据库</legend>
+                      <div class="layui-field-box">
+                          <label class="layui-form-label"><?php echo (C("DB_NAME")); ?></label>
+                          <a href="javascript:;" class="backup layui-btn layui-btn-primary">开始备份</a>
+                      </div>
+                    </div>
+                  </fieldset>
                 </div>
-            </div>
-        </div>
-        <div class="result-wrap">
-            <div class="result-title">
-                <h1>系统基本信息</h1>
-            </div>
-            <div class="result-content">
-                <ul class="sys-info-list">
-                    <li>
-                        <label class="res-lab">操作系统：</label><span class="res-info"><?php echo ($system["name"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">运行环境：</label><span class="res-info"><?php echo ($system["hj"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">服务器上传附件限制：</label><span class="res-info "><?php echo ($system["uploadSize"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">北京时间：</label><span class="res-info" id="time"></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">服务器域名：</label><span class="res-info"><?php echo ($system["siteUrl"]); ?></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">IP：</label><span class="res-info"><?php echo ($system["host"]); ?></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="result-wrap">
-            <div class="result-title">
-                <h1>使用帮助</h1>
-            </div>
-            <div class="result-content">
-                <ul class="sys-info-list">
-                    <li>
-                        <label class="res-lab">客服QQ：</label><span class="res-info">848464730</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">微信：</label><span class="res-info">848464730</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">E-mail：</label><span class="res-info">848464730@qq.com</span>
-                    </li>
-                </ul>
-            </div>
+            </form>
         </div>
     </div>
     <!--/main-->
-</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -188,28 +154,20 @@
 		
 	});
 </script>
+<script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    $(function(){
-        //获取当前时间
-        var t = null;
-        t = setTimeout(time,1000);//开始执行
-        function time()
-        {
-           clearTimeout(t);//清除定时器
-           dt = new Date();
-           var yy = dt.getYear();   
-            if(yy<1900) yy = yy+1900;   
-            var MM = dt.getMonth()+1;   
-            if(MM<10) MM = '0' + MM;   
-            var dd = dt.getDate();   
-            if(dd<10) dd = '0' + dd; 
-           var h=dt.getHours();
-           var m=dt.getMinutes();
-           var s=dt.getSeconds();
-           document.getElementById("time").innerHTML =  yy+"年"+MM+"月"+dd+"日 "+h+":"+m+":"+s;
-           t = setTimeout(time,1000); //设定定时器，循环执行             
-        } 
-    });
+    layui.use(['layer','element','form'], function(){
+        var layer = layui.layer
+        ,form = layui.form()
+        ,element = layui.element();
+
+  });
+      $('.backup').on('click',function(){
+        var url = "<?php echo U('System/backup');?>";
+          $.post(url,{'type':'1'},function(res){
+            console.log(res);
+          },'json');
+      });
 </script>
 </body>
 </html>

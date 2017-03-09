@@ -12,11 +12,11 @@
             </div>
             <div class="result-content">
                 <div class="short-wrap">
-                    <a href="#"><i class="icon-font">&#xe001;</i>添加内容</a>
-                    <a href="#"><i class="icon-font">&#xe005;</i>添加栏目</a>
-                    <a href="#"><i class="icon-font">&#xe048;</i>内容管理</a>
-                    <a href="#"><i class="icon-font">&#xe041;</i>栏目管理</a>
-                    <a href="#"><i class="icon-font">&#xe01e;</i>系统设置</a>
+                    <a href="{:U('Article/add')}"><i class="icon-font">&#xe001;</i>添加内容</a>
+                    <a href="{:U('Category/add')}"><i class="icon-font">&#xe005;</i>添加栏目</a>
+                    <a href="{:U('Article/index')}"><i class="icon-font">&#xe048;</i>内容管理</a>
+                    <a href="{:U('Category/index')}"><i class="icon-font">&#xe041;</i>栏目管理</a>
+                    <a href="{:U('System/index')}"><i class="icon-font">&#xe01e;</i>系统设置</a>
                 </div>
             </div>
         </div>
@@ -27,22 +27,22 @@
             <div class="result-content">
                 <ul class="sys-info-list">
                     <li>
-                        <label class="res-lab">操作系统</label><span class="res-info">{$system.name}</span>
+                        <label class="res-lab">操作系统：</label><span class="res-info">{$system.name}</span>
                     </li>
                     <li>
-                        <label class="res-lab">运行环境</label><span class="res-info">{$system.hj}</span>
+                        <label class="res-lab">运行环境：</label><span class="res-info">{$system.hj}</span>
                     </li>
                     <li>
-                        <label class="res-lab">上传附件限制</label><span class="res-info ">{$system.uploadSize}M</span>
+                        <label class="res-lab">服务器上传附件限制：</label><span class="res-info ">{$system.uploadSize}</span>
                     </li>
                     <li>
-                        <label class="res-lab">北京时间</label><span class="res-info" id="time"></span>
+                        <label class="res-lab">北京时间：</label><span class="res-info" id="time"></span>
                     </li>
                     <li>
-                        <label class="res-lab">服务器域名</label><span class="res-info">{$system.siteUrl}</span>
+                        <label class="res-lab">服务器域名：</label><span class="res-info">{$system.siteUrl}</span>
                     </li>
                     <li>
-                        <label class="res-lab">Host</label><span class="res-info">{$system.host}</span>
+                        <label class="res-lab">IP：</label><span class="res-info">{$system.host}</span>
                     </li>
                 </ul>
             </div>
@@ -71,7 +71,6 @@
 <include file="Public:footer" />
 <script type="text/javascript">
     $(function(){
-        
         //获取当前时间
         var t = null;
         t = setTimeout(time,1000);//开始执行

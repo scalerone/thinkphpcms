@@ -1,0 +1,54 @@
+<include file="Public:header"/>
+<div class="container clearfix">
+    <include file="Public:left"/>
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a>首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">系统设置</span></div>
+        </div>
+
+        <div class="result-wrap">
+            <form method="post" action="{:U('System/backup')}" class="layui-form sortForm">
+                <div class="result-content" style="max-height: 600px;overflow: auto;">
+                  <div class="result-title">
+                      <div class="result-list">
+                          <div class="layui-btn-group">
+                            <a class="layui-btn">备份</a>
+                            <a class="layui-btn">还原</a>
+                            <a class="layui-btn">下载</a>
+                          </div>
+                      </div>
+                  </div>
+                  <fieldset class="layui-elem-field" style="min-height: 100px;">
+                    <div class="layui-inline">
+                      <legend>备份数据库</legend>
+                      <div class="layui-field-box">
+                          <label class="layui-form-label">{$Think.config.DB_NAME}</label>
+                          <a href="javascript:;" class="backup layui-btn layui-btn-primary">开始备份</a>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/main-->
+<include file="Public:footer"/>
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['layer','element','form'], function(){
+        var layer = layui.layer
+        ,form = layui.form()
+        ,element = layui.element();
+
+  });
+      $('.backup').on('click',function(){
+        var url = "{:U('System/backup')}";
+          $.post(url,{'type':'1'},function(res){
+            console.log(res);
+          },'json');
+      });
+</script>
+</body>
+</html>
