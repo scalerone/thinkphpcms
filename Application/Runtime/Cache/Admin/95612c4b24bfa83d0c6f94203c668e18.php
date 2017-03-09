@@ -62,8 +62,8 @@
                     <ul class="sub-menu">
                         <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统设置</a></li>
                         <li><a href="javascript:;" class="clearCache"><i class="icon-font">&#xe037;</i>清空缓存</a></li>
-                        <li><a href="<?php echo U('Data/backup');?>"><i class="icon-font">&#xe046;</i>数据备份</a></li>
-                        <li><a href="<?php echo U('Data/reduct');?>"><i class="icon-font">&#xe045;</i>数据还原</a></li>
+                        <li><a href="<?php echo U('System/backup');?>"><i class="icon-font">&#xe046;</i>数据备份</a></li>
+                        <li><a href="<?php echo U('System/reduct');?>"><i class="icon-font">&#xe045;</i>数据还原</a></li>
                     </ul>
                 </li>
                 <li>
