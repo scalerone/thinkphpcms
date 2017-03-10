@@ -5,6 +5,7 @@
     <title>ThinkphpCms</title>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/fonts/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/layui/css/layui.css" media="all" />
 </head>
 <body>
@@ -33,44 +34,43 @@
         <div class="sidebar-content">
             <ul class="sidebar-list">
                 <li>
-                    <a href="javascript:;"><i class="icon-font">&#xe003;</i>内容管理</a>
+                    <a href="javascript:;"><i class="iconfont">&#xe685;</i>内容管理</a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo U('Article/index');?>"><i class="icon-font">&#xe008;</i>文章管理</a></li>
-                        <li><a href="<?php echo U('Category/index');?>"><i class="icon-font">&#xe005;</i>栏目管理</a></li>
-                        <li><a href="<?php echo U('Contact/index');?>"><i class="icon-font">&#xe006;</i>留言管理</a></li>
-                        <li><a href="<?php echo U('Comment/index');?>"><i class="icon-font">&#xe012;</i>评论管理</a></li>
-                        <li><a href="<?php echo U('Links/index');?>"><i class="icon-font">&#xe052;</i>友情链接</a></li>
-                        <li><a href="<?php echo U('Banner/index');?>"><i class="icon-font">&#xe033;</i>广告管理</a></li>
+                        <li><a href="<?php echo U('Article/index');?>"><i class="iconfont">&#xe66a;</i>文章管理</a></li>
+                        <li><a href="<?php echo U('Category/index');?>"><i class="iconfont">&#xe60d;</i>栏目管理</a></li>
+                        <li><a href="<?php echo U('Contact/index');?>"><i class="iconfont">&#xe61b;</i>留言管理</a></li>
+                        <li><a href="<?php echo U('Comment/index');?>"><i class="iconfont">&#xe621;</i>评论管理</a></li>
+                        <li><a href="<?php echo U('Links/index');?>"><i class="iconfont">&#xe636;</i>友情链接</a></li>
+                        <li><a href="<?php echo U('Banner/index');?>"><i class="iconfont">&#xe622;</i>广告管理</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="icon-font">&#xe003;</i>用户管理</a>
+                    <a href="#"><i class="iconfont">&#xe601;</i>用户管理</a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo U('Member/index');?>"><i class="icon-font">&#xe008;</i>网站会员</a></li>
-                        <li><a href="<?php echo U('Admin/index');?>"><i class="icon-font">&#xe005;</i>管理员</a></li>
-                        <li><a href="<?php echo U('Admin/group');?>"><i class="icon-font">&#xe033;</i>管理员组</a></li>
+                        <li><a href="<?php echo U('Member/index');?>"><i class="iconfont">&#xe64b;</i>网站会员</a></li>
+                        <li><a href="<?php echo U('Admin/index');?>"><i class="iconfont">&#xe7e1;</i>管理员</a></li>
+                        <li><a href="<?php echo U('Admin/group');?>"><i class="iconfont">&#xe605;</i>管理员组</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="icon-font">&#xe003;</i>权限管理</a>
+                    <a href="#"><i class="iconfont">&#xe691;</i>权限管理</a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo U('Rule/index');?>"><i class="icon-font">&#xe008;</i>权限列表</a></li>
+                        <li><a href="<?php echo U('Rule/index');?>"><i class="iconfont">&#xe644;</i>权限列表</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
+                    <a href="#"><i class="iconfont">&#xe646;</i>系统管理</a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo U('System/index');?>"><i class="icon-font">&#xe017;</i>系统设置</a></li>
-                        <li><a href="javascript:;" class="clearCache"><i class="icon-font">&#xe037;</i>清空缓存</a></li>
-                        <li><a href="<?php echo U('System/backup');?>"><i class="icon-font">&#xe046;</i>数据备份</a></li>
-                        <li><a href="<?php echo U('System/reduct');?>"><i class="icon-font">&#xe045;</i>数据还原</a></li>
+                        <li><a href="<?php echo U('System/index');?>"><i class="iconfont">&#xe78a;</i>系统设置</a></li>
+                        <li><a href="javascript:;" class="clearCache"><i class="iconfont">&#xe6fa;</i>清空缓存</a></li>
+                        <li><a href="<?php echo U('System/backup');?>"><i class="iconfont">&#xe634;</i>数据备份</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="icon-font">&#xe018;</i>扩展功能</a>
+                    <a href="#"><i class="iconfont">&#xe60e;</i>扩展功能</a>
                     <ul class="sub-menu">
-                        <li><a href="system.html"><i class="icon-font">&#xe017;</i>静态页面</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe046;</i>语言设置</a></li>
+                        <li><a href="system.html"><i class="iconfont">&#xe641;</i>静态页面</a></li>
+                        <li><a href="system.html"><i class="iconfont">&#xe64f;</i>语言设置</a></li>
                     </ul>
                 </li>
             </ul>
@@ -80,16 +80,16 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">栏目管理</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">栏目管理</span></div>
         </div>
 
         <div class="result-wrap">
             <form method="post" action="<?php echo U('Category/updateSort');?>" class="catesForm layui-form">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="<?php echo U('Category/add');?>"><i class="icon-font"></i>新增栏目</a>
-                        <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                        <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                        <a href="<?php echo U('Category/add');?>"><i class="iconfont">&#xe762;</i>新增栏目</a>
+                        <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                        <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
                     </div>
                 </div>
                 <div class="result-content" style="max-height: 850px;overflow: auto;">
@@ -135,9 +135,9 @@
                     </table>
                     <div class="result-title">
                         <div class="result-list">
-                            <a href="<?php echo U('Article/add');?>"><i class="icon-font"></i>新增栏目</a>
-                            <a class="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                            <a class="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                            <a href="<?php echo U('Article/add');?>"><i class="iconfont">&#xe762;</i>新增栏目</a>
+                            <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                            <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ use Org\Db\MySQLReback;
 class BakController extends Controller {
 
     public function index() {
-        $DataDir = "databak/";
+        $DataDir = C('DB_BACKUP_PATH');
         mkdir($DataDir);
         if (!empty($_GET['Action'])) {
             //import("Common.Org.MySQLReback");
@@ -54,7 +54,7 @@ class BakController extends Controller {
                 exit();
             }
         }
-        $lists = $this->MyScandir('databak/');
+        $lists = $this->MyScandir(C('DB_BACKUP_PATH'));
         $this->assign("datadir",$DataDir);
         $this->assign("lists", $lists);
         $this->display();

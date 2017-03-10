@@ -5,21 +5,20 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">权限管理</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="{:U('Index/index')}">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">权限管理</span></div>
         </div>
 
         <div class="result-wrap">
             <form method="post" action="" class="sortForm">
                 <div class="result-title">
                     <div class="result-list">
-                        <a class="addRule" href="javascript:;"><i class="icon-font"></i>添加权限</a>
+                        <a class="addRule" href="javascript:;"><i class="iconfont">&#xe762;</i>添加权限</a>
                     </div>
                 </div>
                 <div class="result-content" style="max-height: 600px;overflow: auto;">
                     <table class="layui-table">
                       <thead>
                         <tr>
-                            <!-- <th width="3%"><input type="checkbox"></th> -->
                             <th width="15%">名称</th>
                             <th width="25%">规则</th>
                             <th width="15%">添加时间</th>
@@ -30,7 +29,7 @@
                       <tbody>
                     <volist name="rules" id="vo">
                         <tr data-id={$vo.id} data-pid="{$vo.pid}">
-                            <!-- <td><input class="set" type="checkbox" value="{$vo.id}"></td> -->
+                            
                             <td>{$vo.html}{$vo.title}</td>
                             <td>{$vo.name}</td>
                             <td>{$vo.createtime|date='Y-m-d H:i:s',###}</td>
@@ -39,9 +38,7 @@
                             </td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <!-- <a title="添加子权限" class="layui-btn layui-btn-small {$vo['pid']==0?'':'layui-btn-disabled'} addSub" href="javascript:;" data-id="{$vo.id}">
-                                        <i class="layui-icon">&#xe654;</i>
-                                    </a> -->
+                                    
                                     <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOne" href="javascript:;" data-id="{$vo.id}">
                                         <i class="layui-icon">&#xe640;</i>
                                     </a>
@@ -53,7 +50,7 @@
                     </table>
                     <div class="result-title">
                         <div class="result-list">
-                            <a class="addRule" href="#"><i class="icon-font"></i>添加权限</a>
+                            <a class="addRule" href="#"><i class="iconfont">&#xe762;</i>添加权限</a>
                         </div>
                     </div>
                 </div>

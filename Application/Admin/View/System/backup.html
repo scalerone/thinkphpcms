@@ -5,32 +5,67 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a>首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">系统设置</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a>首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">系统设置</span></div>
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="{:U('System/backup')}" class="layui-form sortForm">
-                <div class="result-content" style="max-height: 600px;overflow: auto;">
-                  <div class="result-title">
-                      <div class="result-list">
-                          <div class="layui-btn-group">
-                            <a class="layui-btn">备份</a>
-                            <a class="layui-btn">还原</a>
-                            <a class="layui-btn">下载</a>
-                          </div>
+            <div class="result-content" style="max-height: 600px;overflow: auto;">
+              <div class="result-title">
+                  <div class="result-list">
+                      <div class="layui-btn-group">
+                        <a class="layui-btn back" href="javascript:;">立即备份</a>
                       </div>
                   </div>
-                  <fieldset class="layui-elem-field" style="min-height: 100px;">
-                    <div class="layui-inline">
-                      <legend>备份数据库</legend>
-                      <div class="layui-field-box">
-                          <label class="layui-form-label">{$Think.config.DB_NAME}</label>
-                          <a href="javascript:;" class="backup layui-btn layui-btn-primary">开始备份</a>
-                      </div>
-                    </div>
-                  </fieldset>
+              </div>
+              <fieldset class="layui-elem-field" style="min-height: 100px;">
+                <div class="layui-inline">
+                  <div class="layui-field-box">
+                      <table class="layui-table" lay-even="" lay-skin="row">
+                        <thead>
+                          <tr>
+                            <th width="6%">序号</th>
+                            <th>文件名</th>
+                            <th width="15%">备份时间</th>
+                            <th>文件大小</th>
+                            <th width="20%">操作</th>
+                          </tr>
+                        </head>
+                        <tbody>
+                            <notempty name="lists">
+                                <foreach name="lists" key="key" item="row">
+                                    <if condition="$key gt 1">
+                                        <tr>
+                                            <td>{$key-1}</td>
+                                            <td style="text-align: left"><a href="{:U('System/backup',array('action'=>'download','file'=>$row))}">{$row}</a></td>
+                                            <td>{$row|getfiletime=$datadir}</td>
+                                            <td>{$row|getfilesize=$datadir}</td>
+                                            <td>
+                                              <div class="layui-btn-group">
+                                                <a title="下载" href="{:U('System/backup',array('action'=>'download','file'=>$row))}" class="layui-btn">
+                                                  <i class="layui-icon">&#xe601;</i>
+                                                </a>
+                                                <a title="还原" data-file="{$row}" href="javascript:;" class="layui-btn rl">
+                                                  <i class="iconfont">&#xe634;</i>
+                                                </a>
+                                                <a title="删除" data-file="{$row}" href="javascript:;" class="layui-btn layui-btn-danger del">
+                                                  <i class="layui-icon">&#xe640;</i>
+                                                </a>
+                                              </div>
+                                            </td>
+                                        </tr>
+                                    </if>
+                                </foreach>
+                                <else/>
+                                <tr>
+                                    <td colspan="7">没有找到相关数据。</td>
+                                </tr>
+                            </notempty>
+                        </tbody>
+                    </table>
+                  </div>
                 </div>
-            </form>
+              </fieldset>
+            </div>
         </div>
     </div>
     <!--/main-->
@@ -43,11 +78,57 @@
         ,element = layui.element();
 
   });
-      $('.backup').on('click',function(){
-        var url = "{:U('System/backup')}";
-          $.post(url,{'type':'1'},function(res){
-            console.log(res);
+      $('.rl').on('click',function(){
+          var url = "{:U('System/backup')}";
+          var file = $(this).data('file');
+          layer.confirm('是否还原该数据库文件!', {icon: 3, title:'提示'}, function(index){
+            
+            $.get(url,{'action':'RL','file':file},function(res){
+              if(res.status == 1){
+                layer.msg('还原成功!',{icon:1});
+                 window.setTimeout(function(){
+                  window.location.href = url;
+                },1500);
+              }else{
+                layer.msg('还原出错!',{icon:2});
+              }
+            },'json');
+            layer.close(index);
+          });
+          
+      });
+      $('.back').on('click',function(){
+          var url = "{:U('System/backup')}";
+          $.get(url,{'action':'backup'},function(res){
+            if(res.status == 1){
+              layer.msg('备份成功!',{icon:1});
+              window.setTimeout(function(){
+                window.location.href = url;
+              },1500);
+            }else{
+              layer.msg('备份出错!',{icon:2});
+            }
           },'json');
+          layer.close(index);
+          
+      });
+      $('.del').on('click',function(){
+          var url = "{:U('System/backup')}";
+          var file = $(this).data('file');
+          layer.confirm('是否删除该数据库文件!', {icon: 3, title:'提示'}, function(index){
+            $.get(url,{'action':'Del','file':file},function(res){
+              if(res.status == 1){
+                layer.msg('删除成功!',{icon:1});
+                 window.setTimeout(function(){
+                  window.location.href = url;
+                },1500);
+              }else{
+                layer.msg('删除失败!',{icon:2});
+              }
+            },'json');
+            layer.close(index);
+          });
+         
       });
 </script>
 </body>
