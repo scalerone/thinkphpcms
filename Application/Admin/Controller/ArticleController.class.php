@@ -144,7 +144,7 @@
 				$res = $upload->getError();
 			}else{// 上传成功 获取上传文件信息 
 				$res['status'] = '1';
-				$res['src'] = './Uploads/' . $info['savepath'].$info['savename'];
+				$res['src'] = '/Uploads/' . $info['savepath'].$info['savename'];
 			}
 			$this -> ajaxReturn($res);
 		}
@@ -167,7 +167,7 @@
 						'code' => '0',
 						'msg'  => $upload->getError(),
 						"data" => array(
-								"src" => './Uploads/' . $info['savepath'].$info['savename'],
+								"src" => '/Uploads/' . $info['savepath'].$info['savename'],
     							"title" => $info['savename'],
 							)
 					);

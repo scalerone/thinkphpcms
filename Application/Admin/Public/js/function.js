@@ -55,7 +55,9 @@ function fileUpload(opt,id,url){
       // 告诉jQuery不要去设置Content-Type请求头
       contentType : false,
       beforeSend:function(){
-        $(_defaulf.id).nextAll('.upload-btn').html('<i class="layui-icon">&#xe608;</i>正在上传...');
+        $(_defaulf.id).nextAll('.upload-btn')
+        .html('<i class="layui-icon">&#xe608;</i>正在上传...')
+        .attr('disabled','disabled');
       },
       success : function(msg) {
         var $thumb_img = $(_defaulf.id).prevAll('.thumb-img');
@@ -68,7 +70,7 @@ function fileUpload(opt,id,url){
           $thumb_img.attr('src',msg.src).removeClass('hide').show();
           $thumb_input.val(msg.src);
           $(_defaulf.id).val('');
-          $upload_btn.html('<i class="layui-icon">&#xe608;</i>上传').addClass('layui-btn-disabled');
+          $upload_btn.html('<i class="layui-icon">&#xe608;</i>上传').addClass('layui-btn-disabled').attr('disabled','disabled');
           $del_thumb.removeClass('hide').show();
         }else{
           $upload_btn.html('<i class="layui-icon">&#xe608;</i>上传' + msg.info);
@@ -86,7 +88,7 @@ function fileUpload(opt,id,url){
       $(this).prevAll('.thumb-input').val('');
       $(this).prevAll('input[type=file]').val('');
       $(this).hide();
-      $(this).prevAll('.upload-btn').removeClass('layui-btn-disabled');
+      $(this).prevAll('.upload-btn').removeClass('layui-btn-disabled').removeClass('hide').show();
       return false;
     });
     //栏目和文章全选反选

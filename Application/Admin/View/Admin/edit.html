@@ -31,8 +31,8 @@
                                 <th></th>
                                 <td>
                                     <input type="hidden" name="id" value="{$admin.id}">
-                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
-                                    <input class="btn btn6" value="重置" type="reset">
+                                    <input class="layui-btn mr10" value="提交" type="submit">
+                                    <input class="layui-btn layui-btn-primary" value="重置" type="reset">
                                 </td>
                             </tr>
                         </tbody>
@@ -71,11 +71,15 @@
                 data:$('#editForm').serialize(),
                 dataType: 'json',
                 success:function(result){
-                    layer.msg(result.msg);
+                    if(result.status == 1){
+                        layer.msg(result.msg,{icon:1});
+                    }else{
+                        layer.msg(result.msg,{icon:2});
+                    }
                     return false;
                 },
                 error:function(result){
-                    layer.msg('修改失败!');
+                    layer.msg('网络错误!',{icon:2});
                 }
             });
             $('#uname').attr('disabled','disabled');

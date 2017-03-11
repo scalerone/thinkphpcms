@@ -83,40 +83,40 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">权限管理</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">会员管理</span></div>
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="" class="sortForm">
+            <form method="post" action="" class="sortForm layui-form">
                 <div class="result-title">
                     <div class="result-list">
-                        <a class="addRule" href="javascript:;"><i class="iconfont">&#xe762;</i>添加权限</a>
+                        <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加会员</a>
                     </div>
                 </div>
-                <div class="result-content" style="max-height: 600px;overflow: auto;">
+                <div class="result-content" style="max-height: 850px;overflow: auto;">
                     <table class="layui-table">
                       <thead>
                         <tr>
-                            <th width="15%">名称</th>
-                            <th width="25%">规则</th>
-                            <th width="15%">添加时间</th>
-                            <th width="10%">状态</th>
-                            <th width="10%">操作</th>
+                            <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
+                            <th width="10%">用户名</th>
+                            <th>邮箱</th>
+                            <th width="14%">操作</th>
                         </tr>
                       </thead>
                       <tbody>
-                    <?php if(is_array($rules)): $i = 0; $__LIST__ = $rules;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?> data-pid="<?php echo ($vo["pid"]); ?>">
-                            
-                            <td><?php echo ($vo["html"]); echo ($vo["title"]); ?></td>
-                            <td><?php echo ($vo["name"]); ?></td>
-                            <td><?php echo (date('Y-m-d H:i:s',$vo["createtime"])); ?></td>
-                            <td class="layui-form">
-                              <input type="checkbox" value="<?php echo ($vo["status"]); ?>" name="status" lay-filter="status" lay-skin="switch" lay-text="开启|关闭"<?php echo ($vo['status']=='1'?'checked="checked"':''); ?>>
+                    <?php if(is_array($members)): $i = 0; $__LIST__ = $members;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
+                            <td><input class="set" type="checkbox" value="<?php echo ($vo["id"]); ?>" lay-skin="primary"></td>
+                            <td><?php echo ($vo["name"]); ?>
+                                <?php if($vo["avatar"] != '' ): ?><i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="<?php echo ($vo["avatar"]); ?>">&#xe64a;</i>
+                                <?php else: endif; ?>
                             </td>
+                            <td><?php echo ($vo["email"]); ?></td>
                             <td>
                                 <div class="layui-btn-group">
-                                    
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOne" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="<?php echo U('Member/edit',array('id'=>$vo['id']));?>">
+                                        <i class="layui-icon">&#xe642;</i>
+                                    </a>
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
                                         <i class="layui-icon">&#xe640;</i>
                                     </a>
                                 </div>
@@ -126,7 +126,7 @@
                     </table>
                     <div class="result-title">
                         <div class="result-list">
-                            <a class="addRule" href="#"><i class="iconfont">&#xe762;</i>添加权限</a>
+                            <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加会员</a>
                         </div>
                     </div>
                 </div>
@@ -135,41 +135,50 @@
     </div>
     <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
         <form class="layui-form" action="">
-
           <div class="layui-form-item">
-            <label class="layui-form-label ">上级权限</label>
-            <div class="layui-input-inline ">
-              <select name="pid" lay-verify="required">
-                <option value="0">==顶级权限==</option>
-                <?php if(is_array($topRule)): $i = 0; $__LIST__ = $topRule;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$top): $mod = ($i % 2 );++$i;?><option value="<?php echo ($top["id"]); ?>"><?php echo ($top["title"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
-              </select>
+            <label class="layui-form-label wid_auto">用户名</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="name" required  lay-verify="required" placeholder="请输入标用户名" autocomplete="off" class="layui-input">
             </div>
           </div>
 
           <div class="layui-form-item">
-            <label class="layui-form-label ">名称</label>
-            <div class="layui-input-inline ">
-              <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            <label class="layui-form-label wid_auto">密码</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="pass" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
             </div>
           </div>
 
           <div class="layui-form-item">
-            <label class="layui-form-label ">规则</label>
-            <div class="layui-input-inline ">
-              <input type="text" name="name" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            <label class="layui-form-label wid_auto">邮箱</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="email" required  lay-verify="" placeholder="" autocomplete="off" class="layui-input">
             </div>
           </div>
 
           <div class="layui-form-item">
-            <label class="layui-form-label ">状态</label>
-            <div class="layui-input-inline ">
-                <input type="checkbox" lay-text="启动|关闭" value="1" name="status" lay-skin="switch" checked="checked">
+            <label class="layui-form-label wid_auto">头像</label>
+            <div class="layui-input-block margin-left80">
+                <img src="" class="hide thumb-img" height="80px" width="auto">
+                <input type="hidden" name="avatar" class="thumb-input" value="">
+                <input type="file" id="_thumb" class="hide">
+                <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                  <i class="layui-icon">&#xe608;</i> 上传头像
+                </button>
+                <button class="del-thumb layui-btn layui-btn-primary hide">删除</button>
+            </div>
+          </div>
+
+          <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label wid_auto">简介</label>
+            <div class="layui-input-block margin-left80">
+              <textarea name="intro" placeholder="请输入内容" class="layui-textarea"></textarea>
             </div>
           </div>
 
           <div class="layui-form-item">
             <div class="layui-input-block">
-              <button class="layui-btn" lay-submit lay-filter="formDemo" >立即添加</button>
+              <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>
             </div>
           </div>
         </form>
@@ -231,36 +240,19 @@ layui.use('element', function(){
         var layer = layui.layer
         ,form = layui.form();
 
-        //监听开关时间
-        form.on('switch(status)', function(data){
-          var id = $(data.elem).parents('tr').data('id');
-          var status = 0;
-          var url = "<?php echo U('Rule/updateStatus');?>";
-          if(data.elem.checked){
-            status = 1;
-          }
-          $.ajax({
-              url: url,
-              type: 'post',
-              dataType: 'json',
-              data: {'id': id,'status':status},
-              success: function(res){
-                if(res.status == 1){
-                  layer.msg(res.msg,{icon:1});
-                }else{
-                  layer.msg(res.msg,{icon:2});
-                }
-              },
-              error: function(res){
-                layer.msg('出现错误!',{icon:2});
-              }
-            });
-        });  
+        //全选
+        form.on('checkbox(allChoose)', function(data){
+          var child = $(data.elem).parents('table').find('tbody .set');
+          child.each(function(index, item){
+            item.checked = data.elem.checked;
+          });
+          form.render('checkbox');
+        });
 
         //监听提交
         form.on('submit(formDemo)', function(data){
           $.ajax({
-            url: '<?php echo U("Rule/add");?>',
+            url: '<?php echo U("Member/add");?>',
             type: 'post',
             dataType: 'json',
             data: $(data.form).serialize(),
@@ -268,7 +260,7 @@ layui.use('element', function(){
               if(res.status == 1){
                 layer.alert(res.msg,{icon:1});   
                 window.setTimeout(function(){
-                  window.location.href = "<?php echo U('Rule/index');?>";
+                  window.location.href = "<?php echo U('Member/index');?>";
                 },1500);
               }else{
                 layer.alert(res.msg,{icon:2}); 
@@ -282,53 +274,40 @@ layui.use('element', function(){
         });
 });
 
+    //文章缩略图上传
+    $('#_thumb').bind('change',function(){
+      //限制文件类型与大小
+      var options = {
+        'filePath': $(this).val()
+      };
+      //调用上传方法
+      fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
+    });
 
-    //删除
+    //删除单个
     $(function(){
-        $('.delOne').on('click',function(){
-                var $trEle = $(this).parents('tr');//当前的tr节点
-                var url = "<?php echo U('Rule/del');?>";//提交删除的地址
+        $('.delOneLink').on('click',function(){
+                $trEle = $(this).parents('tr');//当前的tr节点
+                var url = "<?php echo U('Member/del');?>";//提交删除的地址
                 var eleId = $trEle.data('id');//当前的id
-
-                var $trs = $('.result-content table tbody tr');//获取所有的栏目所在的tr节点
-                var $deltrs = getChildsById($trs,eleId);//获取当前栏目的子栏目所在tr节点
-                console.log($deltrs);
-                debugger;
-                //递归获取当前栏目的所有子栏目的节点数组
-                /**
-                 * [getChildsById description]
-                 * @param  {[array]} trs [tr节点数组]
-                 * @param  {[int]} pid [tr节点父栏目ID]
-                 * @return {[array]}     [重组后的array]
-                 */
-                function getChildsById(trs,pid) {
-                    var arr = [],length = trs.length;
-
-                    for (var i = 0; i < length; i++) {
-                        if($(trs[i]).data('pid') == pid){
-                            arr.push(trs[i]);
-                            arr = arr.concat(getChildsById(trs,$(trs[i]).data('id')));
-                        }
-                    }
-                    return arr;
-                }
                 //提示
-                layer.confirm('确定要删除该权限吗？', {icon: 3, title:'提示'}, function(index){
-                ajaxDeleteElems(eleId,url,'post',$deltrs,$trEle);
+                layer.confirm('确定要删除该用户？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(eleId,url,'post',$trEle);
             });
         });
     });
-    //添加权限
-    $('.addRule').click(function(){
+    //添加会员
+    $('.addMember').click(function(){
         layer.open({
           type: 1,
-          title: '添加权限',
+          title: '添加会员',
           closeBtn: 1,
-          area: ['380px', 'auto'],
+          area: ['460px', 'auto'],
           shadeClose: true,
           content: $('#addWrap'),
         });
     });
+
 </script>
 </body>
 </html>

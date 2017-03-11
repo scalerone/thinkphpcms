@@ -37,13 +37,13 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">头像：</label>
                     <div class="layui-input-block">
-                        <img src="{$member.avatar}" class="{$member['avatar']==''?'hide':''}" id="thumb-img" height="100px" width="auto">
-                        <input type="hidden" name="avatar" id="thumb-input" value="{$member.avatar}">
+                        <img src="{$member.avatar}" class="{$member['avatar']==''?'hide thumb-img':'thumb-img'}" height="100px" width="auto">
+                        <input type="hidden" name="avatar" class="thumb-input" value="{$member.avatar}">
                         <input type="file" name="_thumb" id="_thumb" class="hide">
                         <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
                           <i class="layui-icon">&#xe608;</i> 添加头像
                         </button>
-                        <button id="del-thumb" class="layui-btn layui-btn-primary {$member['avatar']==''?'hide':''}">删除</button>
+                        <button class="del-thumb layui-btn layui-btn-primary {$member['avatar']==''?'hide':''}">删除</button>
                     </div>
                   </div>
                   

@@ -83,64 +83,91 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a>首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">系统设置</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/index');?>">文章管理</a><span class="crumb-step">&gt;</span><a class="crumb-name">修改文章</a></div>
         </div>
 
         <div class="result-wrap">
-            <div class="result-content" style="max-height: 600px;overflow: auto;">
-              <div class="result-title">
-                  <div class="result-list">
-                      <div class="layui-btn-group">
-                        <a class="layui-btn back" href="javascript:;">立即备份</a>
+            <div class="result-content">
+               <form class="layui-form " action="<?php echo U('Article/edit');?>" method="post" enctype="multipart/form-data" id="addForm">
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">栏目：</label>
+                    <div class="layui-input-block w200" >
+                      <select name="catid" lay-verify="required">
+                        <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$article['catid']?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">标题：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="<?php echo ($article["title"]); ?>">
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">内容：</label>
+                    <div class="layui-input-block">
+                      <textarea name="content" class="layui-textarea" id="LAY_edit" style="display: none"><?php echo ($article["content"]); ?></textarea>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">缩略图：</label>
+                    <div class="layui-input-block">
+                        <img src="<?php echo ($article["thumb"]); ?>" <?php echo ($article['thumb']==''?'class="thumb-img hide"':'class="thumb-img"'); ?> height="100px" width="auto">
+                        <input type="hidden" name="thumb" class="thumb-input" value="<?php echo ($article["thumb"]); ?>">
+                        <input type="file" name="_thumb" id="_thumb" class="hide">
+                        <button class="layui-btn upload-btn <?php echo ($article['thumb']==''?'':'hide'); ?>" onclick="_thumb.click();return false;">
+                          <i class="layui-icon">&#xe608;</i> 文章缩略图
+                        </button>
+                        <button class="del-thumb layui-btn layui-btn-primary <?php echo ($article['thumb']==''?'hide':''); ?>">删除</button>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">状态：</label>
+                    <div class="layui-input-block">
+                      <input type="checkbox" name="is_top" title="置顶" value="1" <?php echo ($article['is_top']=='1'?'checked=""':''); ?>>
+                      <input type="checkbox" name="is_rec" title="推荐" <?php echo ($article['is_rec']=='1'?'checked=""':''); ?> value="1">
+                      <input type="checkbox" name="is_hot" title="热门" value="1" <?php echo ($article['is_hot']=='1'?'checked=""':''); ?>>
+                    </div>
+                  </div>
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">摘要：</label>
+                    <div class="layui-input-block w500">
+                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"><?php echo ($article["summary"]); ?></textarea>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <div class="layui-inline">
+                      <label class="layui-form-label">添加日期：</label>
+                      <div class="layui-input-block">
+                        <input type="text" name="addtime" value="<?php echo (date('Y-m-d',$article["addtime"])); ?>" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD'})">
                       </div>
+                    </div>
+                    <div class="layui-inline">
+                      <label class="layui-form-label">作者：</label>
+                      <div class="layui-input-block">
+                        <input type="tel" value="<?php echo ($article["author"]); ?>" name="author" autocomplete="off" class="layui-input">
+                      </div>
+                    </div>
+                    <div class="layui-inline">
+                      <label class="layui-form-label">别名：</label>
+                      <div class="layui-input-block">
+                        <input type="tel" name="alias" value="<?php echo ($article["alias"]); ?>" autocomplete="off" class="layui-input">
+                      </div>
+                    </div>
                   </div>
-              </div>
-              <fieldset class="layui-elem-field" style="min-height: 100px;">
-                <div class="layui-inline">
-                  <div class="layui-field-box">
-                      <table class="layui-table" lay-even="" lay-skin="row">
-                        <thead>
-                          <tr>
-                            <th width="6%">序号</th>
-                            <th>文件名</th>
-                            <th width="15%">备份时间</th>
-                            <th>文件大小</th>
-                            <th width="20%">操作</th>
-                          </tr>
-                        </head>
-                        <tbody>
-                            <?php if(!empty($lists)): if(is_array($lists)): foreach($lists as $key=>$row): if($key > 1): ?><tr>
-                                            <td><?php echo ($key-1); ?></td>
-                                            <td style="text-align: left"><a href="<?php echo U('System/backup',array('action'=>'download','file'=>$row));?>"><?php echo ($row); ?></a></td>
-                                            <td><?php echo (getfiletime($row,$datadir)); ?></td>
-                                            <td><?php echo (getfilesize($row,$datadir)); ?></td>
-                                            <td>
-                                              <div class="layui-btn-group">
-                                                <a title="下载" href="<?php echo U('System/backup',array('action'=>'download','file'=>$row));?>" class="layui-btn">
-                                                  <i class="layui-icon">&#xe601;</i>
-                                                </a>
-                                                <a title="还原" data-file="<?php echo ($row); ?>" href="javascript:;" class="layui-btn rl">
-                                                  <i class="iconfont">&#xe634;</i>
-                                                </a>
-                                                <a title="删除" data-file="<?php echo ($row); ?>" href="javascript:;" class="layui-btn layui-btn-danger del">
-                                                  <i class="layui-icon">&#xe640;</i>
-                                                </a>
-                                              </div>
-                                            </td>
-                                        </tr><?php endif; endforeach; endif; ?>
-                                <?php else: ?>
-                                <tr>
-                                    <td colspan="7">没有找到相关数据。</td>
-                                </tr><?php endif; ?>
-                        </tbody>
-                    </table>
+                  
+                   <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <input type="hidden" name="id" value="<?php echo ($article["id"]); ?>">
+                      <button type="submit" class="layui-btn submit" lay-submit="" >修改</button>
+                    </div>
                   </div>
-                </div>
-              </fieldset>
+                </form>
             </div>
         </div>
     </div>
     <!--/main-->
+</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -191,65 +218,32 @@ layui.use('element', function(){
   var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
 });
 </script>
-<script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
-<script type="text/javascript">
-    layui.use(['layer','form'], function(){
-        var layer = layui.layer
-        ,form = layui.form();
 
-  });
-      $('.rl').on('click',function(){
-          var url = "<?php echo U('System/backup');?>";
-          var file = $(this).data('file');
-          layer.confirm('是否还原该数据库文件!', {icon: 3, title:'提示'}, function(index){
-            
-            $.get(url,{'action':'RL','file':file},function(res){
-              if(res.status == 1){
-                layer.msg('还原成功!',{icon:1});
-                 window.setTimeout(function(){
-                  window.location.href = url;
-                },1500);
-              }else{
-                layer.msg('还原出错!',{icon:2});
-              }
-            },'json');
-            layer.close(index);
-          });
-          
-      });
-      $('.back').on('click',function(){
-          var url = "<?php echo U('System/backup');?>";
-          $.get(url,{'action':'backup'},function(res){
-            if(res.status == 1){
-              layer.msg('备份成功!',{icon:1});
-              window.setTimeout(function(){
-                window.location.href = url;
-              },1500);
-            }else{
-              layer.msg('备份出错!',{icon:2});
-            }
-          },'json');
-          layer.close(index);
-          
-      });
-      $('.del').on('click',function(){
-          var url = "<?php echo U('System/backup');?>";
-          var file = $(this).data('file');
-          layer.confirm('是否删除该数据库文件!', {icon: 3, title:'提示'}, function(index){
-            $.get(url,{'action':'Del','file':file},function(res){
-              if(res.status == 1){
-                layer.msg('删除成功!',{icon:1});
-                 window.setTimeout(function(){
-                  window.location.href = url;
-                },1500);
-              }else{
-                layer.msg('删除失败!',{icon:2});
-              }
-            },'json');
-            layer.close(index);
-          });
-         
-      });
+<script type="text/javascript">
+    layui.use(['form', 'layedit', 'laydate'], function(){
+      var form = layui.form()
+      ,layedit = layui.layedit
+      ,laydate = layui.laydate;
+
+      //创建一个编辑器
+        layedit.set({
+          uploadImage: {
+            url: '<?php echo U("Article/editImgUpload");?>'
+          }
+        });
+
+        var editIndex = layedit.build('LAY_edit');
+
+        //文章缩略图上传
+        $('#_thumb').bind('change',function(){
+          //限制文件类型与大小
+          var options = {
+            'filePath': $(this).val()
+          };
+          //调用上传方法
+          fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
+        });
+    });
 </script>
 </body>
 </html>

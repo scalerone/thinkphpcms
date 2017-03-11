@@ -25,11 +25,11 @@
                         <label for="pwd">验证码：</label>
                     </li>
                     <li>
-                       <div class="codebox"><input type="text" name="code" value="" id="code" size="8" class="admin_input_style" />
+                       <div class="codebox"><input type="text" name="code" value="" id="code" size="4" class="admin_input_style" maxlength="4" />
                         <img title="点击图片更换验证码" class="verify" src="<?php echo U('verify');?>" width="138px"></div>
                     </li>
                     <li>
-                        <input type="submit" tabindex="3" value="登录" class="layui-btn" />
+                        <input type="submit" value="登录" class="layui-btn" />
                     </li>
                 </ul>
             </form>
@@ -41,30 +41,28 @@
 <script type="text/javascript">
     $(function(){
         $('.verify').on('click',function(){
-            var url = "<?php echo U('verify');?>";
-            $(this)[0].src= url + "&r=" + Math.random();
+            var url = "<?php echo U('Login/verify');?>";
+            $(this)[0].src= url;
         });
         //登录
         $('input[type=submit]').click(function(){
             if($('#username').val().trim() == ""){
-                layer.tips('用户名不能为空哦!', '#username');
+                layer.tips('用户名不能为空哦!', '#username',{tips: [4, '#FF5722']});
                 $('#username').focus();
                 return false;
             }
             if($('#pwd').val().trim() == ""){
-                layer.tips('你还没有输入密码呢!', '#pwd');
+                layer.tips('你还没有输入密码呢!', '#pwd',{tips: [4, '#FF5722']});
                 $('#pwd').focus();
                 return false;
             }
             if($('#code').val().trim() == ""){
-                layer.tips('你还没有输入验证码呢!', '#code');
+                layer.tips('你还没有输入验证码呢!', '#code',{tips: [4, '#FF5722']});
                 $('#code').focus();
                 return false;
             }
             if($('#code').val().trim().length != 4){
-               layer.tips('验证码长度为4!', '#code',{
-                    tips: [4]
-               }); 
+               layer.tips('验证码长度为4!', '#code',{tips: [4, '#FF5722']}); 
                $('#code').focus();
                return false;
             }
@@ -76,23 +74,22 @@
                 success:function(result){
                     var status = result.status;
                     if(status == 1){
-                        layer.msg(result.msg);
+                        layer.msg(result.msg,{icon:2});
                         $('#code').val('').focus();
                         $('.verify').trigger('click');
                     }else if(status == 2){
-                        layer.msg(result.msg);
+                        layer.msg(result.msg,{icon:2});
                     }else if(status == 3){
-                        layer.msg(result.msg);
-                        $('#username').val('').focus();
+                        layer.msg(result.msg,{icon:2});
+                        $('#username').focus();
                         $('.verify').trigger('click');
-                    }else{
-                        layer.msg(result.msg);
+                    }else if(status == 0){
+                        layer.msg(result.msg,{icon:1});
                         setTimeout('window.location.href = "<?php echo U('Index/index');?>";',1000);
-                        
                     }
                 },
                 error:function(result){
-                    layer.msg('登入失败!');
+                    layer.msg('登入失败,网络错误!');
                 }
             });
             return false;

@@ -83,64 +83,67 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a>首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">系统设置</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name">链接管理</a><span class="crumb-step">&gt;</span><a class="crumb-name">修改链接</a></div>
         </div>
 
         <div class="result-wrap">
-            <div class="result-content" style="max-height: 600px;overflow: auto;">
-              <div class="result-title">
-                  <div class="result-list">
-                      <div class="layui-btn-group">
-                        <a class="layui-btn back" href="javascript:;">立即备份</a>
-                      </div>
+            <div class="result-content">
+               <form class="layui-form" action="<?php echo U('Links/edit');?>" method="post" enctype="multipart/form-data" id="addForm">
+                  
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">链接名称：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="title" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="<?php echo ($link["title"]); ?>">
+                    </div>
                   </div>
-              </div>
-              <fieldset class="layui-elem-field" style="min-height: 100px;">
-                <div class="layui-inline">
-                  <div class="layui-field-box">
-                      <table class="layui-table" lay-even="" lay-skin="row">
-                        <thead>
-                          <tr>
-                            <th width="6%">序号</th>
-                            <th>文件名</th>
-                            <th width="15%">备份时间</th>
-                            <th>文件大小</th>
-                            <th width="20%">操作</th>
-                          </tr>
-                        </head>
-                        <tbody>
-                            <?php if(!empty($lists)): if(is_array($lists)): foreach($lists as $key=>$row): if($key > 1): ?><tr>
-                                            <td><?php echo ($key-1); ?></td>
-                                            <td style="text-align: left"><a href="<?php echo U('System/backup',array('action'=>'download','file'=>$row));?>"><?php echo ($row); ?></a></td>
-                                            <td><?php echo (getfiletime($row,$datadir)); ?></td>
-                                            <td><?php echo (getfilesize($row,$datadir)); ?></td>
-                                            <td>
-                                              <div class="layui-btn-group">
-                                                <a title="下载" href="<?php echo U('System/backup',array('action'=>'download','file'=>$row));?>" class="layui-btn">
-                                                  <i class="layui-icon">&#xe601;</i>
-                                                </a>
-                                                <a title="还原" data-file="<?php echo ($row); ?>" href="javascript:;" class="layui-btn rl">
-                                                  <i class="iconfont">&#xe634;</i>
-                                                </a>
-                                                <a title="删除" data-file="<?php echo ($row); ?>" href="javascript:;" class="layui-btn layui-btn-danger del">
-                                                  <i class="layui-icon">&#xe640;</i>
-                                                </a>
-                                              </div>
-                                            </td>
-                                        </tr><?php endif; endforeach; endif; ?>
-                                <?php else: ?>
-                                <tr>
-                                    <td colspan="7">没有找到相关数据。</td>
-                                </tr><?php endif; ?>
-                        </tbody>
-                    </table>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">链接地址：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="url" required  lay-verify="required|url" placeholder="http://www.baidu.com" autocomplete="off" class="layui-input" value="<?php echo ($link["url"]); ?>">
+                    </div>
                   </div>
-                </div>
-              </fieldset>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">排序：</label>
+                    <div class="layui-input-block w200">
+                      <input type="text" name="sort" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="<?php echo ($link["sort"]); ?>">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">缩略图：</label>
+                    <div class="layui-input-block">
+                        <img src="<?php echo ($link["thumb"]); ?>" class="<?php echo ($link['thumb']==''?'thumb-img hide':'thumb-img'); ?>" height="100px" width="auto">
+                        <input type="hidden" name="thumb" class="thumb-input" value="<?php echo ($link["thumb"]); ?>">
+                        <input type="file" name="_thumb" id="_thumb" class="hide">
+                       <button class="layui-btn upload-btn <?php echo ($link['thumb']==''?'':'hide'); ?>" onclick="_thumb.click();return false;">
+                          <i class="layui-icon">&#xe608;</i> 文章缩略图
+                        </button>
+                        <button class="del-thumb layui-btn layui-btn-primary <?php echo ($link['thumb']==''?'hide':''); ?>">删除</button>
+                    </div>
+                  </div>
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">描述：</label>
+                    <div class="layui-input-block w500">
+                      <textarea name="desc" placeholder="链接描述..." class="layui-textarea"><?php echo ($link["desc"]); ?></textarea>
+                    </div>
+                  </div>
+                  
+                   <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <input type="hidden" name="id" value="<?php echo ($link["id"]); ?>">
+                      <button type="submit" class="layui-btn submit" lay-submit="" >修改</button>
+                      <a href="javascript:window.history.go(-1);" class="layui-btn layui-btn-warm" >返回</a>
+                      <a href="<?php echo U('Links/index');?>" class="layui-btn" >查看链接</a>
+                    </div>
+                  </div>
+                </form>
             </div>
         </div>
     </div>
     <!--/main-->
+</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -191,65 +194,49 @@ layui.use('element', function(){
   var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
 });
 </script>
-<script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['layer','form'], function(){
-        var layer = layui.layer
-        ,form = layui.form();
+    layui.use(['form'], function(){
+      var form = layui.form();
 
-  });
-      $('.rl').on('click',function(){
-          var url = "<?php echo U('System/backup');?>";
-          var file = $(this).data('file');
-          layer.confirm('是否还原该数据库文件!', {icon: 3, title:'提示'}, function(index){
-            
-            $.get(url,{'action':'RL','file':file},function(res){
+        //文章缩略图上传
+        $('#_thumb').bind('change',function(){
+          //限制文件类型与大小
+          var options = {
+            'filePath': $(this).val()
+          };
+          //调用上传方法
+          fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
+        });
+    });
+    //ajax修改友情链接
+    $(function(){
+      $('.submit').on('click',function(){
+        var url = '<?php echo U("Links/edit");?>';
+        ajaxAddLinks(url);
+        function ajaxAddLinks(url){
+          $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'json',
+            data: $('#addForm').serialize(),
+            success:function(res){
               if(res.status == 1){
-                layer.msg('还原成功!',{icon:1});
-                 window.setTimeout(function(){
-                  window.location.href = url;
+                layer.msg(res.msg,{icon:1});
+                window.setTimeout(function(){
+                  window.location.href = "<?php echo U('Links/index');?>";
                 },1500);
               }else{
-                layer.msg('还原出错!',{icon:2});
+                layer.msg(res.msg,{icon:2});
               }
-            },'json');
-            layer.close(index);
-          });
-          
-      });
-      $('.back').on('click',function(){
-          var url = "<?php echo U('System/backup');?>";
-          $.get(url,{'action':'backup'},function(res){
-            if(res.status == 1){
-              layer.msg('备份成功!',{icon:1});
-              window.setTimeout(function(){
-                window.location.href = url;
-              },1500);
-            }else{
-              layer.msg('备份出错!',{icon:2});
+            },
+            error:function(res){
+              layer.msg('出现错误！',{icon:2});
             }
-          },'json');
-          layer.close(index);
-          
+          })
+        }
+        return false;
       });
-      $('.del').on('click',function(){
-          var url = "<?php echo U('System/backup');?>";
-          var file = $(this).data('file');
-          layer.confirm('是否删除该数据库文件!', {icon: 3, title:'提示'}, function(index){
-            $.get(url,{'action':'Del','file':file},function(res){
-              if(res.status == 1){
-                layer.msg('删除成功!',{icon:1});
-                 window.setTimeout(function(){
-                  window.location.href = url;
-                },1500);
-              }else{
-                layer.msg('删除失败!',{icon:2});
-              }
-            },'json');
-            layer.close(index);
-          });
-         
-      });
+    });
 </script>
 </body>
 </html>

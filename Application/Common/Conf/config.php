@@ -16,6 +16,9 @@ return array(
 
     'LOAD_EXT_CONFIG'		=>	'system.config',//加载站点信息配置文件
 
+    'URL_MODEL'             =>  1,
+    'URL_HTML_SUFFIX'       =>  'html',  // URL伪静态后缀设置
+
     //权限认证
     'AUTH_CONFIG'=>array(
         'AUTH_ON' => true, //认证开关

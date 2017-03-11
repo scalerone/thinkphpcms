@@ -76,6 +76,7 @@
 				'rootPath'	=>	'./Uploads/', 
 				'file'		=>	'file',
 				'autoSub'	=>  true,
+				'outPath'	=>	'/Uploads/'
 			);
 
 		$_config = array_merge($_config,$config);
@@ -97,7 +98,7 @@
 			$res['status'] = '0';
 		}else{// 上传成功 获取上传文件信息 
 			$res['status'] = '1';
-			$res['src'] = $_config['rootPath'] . $info['savepath'].$info['savename'];
+			$res['src'] = $_config['outPath'] . $info['savepath'].$info['savename'];
 		}
 
 		return $res;

@@ -2,8 +2,8 @@
 return array (
   'SITE_NAME' => 'thinkphpcms',
   'SITE_URL' => 'http://www.thinkphpcms.com',
-  'SITE_LOGO' => './Uploads/System/Logo/58bf9f06606a4.gif',
-  'SITE_ICO' => './Uploads/System/Ico/58bf9f08d13e1.ico',
+  'SITE_LOGO' => '/Uploads/System/Logo/58bf9f06606a4.gif',
+  'SITE_ICO' => '/Uploads/System/Ico/58bf9f08d13e1.ico',
   'SITE_TELPHONE' => '0795-49856133',
   'SITE_PHONE' => '15013721945',
   'SITE_FAX' => '4548521032',

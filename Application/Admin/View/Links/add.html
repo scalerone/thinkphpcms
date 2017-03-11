@@ -36,13 +36,13 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">缩略图：</label>
                     <div class="layui-input-block">
-                        <img src="" class="hide" id="thumb-img" height="100px" width="auto">
-                        <input type="hidden" name="thumb" id="thumb-input" value="">
+                        <img src="" class="hide thumb-img" height="100px" width="auto">
+                        <input type="hidden" name="thumb" class="thumb-input" value="">
                         <input type="file" name="_thumb" id="_thumb" class="hide">
                         <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
                           <i class="layui-icon">&#xe608;</i> 链接缩略图
                         </button>
-                        <button id="del-thumb" class="layui-btn layui-btn-primary hide">删除</button>
+                        <button class="del-thumb layui-btn layui-btn-primary hide">删除</button>
                     </div>
                   </div>
                   <div class="layui-form-item layui-form-text">

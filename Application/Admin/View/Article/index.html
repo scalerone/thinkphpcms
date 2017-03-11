@@ -38,6 +38,7 @@
                         <a id="updateSortArticle" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
                         <div class="inline-block removebox">
                             <select style="height:28px;" name="catid" class="common-text selectCatid">
+                                <option value="0">==选择栏目==</option>
                                 <volist name="categories" id="c">
                                   <option value="{$c.id}" {($c['id']==$pid || $c['id']==$post['catid'])?'selected="selected"':''}>{$c.html}{$c.catname}</option>
                                 </volist>
@@ -131,6 +132,10 @@
         //ids = ids.join(',');
         //获取移动到的栏目的ID
         var $catid = $('.selectCatid').val();
+        if($catid == 0){
+            layer.alert('请选中移动到的栏目!', {icon: 2});
+            return;
+        }
         var url = '{:U("Article/remove")}';
         var redirectUrl = '{:U("Article/index")}';
         removeArticle(ids,url,$catid,redirectUrl);
