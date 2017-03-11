@@ -5,7 +5,7 @@
 	class RuleController extends CommonController {
 		public function index() {
 			$model = M('auth_rule');
-			$rules = $model -> order('sort ASC')->select();
+			$rules = $model -> order('id ASC')->select();
 			$this -> topRule = $model ->field('id,title')->where('pid=0')->select();
 			$this -> rules = reorgnCates($rules);
 			$this -> display();
@@ -29,7 +29,7 @@
 			if(IS_POST){
 				$id = I('post.id');
 				$result = M('auth_rule')->where("id=%d or pid='%d'",array($id,$id))-> delete();
-				if($result != false){
+				if($result !== false){
 					$this -> ajaxReturn(array('status'=>1,'msg'=>'删除成功!'));
 				}else{
 					$this -> ajaxReturn(array('status'=>0,'msg'=>'删除失败!'));
@@ -44,7 +44,7 @@
 				->where(array('id'=>I('post.id')))
 				->setField('status',I('post.status'));
 
-				if($result != false){
+				if($result !== false){
 					$this -> ajaxReturn(array('status'=>1,'msg'=>'更新成功!'));
 				}else{
 					$this -> ajaxReturn(array('status'=>0,'msg'=>'更新失败!'));

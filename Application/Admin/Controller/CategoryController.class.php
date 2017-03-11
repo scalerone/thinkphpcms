@@ -51,7 +51,8 @@
 					$post['status'] = 2;
 				}
 				$result = M('Category') -> save($post);
-				if($result != false){
+				//p($result);die;
+				if($result !== false){
 					$this -> ajaxReturn(array('status'=>'1','msg'=>'修改成功!'));
 				}else{
 					$this -> ajaxReturn(array('status'=>'0','msg'=>'修改失败!'));
@@ -79,7 +80,7 @@
 		//更新栏目状态
 		public function updateStatus() {
 			$result = M('Category') -> save(I('get.'));
-			if($result != false){
+			if($result !== false){
 				$this -> ajaxReturn(array('status'=>1,'msg'=>'操作成功!'));
 			}else{
 				$this -> ajaxReturn(array('status'=>0,'msg'=>'操作失败!'));

@@ -28,9 +28,9 @@
 </div>
 <div class="container clearfix">
     <div class="sidebar-wrap">
-        <div class="sidebar-title">
+        <!-- <div class="sidebar-title">
             <h1>菜单</h1>
-        </div>
+        </div> -->
         <div class="sidebar-content">
             <ul class="layui-nav layui-nav-tree wid_auto" lay-filter="demo">
                 <li class="layui-nav-item layui-nav-itemed">
@@ -100,7 +100,7 @@
                       <thead>
                         <tr>
                             <th width="3%"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
-                            <th width="5%">排序</th>
+                            <th width="6%">排序</th>
                             <th>名称</th>
                             <th width="8%" align="center">栏目类型</th>
                             <th width="6%">状态</th>

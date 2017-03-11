@@ -1,0 +1,119 @@
+@charset "utf-8";
+.login{
+	width: 100%;
+	height: 600px;
+	background: url('../images/login_bg.jpg')  50% 0 no-repeat;
+	background-size: 100% 675px;
+	padding-top: 75px;
+}
+.login.register{
+	height: 865px;
+	background: url('../images/login_bg.jpg')  50% 0 repeat-y;
+	background-size: 100% 940px;
+}
+.login .login_bar{
+	width: 780px;
+	margin: 0px auto;
+	background-color: #fff;
+}
+.login .login_bar .title{
+	color: #93308d;
+	padding: 30px 0px;
+	text-align: center;
+}
+.login .login_bar .title>h2{
+	font-size: 24px;
+	font-weight: 100;
+}
+.login .login_bar .title>span{
+	font-size: 12px;
+}
+.login .login_bar .inputs label{
+	font-size: 18px;
+}
+.login .login_bar .inputs{
+	padding-left: 135px;
+}
+.login .login_bar .inputs .redpass{
+	padding-left: 75px;
+}
+.login .login_bar .inputs .birthday{
+	position: relative;
+}
+#birth{
+	width: 220px;
+}
+.icon-birth:after{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	background-position: -193px 0px;
+	top: 8px;
+    left: 265px;
+    z-index: 9;
+    cursor: pointer;
+}
+.login .login_bar .inputs .redpass input[type=checkbox]{
+	vertical-align: middle;
+	margin: 0px;
+	width: 15px;
+}
+.middle{
+	vertical-align: middle;
+}
+.color-error{
+	color: #e62828;
+}
+.login .login_bar .submit{
+	text-align: center;
+	padding-top: 45px;
+}
+.login .login_bar .submit .login_btn{
+	display: inline-block;
+	color: #fff;
+	background-color: #93308d;
+	padding: 0px 100px;
+	line-height: 40px;
+	height: 40px;
+	border-color: #93308d;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+}
+.login .login_bar .submit .register{
+	padding: 25px 0;
+}
+.login .login_bar .inputs input[type=password],
+.login .login_bar .inputs input[type=text]{
+	line-height: 40px;
+	height: 40px;
+	width: 418px;
+	border: 1px solid #ccc;
+	text-indent: 10px;
+	border-radius: 3px;
+}
+.login .login_bar .inputs input.code{
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	width: 120px;
+}
+.login .login_bar .inputs .code_img{
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+.login .login_bar .inputs .error{
+	line-height: 40px;
+	height: 40px;
+	padding-left: 80px;
+	color: #e62828;
+}
+.login .login_bar .inputs .error i.icon-error:after{
+	background-position: -178px 0px;
+	width: 16px;
+	height: 16px;
+	vertical-align: text-bottom;
+}

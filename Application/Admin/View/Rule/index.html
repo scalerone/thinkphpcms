@@ -19,6 +19,7 @@
                     <table class="layui-table">
                       <thead>
                         <tr>
+                            <th width="5%">ID</th>
                             <th width="15%">名称</th>
                             <th width="25%">规则</th>
                             <th width="15%">添加时间</th>
@@ -29,7 +30,7 @@
                       <tbody>
                     <volist name="rules" id="vo">
                         <tr data-id={$vo.id} data-pid="{$vo.pid}">
-                            
+                            <td>{$vo.id}</td>
                             <td>{$vo.html}{$vo.title}</td>
                             <td>{$vo.name}</td>
                             <td>{$vo.createtime|date='Y-m-d H:i:s',###}</td>

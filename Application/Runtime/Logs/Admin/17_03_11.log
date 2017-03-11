@@ -351,3 +351,334 @@ ERR: 非法操作:verify.html&r=0.9559470154126508
 [ 2017-03-11T14:59:37+08:00 ] 127.0.0.1 /index.php/Admin/Login/verify.html&r=0.7603739649313221
 ERR: 非法操作:verify.html&r=0.7603739649313221
 
+[ 2017-03-11T15:09:21+08:00 ] 127.0.0.1 /index.php/Admin/Login/index.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0060s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'admin' AND `password` = 'e00cf25ad42683b3df678c61f42c6bda' LIMIT 1   [ RunTime:0.0010s ]
+SQL: UPDATE `cms_admin` SET `username`='admin',`password`='e00cf25ad42683b3df678c61f42c6bda',`email`='',`lastlogintime`='1489216161',`lastloginip`='127.0.0.1',`status`='1' WHERE `id` = 1 [ RunTime:0.0000s ]
+
+[ 2017-03-11T15:09:55+08:00 ] 127.0.0.1 /index.php/Admin/Contact/index.html
+ERR: 无法加载控制器:Contact
+
+[ 2017-03-11T15:10:56+08:00 ] 127.0.0.1 /index.php/Admin/Article/del.html?id=67
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_article` [ RunTime:0.0060s ]
+SQL: DELETE FROM `cms_article` WHERE `id` = 67 [ RunTime:0.0670s ]
+
+[ 2017-03-11T15:14:58+08:00 ] 127.0.0.1 /index.php/Admin/Rule/updateStatus.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_auth_rule` SET `status`='0' WHERE `id` = 1 [ RunTime:0.0000s ]
+
+[ 2017-03-11T15:15:01+08:00 ] 127.0.0.1 /index.php/Admin/Rule/updateStatus.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_auth_rule` [ RunTime:0.0060s ]
+SQL: UPDATE `cms_auth_rule` SET `status`='1' WHERE `id` = 1 [ RunTime:0.0000s ]
+
+[ 2017-03-11T15:37:02+08:00 ] 127.0.0.1 /index.php/Admin/Index/logout.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-03-11T15:37:14+08:00 ] 127.0.0.1 /index.php/Admin/Login/index.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0210s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'admin' AND `password` = '21232f297a57a5a743894a0e4a801fc3' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2017-03-11T15:37:21+08:00 ] 127.0.0.1 /index.php/Admin/Login/index.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0060s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'admin' AND `password` = 'e00cf25ad42683b3df678c61f42c6bda' LIMIT 1   [ RunTime:0.0000s ]
+SQL: UPDATE `cms_admin` SET `username`='admin',`password`='e00cf25ad42683b3df678c61f42c6bda',`email`='',`lastlogintime`='1489217841',`lastloginip`='127.0.0.1',`status`='1' WHERE `id` = 1 [ RunTime:0.0000s ]
+
+[ 2017-03-11T15:37:38+08:00 ] 127.0.0.1 /index.php/Admin/Category/del.html?id=2
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: SELECT `id`,`pid` FROM `cms_category`  [ RunTime:0.0000s ]
+SQL: DELETE FROM `cms_category` WHERE `id` = 2 [ RunTime:0.0010s ]
+
+[ 2017-03-11T15:37:42+08:00 ] 127.0.0.1 /index.php/Admin/Category/del.html?id=46
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: SELECT `id`,`pid` FROM `cms_category`  [ RunTime:0.0000s ]
+SQL: DELETE FROM `cms_category` WHERE `id` = 47 [ RunTime:0.0000s ]
+SQL: DELETE FROM `cms_category` WHERE `id` = 46 [ RunTime:0.0000s ]
+
+[ 2017-03-11T15:37:46+08:00 ] 127.0.0.1 /index.php/Admin/Category/del.html?id=48
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: SELECT `id`,`pid` FROM `cms_category`  [ RunTime:0.0000s ]
+SQL: DELETE FROM `cms_category` WHERE `id` = 48 [ RunTime:0.0010s ]
+
+[ 2017-03-11T15:37:49+08:00 ] 127.0.0.1 /index.php/Admin/Category/del.html?id=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: SELECT `id`,`pid` FROM `cms_category`  [ RunTime:0.0010s ]
+SQL: DELETE FROM `cms_category` WHERE `id` = 1 [ RunTime:0.0000s ]
+
+[ 2017-03-11T15:46:20+08:00 ] 127.0.0.1 /index.php/Admin/Article/system.html
+ERR: 非法操作:system
+
+[ 2017-03-11T15:46:22+08:00 ] 127.0.0.1 /index.php/Admin/Comment/index.html
+ERR: 无法加载控制器:Comment
+
+[ 2017-03-11T15:51:36+08:00 ] 127.0.0.1 /index.php/Admin/Login/index.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0090s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'admin' AND `password` = '21232f297a57a5a743894a0e4a801fc3' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2017-03-11T15:51:38+08:00 ] 127.0.0.1 /index.php/Admin/Login/index.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0080s ]
+
+[ 2017-03-11T15:51:45+08:00 ] 127.0.0.1 /index.php/Admin/Login/index.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0080s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'admin' AND `password` = 'e00cf25ad42683b3df678c61f42c6bda' LIMIT 1   [ RunTime:0.0010s ]
+SQL: UPDATE `cms_admin` SET `username`='admin',`password`='e00cf25ad42683b3df678c61f42c6bda',`email`='',`lastlogintime`='1489218705',`lastloginip`='127.0.0.1',`status`='1' WHERE `id` = 1 [ RunTime:0.0010s ]
+
+[ 2017-03-11T16:11:04+08:00 ] 127.0.0.1 /index.php/Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\phpstudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-03-11T16:13:24+08:00 ] 127.0.0.1 /index.php/Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\phpstudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-03-11T16:14:03+08:00 ] 127.0.0.1 /index.php/Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\phpstudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-03-11T16:14:25+08:00 ] 127.0.0.1 /index.php/Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\phpstudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-03-11T16:14:38+08:00 ] 127.0.0.1 /index.php/Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\phpstudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-03-11T16:15:26+08:00 ] 127.0.0.1 /index.php/Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\phpstudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-03-11T16:16:23+08:00 ] 127.0.0.1 /index.php/Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\phpstudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-03-11T16:16:26+08:00 ] 127.0.0.1 /index.php/Admin/Category/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`content`,`url`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('0','关于我们','2','','','/Uploads/2017-03-11/58c3b257a466f.jpg','1','','','1489220186') [ RunTime:0.0260s ]
+
+[ 2017-03-11T16:19:22+08:00 ] 127.0.0.1 /index.php/Admin/Category/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-03-11T16:19:49+08:00 ] 127.0.0.1 /index.php/Admin/Category/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`content`,`url`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('0','asd','2','asdasd','','','1','','','1489220389') [ RunTime:0.0200s ]
+
+[ 2017-03-11T16:26:05+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='',`content`='asdasd',`url`='',`status`='1',`summary`='',`alias`='' WHERE `id` = 55 [ RunTime:0.0010s ]
+
+[ 2017-03-11T16:26:25+08:00 ] 127.0.0.1 /index.php/Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\phpstudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-03-11T16:26:28+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4b1ec888.jpg',`content`='asdasd',`url`='',`status`='1',`summary`='',`alias`='' WHERE `id` = 55 [ RunTime:0.0010s ]
+
+[ 2017-03-11T16:26:39+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='',`content`='asdasd',`url`='',`status`='1',`summary`='',`alias`='' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-11T16:27:32+08:00 ] 127.0.0.1 /index.php/Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\phpstudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-03-11T16:27:38+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-03-11T16:27:51+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='asdasd',`url`='',`status`='1',`summary`='',`alias`='' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-11T16:28:03+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-03-11T16:28:35+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-03-11T16:28:44+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-03-11T16:28:58+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='asdasd',`url`='',`status`='1',`summary`='',`alias`='' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-11T16:29:07+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='asdasd',`url`='',`status`='1',`summary`='',`alias`='' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-11T16:29:31+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0060s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='asdasd',`url`='',`status`='1',`summary`='',`alias`='' WHERE `id` = 55 [ RunTime:0.0010s ]
+
+[ 2017-03-11T16:29:54+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='asdasd',`url`='',`status`='1',`summary`='',`alias`='' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-11T16:30:17+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='asdasd',`url`='',`status`='1',`summary`='',`alias`='' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-11T16:30:23+08:00 ] 127.0.0.1 /index.php/Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='asdasd',`url`='',`status`='1',`summary`='',`alias`='' WHERE `id` = 55 [ RunTime:0.0010s ]
+
+[ 2017-03-11T16:32:38+08:00 ] 127.0.0.1 /index.php/Admin/Category/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`content`,`url`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('0','创客教育','2','assd','','','1','','','1489221158') [ RunTime:0.0010s ]
+
+[ 2017-03-11T16:32:58+08:00 ] 127.0.0.1 /index.php/Admin/Category/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0090s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`content`,`url`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('0','新闻资讯','1','','','','1','','','1489221178') [ RunTime:0.0010s ]
+
+[ 2017-03-11T16:33:17+08:00 ] 127.0.0.1 /index.php/Admin/Category/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0080s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`content`,`url`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('0','下载中心','1','','','','1','','','1489221197') [ RunTime:0.0010s ]
+
+[ 2017-03-11T16:33:39+08:00 ] 127.0.0.1 /index.php/Admin/Category/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0080s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`content`,`url`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('0','服务支持','2','111','','','1','','','1489221219') [ RunTime:0.0010s ]
+
+[ 2017-03-11T16:34:01+08:00 ] 127.0.0.1 /index.php/Admin/Category/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0090s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`content`,`url`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('0','成功案例','1','','','','1','','','1489221241') [ RunTime:0.0010s ]
+
+[ 2017-03-11T16:36:20+08:00 ] 127.0.0.1 /index.php/Admin/Category/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0090s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`content`,`url`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('0','在线留言','1','','','','1','','','1489221380') [ RunTime:0.0010s ]
+

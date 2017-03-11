@@ -40,14 +40,29 @@
                     <label class="layui-form-label">缩略图：</label>
                     <div class="layui-input-block">
                       <img src="{$cate['thumb']}" class="{$cate['thumb']==''?'hide':''} thumb-img" height="100px" width="auto">
-                        <input type="hidden" name="thumb" class="thumb-input" value="">
+                        <input type="hidden" name="thumb" class="thumb-input" value="{$cate['thumb']}">
                         <input type="file" id="_thumb" class="hide">
-                        <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                        <button class="layui-btn upload-btn {$cate['thumb']==''?'':'hide'}" onclick="_thumb.click();return false;">
                           <i class="layui-icon">&#xe608;</i> 栏目缩略图
                         </button>
                         <button class="del-thumb layui-btn layui-btn-primary {$cate['thumb']==''?'hide':''}">删除</button>
                     </div>
                   </div>
+
+                  <div class="layui-form-item {$cate['type']==2?'':'hide'} content">
+                    <label class="layui-form-label ">内容：</label>
+                    <div class="layui-input-block">
+                      <textarea name="content" class="layui-textarea" id="content_edit" style="display: none">{$cate.content}</textarea>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item {$cate['type']==3?'':'hide'} link">
+                    <label class="layui-form-label ">链接地址：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="url" placeholder="请输入地址" autocomplete="off" class="layui-input" value="{$cate.url}">
+                    </div>
+                  </div>
+
                   <div class="layui-form-item">
                     <label class="layui-form-label">状态：</label>
                     <div class="layui-input-block">
@@ -98,9 +113,32 @@
           //调用上传方法
           fileUpload(options,'#_thumb','{:U("Article/upload")}');
         });
+
+        form.on('radio(default)', function(data){
+          if(data.elem.checked){
+            $('.content,.link').hide();
+          }
+        });
+
+        form.on('radio(singer)', function(data){
+          if(data.elem.checked){
+            $('.content').removeClass('hide').show();
+            $('.link').hide();
+          }
+        });
+
+        form.on('radio(link)', function(data){
+          if(data.elem.checked){
+            $('.link').removeClass('hide').show();
+            $('.content').hide();
+          }
+        });
+
+        var content_edit = layedit.build('content_edit'); //建立编辑器
         
         //添加栏目
         $('.submit').on('click',function(){
+          layedit.sync(content_edit);
           $.ajax({
             url: '{:U("Category/edit")}',
             type: 'POST',

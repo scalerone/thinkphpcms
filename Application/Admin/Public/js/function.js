@@ -88,7 +88,7 @@ function fileUpload(opt,id,url){
       $(this).prevAll('.thumb-input').val('');
       $(this).prevAll('input[type=file]').val('');
       $(this).hide();
-      $(this).prevAll('.upload-btn').removeClass('layui-btn-disabled').removeClass('hide').show();
+      $(this).prevAll('.upload-btn').removeClass('layui-btn-disabled').removeClass('hide').removeAttr('disabled').show();
       return false;
     });
     //栏目和文章全选反选

@@ -27,7 +27,7 @@
 		public function del() {
 			if(IS_POST){
 				$result = M('Links') -> delete(I('post.id'));
-				if($result != false){
+				if($result !== false){
 					$this -> ajaxReturn(array('status'=>1,'msg'=>'删除成功!'));
 				}else{
 					$this -> ajaxReturn(array('status'=>0,'msg'=>'删除失败!'));
@@ -39,7 +39,7 @@
 		public function edit() {
 			if(IS_POST){
 				$result = M('Links') -> save(I('post.'));
-				if($result != false){
+				if($result !== false){
 					$this -> ajaxReturn(array('status'=>1,'msg'=>'修改成功!'));
 				}else{
 					$this -> ajaxReturn(array('status'=>0,'msg'=>'修改失败!'));

@@ -65,7 +65,7 @@
 		//删除管理员并删除关联表信息
 		public function del() {
 			$result = D('AdminRelation')->relation(true)->delete(I('post.id'));
-			if($result != false){
+			if($result !== false){
 				$this -> ajaxReturn(array('status'=>1,'msg'=>'删除成功!'));
 			}else{
 				$this -> ajaxReturn(array('status'=>0,'msg'=>'删除失败!'));
@@ -115,7 +115,7 @@
 					$result = M('auth_group')
 					->where(array('id'=>I('post.group_id')))
 					->setField('rules',$post);
-					if($result != false){
+					if($result !== false){
 						$this -> ajaxReturn(array('status'=>0,'msg'=>'设置权限成功！'));
 					}else{
 						$this -> ajaxReturn(array('status'=>1,'msg'=>'设置权限失败！'));

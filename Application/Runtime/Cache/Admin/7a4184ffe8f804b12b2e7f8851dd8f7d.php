@@ -129,7 +129,6 @@
                             <th width="5%">排序</th>
                             <th>标题</th>
                             <th width="6%">点击</th>
-                            <th width="10%">发布人</th>
                             <th width="15%">添加时间</th>
                             <th width="12%">状态</th>
                             <th width="12%">操作</th>
@@ -144,7 +143,6 @@
                                 <?php else: endif; ?>
                                 </td>
                                 <td><?php echo ($a["hits"]); ?></td>
-                                <td><?php echo ($a["author"]); ?></td>
                                 <td><?php echo (date("Y-m-d h:m:s",$a["addtime"])); ?></td>
                                 <td>
                                     <?php echo ($a['is_rec']==1?'<span class="text-info">推荐</span>':''); ?>

@@ -63,7 +63,7 @@
 				}
 				$post['addtime'] = strtotime(I('post.addtime'));
 				$result = M('Article')->save($post);
-				if($result != false){
+				if($result !== false){
 					$this -> success('修改成功!',U('Article/index'));
 				}else{
 					$this -> error('修改失败!');

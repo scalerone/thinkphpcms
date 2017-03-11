@@ -27,7 +27,7 @@
  		public function del() {
  			if(IS_POST){
  				$result = M('Member') -> delete(I('post.id'));
- 				if($result != false){
+ 				if($result !== false){
  					$this -> ajaxReturn(array('status'=>1,'msg'=>'删除成功！'));
  				}else{
 					$this -> ajaxReturn(array('status'=>0,'msg'=>'删除失败！'));
@@ -39,7 +39,7 @@
  		public function edit() {
  			if(IS_POST){
  				$result = M('Member') -> save(I('post.'));
- 				if($result != false){
+ 				if($result !== false){
  					$this -> success('修改成功!',U('Member/index'));
  				}else{
  					$this -> error('修改失败!');

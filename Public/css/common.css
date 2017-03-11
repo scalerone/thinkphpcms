@@ -1,0 +1,131 @@
+@charset "utf-8";
+html,body,p,nav,img,ul,hgroup,h2,h3,h1,i,h4,dl,dt,dd,table,tbody,thead,th,tr,td{
+	margin: 0;
+	padding: 0;
+}
+body{
+	font-family: "microsoft yahei" , arial;
+	font-size: 13px;
+	color: #333;
+	background-color: #fff;
+}
+h2,h3,h1,h4,h5,h6{
+	color: inherit;
+	font-size: inherit;
+}
+input,textarea{color: inherit; font-size: inherit;font-family: inherit;background-color:inherit;}
+a{text-decoration: none;color: #333;}
+
+ul,li{list-style: none;}
+img{display: block;border: 0;}
+.clear {
+	*zoom: 1;
+}
+.clear:after {
+	display: block;
+	overflow: hidden;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+	content: " ";
+}
+.display-inline{
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+}
+.float_l{
+	float: left !important;
+}
+.float_r{
+	float: right !important;
+}
+.hide{
+	display: none;
+}
+.show{
+	display: block;
+}
+.pd10{
+	margin: 15px 0px;
+}
+.ml20{
+	margin-left: 25px;
+}
+.container{
+	width: 1100px;
+	min-height: 1px;
+	margin: 0 auto;
+}
+.list.down>.container>ul>li .down_btn a:hover,
+.zuopin .list>ul>li>a:hover,
+.list>.container>ul>li .text>h2>a:hover,
+.case .list>ul>li>a:hover{
+	color: #93308d;
+}
+/*分页s*/
+.pages {
+	width: 100%;
+	padding: 30px 0;
+	text-align: center;
+	margin-bottom: 60px;
+}
+.pages.plu{
+	text-align: left;
+}
+.pages span,
+.pages a{
+	color: #333;
+	font-size: 16px;
+}
+.pages>p>span,
+.pages>p>a {
+	padding: 4px 10px;
+	border: 1px solid #e1e2e3;
+}
+.pages.plu>p>a{
+	padding: 5px 20px;
+	border-radius: 3px;
+	border-color: #93308d;
+}
+.pages>p>span,
+.pages>p>a:hover {
+	background-color: #93308d;
+	color: #fff;
+	border-color: #93308d;
+}
+/*分页e*/
+input{
+	border: 0;
+	background-color: #fff;
+	outline: none;
+	color: #333;
+	text-indent: 6px;
+	line-height: 26px;
+	height: 26px;
+}
+.list>.container>ul>li .img>a>img,
+.wrap .left_wrap .nav>nav>ul>li>a,
+.wrap>.container>ul>li>.img>a>img,
+header .loginbaar a{
+	-webkit-transition: all .8s ease;
+	-moz-transition: all .8s ease;
+	-o-transition: all .8s ease;
+	-ms-transition: all .8s ease;
+	transition: all .8s ease;
+}
+.icon-download:after,
+.icon-birth:after,
+.login .login_bar .inputs .error i.icon-error:after,
+footer .about .icon-botton:after,
+.position p i.icon-home:after,
+header .user .icon-dowm:after,
+header .user .icon-user:after{
+	content: " ";
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	vertical-align: middle;
+	background-image: url(../images/icon.png);
+	background-repeat: no-repeat;
+}

@@ -97,6 +97,7 @@
                     <table class="layui-table">
                       <thead>
                         <tr>
+                            <th width="5%">ID</th>
                             <th width="15%">名称</th>
                             <th width="25%">规则</th>
                             <th width="15%">添加时间</th>
@@ -106,7 +107,7 @@
                       </thead>
                       <tbody>
                     <?php if(is_array($rules)): $i = 0; $__LIST__ = $rules;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?> data-pid="<?php echo ($vo["pid"]); ?>">
-                            
+                            <td><?php echo ($vo["id"]); ?></td>
                             <td><?php echo ($vo["html"]); echo ($vo["title"]); ?></td>
                             <td><?php echo ($vo["name"]); ?></td>
                             <td><?php echo (date('Y-m-d H:i:s',$vo["createtime"])); ?></td>
