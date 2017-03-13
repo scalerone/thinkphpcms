@@ -1,0 +1,55 @@
+<footer>
+	<div class="container clear">
+		<div class="stu float_l">
+			<h2 class="h2">
+				<getCate catid="57">
+					<a href="{$url}">{$catname}</a>
+				</getCate>
+			</h2>
+			<category catid="57" length="3" order="sort ASC">
+				<p><a href="{$url}">{$catname}</a></p>
+			</category>
+		</div>
+		<div class="contact float_l">
+			<h2 class="h2">
+				<getCate catid="62">
+					<a href="{$url}">{$catname}</a>
+				</getCate>
+			</h2>
+			<p>热线：{$Think.config.SITE_TELPHONE}</p>
+			<p>邮箱：{$Think.config.SITE_EMAIL}</p>
+			<p>地址: {$Think.config.SITE_ADDRESS}</p>
+		</div>
+		<div class="about float_l">
+			<h2 class="h2">
+				<getCate catid="55">
+					{$catname}
+				</getCate>
+			</h2>
+			<p class="i">
+				<a href="">
+					<i class="icon-botton icon-qq"></i>
+				</a>
+				<a href="">
+					<i class="icon-botton icon-weixin"></i>
+				</a>
+				<a href="">
+					<i class="icon-botton icon-sina"></i>
+				</a>
+				<a href="">
+					<i class="icon-botton icon-face"></i>
+				</a>
+			</p>
+			<p>{$Think.config.SITE_CR}</p>
+		</div>
+		<div class="qcode float_r">
+			<img src="__PUBLIC__/images/code.jpg">
+			<p>扫一扫，关注我们！</p>
+		</div>
+	</div>
+</footer>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.min.js" ></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.flexslider-min.js" ></script>
+<script type="text/javascript" src="__PUBLIC__/js/index.js" ></script>
+</body>
+</html>

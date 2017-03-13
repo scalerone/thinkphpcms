@@ -2,9 +2,9 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>创客教育-首页</title>
-		<meta name="keywords" content="">
-		<meta name="description" content="">
+		<title><?php echo (C("SITE_TITLE")); ?></title>
+		<meta name="keywords" content="<?php echo (C("SITE_KEYWORDS")); ?>">
+		<meta name="description" content="<?php echo (C("SITE_DESCRIPTION")); ?>">
 		<link rel="stylesheet" href="/Public/css/common.css" />
 		<link rel="stylesheet" href="/Public/css/header.css" />
 		<link rel="stylesheet" href="/Public/css/page.css" />
@@ -18,21 +18,15 @@
 		<header>
 			<div class="container clear">
 				<div class="logo float_l">
-					<a href="">
-						<img alt="" src="/Public/images/logo.jpg" width="150px" height="115px" />
+					<a href="/">
+						<img alt="<?php echo (C("SITE_TITLE")); ?>" src="<?php echo (C("SITE_LOGO")); ?>" width="150px" height="115px" />
 					</a>
 				</div>	
 				<div class="nav float_l">
 					<nav>
 						<ul>
-							<li class="active"><a href="">首页</a></li>
-							<li><a href="">关于我们</a></li>
-							<li><a href="">创客教育</a></li>
-							<li><a href="">新闻资讯</a></li>
-							<li><a href="">下载中心</a></li>
-							<li><a href="">服务与支持</a></li>
-							<li><a href="">成功案例 </a></li>
-							<li><a href="">联系我们</a></li>
+							<li class="active"><a href="/">首页</a></li>
+							<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,0);$cates=array_slice($cates,0,20);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></li><?php endforeach;endif; ?>
 						</ul>
 					</nav>
 				</div>
@@ -102,56 +96,30 @@ bridge Blog、METALAB、Techshop等，国内知名创客空间有新车间、创
 		</div>
 		<div class="row-sl">
 			<div class="desc">
-				<h2>创客课程思路 </h2>
-				<p>以培养学习者，特别是青少年学习者的创客素养为导向的教育模式。它包含正式学习，也包含贯穿学习者一生的非正式学习。</p>
+			<?php
+ $cate = M('category')->where("status=1")->find(intval(71)); extract($cate); $url = U('/cate/'.$id); ?><h2><?php echo ($catname); ?></h2>
+				<p><?php echo ($summary); ?></p>
 			</div>
 			<div class="nav">
 				<ul>
-					<li>
+				<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,71);$cates=array_slice($cates,0,3);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li class="<?php echo ($index==3?'last':''); ?>">
 						<div>
 							<div class="img">
-								<img src="/Public/images/thumb1.png" width="120px" height="120px" alt="">
+								<img src="<?php echo ($thumb); ?>" width="120px" height="120px" alt="">
 							</div>
-							<h2>小学</h2>
-							<p>发明制作一个有趣的玩具，感受造物乐趣，
-								培养探究精神及动手实践的兴趣和能力学
-								会简单编程，学习定格动画制作等。</p>
+							<h2><?php echo ($catname); ?></h2>
+							<p><?php echo ($summary); ?></p>
 						</div>
-					</li>
-					<li>
-						<div>
-							<div class="img">
-								<img src="/Public/images/thumb2.png" width="120px" height="120px" alt="">
-							</div>
-							<h2>初中</h2>
-							<p>综合活动与工作坊相结合，让学生“做中玩、
-								玩中学”，以arduino和图形化编程为基础，
-								融合各学科知识，培养动手解决问题的能力。</p>
-						</div>
-					</li>
-					<li class="last">
-						<div>
-							<div class="img">
-								<img src="/Public/images/thumb3.png" width="120px" height="120px" alt="">
-							</div>
-							<h2>高中</h2>
-							<p>发明制作一个有趣的玩具，感受造物乐趣，
-								培养探究精神及动手实践的兴趣和能力学
-								会简单编程，学习定格动画制作等。</p>
-						</div>
-					</li>
+					</li><?php endforeach;endif; ?>
 				</ul>
 			</div>
 		</div>
 		<div class="en clear">
 			<div class="text width50 float_l">
 				<div class="wrap">
-					<h2>创客教育在美国</h2>
-					<p>奥巴马在2009年的竞选演讲中说：“我希望我们所有人去思考创新的
-						方法，激发年轻人从事到科学和工程中来，鼓励年轻人去创造、构建
-						和发明——去做事物的创造者，而不仅仅是事物的消费者“。2012年
-						初美国政府又推出一个新项目，计划在未来四年内在1000所美国学校
-						引入创客空间。
+				<?php
+ $cate = M('category')->where("status=1")->find(intval(74)); extract($cate); $url = U('/cate/'.$id); ?><h2><?php echo ($catname); ?></h2>
+					<p><?php echo ($summary); ?>
 					</p>
 				</div>
 			</div>
@@ -165,52 +133,26 @@ bridge Blog、METALAB、Techshop等，国内知名创客空间有新车间、创
 			</div>
 			<div class="text width50 float_l clear">
 				<div class="wrap float_l">
-					<h2>创客教育进中国</h2>
-						<p>李克强主持召开国务院常务会议，确定支持发展“众创空间”的政策措施为创业创新搭建新平台，在内的各类青年创新人才和创新团队，带动扩大
-						就压，打造经济发展新的“发动机”，具有重要意义。医药在创客空间、
-						创新工厂等孵化模式的基础上，大力发展市场化、专业化、集成化、网络
-						化的模式
-					</p>
+					<?php
+ $cate = M('category')->where("status=1")->find(intval(75)); extract($cate); $url = U('/cate/'.$id); ?><h2><?php echo ($catname); ?></h2>
+						<p><?php echo ($summary); ?>
+						</p>
 				</div>
 			</div>
 		</div>
 		<div class="listbar">
 			<div class="container">
 				<div class="h2">
-					<h2>创客教育课堂 —为学生筑“造梦空间”</h2>
+					<h2><?php
+ $cate = M('category')->where("status=1")->find(intval(72)); extract($cate); $url = U('/cate/'.$id); echo ($catname); ?></h2>
 				</div>
 				<div class="list">
 					<ul>
-						<li>
-							<a href="">
-								<img src="/Public/images/list01.jpg" alt="" width="276px" height="185px">
+					<?php $list=M("article")->where("status<>0 and catid=72")->order("sort ASC")->select();$list=array_slice($list,0,6);if(count($list)==0) : echo "" ;else: foreach($list as $key=>$list_val): extract($list_val);$index=$key+1;$url=U("/show/".$id);?><li class="<?php echo ($index % 3==0?'last':''); ?>">
+							<a href="<?php echo ($url); ?>">
+								<img src="<?php echo ($thumb); ?>" alt="<?php echo ($title); ?>" width="276px" height="185px">
 							</a>
-						</li>
-						<li>
-							<a href="">
-								<img src="/Public/images/list02.jpg" alt="" width="276px" height="185px">
-							</a>
-						</li>
-						<li class="last">
-							<a href="">
-								<img src="/Public/images/list03.jpg" alt="" width="276px" height="185px">
-							</a>
-						</li>
-						<li>
-							<a href="">
-								<img src="/Public/images/list01.jpg" alt="" width="276px" height="185px">
-							</a>
-						</li>
-						<li>
-							<a href="">
-								<img src="/Public/images/list02.jpg" alt="" width="276px" height="185px">
-							</a>
-						</li>
-						<li class="last">
-							<a href="">
-								<img src="/Public/images/list03.jpg" alt="" width="276px" height="185px">
-							</a>
-						</li>
+						</li><?php endforeach;endif; ?>
 					</ul>
 				</div>
 			</div>
@@ -218,70 +160,21 @@ bridge Blog、METALAB、Techshop等，国内知名创客空间有新车间、创
 		<div class="zuopin">
 			<div class="container">
 				<div class="h2">
-					<h2>创客教育课堂 —为学生筑“造梦空间”</h2>
+					<h2><?php
+ $cate = M('category')->where("status=1")->find(intval(73)); extract($cate); $url = U('/cate/'.$id); echo ($catname); ?></h2>
 				</div>
 				<div class="list">
 					<ul>
-						<li>
+					<?php $list=M("article")->where("status<>0 and catid=73")->order("sort ASC")->select();$list=array_slice($list,0,6);if(count($list)==0) : echo "" ;else: foreach($list as $key=>$list_val): extract($list_val);$index=$key+1;$url=U("/show/".$id);?><li class="<?php echo ($index % 3==0?'last':''); ?>">
 							<div class="img">
-								<a href="">
-									<img src="/Public/images/z01.jpg" width="312px" height="200px">
+								<a href="<?php echo ($url); ?>">
+									<img src="<?php echo ($thumb); ?>" width="312px" height="200px">
 								</a>
 							</div>
-							<a href="">
-								水立方
+							<a href="<?php echo ($url); ?>">
+								<?php echo ($title); ?>
 							</a>
-						</li>
-						<li>
-							<div class="img">
-								<a href="">
-									<img src="/Public/images/z02.jpg" width="312px" height="200px">
-								</a>
-							</div>
-							<a href="">
-								水立方
-							</a>
-						</li>
-						<li class="last">
-							<div class="img">
-								<a href="">
-									<img src="/Public/images/z03.jpg" width="312px" height="200px">
-								</a>
-							</div>
-							<a href="">
-								水立方
-							</a>
-						</li>
-						<li>
-							<div class="img">
-								<a href="">
-									<img src="/Public/images/z01.jpg" width="312px" height="200px">
-								</a>
-							</div>
-							<a href="">
-								水立方
-							</a>
-						</li>
-						<li>
-							<div class="img">
-								<a href="">
-									<img src="/Public/images/z02.jpg" width="312px" height="200px">
-								</a>
-							</div>
-							<a href="">
-								水立方
-							</a>
-						</li>
-						<li class="last">
-							<div class="img">
-								<a href="">
-									<img src="/Public/images/z03.jpg" width="312px" height="200px">
-								</a>
-							</div>
-							<a href="">
-								水立方
-							</a>
-						</li>
+						</li><?php endforeach;endif; ?>
 					</ul>
 				</div>
 			</div>
@@ -289,87 +182,76 @@ bridge Blog、METALAB、Techshop等，国内知名创客空间有新车间、创
 		<div class="case mgb90">
 			<div class="container">
 				<div class="h2">
-					<h2>创客教育案例</h2>
+					<h2><?php
+ $cate = M('category')->where("status=1")->find(intval(61)); extract($cate); $url = U('/cate/'.$id); echo ($catname); ?></h2>
 				</div>
 				<div class="list">
 					<ul>
-						<li>
+					<?php $list=M("article")->where("status<>0 and catid=61")->order("sort ASC")->select();$list=array_slice($list,0,3);if(count($list)==0) : echo "" ;else: foreach($list as $key=>$list_val): extract($list_val);$index=$key+1;$url=U("/show/".$id);?><li class="<?php echo ($index % 3==0?'last':''); ?>">
 							<div class="img">
-								<a href="">
-									<img src="/Public/images/case01.jpg" width="340px" height="240px">
+								<a href="<?php echo ($url); ?>">
+									<img src="<?php echo ($thumb); ?>" width="340px" height="240px">
 								</a>
 							</div>
-							<a href="">
-								启航创客案例 1
+							<a href="<?php echo ($url); ?>">
+								<?php echo ($title); ?>
 							</a>
-						</li>
-						<li>
-							<div class="img">
-								<a href="">
-									<img src="/Public/images/case02.jpg" width="340px" height="240px">
-								</a>
-							</div>
-							<a href="">
-								启航创客案例 1
-							</a>
-						</li>
-						<li class="last">
-							<div class="img">
-								<a href="">
-									<img src="/Public/images/case03.jpg" width="340px" height="240px">
-								</a>
-							</div>
-							<a href="">
-								启航创客案例 1
-							</a>
-						</li>
+						</li><?php endforeach;endif; ?>
 					</ul>
 				</div>
 				<div class="more">
-					<a href="">查看更多></a>
+					<?php
+ $cate = M('category')->where("status=1")->find(intval(61)); extract($cate); $url = U('/cate/'.$id); ?><a href="<?php echo ($url); ?>">查看更多></a>
 				</div>
 			</div>
 		</div>
-		<footer>
-			<div class="container clear">
-				<div class="stu float_l">
-					<h2 class="h2">创客教育</h2>
-					<p><a href="">中小学创客空间</a></p>
-					<p><a href="">高效创客空间</a></p>
-					<p><a href="">社会创客空间</a></p>
-				</div>
-				<div class="contact float_l">
-					<h2 class="h2">联系我们</h2>
-					<p>热线：0755-8888-8888</p>
-					<p>邮箱：postmaster@szqcmaker.com</p>
-					<p>地址:深圳市龙华新区明治街道上塘综路722室</p>
-				</div>
-				<div class="about float_l">
-					<h2 class="h2">关于我们</h2>
-					<p class="i">
-						<a href="">
-							<i class="icon-botton icon-qq"></i>
-						</a>
-						<a href="">
-							<i class="icon-botton icon-weixin"></i>
-						</a>
-						<a href="">
-							<i class="icon-botton icon-sina"></i>
-						</a>
-						<a href="">
-							<i class="icon-botton icon-face"></i>
-						</a>
-					</p>
-					<p>版权所有：2016-2026 启航创客教育</p>
-				</div>
-				<div class="qcode float_r">
-					<img src="/Public/images/code.jpg">
-					<p>扫一扫，关注我们！</p>
-				</div>
-			</div>
-		</footer>
-		<script type="text/javascript" src="js/jquery-1.11.min.js" ></script>
-		<script type="text/javascript" src="js/jquery.flexslider-min.js" ></script>
-		<script type="text/javascript" src="js/index.js" ></script>
-	</body>
+<footer>
+	<div class="container clear">
+		<div class="stu float_l">
+			<h2 class="h2">
+				<?php
+ $cate = M('category')->where("status=1")->find(intval(57)); extract($cate); $url = U('/cate/'.$id); ?><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a>
+			</h2>
+			<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,57);$cates=array_slice($cates,0,3);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><p><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></p><?php endforeach;endif; ?>
+		</div>
+		<div class="contact float_l">
+			<h2 class="h2">
+				<?php
+ $cate = M('category')->where("status=1")->find(intval(62)); extract($cate); $url = U('/cate/'.$id); ?><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a>
+			</h2>
+			<p>热线：<?php echo (C("SITE_TELPHONE")); ?></p>
+			<p>邮箱：<?php echo (C("SITE_EMAIL")); ?></p>
+			<p>地址: <?php echo (C("SITE_ADDRESS")); ?></p>
+		</div>
+		<div class="about float_l">
+			<h2 class="h2">
+				<?php
+ $cate = M('category')->where("status=1")->find(intval(55)); extract($cate); $url = U('/cate/'.$id); echo ($catname); ?>
+			</h2>
+			<p class="i">
+				<a href="">
+					<i class="icon-botton icon-qq"></i>
+				</a>
+				<a href="">
+					<i class="icon-botton icon-weixin"></i>
+				</a>
+				<a href="">
+					<i class="icon-botton icon-sina"></i>
+				</a>
+				<a href="">
+					<i class="icon-botton icon-face"></i>
+				</a>
+			</p>
+			<p><?php echo (C("SITE_CR")); ?></p>
+		</div>
+		<div class="qcode float_r">
+			<img src="/Public/images/code.jpg">
+			<p>扫一扫，关注我们！</p>
+		</div>
+	</div>
+</footer>
+<script type="text/javascript" src="/Public/js/jquery-1.11.min.js" ></script>
+<script type="text/javascript" src="/Public/js/jquery.flexslider-min.js" ></script>
+<script type="text/javascript" src="/Public/js/index.js" ></script>
+</body>
 </html>

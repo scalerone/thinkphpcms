@@ -10,6 +10,7 @@
 				'rootPath'	=>	'./Uploads/System/Logo/', 
 				'file'		=>	'file',
 				'autoSub'	=>  false,	
+				'outPath'	=>	'/Uploads/System/Logo/', 
 			);
 			$result = upload($config);
 			$this -> ajaxReturn($result);
@@ -21,7 +22,8 @@
 				'type'		=> 	array('ico'),
 				'rootPath'	=>	'./Uploads/System/Ico/', 
 				'file'		=>	'file',
-				'autoSub'	=>  false,	
+				'autoSub'	=>  false,
+				'outPath'	=>	'/Uploads/System/Ico/', 	
 			);
 			$result = upload($config);
 			$this -> ajaxReturn($result);
@@ -34,6 +36,7 @@
 				'rootPath'	=>	'./Uploads/System/Wate/', 
 				'file'		=>	'file',
 				'autoSub'	=>  false,	
+				'outPath'	=>	'/Uploads/System/Wate/', 
 			);
 			$result = upload($config);
 			$this -> ajaxReturn($result);
@@ -45,7 +48,8 @@
 				'type'		=> 	array('gif','png'),
 				'rootPath'	=>	'./Uploads/System/Wate/', 
 				'file'		=>	'file',
-				'autoSub'	=>  false,	
+				'autoSub'	=>  false,
+				'outPath'	=>	'/Uploads/System/Wate/',	
 			);
 			$result = upload($config);
 			$this -> ajaxReturn($result);

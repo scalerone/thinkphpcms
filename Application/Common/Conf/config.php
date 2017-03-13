@@ -16,7 +16,15 @@ return array(
 
     'LOAD_EXT_CONFIG'		=>	'system.config',//加载站点信息配置文件
 
-    'URL_MODEL'             =>  1,
+    //路由相关
+    'URL_MODEL'             =>  2,
+    'URL_ROUTER_ON'         =>  true,   // 是否开启URL路由
+    'URL_ROUTE_RULES'       =>  array(
+            'list/:id' => 'Home/List/index',
+            'page/:id' => 'Home/Page/index',
+            'show/:id' => 'Home/Show/index',
+    ), // 默认路由规则 针对模块
+
     'URL_HTML_SUFFIX'       =>  'html',  // URL伪静态后缀设置
 
     //权限认证
@@ -41,6 +49,9 @@ return array(
         'Public/uploadWateContent',
         'Article/upload',
         'Article/editImgUpload',
-    )
+    ),
 
+
+    //自定义标签相关
+    'TAGLIB_BUILD_IN' => 'cx,Home\TagLib\TagLibHome',
 );

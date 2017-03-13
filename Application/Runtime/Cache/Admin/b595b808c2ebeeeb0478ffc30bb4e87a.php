@@ -28,9 +28,9 @@
 </div>
 <div class="container clearfix">
     <div class="sidebar-wrap">
-        <div class="sidebar-title">
+        <!-- <div class="sidebar-title">
             <h1>菜单</h1>
-        </div>
+        </div> -->
         <div class="sidebar-content">
             <ul class="layui-nav layui-nav-tree wid_auto" lay-filter="demo">
                 <li class="layui-nav-item layui-nav-itemed">
