@@ -102,7 +102,11 @@
       ,layedit = layui.layedit
       ,laydate = layui.laydate;
 
-
+      layedit.set({
+          uploadImage: {
+            url: '{:U("Article/editImgUpload")}'
+          }
+        });
         
         //文章缩略图上传
         $('#_thumb').bind('change',function(){
@@ -135,6 +139,11 @@
         });
 
         var content_edit = layedit.build('content_edit'); //建立编辑器
+        layedit.set({
+          uploadImage: {
+            url: '{:U("Article/editImgUpload")}'
+          }
+        });
 
         form.on('submit(*)', function(data){
           layedit.sync(content_edit);

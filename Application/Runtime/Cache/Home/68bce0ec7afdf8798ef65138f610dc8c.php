@@ -25,8 +25,8 @@
 				<div class="nav float_l">
 					<nav>
 						<ul>
-							<li class="active"><a href="/">首页</a></li>
-							<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,0);$cates=array_slice($cates,0,20);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></li><?php endforeach;endif; ?>
+							<li class="<?php echo ($cate['id']==''?'active':''); ?>"><a href="/">首页</a></li>
+							<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,0);$cates=array_slice($cates,0,20);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li class="<?php echo ($cate['id']==$id?'active':''); ?>"><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></li><?php endforeach;endif; ?>
 						</ul>
 					</nav>
 				</div>
@@ -57,16 +57,16 @@
 				<div class="left float_l">
 					<p>
 						<span class="h2">
-							关于我们
+							<?php echo ($cate['catname']); ?>
 						</span>
-						<span class="h4">About Us </span>
+						<span class="h4"><?php echo ($cate['alias']); ?></span>
 					</p>
 				</div>
 				<div class="right float_r">
 					<p>
 						<i class="icon-home"></i>
-						<a href="">首页</a>>
-						<a href="">关于我们</a>
+						<a href="/">首页</a>>
+						<a href="/page/55.html">关于我们</a>&gt;
 					</p>
 				</div>
 			</div>
@@ -74,23 +74,7 @@
 
 		<div class="wrap content mb50">
 			<div class="container">
-				<h2>启航创客</h2>				
-				<p>深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。</p>
-				<img src="/Public/images/about01.jpg" class="auto_img">	
-				<h2>启航理念</h2>			
-				<p>你微笑，我开心。你成功，我荣誉。</p>
-				<img src="/Public/images/about02.jpg" class="auto_img">
-				<h2>启航寓意</h2>			
-				<p>提早启发孩子的创新思维，在接受创新事物的基础上让学生从小赢在起跑线，早早提高孩子动手能力，创新思维能力。</p>
-				<img src="/Public/images/about03.jpg" class="auto_img">
-
-				<h2>启航创客业务</h2>			
-				<p>为中小学学校提供创客空间一站式解决方案。 培育青少年的动手能力、观察力、审美力、独立思考能 培养创客教育师资团队，推动创客教育的可持续发展。</p>
-				<img src="/Public/images/about04.jpg" class="auto_img">
-
-				<h2>启航创客目标</h2>			
-				<p>培养青少年的创新力、执行力、领导力，让青少年赢在起跑线上。</p>
-				<img src="/Public/images/about05.jpg" class="auto_img">						
+				<?php echo ($cate['content']); ?>					
 			</div>
 		</div>
 <footer>

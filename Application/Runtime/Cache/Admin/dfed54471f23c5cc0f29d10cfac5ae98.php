@@ -229,6 +229,12 @@ layui.use('element', function(){
       ,layedit = layui.layedit
       ,laydate = layui.laydate;
 
+      layedit.set({
+          uploadImage: {
+            url: '<?php echo U("Article/editImgUpload");?>'
+          }
+        });
+
         //文章缩略图上传
         $('#_thumb').bind('change',function(){
           //限制文件类型与大小
@@ -260,6 +266,7 @@ layui.use('element', function(){
         });
 
         var content_edit = layedit.build('content_edit'); //建立编辑器
+
         
         //添加栏目
         $('.submit').on('click',function(){

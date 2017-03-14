@@ -13,7 +13,43 @@
 			'list'	=> array(
 					'attr'	=> 'catid,order,length,empty',
 				),
+			'position' => array(
+					'close' => '0',
+				),
 		);
+
+		//定位
+		public function _position($attr,$content) {
+			$catid = I('get.id');
+			if(empty($catid)) return '';
+			$cates = M('category')->field('id,pid,catname,type,summary,sort')->where('status=1')->select();
+			$cates = getParentsById($catid,$cates);
+			$count = count($cates);
+			if($count==0) return '';
+			$str = '';
+
+			foreach ($cates as $key => $val) {
+				switch ($val['type']) {
+					case '1':
+						$url = U('/list/'.$val['id']);
+						break;
+					case '2':
+						$url = U('/page/'.$val['id']);
+						break;
+					case '3':
+						$url = $val['url'];
+						break;
+				}
+				if($key == $count){
+					$str .= '<a href="'.$url.'">'.$val['catname'].'</a>';
+				}else{
+					$str .= '<a href="'.$url.'">'.$val['catname'].'</a>&gt;';
+				}
+			}
+			
+			//p($str);die;
+			return $str;
+		}
 
 		//文章列表循环
 		public function _list($attr,$content) {

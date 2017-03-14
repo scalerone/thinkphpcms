@@ -4,6 +4,24 @@
 	    dump($var, true, null, 0);
 	}	
 	
+	//通过栏目ID获取上级栏目
+	function getParentsById($catid,$cates) {
+		$arr = array();
+
+		foreach ($cates as $v) {
+			if($v['id'] == $catid){
+				$arr[] = $v;
+				$tem = getParentsById($v['pid'],$cates);
+				if(count($tem)==0){
+					return $arr;
+				}else{
+					$arr = array_merge($tem,$arr);
+				}
+			}
+		}
+		return $arr;
+	}
+
 	//递归重组栏目
 	/**
 	 * @param $cates 需要进行重组的栏目数组

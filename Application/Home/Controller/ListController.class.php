@@ -4,7 +4,8 @@
 
 	class ListController extends Controller {
 		public function index() {
-			p($_GET);die;
+			$cate = M('category')->find(I('get.id'));
+			$this -> cate = $cate;
 			$this->display();
 		}
 	}

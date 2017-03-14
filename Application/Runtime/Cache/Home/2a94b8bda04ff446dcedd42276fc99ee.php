@@ -25,8 +25,8 @@
 				<div class="nav float_l">
 					<nav>
 						<ul>
-							<li class="active"><a href="/">首页</a></li>
-							<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,0);$cates=array_slice($cates,0,20);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></li><?php endforeach;endif; ?>
+							<li class="<?php echo ($cate['id']==''?'active':''); ?>"><a href="/">首页</a></li>
+							<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,0);$cates=array_slice($cates,0,20);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li class="<?php echo ($cate['id']==$id?'active':''); ?>"><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></li><?php endforeach;endif; ?>
 						</ul>
 					</nav>
 				</div>

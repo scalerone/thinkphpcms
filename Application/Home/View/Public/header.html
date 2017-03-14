@@ -25,9 +25,9 @@
 				<div class="nav float_l">
 					<nav>
 						<ul>
-							<li class="active"><a href="/">首页</a></li>
+							<li class="{$cate['id']==''?'active':''}"><a href="/">首页</a></li>
 							<category catid="0" length="20" order="sort ASC" empty="">
-								<li><a href="{$url}">{$catname}</a></li>
+								<li class="{$cate['id']==$id?'active':''}"><a href="{$url}">{$catname}</a></li>
 							</category>
 						</ul>
 					</nav>
