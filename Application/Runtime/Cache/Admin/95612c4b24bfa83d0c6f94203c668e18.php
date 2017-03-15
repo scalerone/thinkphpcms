@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/fonts/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/layui/css/layui.css" media="all" />
+    
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -26,6 +27,9 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/lang/zh-cn/zh-cn.js"></script>
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <!-- <div class="sidebar-title">
@@ -113,10 +117,10 @@
                     </div>
                   </div>
                 
-                  <div class="layui-form-item hide content">
+                  <div class="layui-form-item content">
                     <label class="layui-form-label ">内容：</label>
                     <div class="layui-input-block">
-                      <textarea name="content" class="layui-textarea" id="content_edit" style="display: none"></textarea>
+                      <textarea name="content" id="content" style="height: 450px;"></textarea>
                     </div>
                   </div>
 
@@ -226,8 +230,6 @@ layui.use('element', function(){
       var form = layui.form()
       ,layedit = layui.layedit
       ,laydate = layui.laydate;
-
-
         
         //文章缩略图上传
         $('#_thumb').bind('change',function(){
@@ -244,7 +246,7 @@ layui.use('element', function(){
             $('.content,.link').hide();
           }
         });
-
+      $('.content').hide();
         form.on('radio(singer)', function(data){
           if(data.elem.checked){
             $('.content').removeClass('hide').show();
@@ -259,10 +261,8 @@ layui.use('element', function(){
           }
         });
 
-        var content_edit = layedit.build('content_edit'); //建立编辑器
-
         form.on('submit(*)', function(data){
-          layedit.sync(content_edit);
+         // layedit.sync(content_edit);
           $.ajax({
             url: '<?php echo U("Category/add");?>',
             type: 'POST',
@@ -282,6 +282,9 @@ layui.use('element', function(){
           return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
     });
+</script>
+<script type="text/javascript">
+  var ue = UE.getEditor('content');
 </script>
 </body>
 </html>

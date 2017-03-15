@@ -1,4 +1,7 @@
 <include file="Public:header" />
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/plugin/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/plugin/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/plugin/ueditor/lang/zh-cn/zh-cn.js"></script>
 <div class="container clearfix">
     <include file="Public:left" />
     <!--/sidebar-->
@@ -52,7 +55,7 @@
                   <div class="layui-form-item {$cate['type']==2?'':'hide'} content">
                     <label class="layui-form-label ">内容：</label>
                     <div class="layui-input-block">
-                      <textarea name="content" class="layui-textarea" id="content_edit" style="display: none">{$cate.content}</textarea>
+                      <textarea name="content" id="content" style="height: 450px;">{$cate['content']}</textarea>
                     </div>
                   </div>
 
@@ -104,12 +107,6 @@
       ,layedit = layui.layedit
       ,laydate = layui.laydate;
 
-      layedit.set({
-          uploadImage: {
-            url: '{:U("Article/editImgUpload")}'
-          }
-        });
-
         //文章缩略图上传
         $('#_thumb').bind('change',function(){
           //限制文件类型与大小
@@ -140,12 +137,9 @@
           }
         });
 
-        var content_edit = layedit.build('content_edit'); //建立编辑器
-
         
         //添加栏目
         $('.submit').on('click',function(){
-          layedit.sync(content_edit);
           $.ajax({
             url: '{:U("Category/edit")}',
             type: 'POST',
@@ -166,6 +160,9 @@
           return false;
         });
     });
+</script>
+<script type="text/javascript">
+  var ue = UE.getEditor('content');
 </script>
 </body>
 </html>

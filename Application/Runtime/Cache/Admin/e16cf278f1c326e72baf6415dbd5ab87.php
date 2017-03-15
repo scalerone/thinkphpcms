@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/fonts/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/layui/css/layui.css" media="all" />
+    
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -26,6 +27,9 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/lang/zh-cn/zh-cn.js"></script>
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <!-- <div class="sidebar-title">
@@ -106,7 +110,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label ">内容：</label>
                     <div class="layui-input-block">
-                      <textarea name="content" class="layui-textarea" id="LAY_edit" style="display: none"></textarea>
+                      <textarea name="content" id="content" style="height: 450px;"></textarea>
                     </div>
                   </div>
                   <div class="layui-form-item">
@@ -224,15 +228,6 @@ layui.use('element', function(){
       ,layedit = layui.layedit
       ,laydate = layui.laydate;
 
-      //创建一个编辑器
-        layedit.set({
-          uploadImage: {
-            url: '<?php echo U("Article/editImgUpload");?>'
-          }
-        });
-
-        var editIndex = layedit.build('LAY_edit');
-
         //文章缩略图上传
         $('#_thumb').bind('change',function(){
           //限制文件类型与大小
@@ -245,6 +240,9 @@ layui.use('element', function(){
           fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
         });
     });
+</script>
+<script type="text/javascript">
+  var ue = UE.getEditor('content');
 </script>
 </body>
 </html>

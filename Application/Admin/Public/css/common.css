@@ -48,6 +48,9 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{di
     padding-right: 10px;
     padding-bottom: 10px;
 }
+.layui-form-select dl{
+    z-index: 9999 !important;
+}
 .text-info{    
 	background-color: #5bc0de;
     color: #fff;

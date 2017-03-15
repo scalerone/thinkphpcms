@@ -25,6 +25,7 @@
 			if(IS_POST){
 				$post = I('post.');
 				$post['addtime'] = strtotime(I('post.addtime'));
+				$post['content'] = htmlspecialchars_decode(I('post.content'));
 				$article = M('Article');
 				if($article -> add($post)){
 					$this -> success('添加成功!',U('Article/index'));
@@ -62,6 +63,7 @@
 					$post['is_top'] = 0;
 				}
 				$post['addtime'] = strtotime(I('post.addtime'));
+				$post['content'] = htmlspecialchars_decode(I('post.content'));
 				$result = M('Article')->save($post);
 				if($result !== false){
 					$this -> success('修改成功!',U('Article/index'));

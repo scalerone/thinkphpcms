@@ -26,7 +26,7 @@
 					<nav>
 						<ul>
 							<li class="<?php echo ($cate['id']==''?'active':''); ?>"><a href="/">首页</a></li>
-							<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,0);$cates=array_slice($cates,0,20);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li class="<?php echo ($cate['id']==$id?'active':''); ?>"><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></li><?php endforeach;endif; ?>
+							<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,0);$cates=array_slice($cates,0,20);foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li class="<?php echo ($cate['id']==$id?'active':''); ?>"><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></li><?php endforeach;?>
 						</ul>
 					</nav>
 				</div>
@@ -66,7 +66,7 @@
 					<p>
 						<i class="icon-home"></i>
 						<a href="/">首页</a>>
-						
+						<a href="/list/58.html">新闻资讯</a>&gt;
 					</p>
 				</div>
 			</div>
@@ -74,81 +74,19 @@
 		<div class="content list service">
 			<div class="container">
 				<ul>
-					<li class="clear">
+				<?php $list=M("article")->query("select * from cms_article where (catid in(58) and status<>0)");$list=array_slice($list,0,60);if(count($list)==0) : echo "" ;else: foreach($list as $key=>$list_val): extract($list_val);$index=$key+1;$url=U("/show/".$id);?><li class="clear">
 						<div class="img float_l">
-							<a href="">
-								<img src="images/服务于支持_03.jpg" alt="" height="230px" width="345px">
+							<a href="<?php echo ($url); ?>">
+								<img src="<?php echo ($thumb); ?>" alt="<?php echo ($title); ?>" height="230px" width="345px">
 							</a>
 						</div>
 						<div class="text float_l">
-							<h2><a href="">新宁物流举行安徽睿德智造智能系统有限公司成立暨签约仪式</a></h2>
-							<p>2016年9月18日，由新宁物流、明匠智能、张晖团队合资的安徽睿德智能系统有限公司成立暨签约仪式在新宁物
-							流总部举行。新宁物流董事长王雅军、明匠智能董事长陈俊、张晖团队、德国弗劳恩霍夫物流研究院宋伟等近20
-							人参加了本次签约仪式。
+							<h2><a href="<?php echo ($url); ?>"><?php echo ($title); ?></a></h2>
+							<p><?php echo ($summary); ?>
 							</p>
-							<span class="date">2016-12-16</span>
+							<span class="date"><?php echo (date('Y-m-d',$addtime)); ?></span>
 						</div>
-					</li>
-					<li class="clear">
-						<div class="img float_l">
-							<a href="">
-								<img src="images/服务于支持_06.jpg" alt="" height="230px" width="345px">
-							</a>
-						</div>
-						<div class="text float_l">
-							<h2><a href="">新宁物流举行安徽睿德智造智能系统有限公司成立暨签约仪式</a></h2>
-							<p>2016年9月18日，由新宁物流、明匠智能、张晖团队合资的安徽睿德智能系统有限公司成立暨签约仪式在新宁物
-							流总部举行。新宁物流董事长王雅军、明匠智能董事长陈俊、张晖团队、德国弗劳恩霍夫物流研究院宋伟等近20
-							人参加了本次签约仪式。
-							</p>
-							<span class="date">2016-12-16</span>
-						</div>
-					</li>
-					<li class="clear">
-						<div class="img float_l">
-							<a href="">
-								<img src="images/服务于支持_08.jpg" alt="" height="230px" width="345px">
-							</a>
-						</div>
-						<div class="text float_l">
-							<h2><a href="">新宁物流举行安徽睿德智造智能系统有限公司成立暨签约仪式</a></h2>
-							<p>2016年9月18日，由新宁物流、明匠智能、张晖团队合资的安徽睿德智能系统有限公司成立暨签约仪式在新宁物
-							流总部举行。新宁物流董事长王雅军、明匠智能董事长陈俊、张晖团队、德国弗劳恩霍夫物流研究院宋伟等近20
-							人参加了本次签约仪式。
-							</p>
-							<span class="date">2016-12-16</span>
-						</div>
-					</li>
-					<li class="clear">
-						<div class="img float_l">
-							<a href="">
-								<img src="images/服务于支持_10.jpg" alt="" height="230px" width="345px">
-							</a>
-						</div>
-						<div class="text float_l">
-							<h2><a href="">新宁物流举行安徽睿德智造智能系统有限公司成立暨签约仪式</a></h2>
-							<p>2016年9月18日，由新宁物流、明匠智能、张晖团队合资的安徽睿德智能系统有限公司成立暨签约仪式在新宁物
-							流总部举行。新宁物流董事长王雅军、明匠智能董事长陈俊、张晖团队、德国弗劳恩霍夫物流研究院宋伟等近20
-							人参加了本次签约仪式。
-							</p>
-							<span class="date">2016-12-16</span>
-						</div>
-					</li>
-					<li class="clear">
-						<div class="img float_l">
-							<a href="">
-								<img src="images/服务于支持_12.jpg" alt="" height="230px" width="345px">
-							</a>
-						</div>
-						<div class="text float_l">
-							<h2><a href="">新宁物流举行安徽睿德智造智能系统有限公司成立暨签约仪式</a></h2>
-							<p>2016年9月18日，由新宁物流、明匠智能、张晖团队合资的安徽睿德智能系统有限公司成立暨签约仪式在新宁物
-							流总部举行。新宁物流董事长王雅军、明匠智能董事长陈俊、张晖团队、德国弗劳恩霍夫物流研究院宋伟等近20
-							人参加了本次签约仪式。
-							</p>
-							<span class="date">2016-12-16</span>
-						</div>
-					</li>
+					</li><?php endforeach;endif;p($show);?>
 				</ul>
 				<div class="pages">
 					<p>
@@ -169,7 +107,7 @@
 				<?php
  $cate = M('category')->where("status=1")->find(intval(57)); extract($cate); $url = U('/cate/'.$id); ?><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a>
 			</h2>
-			<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,57);$cates=array_slice($cates,0,3);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><p><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></p><?php endforeach;endif; ?>
+			<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,57);$cates=array_slice($cates,0,3);foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><p><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></p><?php endforeach;?>
 		</div>
 		<div class="contact float_l">
 			<h2 class="h2">

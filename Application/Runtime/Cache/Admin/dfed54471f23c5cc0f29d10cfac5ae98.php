@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/fonts/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/layui/css/layui.css" media="all" />
+    
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -26,6 +27,9 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/lang/zh-cn/zh-cn.js"></script>
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <!-- <div class="sidebar-title">
@@ -128,7 +132,7 @@
                   <div class="layui-form-item <?php echo ($cate['type']==2?'':'hide'); ?> content">
                     <label class="layui-form-label ">内容：</label>
                     <div class="layui-input-block">
-                      <textarea name="content" class="layui-textarea" id="content_edit" style="display: none"><?php echo ($cate["content"]); ?></textarea>
+                      <textarea name="content" id="content" style="height: 450px;"><?php echo ($cate['content']); ?></textarea>
                     </div>
                   </div>
 
@@ -229,12 +233,6 @@ layui.use('element', function(){
       ,layedit = layui.layedit
       ,laydate = layui.laydate;
 
-      layedit.set({
-          uploadImage: {
-            url: '<?php echo U("Article/editImgUpload");?>'
-          }
-        });
-
         //文章缩略图上传
         $('#_thumb').bind('change',function(){
           //限制文件类型与大小
@@ -265,12 +263,9 @@ layui.use('element', function(){
           }
         });
 
-        var content_edit = layedit.build('content_edit'); //建立编辑器
-
         
         //添加栏目
         $('.submit').on('click',function(){
-          layedit.sync(content_edit);
           $.ajax({
             url: '<?php echo U("Category/edit");?>',
             type: 'POST',
@@ -291,6 +286,9 @@ layui.use('element', function(){
           return false;
         });
     });
+</script>
+<script type="text/javascript">
+  var ue = UE.getEditor('content');
 </script>
 </body>
 </html>

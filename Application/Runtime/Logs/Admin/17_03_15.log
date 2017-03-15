@@ -1,0 +1,168 @@
+[ 2017-03-15T11:20:20+08:00 ] 127.0.0.1 /Admin/Login/index.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0312s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'admin' AND `password` = 'e00cf25ad42683b3df678c61f42c6bda' LIMIT 1   [ RunTime:0.0000s ]
+SQL: UPDATE `cms_admin` SET `username`='admin',`password`='e00cf25ad42683b3df678c61f42c6bda',`email`='',`lastlogintime`='1489548020',`lastloginip`='127.0.0.1',`status`='1' WHERE `id` = 1 [ RunTime:0.0000s ]
+
+[ 2017-03-15T11:28:17+08:00 ] 127.0.0.1 /Admin/Article/_PUBLIC__/plugin/ueditor/ueditor.config.js
+ERR: 非法操作:_PUBLIC__
+
+[ 2017-03-15T11:28:17+08:00 ] 127.0.0.1 /Admin/Article/_PUBLIC__/plugin/ueditor/ueditor.all.min.js
+ERR: 非法操作:_PUBLIC__
+
+[ 2017-03-15T11:28:17+08:00 ] 127.0.0.1 /Admin/Article/_PUBLIC__/plugin/ueditor/lang/zh-cn/zh-cn.js
+ERR: 非法操作:_PUBLIC__
+
+[ 2017-03-15T11:35:13+08:00 ] 127.0.0.1 /Admin/Contact/index.html
+ERR: 无法加载控制器:Contact
+
+[ 2017-03-15T11:42:44+08:00 ] 127.0.0.1 /Admin/Login/index.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'admin' AND `password` = 'e00cf25ad42683b3df678c61f42c6bda' LIMIT 1   [ RunTime:0.0000s ]
+SQL: UPDATE `cms_admin` SET `username`='admin',`password`='e00cf25ad42683b3df678c61f42c6bda',`email`='',`lastlogintime`='1489549364',`lastloginip`='127.0.0.1',`status`='1' WHERE `id` = 1 [ RunTime:0.0000s ]
+
+[ 2017-03-15T11:46:30+08:00 ] 127.0.0.1 /Admin/Category/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0000s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`content`,`url`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('0','asdasd','2','&lt;p&gt;asdasdasd&lt;br/&gt;&lt;/p&gt;','','','1','asd','asd','1489549590') [ RunTime:0.0000s ]
+
+[ 2017-03-15T11:47:01+08:00 ] 127.0.0.1 /Admin/Category/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0000s ]
+SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`content`,`url`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('0','123123','2','&lt;p&gt;123123&lt;/p&gt;','','','1','123123','','1489549621') [ RunTime:0.0000s ]
+
+[ 2017-03-15T11:47:13+08:00 ] 127.0.0.1 /Admin/Category/del.html?id=82
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0070s ]
+SQL: SELECT `id`,`pid` FROM `cms_category`  [ RunTime:0.0000s ]
+SQL: DELETE FROM `cms_category` WHERE `id` = 82 [ RunTime:0.0010s ]
+
+[ 2017-03-15T11:48:37+08:00 ] 127.0.0.1 /Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0000s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='&lt;h2&gt;启航创客&lt;/h2&gt;&lt;p&gt;深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;/Uploads/2017-03-14/58c7f38e790c9.jpg&quot; alt=&quot;58c7f38e790c9.jpg&quot;/&gt;&lt;br/&gt;&lt;/p&gt;',`url`='',`status`='1',`summary`='',`alias`='About Us' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-15T11:53:39+08:00 ] 127.0.0.1 /Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0000s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='&lt;h2&gt;启航创客&lt;/h2&gt;&lt;p&gt;深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;/Uploads/2017-03-14/58c7f38e790c9.jpg&quot; alt=&quot;58c7f38e790c9.jpg&quot;/&gt;&lt;br/&gt;&lt;/p&gt;',`url`='',`status`='1',`summary`='',`alias`='About Us' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-15T11:54:10+08:00 ] 127.0.0.1 /Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0090s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='&lt;h2&gt;启航创客&lt;/h2&gt;&lt;p&gt;深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;/Uploads/2017-03-14/58c7f38e790c9.jpg&quot; alt=&quot;58c7f38e790c9.jpg&quot;/&gt;&lt;br/&gt;&lt;/p&gt;',`url`='',`status`='1',`summary`='',`alias`='About Us' WHERE `id` = 55 [ RunTime:0.0010s ]
+
+[ 2017-03-15T11:54:36+08:00 ] 127.0.0.1 /Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0000s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='&lt;h2&gt;启航创客&lt;/h2&gt;&lt;p&gt;深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。3333&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;/Uploads/2017-03-14/58c7f38e790c9.jpg&quot; alt=&quot;58c7f38e790c9.jpg&quot;/&gt;&lt;br/&gt;&lt;/p&gt;',`url`='',`status`='1',`summary`='',`alias`='About Us' WHERE `id` = 55 [ RunTime:0.0156s ]
+
+[ 2017-03-15T11:54:57+08:00 ] 127.0.0.1 /Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0090s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='&lt;h2&gt;启航创客&lt;/h2&gt;&lt;p&gt;深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;/Uploads/2017-03-14/58c7f38e790c9.jpg&quot; alt=&quot;58c7f38e790c9.jpg&quot;/&gt;&lt;br/&gt;&lt;/p&gt;',`url`='',`status`='1',`summary`='',`alias`='About Us' WHERE `id` = 55 [ RunTime:0.0010s ]
+
+[ 2017-03-15T12:06:02+08:00 ] 127.0.0.1 /Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0000s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='&lt;h2&gt;启航创客&lt;/h2&gt;&lt;p&gt;深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;/Uploads/2017-03-14/58c7f38e790c9.jpg&quot; alt=&quot;58c7f38e790c9.jpg&quot;/&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;/Uploads/images/20170315/1489550738174407.jpg&quot; title=&quot;1489550738174407.jpg&quot; alt=&quot;about02.jpg&quot;/&gt;&lt;/p&gt;',`url`='',`status`='1',`summary`='',`alias`='About Us' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-15T12:51:54+08:00 ] 127.0.0.1 /Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0000s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='&lt;h2&gt;启航创客&lt;/h2&gt;&lt;p&gt;深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;/Uploads/2017-03-14/58c7f38e790c9.jpg&quot; alt=&quot;58c7f38e790c9.jpg&quot;/&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;/Uploads/images/20170315/1489550738174407.jpg&quot; title=&quot;1489550738174407.jpg&quot; alt=&quot;about02.jpg&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;/Uploads/images/20170315/1489553508557820.jpg&quot; title=&quot;1489553508557820.jpg&quot; alt=&quot;about03.jpg&quot;/&gt;&lt;/p&gt;',`url`='',`status`='1',`summary`='',`alias`='About Us' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-15T12:52:39+08:00 ] 127.0.0.1 /Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0000s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='<h2>启航创客</h2><p>深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。</p><p><img src=\"/Uploads/2017-03-14/58c7f38e790c9.jpg\" alt=\"58c7f38e790c9.jpg\"/><br/></p><p><img src=\"/Uploads/images/20170315/1489550738174407.jpg\" title=\"1489550738174407.jpg\" alt=\"about02.jpg\"/></p><p><img src=\"/Uploads/images/20170315/1489553508557820.jpg\" title=\"1489553508557820.jpg\" alt=\"about03.jpg\"/></p>',`url`='',`status`='1',`summary`='',`alias`='About Us' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-15T12:53:44+08:00 ] 127.0.0.1 /Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0000s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='<h2>启航创客</h2><p>深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。select * from cms_admin;</p><p><img src=\"/Uploads/2017-03-14/58c7f38e790c9.jpg\" alt=\"58c7f38e790c9.jpg\"/><br/></p><p><img src=\"/Uploads/images/20170315/1489550738174407.jpg\" title=\"1489550738174407.jpg\" alt=\"about02.jpg\"/></p><p><img src=\"/Uploads/images/20170315/1489553508557820.jpg\" title=\"1489553508557820.jpg\" alt=\"about03.jpg\"/></p>',`url`='',`status`='1',`summary`='',`alias`='About Us' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-15T12:54:03+08:00 ] 127.0.0.1 /Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0000s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='关于我们',`thumb`='/Uploads/2017-03-11/58c3b4f43986f.jpg',`content`='<h2>启航创客</h2><p>深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。</p><p><img src=\"/Uploads/2017-03-14/58c7f38e790c9.jpg\" alt=\"58c7f38e790c9.jpg\"/><br/></p><p><img src=\"/Uploads/images/20170315/1489550738174407.jpg\" title=\"1489550738174407.jpg\" alt=\"about02.jpg\"/></p><p><img src=\"/Uploads/images/20170315/1489553508557820.jpg\" title=\"1489553508557820.jpg\" alt=\"about03.jpg\"/></p>',`url`='',`status`='1',`summary`='',`alias`='About Us' WHERE `id` = 55 [ RunTime:0.0000s ]
+
+[ 2017-03-15T12:55:21+08:00 ] 127.0.0.1 /Admin/Category/edit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0000s ]
+SQL: UPDATE `cms_category` SET `pid`='0',`catname`='创客教育',`thumb`='',`content`='<h2 style=\"margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 24px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);\">中小学创客空间</h2><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 13px; white-space: normal; background-color: rgb(255, 255, 255);\">创客教室空间用于培养学生的创新能力，让学生的新奇创意思维变成现实。</p><p><img src=\"/Uploads/images/20170315/1489553718604295.jpg\" title=\"1489553718604295.jpg\" alt=\"show_ck01.jpg\"/></p>',`url`='',`status`='1',`summary`='',`alias`='' WHERE `id` = 57 [ RunTime:0.0000s ]
+
+[ 2017-03-15T14:43:35+08:00 ] 127.0.0.1 /Admin/Login/index.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0624s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' E:\phpstudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'admin' AND `password` = 'e00cf25ad42683b3df678c61f42c6bda' LIMIT 1   [ RunTime:0.0000s ]
+SQL: UPDATE `cms_admin` SET `username`='admin',`password`='e00cf25ad42683b3df678c61f42c6bda',`email`='',`lastlogintime`='1489560215',`lastloginip`='127.0.0.1',`status`='1' WHERE `id` = 1 [ RunTime:0.0156s ]
+
+[ 2017-03-15T14:43:43+08:00 ] 127.0.0.1 /Admin/Article/undefinedthemes/default/css/ueditor.css
+ERR: 非法操作:undefinedthemes
+
+[ 2017-03-15T14:43:43+08:00 ] 127.0.0.1 /Admin/Article/undefinedthemes/iframe.css
+ERR: 非法操作:undefinedthemes
+
+[ 2017-03-15T14:43:44+08:00 ] 127.0.0.1 /Admin/Article/undefinedthird-party/codemirror/codemirror.js
+ERR: 非法操作:undefinedthird-party
+
+[ 2017-03-15T14:43:44+08:00 ] 127.0.0.1 /Admin/Article/undefinedthird-party/codemirror/codemirror.css
+ERR: 非法操作:undefinedthird-party
+
+[ 2017-03-15T14:43:44+08:00 ] 127.0.0.1 /Admin/Article/undefinedthird-party/zeroclipboard/ZeroClipboard.js
+ERR: 非法操作:undefinedthird-party
+
+[ 2017-03-15T16:53:16+08:00 ] 127.0.0.1 /Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\phpstudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2017-03-15T16:55:17+08:00 ] 127.0.0.1 /Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\phpstudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+

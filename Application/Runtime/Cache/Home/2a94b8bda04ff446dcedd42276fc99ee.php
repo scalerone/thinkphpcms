@@ -26,7 +26,7 @@
 					<nav>
 						<ul>
 							<li class="<?php echo ($cate['id']==''?'active':''); ?>"><a href="/">首页</a></li>
-							<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,0);$cates=array_slice($cates,0,20);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li class="<?php echo ($cate['id']==$id?'active':''); ?>"><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></li><?php endforeach;endif; ?>
+							<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,0);$cates=array_slice($cates,0,20);foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li class="<?php echo ($cate['id']==$id?'active':''); ?>"><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></li><?php endforeach;?>
 						</ul>
 					</nav>
 				</div>
@@ -102,7 +102,7 @@ bridge Blog、METALAB、Techshop等，国内知名创客空间有新车间、创
 			</div>
 			<div class="nav">
 				<ul>
-				<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,71);$cates=array_slice($cates,0,3);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li class="<?php echo ($index==3?'last':''); ?>">
+				<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,71);$cates=array_slice($cates,0,3);foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><li class="<?php echo ($index==3?'last':''); ?>">
 						<div>
 							<div class="img">
 								<img src="<?php echo ($thumb); ?>" width="120px" height="120px" alt="">
@@ -110,7 +110,7 @@ bridge Blog、METALAB、Techshop等，国内知名创客空间有新车间、创
 							<h2><?php echo ($catname); ?></h2>
 							<p><?php echo ($summary); ?></p>
 						</div>
-					</li><?php endforeach;endif; ?>
+					</li><?php endforeach;?>
 				</ul>
 			</div>
 		</div>
@@ -212,7 +212,7 @@ bridge Blog、METALAB、Techshop等，国内知名创客空间有新车间、创
 				<?php
  $cate = M('category')->where("status=1")->find(intval(57)); extract($cate); $url = U('/cate/'.$id); ?><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a>
 			</h2>
-			<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,57);$cates=array_slice($cates,0,3);if(count($cates)==0) : echo "" ;else: foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><p><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></p><?php endforeach;endif; ?>
+			<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,57);$cates=array_slice($cates,0,3);foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><p><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a></p><?php endforeach;?>
 		</div>
 		<div class="contact float_l">
 			<h2 class="h2">

@@ -17,6 +17,7 @@
 				$post = I('post.');
 				$category = M('Category');
 				$post['addtime'] = time();
+				$post['content'] = htmlspecialchars_decode(I('post.content'));
 				if($category -> add($post)){
 					$this -> ajaxReturn(array('status'=>'1','msg'=>'添加成功!'));
 				}else{
@@ -50,6 +51,7 @@
 				if(!isset($post['status'])){
 					$post['status'] = 2;
 				}
+				$post['content'] = htmlspecialchars_decode(I('post.content'));
 				$result = M('Category') -> save($post);
 				//p($result);die;
 				if($result !== false){

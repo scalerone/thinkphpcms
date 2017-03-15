@@ -53,14 +53,21 @@
 
 		//文章列表循环
 		public function _list($attr,$content) {
-			$catid = $attr['catid'];
-			if(empty($catid)) return $attr['empty'];
+			//获取栏目catid
+			$id = $attr['catid'];
+			if('' == $id) $id = I('get.id');
+			//获取子栏目ID
+			$cates = M('Category')->field('id,pid')->select();
+			$cates = getChildsById($cates,$id);
+			$ids = implode(',',$cates[0]);
+			if(empty($ids)) $ids = $id;
+			//设置属性的默认值
 			$length = !empty($attr['length'])?$attr['length']:'60';
 			$empty = !empty($attr['empty'])?$attr['empty']:'';
 			$order = !empty($attr['order'])?$attr['order']:'sort ASC';
 
 			$str = '<?php ';
-			$str .= '$list=M("article")->where("status<>0 and catid='.$catid.'")->order("'.$order.'")->select();';
+			$str .= '$list=M("article")->query("select * from cms_article where (catid in('.$ids.') and status<>0)");';
 			$str .= '$list=array_slice($list,0,'.$length.');';
 
 			$str .= 'if(count($list)==0) : echo "'.$empty.'" ;';
@@ -70,14 +77,16 @@
 			$str .= '$index=$key+1;';
 			$str .= '$url=U("/show/".$id);?>';
 			$str .= $content;
-			$str .='<?php endforeach;endif; ?>';
+			$str .='<?php endforeach;endif;?>';
 
 			return $str;
 		}
 
 		//栏目导航
 		public function _category($attr,$content) {
-			$id = !empty($attr['catid'])?$attr['catid']:'0';
+			$id = $attr['catid'];
+			if('' == $id) $id = I('get.id');
+			
 			$order = !empty($attr['order'])?$attr['order']:'sort ASC';
 
 			$str = '<?php ';
@@ -86,8 +95,8 @@
 			if(isset($attr['length']) && '' !=$attr['length'] ) {
 				$str .= '$cates=array_slice($cates,0,'.$attr['length'].');';
 			}
-			$str .= 'if(count($cates)==0) : echo "'.$attr['empty'].'" ;';
-			$str .= 'else: ';
+			//$str .= 'if(count($cates)==0) : echo "'.$attr['empty'].'" ;';
+			//$str .= 'else: ';
 			$str .= 'foreach($cates as $key=>$cate_val): ';
 			$str .= 'extract($cate_val);';
 			$str .= '$index=$key+1;';
@@ -95,7 +104,7 @@
 			$str .= 'if($type==2) $url=U("/page/".$id);';
 			$str .= '?>';
 			$str .= $content;
-			$str .='<?php endforeach;endif; ?>';
+			$str .='<?php endforeach;?>';
 			return $str;
 		}
 
