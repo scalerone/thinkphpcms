@@ -3,6 +3,94 @@
 	function p($var) {
 	    dump($var, true, null, 0);
 	}	
+
+
+	/**
+	 * 通过自定id获取文章信息
+	 * @param  [type] $catid [文章ID]
+	 * @return [type]        [文章信息]
+	 */
+	function getArticleById($id=''){
+		if('' == $id) return '';
+		return M('Article')->find($id);
+	}
+
+	/**
+	 * 通过自定id获取栏目信息
+	 * @param  [type] $catid [栏目ID]
+	 * @return [type]        [栏目信息]
+	 */
+	function getCateById($catid=''){
+		if('' == $catid) return '';
+		return M('Category')->find($catid);
+	}
+	/**
+	 * 获取文章列表可设置分页
+	 * @param  string  $catid    [栏目ID为空时则获取所有文章]
+	 * @param  string  $fields   [获取文章的字段]
+	 * @param  string  $limit    [获取文章的数量设置分页后则该值无效]
+	 * @param  string  $order    [排序]
+	 * @param  boolean $page     [分页为true则启动，默认为false]
+	 * @param  string  $pageSize [每页显示的数量默认为10]
+	 * @return [type]            [返回文章列表和分页(如果设置了分页)]
+	 */
+	function get_article($catid='',$fields='*',$limit='10',$order='sort ASC',$page=false,$pageSize='10'){
+		$model = M('Article');
+		//需要分页
+		if($page){
+			if('' !== $catid){
+				//获取子栏目ID
+				$cates = M('Category')->field('id,pid')->select();
+				$cates = getChildsById($cates,$catid);
+				$ids = implode(',',$cates[0]);
+				if(empty($ids)) $ids = $catid;
+				$map['_string'] = 'status<>0 AND catid in('.$ids.')'; 
+
+				$count = $model->field($fields)->order($order)->where($map) -> count();
+				$Page = new \Think\Page($count,$pageSize);
+				$Page -> setConfig('prev','上一页');
+				$Page -> setConfig('next','下一页');
+				$show = $Page -> show();
+				$content['page']=$show;
+				$news=$model->field($fields)->where($map)->order($order)->limit($Page->firstRow.','.$Page->listRows)->select();
+				$content['list']=$news;
+			}else{
+
+				$count = $model->field($fields)->order($order)-> count();
+				$Page = new \Think\Page($count,$pageSize);
+				$Page -> setConfig('prev','上一页');
+				$Page -> setConfig('next','下一页');
+				$show = $Page -> show();
+				$content['page']=$show;
+				$news=$model->field($fields)->order($order)->limit($Page->firstRow.','.$Page->listRows)->select();
+				$content['list']=$news;
+			}
+
+			
+		}else{
+			//不需要分页
+			if('' !== $catid){
+				//获取子栏目ID
+				$cates = M('Category')->field('id,pid')->select();
+				$cates = getChildsById($cates,$catid);
+				$ids = implode(',',$cates[0]);
+
+				if(empty($ids)) $ids = $catid;
+				$map['_string'] = 'status<>0 AND catid in('.$ids.')'; 
+				$content['list'] = $model->field($fields)->order($order)->where($map)->limit($limit)->select();
+			}else{
+				//获取子栏目ID
+				$cates = M('Category')->field('id,pid')->select();
+				$cates = getChildsById($cates,$catid);
+				$ids = implode(',',$cates[0]);
+
+				if(empty($ids)) $ids = $catid;
+
+				$content['list'] = $model->field($fields)->order($order)->limit($limit)->select();
+			}
+		}
+		return $content;
+	}
 	
 	/**
 	 * 获取模版文件

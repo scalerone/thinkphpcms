@@ -21,7 +21,10 @@
 		<div class="content list service">
 			<div class="container">
 				<ul>
-				<foreach name="articles" item="vo">
+				<php>
+					$arr = get_article($cate["id"],$fields='*',$limit='1',$order='sort ASC',$page=true,$pageSize='1');
+				</php>
+				<foreach name="arr['list']" item="vo">
 					<li class="clear">
 						<div class="img float_l">
 							<a href="{:U('/show/'.$vo['id'])}">
@@ -37,7 +40,7 @@
 				</foreach>
 				</ul>
 				<div class="pages">
-					{$page}
+					{$arr['page']}
 				</div>
 			</div>
 		</div>
