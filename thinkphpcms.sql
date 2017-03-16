@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 �?03 �?15 �?17:42
+-- 生成日期: 2017 �?03 �?16 �?17:10
 -- 服务器版本: 5.5.47
 -- PHP 版本: 5.5.30
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `cms_admin` (
 --
 
 INSERT INTO `cms_admin` (`id`, `username`, `password`, `email`, `lastlogintime`, `lastloginip`, `status`) VALUES
-(1, 'admin', 'e00cf25ad42683b3df678c61f42c6bda', '', 1489560215, '127.0.0.1', 1),
+(1, 'admin', 'e00cf25ad42683b3df678c61f42c6bda', '', 1489647136, '127.0.0.1', 1),
 (3, 'test', '098f6bcd4621d373cade4e832627b4f6', '', 1488954587, '127.0.0.1', 1),
 (4, 'ads', '2deb000b57bfac9d72c14d4ed967b572', '', 0, '', 1),
 (5, 'test2', 'ad0234829205b9033196ba818f7a872b', '', 1488965209, '127.0.0.1', 1);
@@ -86,7 +86,6 @@ INSERT INTO `cms_article` (`id`, `title`, `summary`, `content`, `catid`, `addtim
 (74, '55', '', '55', 73, 1489334400, '', '', '/Uploads/2017-03-13/58c6563702a73.jpg', 20, 1, 0, 1, 0, 0),
 (75, '启航创客案例 1', '', 'asdasd', 61, 1489334400, '', '', '/Uploads/2017-03-13/58c6578b31654.jpg', 20, 1, 0, 1, 0, 0),
 (76, '2112', '', 'asdasd', 61, 1489334400, '', '', '/Uploads/2017-03-13/58c657a074965.jpg', 20, 1, 0, 1, 0, 0),
-(77, '2323', '', '2323', 61, 1489334400, '', '', '/Uploads/2017-03-13/58c657b1e4e44.jpg', 20, 1, 0, 1, 0, 0),
 (78, '创客教育的理论关联', '在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想', '<p><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span><span style="color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 14px; background-color: rgb(255, 255, 255);">在新兴科技和互联网社区的发展大背景下，创新教育以信息技术的融合为基础，传承了体验教育、项目学习法、创新教育、DIY理念的思想</span></p>', 58, 1489507200, 'admin', '', '/Uploads/2017-03-15/58c900fc2a37f.jpg', 20, 1, 0, 1, 0, 0),
 (79, '启航创客与教育的融合', '启航创客与教育的融合', '<h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 18px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);"><a href="http://www.szqhmaker.com/index.php?m=content&c=index&a=show&catid=3&id=52" style="text-decoration: none; color: rgb(51, 51, 51);">启航创客与教育的融合</a></h2><h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 18px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);"><a href="http://www.szqhmaker.com/index.php?m=content&c=index&a=show&catid=3&id=52" style="text-decoration: none; color: rgb(51, 51, 51);">启航创客与教育的融合</a></h2><h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 18px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);"><a href="http://www.szqhmaker.com/index.php?m=content&c=index&a=show&catid=3&id=52" style="text-decoration: none; color: rgb(51, 51, 51);">启航创客与教育的融合</a></h2><h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 18px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);"><a href="http://www.szqhmaker.com/index.php?m=content&c=index&a=show&catid=3&id=52" style="text-decoration: none; color: rgb(51, 51, 51);">启航创客与教育的融合</a></h2><h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 18px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);"><a href="http://www.szqhmaker.com/index.php?m=content&c=index&a=show&catid=3&id=52" style="text-decoration: none; color: rgb(51, 51, 51);">启航创客与教育的融合</a></h2><h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 18px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);"><a href="http://www.szqhmaker.com/index.php?m=content&c=index&a=show&catid=3&id=52" style="text-decoration: none; color: rgb(51, 51, 51);">启航创客与教育的融合</a></h2><h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 18px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);"><a href="http://www.szqhmaker.com/index.php?m=content&c=index&a=show&catid=3&id=52" style="text-decoration: none; color: rgb(51, 51, 51);">启航创客与教育的融合</a></h2><h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 18px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);"><a href="http://www.szqhmaker.com/index.php?m=content&c=index&a=show&catid=3&id=52" style="text-decoration: none; color: rgb(51, 51, 51);">启航创客与教育的融合</a></h2><h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 18px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);"><a href="http://www.szqhmaker.com/index.php?m=content&c=index&a=show&catid=3&id=52" style="text-decoration: none; color: rgb(51, 51, 51);">启航创客与教育的融合</a></h2><p><br/></p>', 58, 1489507200, '', '', '/Uploads/2017-03-15/58c90175e1777.jpg', 20, 1, 0, 1, 0, 0);
 
@@ -224,35 +223,38 @@ CREATE TABLE IF NOT EXISTS `cms_category` (
   `summary` varchar(255) DEFAULT '',
   `content` text,
   `url` varchar(255) DEFAULT '',
+  `template` varchar(50) DEFAULT '' COMMENT '对应的模版文件:list.html',
+  `app_sub` smallint(1) DEFAULT '1' COMMENT '模版是否应用到子栏目',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=83 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=84 ;
 
 --
 -- 转存表中的数据 `cms_category`
 --
 
-INSERT INTO `cms_category` (`id`, `catname`, `sort`, `pid`, `thumb`, `addtime`, `alias`, `status`, `type`, `summary`, `content`, `url`) VALUES
-(55, '关于我们', 20, 0, '/Uploads/2017-03-11/58c3b4f43986f.jpg', 1489220186, 'About Us', 1, 2, '', '<h2>启航创客</h2><p>深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。</p><p><img src="/Uploads/2017-03-14/58c7f38e790c9.jpg" alt="58c7f38e790c9.jpg"/><br/></p><p><img src="/Uploads/images/20170315/1489550738174407.jpg" title="1489550738174407.jpg" alt="about02.jpg"/></p><p><img src="/Uploads/images/20170315/1489553508557820.jpg" title="1489553508557820.jpg" alt="about03.jpg"/></p>', ''),
-(57, '创客教育', 20, 0, '', 1489221158, '', 1, 2, '', '<h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 24px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);">中小学创客空间</h2><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 13px; white-space: normal; background-color: rgb(255, 255, 255);">创客教室空间用于培养学生的创新能力，让学生的新奇创意思维变成现实。</p><p><img src="/Uploads/images/20170315/1489553718604295.jpg" title="1489553718604295.jpg" alt="show_ck01.jpg"/></p>', ''),
-(58, '新闻资讯', 20, 0, '', 1489221178, '', 1, 1, '', '', ''),
-(59, '下载中心', 20, 0, '', 1489221197, '', 1, 1, '', '', ''),
-(60, '服务支持', 20, 0, '', 1489221219, '', 1, 2, '', '111', ''),
-(61, '成功案例', 20, 0, '', 1489221241, '', 1, 1, '', '', ''),
-(62, '在线留言', 20, 0, '', 1489221380, '', 1, 1, '', '', ''),
-(68, '师资培训', 20, 60, '', 1489385409, '师资培训', 1, 1, '师资培训', '', ''),
-(65, '中小学创客空间', 20, 57, '', 1489373593, '', 1, 2, 'asd', 'asdasd', ''),
-(66, '高效创客空间', 20, 57, '', 1489373608, '高效创客空间', 1, 2, '高效创客空间', 'asd', ''),
-(67, '社会创客空间', 20, 57, '', 1489373622, '社会创客空间', 1, 2, '社会创客空间', 'asd', ''),
-(69, '赛事活动', 20, 60, '', 1489385422, '赛事活动', 1, 1, '赛事活动', '', ''),
-(70, '首页', 20, 0, '', 1489385718, '首页', 2, 1, '首页', '', ''),
-(71, '创客课程思路', 20, 70, '', 1489385738, '创客课程思路', 1, 1, '以培养学习者，特别是青少年学习者的创客素养为导向的教育模式。它包含正式学习，也包含贯穿学习者一生的非正式学习。', '', ''),
-(72, '创客教育课堂 —为学生筑“造梦空间”', 20, 70, '', 1489385752, '创客教育课堂 —为学生筑“造梦空间”', 1, 1, '创客教育课堂 —为学生筑“造梦空间”', '', ''),
-(73, ' 小创客的作品', 20, 70, '', 1489385766, ' 小创客的作品', 1, 1, ' 小创客的作品', '', ''),
-(74, '创客教育在美国', 20, 70, '', 1489385805, '创客教育在美国', 1, 1, '奥巴马在2009年的竞选演讲中说：“我希望我们所有人去思考创新的 方法，激发年轻人从事到科学和工程中来，鼓励年轻人去创造、构建 和发明——去做事物的创造者，而不仅仅是事物的消费者“。2012年 初美国政府又推出一个新项目，计划在未来四年内在1000所美国学校 引入创客空间。', '', ''),
-(75, '创客教育进中国', 20, 70, '', 1489385818, ' 创客教育进中国', 1, 1, '李克强主持召开国务院常务会议，确定支持发展“众创空间”的政策措施为创业创新搭建新平台，在内的各类青年创新人才和创新团队，带动扩大 就压，打造经济发展新的“发动机”，具有重要意义。医药在创客空间、 创新工厂等孵化模式的基础上，大力发展市场化、专业化、集成化、网络 化的模式', '', ''),
-(76, '小学', 20, 71, '/Uploads/2017-03-13/58c63b1ba2967.png', 1489385832, '小学', 1, 1, '发明制作一个有趣的玩具，感受造物乐趣，培养探究精神及动手实践的兴趣和能力学会简单编程，学习定格动画制作等。', '', ''),
-(77, '初中', 20, 71, '/Uploads/2017-03-13/58c63b2c64cf5.png', 1489385845, '初中', 1, 1, '综合活动与工作坊相结合，让学生“做中玩、 玩中学”，以arduino和图形化编程为基础， 融合各学科知识，培养动手解决问题的能力。', '', ''),
-(78, '高中', 20, 71, '/Uploads/2017-03-13/58c63b3cdd66c.png', 1489385856, '高中', 1, 1, '发明制作一个有趣的玩具，感受造物乐趣， 培养探究精神及动手实践的兴趣和能力学 会简单编程，学习定格动画制作等。', '', '');
+INSERT INTO `cms_category` (`id`, `catname`, `sort`, `pid`, `thumb`, `addtime`, `alias`, `status`, `type`, `summary`, `content`, `url`, `template`, `app_sub`) VALUES
+(55, '关于我们', 20, 0, '/Uploads/2017-03-11/58c3b4f43986f.jpg', 1489220186, 'About Us', 1, 2, '', '<h2>启航创客</h2><p>深圳市启航创客科技有限公司是一家领先的青少年创客教育服务商，为中小学学校提供创客空间设计搭建、创客课程、创客师资培训、创客电子物料等专业服务。</p><p><img src="/Uploads/2017-03-14/58c7f38e790c9.jpg" alt="58c7f38e790c9.jpg"/><br/></p><p><img src="/Uploads/images/20170315/1489550738174407.jpg" title="1489550738174407.jpg" alt="about02.jpg"/></p><p><img src="/Uploads/images/20170315/1489553508557820.jpg" title="1489553508557820.jpg" alt="about03.jpg"/></p>', '', '', 1),
+(57, '创客教育', 20, 0, '', 1489221158, '', 1, 2, '', '<h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 24px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);">中小学创客空间</h2><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 13px; white-space: normal; background-color: rgb(255, 255, 255);">创客教室空间用于培养学生的创新能力，让学生的新奇创意思维变成现实。</p><p><img src="/Uploads/images/20170315/1489553718604295.jpg" title="1489553718604295.jpg" alt="show_ck01.jpg"/></p>', '', '', 1),
+(58, '新闻资讯', 20, 0, '', 1489221178, '', 1, 1, '', '', '', '', 1),
+(59, '下载中心', 20, 0, '', 1489221197, '', 1, 1, '', '', '', '', 1),
+(60, '服务支持', 20, 0, '', 1489221219, '', 1, 2, '', '111', '', '', 1),
+(61, '成功案例', 20, 0, '', 1489221241, '', 1, 1, '', '', '', '', 1),
+(62, '在线留言', 20, 0, '', 1489221380, '', 1, 1, '', '', '', '', 1),
+(68, '师资培训', 20, 60, '', 1489385409, '师资培训', 1, 1, '师资培训', '', '', '', 1),
+(65, '中小学创客空间', 20, 57, '', 1489373593, '', 1, 2, 'asd', 'asdasd', '', '', 1),
+(66, '高效创客空间', 20, 57, '', 1489373608, '高效创客空间', 1, 2, '高效创客空间', 'asd', '', '', 1),
+(67, '社会创客空间', 20, 57, '', 1489373622, '社会创客空间', 1, 2, '社会创客空间', 'asd', '', '', 1),
+(69, '赛事活动', 20, 60, '', 1489385422, '赛事活动', 1, 1, '赛事活动', '', '', '', 1),
+(70, '首页', 20, 0, '', 1489385718, '首页', 2, 1, '首页', '', '', '', 1),
+(71, '创客课程思路', 20, 70, '', 1489385738, '创客课程思路', 1, 1, '以培养学习者，特别是青少年学习者的创客素养为导向的教育模式。它包含正式学习，也包含贯穿学习者一生的非正式学习。', '', '', '', 1),
+(72, '创客教育课堂 —为学生筑“造梦空间”', 20, 70, '', 1489385752, '创客教育课堂 —为学生筑“造梦空间”', 1, 1, '创客教育课堂 —为学生筑“造梦空间”', '', '', '', 1),
+(73, ' 小创客的作品', 20, 70, '', 1489385766, ' 小创客的作品', 1, 1, ' 小创客的作品', '', '', '', 1),
+(74, '创客教育在美国', 20, 70, '', 1489385805, '创客教育在美国', 1, 1, '奥巴马在2009年的竞选演讲中说：“我希望我们所有人去思考创新的 方法，激发年轻人从事到科学和工程中来，鼓励年轻人去创造、构建 和发明——去做事物的创造者，而不仅仅是事物的消费者“。2012年 初美国政府又推出一个新项目，计划在未来四年内在1000所美国学校 引入创客空间。', '', '', '', 1),
+(75, '创客教育进中国', 20, 70, '', 1489385818, ' 创客教育进中国', 1, 1, '李克强主持召开国务院常务会议，确定支持发展“众创空间”的政策措施为创业创新搭建新平台，在内的各类青年创新人才和创新团队，带动扩大 就压，打造经济发展新的“发动机”，具有重要意义。医药在创客空间、 创新工厂等孵化模式的基础上，大力发展市场化、专业化、集成化、网络 化的模式', '', '', '', 1),
+(76, '小学', 20, 71, '/Uploads/2017-03-13/58c63b1ba2967.png', 1489385832, '小学', 1, 1, '发明制作一个有趣的玩具，感受造物乐趣，培养探究精神及动手实践的兴趣和能力学会简单编程，学习定格动画制作等。', '', '', '', 1),
+(77, '初中', 20, 71, '/Uploads/2017-03-13/58c63b2c64cf5.png', 1489385845, '初中', 1, 1, '综合活动与工作坊相结合，让学生“做中玩、 玩中学”，以arduino和图形化编程为基础， 融合各学科知识，培养动手解决问题的能力。', '', '', '', 1),
+(78, '高中', 20, 71, '/Uploads/2017-03-13/58c63b3cdd66c.png', 1489385856, '高中', 1, 1, '发明制作一个有趣的玩具，感受造物乐趣， 培养探究精神及动手实践的兴趣和能力学 会简单编程，学习定格动画制作等。', '', '', '', 1),
+(83, '测试模版', 20, 0, '', 1489650585, '阿斯达', 1, 2, 'asd', '<p>测试模版neirong&nbsp;</p>', '', 'page.html', 1);
 
 -- --------------------------------------------------------
 

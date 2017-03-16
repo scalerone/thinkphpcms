@@ -52,46 +52,18 @@
 				<li style="background:url(/Public/images/banner01.jpg) 50% 0 no-repeat;"></li>
 			</ul>
 		</section>
-		<div class="position">
-			<div class="container clear">
-				<div class="left float_l">
-					<p>
-						<span class="h2">
-							<?php echo ($cate['catname']); ?>
-						</span>
-						<span class="h4"><?php echo ($cate['alias']); ?></span>
-					</p>
-				</div>
-				<div class="right float_r">
-					<p>
-						<i class="icon-home"></i>
-						<a href="/">首页</a>>
-						<a href="/list/58.html">新闻资讯</a>&gt;
-					</p>
-				</div>
-			</div>
+	<div class="position sub_nav">
+		<div class="container">
+			<p>
+			<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,57);foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id);?><a class="<?php echo ($cate['id']==$id?'active':''); ?>" href="<?php echo ($url); ?>"><?php echo ($catname); ?></a><?php endforeach;?>
+			</p>
 		</div>
-		<div class="content list service">
-			<div class="container">
-				<ul>
-				<?php if(is_array($articles)): foreach($articles as $key=>$vo): ?><li class="clear">
-						<div class="img float_l">
-							<a href="<?php echo U('/show/'.$vo['id']);?>">
-								<img src="<?php echo ($vo["thumb"]); ?>" alt="<?php echo ($vo["title"]); ?>" height="230px" width="345px">
-							</a>
-						</div>
-						<div class="text float_l">
-							<h2><a href="<?php echo U('/show/'.$vo['id']);?>"><?php echo ($vo["title"]); ?></a></h2>
-							<p><?php echo ($vo["summary"]); ?></p>
-							<span class="date"><?php echo (date('Y-m-d',$vo['addtime'])); ?></span>
-						</div>
-					</li><?php endforeach; endif; ?>
-				</ul>
-				<div class="pages">
-					<?php echo ($page); ?>
-				</div>
-			</div>
+	</div>
+	<div class="content mb50">
+		<div class="container">
+			<?php echo ($cate["content"]); ?>
 		</div>
+	</div>
 <footer>
 	<div class="container clear">
 		<div class="stu float_l">

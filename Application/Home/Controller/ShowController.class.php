@@ -4,7 +4,10 @@
 
 	class ShowController extends Controller {
 		public function index() {
-			p($_GET);die;
+			$id = I('get.id');
+			$article = M('Article')->find($id);
+			$this -> article = $article;
+			$this->display('Template:show');
 		}
 	}
 

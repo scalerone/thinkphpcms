@@ -21,31 +21,23 @@
 		<div class="content list service">
 			<div class="container">
 				<ul>
-				<list order="order ASC" page="page" pageNum="1">
+				<foreach name="articles" item="vo">
 					<li class="clear">
 						<div class="img float_l">
-							<a href="{$url}">
-								<img src="{$thumb}" alt="{$title}" height="230px" width="345px">
+							<a href="{:U('/show/'.$vo['id'])}">
+								<img src="{$vo.thumb}" alt="{$vo.title}" height="230px" width="345px">
 							</a>
 						</div>
 						<div class="text float_l">
-							<h2><a href="{$url}">{$title}</a></h2>
-							<p>{$summary}
-							</p>
-							<span class="date">{$addtime|date='Y-m-d',###}</span>
+							<h2><a href="{:U('/show/'.$vo['id'])}">{$vo.title}</a></h2>
+							<p>{$vo.summary}</p>
+							<span class="date">{$vo['addtime']|date='Y-m-d',###}</span>
 						</div>
 					</li>
-				</list>
+				</foreach>
 				</ul>
 				<div class="pages">
-					<p>
-						<a href=""><</a>
-						<span>1</span>
-						<a href="">2</a>
-						<a href="">3</a>
-						<a href="">4</a>
-						<a href="">></a>
-					</p>
+					{$page}
 				</div>
 			</div>
 		</div>

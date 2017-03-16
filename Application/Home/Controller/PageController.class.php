@@ -4,9 +4,10 @@
 
 	class PageController extends Controller {
 		public function index() {
-			$cate = M('category')->find(I('get.id'));
+			$id = I('get.id');
+			$cate = M('Category')->find($id);
 			$this -> cate = $cate;
-			$this->display();
+			$this->display('Template:page');
 		}
 	}
 

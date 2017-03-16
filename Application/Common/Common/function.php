@@ -4,6 +4,28 @@
 	    dump($var, true, null, 0);
 	}	
 	
+	/**
+	 * 获取模版文件
+	 * @param  [type] $dir [description]
+	 * @return [type]      [description]
+	 */
+	function getTemplates($dir){
+		$arr = array();
+		if (is_dir($dir)) {
+			if ($dh = opendir($dir)) {
+				while (($file = readdir($dh)) !== false) {
+					$ex = end(explode('.', $file));
+					$tmp = current(explode('.', $file));
+					if(('html' == $ex || 'htm' == $ex) && $tmp !== 'index'){
+						$arr[] = $file;
+					}
+				}
+				closedir($dh);
+			}
+		}
+		return $arr;
+	}
+
 	//通过栏目ID获取上级栏目
 	function getParentsById($catid,$cates) {
 		$arr = array();

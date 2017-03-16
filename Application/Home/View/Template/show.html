@@ -1,0 +1,52 @@
+<include file="Public:header" />
+		<div class="position">
+			<div class="container clear">
+				<div class="left float_l">
+					<p>
+						<span class="h2">
+							<category catid=""></category>
+						</span>
+						<span class="h4">{$article.alias}</span>
+					</p>
+				</div>
+				<div class="right float_r">
+					<p>
+						<i class="icon-home"></i>
+						<a href="/">首页</a>>
+						<position/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="container">
+				<div class="new_title">
+					<h2>{$article.title}</h2>
+					<span class="date">发布日期：{$article.addtime|date='Y-m-d H:i:s',###}    编辑：{$article.author}</span>
+				</div>
+				<div class="con">
+					{$article.content}
+				</div>
+				<div class="fenx mt50">
+					<div class="bdsharebuttonbox" data-tag="share_1">
+						<a class="bds_qzone" data-cmd="qzone" href="#"></a>
+						<a class="bds_tsina" data-cmd="tsina"></a>
+						<a class="bds_baidu" data-cmd="baidu"></a>
+						<a class="bds_renren" data-cmd="renren"></a>
+						<a class="bds_tqq" data-cmd="tqq"></a>
+						<a class="bds_more" data-cmd="more">更多</a>
+						<a class="bds_count" data-cmd="count"></a>
+					</div>
+				</div>
+				<div class="pages plu">
+					<p>
+						<a href=""><</a>
+						<a href="">></a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+		</script>
+<include file="Public:footer" />

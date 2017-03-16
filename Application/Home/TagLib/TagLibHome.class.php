@@ -21,6 +21,15 @@
 		//定位
 		public function _position($attr,$content) {
 			$catid = I('get.id');
+			
+			$uri = $_SERVER['REQUEST_URI'];
+			$flag = strpos($uri,'show');
+			
+			if($flag){
+				$article = M('Article')->field('id,catid')->find($catid);
+
+				$catid = $article['catid'];
+			}
 			if(empty($catid)) return '';
 			$cates = M('category')->field('id,pid,catname,type,summary,sort')->where('status=1')->select();
 			$cates = getParentsById($catid,$cates);
@@ -46,8 +55,6 @@
 					$str .= '<a href="'.$url.'">'.$val['catname'].'</a>&gt;';
 				}
 			}
-			
-			//p($str);die;
 			return $str;
 		}
 
@@ -66,8 +73,10 @@
 			$empty = !empty($attr['empty'])?$attr['empty']:'';
 			$order = !empty($attr['order'])?$attr['order']:'sort ASC';
 
+			$sql = 'M("article")->query("select * from cms_article where (catid in('.$ids.') and status<>0)");';
+
 			$str = '<?php ';
-			$str .= '$list=M("article")->query("select * from cms_article where (catid in('.$ids.') and status<>0)");';
+			$str .= '$list='.$sql;
 			$str .= '$list=array_slice($list,0,'.$length.');';
 
 			$str .= 'if(count($list)==0) : echo "'.$empty.'" ;';
@@ -78,6 +87,8 @@
 			$str .= '$url=U("/show/".$id);?>';
 			$str .= $content;
 			$str .='<?php endforeach;endif;?>';
+			
+			//p($str);die;
 
 			return $str;
 		}
@@ -86,7 +97,7 @@
 		public function _category($attr,$content) {
 			$id = $attr['catid'];
 			if('' == $id) $id = I('get.id');
-			
+
 			$order = !empty($attr['order'])?$attr['order']:'sort ASC';
 
 			$str = '<?php ';
@@ -95,8 +106,6 @@
 			if(isset($attr['length']) && '' !=$attr['length'] ) {
 				$str .= '$cates=array_slice($cates,0,'.$attr['length'].');';
 			}
-			//$str .= 'if(count($cates)==0) : echo "'.$attr['empty'].'" ;';
-			//$str .= 'else: ';
 			$str .= 'foreach($cates as $key=>$cate_val): ';
 			$str .= 'extract($cate_val);';
 			$str .= '$index=$key+1;';

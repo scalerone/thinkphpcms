@@ -18,15 +18,22 @@
 				$category = M('Category');
 				$post['addtime'] = time();
 				$post['content'] = htmlspecialchars_decode(I('post.content'));
+				if(!isset($post['app_sub'])) $post['app_sub'] = 0;
+				
 				if($category -> add($post)){
 					$this -> ajaxReturn(array('status'=>'1','msg'=>'添加成功!'));
 				}else{
 					$this -> ajaxReturn(array('status'=>'0','msg'=>'添加失败,请重新添加!'));
 				}
 			}else{
+				//获取模版文件
+				$path = APP_PATH . 'Home/View/Template';
+				$templates = getTemplates($path);
+				
 				$category = M('Category')->field('id,catname,pid')->order('sort ASC')-> select();
 				$this -> categories = reorgnCates($category,'├');
 				$this -> pid = I('get.pid',0,intval);
+				$this -> templates = $templates;
 				$this -> display();
 			}
 		}
