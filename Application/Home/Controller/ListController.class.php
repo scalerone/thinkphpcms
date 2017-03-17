@@ -8,10 +8,14 @@
 			$catid = I('get.id');
 			//获取当前栏目信息
 			$cate = M('category')->find($catid);
+			$tmp = getTemplateName($cate['template']);
+			if('' == $tmp){
+				$tmp = 'list';
+			}
 			
 			$this -> cate = $cate;//显示栏目
-			if('' == $cate['template']) $template = 'list';
-			$this->display('Template:'.$template);
+			
+			$this->display('Template:'.$tmp);
 		}
 	}
 

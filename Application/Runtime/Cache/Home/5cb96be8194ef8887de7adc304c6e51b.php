@@ -66,7 +66,7 @@
 					<p>
 						<i class="icon-home"></i>
 						<a href="/">首页</a>>
-						<a href="/list/58.html">新闻资讯</a>&gt;
+						
 					</p>
 				</div>
 			</div>

@@ -42,7 +42,7 @@
                         <dd><a href="<?php echo U('Contact/index');?>"><i class="iconfont">&#xe61b;</i>留言管理</a></dd>
                         <dd><a href="<?php echo U('Comment/index');?>"><i class="iconfont">&#xe621;</i>评论管理</a></dd>
                         <dd><a href="<?php echo U('Links/index');?>"><i class="iconfont">&#xe636;</i>友情链接</a></dd>
-                        <dd><a href="<?php echo U('Banner/index');?>"><i class="iconfont">&#xe622;</i>广告管理</a></dd>
+                        <dd><a href="<?php echo U('Ads/index');?>"><i class="iconfont">&#xe622;</i>广告管理</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -92,7 +92,7 @@
                 <div class="result-title">
                     <div class="result-list">
                         <a href="<?php echo U('Category/add');?>"><i class="iconfont">&#xe762;</i>新增栏目</a>
-                        <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                        <!-- <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a> -->
                         <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                     <div class="result-title">
                         <div class="result-list">
                             <a href="<?php echo U('Article/add');?>"><i class="iconfont">&#xe762;</i>新增栏目</a>
-                            <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                            <!-- <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a> -->
                             <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
                         </div>
                     </div>

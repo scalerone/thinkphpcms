@@ -84,37 +84,48 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">管理员组管理</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">广告管理</span></div>
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="" class="sortForm">
+            <form method="post" action="<?php echo U('Links/updateSort');?>" class="sortForm layui-form">
                 <div class="result-title">
                     <div class="result-list">
-                        <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加管理员组</a>
+                        <a href="javascript:;" class="addPlate"><i class="iconfont">&#xe762;</i>新增板块</a>
+                        <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                        <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
                     </div>
                 </div>
                 <div class="result-content" style="max-height: 850px;overflow: auto;">
                     <table class="layui-table">
                       <thead>
                         <tr>
-                            <th width="5%">ID</th>
-                            <th>组名称</th>
-                            <th width="15%">操作</th>
+                            <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
+                            <th>板块名称</th>
+                            <th width="20%">添加时间</th>
+                            <th width="26%">操作</th>
                         </tr>
                       </thead>
                       <tbody>
-                    <?php if(is_array($groups)): $i = 0; $__LIST__ = $groups;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
-                            <td width="3%"><?php echo ($vo["id"]); ?></td>
-                            <td><?php echo ($vo["title"]); ?>
+                    <?php if(is_array($plate)): $i = 0; $__LIST__ = $plate;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
+                            <td><input class="set" type="checkbox" lay-skin="primary" value="<?php echo ($vo["id"]); ?>"></td>
+                            <td><?php echo ($vo["name"]); ?>
+                            </td>
+                            <td><?php echo (date('Y-m-d H:i:s',$vo["addtime"])); ?>
                             </td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a title="配置权限" class="editLink layui-btn layui-btn-small" href="<?php echo U('Admin/setRules',array('id'=>$vo['id']));?>">
-                                        <i class="layui-icon">&#xe642;</i>
+                                    <a title="添加广告" class="editPlate layui-btn layui-btn-small" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                       添加广告
                                     </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
-                                        <i class="layui-icon">&#xe640;</i>
+                                    <a title="广告列表" class="layui-btn layui-btn-small plateList" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                        广告列表
+                                    </a>
+                                    <a title="修改" class="editPlate layui-btn layui-btn-small" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                       修改
+                                    </a>
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOnePlate" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                        删除
                                     </a>
                                 </div>
                             </td>
@@ -123,30 +134,43 @@
                     </table>
                     <div class="result-title">
                         <div class="result-list">
-                            <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加管理员组</a>
+                            <a href="javascript:;" class="addPlate"><i class="iconfont">&#xe762;</i>新增板块</a>
+                            <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                            <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
+
+    <!--添加板块 S-->
+    <div id="addPlate" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
         <form class="layui-form" action="">
           <div class="layui-form-item">
-            <label class="layui-form-label wid_auto">名称</label>
-            <div class="layui-input-block margin-left80">
-              <input type="text" name="title" required  lay-verify="required" placeholder="请输入管理员组名称" autocomplete="off" class="layui-input">
+            <label class="layui-form-label">板块名</label>
+            <div class="layui-input-block">
+              <input type="text" name="name" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input name">
             </div>
           </div>
 
+        <div class="layui-form-item">
+            <label class="layui-form-label">板块描述</label>
+            <div class="layui-input-block">
+              <textarea name="desc" placeholder="请输入内容" class="layui-textarea desc"></textarea>
+            </div>
+        </div>
+
           <div class="layui-form-item">
             <div class="layui-input-block">
-              <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>
+              <button class="layui-btn" lay-submit lay-filter="formDemo">添加</button>
             </div>
           </div>
         </form>
     </div>
+     <!--添加板块 E-->
     <!--/main-->
+</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -202,57 +226,99 @@ layui.use('element', function(){
     layui.use(['form','layer'], function(){
         var layer = layui.layer
         ,form = layui.form();
-
-        //监听提交
-        form.on('submit(formDemo)', function(data){
-          $.ajax({
-            url: '<?php echo U("Admin/addGroup");?>',
-            type: 'post',
-            dataType: 'json',
-            data: $(data.form).serialize(),
-            success: function(res){
-              if(res.status == 1){
-                layer.alert(res.msg,{icon:1});   
-                window.setTimeout(function(){
-                  window.location.href = "<?php echo U('Admin/group');?>";
-                },1500);
-              }else{
-                layer.alert(res.msg,{icon:2}); 
-              }
-            },
-            error: function(res){
-              console.log(res);
-            }
+        //全选
+          form.on('checkbox(allChoose)', function(data){
+            var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+            child.each(function(index, item){
+              item.checked = data.elem.checked;
+            });
+            form.render('checkbox');
           });
-          return false;
-        });
-});
 
+          //修改
+          var index = $('.editPlate').on('click',function(){
+            var id = $(this).data('id');
+            layer.open({
+              type: 2,
+              title: '修改板块',
+              fixed: false, //不固定
+              maxmin: true,
+              area: ['460px', '280px'],
+              content: '/Admin/Ads/editPlate/id/' + id //iframe的url
+            }); 
+          });
 
-    //删除单个用户组
-    $(function(){
-        $('.delOneLink').on('click',function(){
-                $trEle = $(this).parents('tr');//当前的tr节点
-                var url = "<?php echo U('Admin/delGroup');?>";//提交删除的地址
-                var eleId = $trEle.data('id');//当前的id
-                //提示
-                layer.confirm('确定要删除该管理员组？', {icon: 3, title:'提示'}, function(index){
-                ajaxDeleteElems(eleId,url,'post',$trEle);
+           //添加
+            form.on('submit(formDemo)', function(data){
+              $.ajax({
+                url: '<?php echo U("Ads/addPlate");?>',
+                type: 'post',
+                dataType: 'json',
+                data: $(data.form).serialize(),
+                success: function(res){
+                  if(res.status == 1){
+                    layer.alert(res.msg,{icon:1});   
+                    window.setTimeout(function(){
+                      window.location.href = "<?php echo U('Ads/index');?>";
+                    },1500);
+                  }else{
+                    layer.alert(res.msg,{icon:2}); 
+                  }
+                },
+                error: function(res){
+                  console.log(res);
+                }
+              });
+              return false;
+            });
+        //删除
+        $('.batchDel').on('click',function(){
+                //获取所有选中项
+                $trs = $('.result-content table tbody tr input:checked');
+                if(!$trs.length){
+                    layer.alert('请选中需要删除的板块!', {icon: 2});
+                    return;
+                }
+                //获取选中的ID
+                var ids = [];
+                $trs.filter(function(index) {
+                    return ids.push($($trs[index]).val());
+                });
+
+                var url = '<?php echo U("Ads/delPlate");?>';
+                ids = ids.join(',');
+                var $elems = $trs.parents('tr');
+                console.log($elems);
+                debugger;
+                layer.confirm('确定要删除选中的板块吗？', {icon: 3, title:'提示'}, function(index){
+                    ajaxDeleteElems(ids,url,'post','',$elems);
             });
         });
-    });
-    //添加会员
-    $('.addMember').click(function(){
+        //删除单个
+        $('.delOnePlate').on('click',function(){
+            var id = $(this).data('id');
+            var url = '<?php echo U("Ads/delPlate");?>';
+            var $elems = $(this).parents('tr');
+            layer.confirm('确定要删除选中的板块吗？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(id,url,'post','',$elems);
+            });
+           
+        });
+    
+    //添加板块
+    $('.addPlate').click(function(){
         layer.open({
           type: 1,
-          title: '添加管理员组',
+          title: '添加广告板块',
           closeBtn: 1,
           area: ['460px', 'auto'],
           shadeClose: true,
-          content: $('#addWrap'),
+          content: $('#addPlate'),
         });
-    });
+    });     
 
+});
+   
 </script>
 </body>
 </html>

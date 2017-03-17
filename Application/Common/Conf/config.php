@@ -20,9 +20,10 @@ return array(
     'URL_MODEL'             =>  2,
     'URL_ROUTER_ON'         =>  true,   // 是否开启URL路由
     'URL_ROUTE_RULES'       =>  array(
-            'list/:id' => 'Home/List/index',
-            'page/:id' => 'Home/Page/index',
-            'show/:id' => 'Home/Show/index',
+            'list/:id\d' => 'Home/List/index',
+            'page/:id\d' => 'Home/Page/index',
+            'show/:id\d' => 'Home/Show/index',
+
     ), // 默认路由规则 针对模块
 
     'URL_HTML_SUFFIX'       =>  'html',  // URL伪静态后缀设置

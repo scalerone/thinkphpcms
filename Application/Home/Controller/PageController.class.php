@@ -6,11 +6,16 @@
 		public function index() {
 			$id = I('get.id');
 			$cate = M('Category')->find($id);
-			if('' == $cate['template']) $template = 'page';
+			$tmp = getTemplateName($cate['template']);
+			if('' == $tmp){
+				$tmp = 'page';
+			}
 			
 			$this -> cate = $cate;
-			$this->display('Template:'.$template);
+			$this->display('Template:'.$tmp);
 		}
+
+
 	}
 
 ?>

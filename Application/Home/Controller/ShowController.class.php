@@ -6,9 +6,9 @@
 		public function index() {
 			$id = I('get.id');
 			$article = M('Article')->find($id);
-			if('' == $cate['template']) $template = 'show';
+			
 			$this -> article = $article;
-			$this->display('Template:'.$template);
+			$this->display('Template:show');
 		}
 	}
 

@@ -84,67 +84,62 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">管理员组管理</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a>首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">系统设置</span></div>
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="" class="sortForm">
-                <div class="result-title">
-                    <div class="result-list">
-                        <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加管理员组</a>
-                    </div>
-                </div>
-                <div class="result-content" style="max-height: 850px;overflow: auto;">
-                    <table class="layui-table">
-                      <thead>
-                        <tr>
-                            <th width="5%">ID</th>
-                            <th>组名称</th>
-                            <th width="15%">操作</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                    <?php if(is_array($groups)): $i = 0; $__LIST__ = $groups;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
-                            <td width="3%"><?php echo ($vo["id"]); ?></td>
-                            <td><?php echo ($vo["title"]); ?>
-                            </td>
-                            <td>
-                                <div class="layui-btn-group">
-                                    <a title="配置权限" class="editLink layui-btn layui-btn-small" href="<?php echo U('Admin/setRules',array('id'=>$vo['id']));?>">
-                                        <i class="layui-icon">&#xe642;</i>
-                                    </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
-                                        <i class="layui-icon">&#xe640;</i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
-                      </tbody>
+            <div class="result-content" style="max-height: 600px;overflow: auto;">
+              <div class="result-title">
+                  <div class="result-list">
+                      <div class="layui-btn-group">
+                        <a class="layui-btn back" href="javascript:;">立即备份</a>
+                      </div>
+                  </div>
+              </div>
+              <fieldset class="layui-elem-field" style="min-height: 100px;">
+                <div class="layui-inline">
+                  <div class="layui-field-box">
+                      <table class="layui-table" lay-even="" lay-skin="row">
+                        <thead>
+                          <tr>
+                            <th width="6%">序号</th>
+                            <th>文件名</th>
+                            <th width="15%">备份时间</th>
+                            <th>文件大小</th>
+                            <th width="20%">操作</th>
+                          </tr>
+                        </head>
+                        <tbody>
+                            <?php if(!empty($lists)): if(is_array($lists)): foreach($lists as $key=>$row): if($key > 1): ?><tr>
+                                            <td><?php echo ($key-1); ?></td>
+                                            <td style="text-align: left"><a href="<?php echo U('System/backup',array('action'=>'download','file'=>$row));?>"><?php echo ($row); ?></a></td>
+                                            <td><?php echo (getfiletime($row,$datadir)); ?></td>
+                                            <td><?php echo (getfilesize($row,$datadir)); ?></td>
+                                            <td>
+                                              <div class="layui-btn-group">
+                                                <a title="下载" href="<?php echo U('System/backup',array('action'=>'download','file'=>$row));?>" class="layui-btn">
+                                                  <i class="layui-icon">&#xe601;</i>
+                                                </a>
+                                                <a title="还原" data-file="<?php echo ($row); ?>" href="javascript:;" class="layui-btn rl">
+                                                  <i class="iconfont">&#xe634;</i>
+                                                </a>
+                                                <a title="删除" data-file="<?php echo ($row); ?>" href="javascript:;" class="layui-btn layui-btn-danger del">
+                                                  <i class="layui-icon">&#xe640;</i>
+                                                </a>
+                                              </div>
+                                            </td>
+                                        </tr><?php endif; endforeach; endif; ?>
+                                <?php else: ?>
+                                <tr>
+                                    <td colspan="7">没有找到相关数据。</td>
+                                </tr><?php endif; ?>
+                        </tbody>
                     </table>
-                    <div class="result-title">
-                        <div class="result-list">
-                            <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加管理员组</a>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-            </form>
+              </fieldset>
+            </div>
         </div>
-    </div>
-    <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
-        <form class="layui-form" action="">
-          <div class="layui-form-item">
-            <label class="layui-form-label wid_auto">名称</label>
-            <div class="layui-input-block margin-left80">
-              <input type="text" name="title" required  lay-verify="required" placeholder="请输入管理员组名称" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-
-          <div class="layui-form-item">
-            <div class="layui-input-block">
-              <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>
-            </div>
-          </div>
-        </form>
     </div>
     <!--/main-->
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
@@ -199,60 +194,63 @@ layui.use('element', function(){
 </script>
 <script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['form','layer'], function(){
+    layui.use(['layer','form'], function(){
         var layer = layui.layer
         ,form = layui.form();
 
-        //监听提交
-        form.on('submit(formDemo)', function(data){
-          $.ajax({
-            url: '<?php echo U("Admin/addGroup");?>',
-            type: 'post',
-            dataType: 'json',
-            data: $(data.form).serialize(),
-            success: function(res){
+  });
+      $('.rl').on('click',function(){
+          var url = "<?php echo U('System/backup');?>";
+          var file = $(this).data('file');
+          layer.confirm('是否还原该数据库文件!', {icon: 3, title:'提示'}, function(index){
+            
+            $.get(url,{'action':'RL','file':file},function(res){
               if(res.status == 1){
-                layer.alert(res.msg,{icon:1});   
-                window.setTimeout(function(){
-                  window.location.href = "<?php echo U('Admin/group');?>";
+                layer.msg('还原成功!',{icon:1});
+                 window.setTimeout(function(){
+                  window.location.href = url;
                 },1500);
               }else{
-                layer.alert(res.msg,{icon:2}); 
+                layer.msg('还原出错!',{icon:2});
               }
-            },
-            error: function(res){
-              console.log(res);
-            }
+            },'json');
+            layer.close(index);
           });
-          return false;
-        });
-});
-
-
-    //删除单个用户组
-    $(function(){
-        $('.delOneLink').on('click',function(){
-                $trEle = $(this).parents('tr');//当前的tr节点
-                var url = "<?php echo U('Admin/delGroup');?>";//提交删除的地址
-                var eleId = $trEle.data('id');//当前的id
-                //提示
-                layer.confirm('确定要删除该管理员组？', {icon: 3, title:'提示'}, function(index){
-                ajaxDeleteElems(eleId,url,'post',$trEle);
-            });
-        });
-    });
-    //添加会员
-    $('.addMember').click(function(){
-        layer.open({
-          type: 1,
-          title: '添加管理员组',
-          closeBtn: 1,
-          area: ['460px', 'auto'],
-          shadeClose: true,
-          content: $('#addWrap'),
-        });
-    });
-
+          
+      });
+      $('.back').on('click',function(){
+          var url = "<?php echo U('System/backup');?>";
+          $.get(url,{'action':'backup'},function(res){
+            if(res.status == 1){
+              layer.msg('备份成功!',{icon:1});
+              window.setTimeout(function(){
+                window.location.href = url;
+              },1500);
+            }else{
+              layer.msg('备份出错!',{icon:2});
+            }
+          },'json');
+          layer.close(index);
+          
+      });
+      $('.del').on('click',function(){
+          var url = "<?php echo U('System/backup');?>";
+          var file = $(this).data('file');
+          layer.confirm('是否删除该数据库文件!', {icon: 3, title:'提示'}, function(index){
+            $.get(url,{'action':'Del','file':file},function(res){
+              if(res.status == 1){
+                layer.msg('删除成功!',{icon:1});
+                 window.setTimeout(function(){
+                  window.location.href = url;
+                },1500);
+              }else{
+                layer.msg('删除失败!',{icon:2});
+              }
+            },'json');
+            layer.close(index);
+          });
+         
+      });
 </script>
 </body>
 </html>

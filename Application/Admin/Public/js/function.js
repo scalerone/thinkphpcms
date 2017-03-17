@@ -152,6 +152,7 @@ function fileUpload(opt,id,url){
        * @return {[null]}     []
        */
       function ajaxDeleteElems(ids,url,method,elem,elem2) {
+        debugger;
            $.ajax({
               type: method,
               url: url,
@@ -166,7 +167,11 @@ function fileUpload(opt,id,url){
                       }catch(err){
                         $(elem).remove();
                       }finally{
-                        if(elem2) elem2.remove();
+                        try{
+                          if(elem2) elem2.remove();
+                        }catch(err){
+                          $(elem2).remove();
+                        }
                       }
                   }
               },

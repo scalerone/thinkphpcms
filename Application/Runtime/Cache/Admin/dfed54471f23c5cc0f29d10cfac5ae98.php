@@ -145,10 +145,21 @@
 
                   <div class="layui-form-item">
                     <label class="layui-form-label">状态：</label>
-                    <div class="layui-input-block">
-                      <input type="checkbox" name="status" lay-skin="switch" <?php echo ($cate['status']==1?'checked="checked"':''); ?> value="1" lay-text="正常|锁定">
+                    <div class="layui-input-inline" style="width:auto;">
+                      <input type="checkbox" name="status" lay-skin="switch" <?php echo ($cate['status']=='1'?'checked="checked"':''); ?> value="1" lay-text="开启|关闭">
+                    </div>
+                    <label class="layui-form-label">模版文件：</label>
+                    <div class="layui-input-inline" style="width:auto;">
+                      <select name="template" lay-verify="required">
+                        <?php if(is_array($templates)): $i = 0; $__LIST__ = $templates;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$t): $mod = ($i % 2 );++$i;?><option value="<?php echo ($t); ?>" <?php echo ($t==$cate['template']?'selected="selected"':''); ?>><?php echo ($t); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+                      </select>
+                    </div>
+                    <div class="layui-input-inline">
+                      <input type="checkbox" value="1" lay-verify="sub" name="app_sub" lay-skin="primary" title="应用到子栏目" <?php echo ($cate['app_sub']='1'?'checked=""':''); ?>>
                     </div>
                   </div>
+
+
                   <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">描述：</label>
                     <div class="layui-input-block w500">

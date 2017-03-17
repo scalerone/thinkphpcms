@@ -84,69 +84,66 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">管理员组管理</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name">链接管理</a><span class="crumb-step">&gt;</span><a class="crumb-name">添加链接</a></div>
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="" class="sortForm">
-                <div class="result-title">
-                    <div class="result-list">
-                        <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加管理员组</a>
+            <div class="result-content">
+               <form class="layui-form" action="<?php echo U('Links/add');?>" method="post" enctype="multipart/form-data" id="addForm">
+                  
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">链接名称：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="title" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
                     </div>
-                </div>
-                <div class="result-content" style="max-height: 850px;overflow: auto;">
-                    <table class="layui-table">
-                      <thead>
-                        <tr>
-                            <th width="5%">ID</th>
-                            <th>组名称</th>
-                            <th width="15%">操作</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                    <?php if(is_array($groups)): $i = 0; $__LIST__ = $groups;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
-                            <td width="3%"><?php echo ($vo["id"]); ?></td>
-                            <td><?php echo ($vo["title"]); ?>
-                            </td>
-                            <td>
-                                <div class="layui-btn-group">
-                                    <a title="配置权限" class="editLink layui-btn layui-btn-small" href="<?php echo U('Admin/setRules',array('id'=>$vo['id']));?>">
-                                        <i class="layui-icon">&#xe642;</i>
-                                    </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
-                                        <i class="layui-icon">&#xe640;</i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
-                      </tbody>
-                    </table>
-                    <div class="result-title">
-                        <div class="result-list">
-                            <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加管理员组</a>
-                        </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">链接地址：</label>
+                    <div class="layui-input-block w500">
+                      <input type="text" name="url" required  lay-verify="required|url" placeholder="http://www.baidu.com" autocomplete="off" class="layui-input" value="">
                     </div>
-                </div>
-            </form>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label ">排序：</label>
+                    <div class="layui-input-block w200">
+                      <input type="text" name="sort" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="20">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">缩略图：</label>
+                    <div class="layui-input-block">
+                        <img src="" class="hide thumb-img" height="100px" width="auto">
+                        <input type="hidden" name="thumb" class="thumb-input" value="">
+                        <input type="file" name="_thumb" id="_thumb" class="hide">
+                        <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                          <i class="layui-icon">&#xe608;</i> 链接缩略图
+                        </button>
+                        <button class="del-thumb layui-btn layui-btn-primary hide">删除</button>
+                    </div>
+                  </div>
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">描述：</label>
+                    <div class="layui-input-block w500">
+                      <textarea name="desc" placeholder="链接描述..." class="layui-textarea"></textarea>
+                    </div>
+                  </div>
+                  
+                   <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
+                      <a href="javascript:window.history.go(-1);" class="layui-btn layui-btn-warm" >返回</a>
+                      <a href="<?php echo U('Links/index');?>" class="layui-btn" >查看链接</a>
+                    </div>
+                  </div>
+                </form>
+            </div>
         </div>
     </div>
-    <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
-        <form class="layui-form" action="">
-          <div class="layui-form-item">
-            <label class="layui-form-label wid_auto">名称</label>
-            <div class="layui-input-block margin-left80">
-              <input type="text" name="title" required  lay-verify="required" placeholder="请输入管理员组名称" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-
-          <div class="layui-form-item">
-            <div class="layui-input-block">
-              <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>
-            </div>
-          </div>
-        </form>
-    </div>
     <!--/main-->
+</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -197,62 +194,46 @@ layui.use('element', function(){
   var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
 });
 </script>
-<script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['form','layer'], function(){
-        var layer = layui.layer
-        ,form = layui.form();
+    layui.use(['form'], function(){
+      var form = layui.form();
 
-        //监听提交
-        form.on('submit(formDemo)', function(data){
+        //文章缩略图上传
+        $('#_thumb').bind('change',function(){
+          //限制文件类型与大小
+          var options = {
+            'filePath': $(this).val()
+          };
+          //调用上传方法
+          fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
+        });
+    });
+    //ajax添加友情链接
+    $(function(){
+      $('.submit').on('click',function(){
+        var url = '<?php echo U("Links/add");?>';
+        ajaxAddLinks(url);
+        function ajaxAddLinks(url){
           $.ajax({
-            url: '<?php echo U("Admin/addGroup");?>',
-            type: 'post',
+            url: url,
+            type: 'POST',
             dataType: 'json',
-            data: $(data.form).serialize(),
-            success: function(res){
+            data: $('#addForm').serialize(),
+            success:function(res){
               if(res.status == 1){
-                layer.alert(res.msg,{icon:1});   
-                window.setTimeout(function(){
-                  window.location.href = "<?php echo U('Admin/group');?>";
-                },1500);
+                layer.msg(res.msg,{icon:1});
               }else{
-                layer.alert(res.msg,{icon:2}); 
+                layer.msg(res.msg,{icon:2});
               }
             },
-            error: function(res){
-              console.log(res);
+            error:function(res){
+              layer.msg('出现错误！',{icon:2});
             }
-          });
-          return false;
-        });
-});
-
-
-    //删除单个用户组
-    $(function(){
-        $('.delOneLink').on('click',function(){
-                $trEle = $(this).parents('tr');//当前的tr节点
-                var url = "<?php echo U('Admin/delGroup');?>";//提交删除的地址
-                var eleId = $trEle.data('id');//当前的id
-                //提示
-                layer.confirm('确定要删除该管理员组？', {icon: 3, title:'提示'}, function(index){
-                ajaxDeleteElems(eleId,url,'post',$trEle);
-            });
-        });
+          })
+        }
+        return false;
+      });
     });
-    //添加会员
-    $('.addMember').click(function(){
-        layer.open({
-          type: 1,
-          title: '添加管理员组',
-          closeBtn: 1,
-          area: ['460px', 'auto'],
-          shadeClose: true,
-          content: $('#addWrap'),
-        });
-    });
-
 </script>
 </body>
 </html>

@@ -4,7 +4,10 @@
 	    dump($var, true, null, 0);
 	}	
 
-
+	function getTemplateName($template=''){
+		if('' == $template) return '';
+		return current(explode('.', $template));
+	}
 	/**
 	 * 通过自定id获取文章信息
 	 * @param  [type] $catid [文章ID]

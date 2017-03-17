@@ -84,14 +84,14 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">管理员组管理</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">管理员</span></div>
         </div>
 
         <div class="result-wrap">
             <form method="post" action="" class="sortForm">
                 <div class="result-title">
                     <div class="result-list">
-                        <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加管理员组</a>
+                        <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加管理员</a>
                     </div>
                 </div>
                 <div class="result-content" style="max-height: 850px;overflow: auto;">
@@ -99,18 +99,23 @@
                       <thead>
                         <tr>
                             <th width="5%">ID</th>
-                            <th>组名称</th>
+                            <th>名称</th>
+                            <th width="10%">所属用户组</th>
+                            <th width="10%">状态</th>
                             <th width="15%">操作</th>
                         </tr>
                       </thead>
                       <tbody>
-                    <?php if(is_array($groups)): $i = 0; $__LIST__ = $groups;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
+                      <?php if(is_array($admins)): $i = 0; $__LIST__ = $admins;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
                             <td width="3%"><?php echo ($vo["id"]); ?></td>
-                            <td><?php echo ($vo["title"]); ?>
+                            <td><?php echo ($vo["username"]); ?></td>
+                            <td><?php echo ($vo['auth_group'][0]['title']); ?></td>
+                            <td class="layui-form">
+                              <input data-id="<?php echo ($vo["id"]); ?>" type="checkbox" checked="" name="status" lay-skin="switch" lay-filter="status" lay-text="正常|锁定">
                             </td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a title="配置权限" class="editLink layui-btn layui-btn-small" href="<?php echo U('Admin/setRules',array('id'=>$vo['id']));?>">
+                                    <a title="编辑" class="editLink layui-btn layui-btn-small" href="<?php echo U('Admin/edit',array('id'=>$vo['id']));?>">
                                         <i class="layui-icon">&#xe642;</i>
                                     </a>
                                     <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
@@ -123,7 +128,7 @@
                     </table>
                     <div class="result-title">
                         <div class="result-list">
-                            <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加管理员组</a>
+                            <a class="addMember" href="javascript:;"><i class="iconfont">&#xe762;</i>添加管理员</a>
                         </div>
                     </div>
                 </div>
@@ -133,9 +138,39 @@
     <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
         <form class="layui-form" action="">
           <div class="layui-form-item">
-            <label class="layui-form-label wid_auto">名称</label>
-            <div class="layui-input-block margin-left80">
-              <input type="text" name="title" required  lay-verify="required" placeholder="请输入管理员组名称" autocomplete="off" class="layui-input">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-inline">
+              <input type="username" name="username" required  lay-verify="required" placeholder="请输入管理员帐号" autocomplete="off" class="layui-input" id="uname">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+              <input type="password" name="password" required  lay-verify="required" placeholder="请输入管理员密码" autocomplete="off" class="layui-input password">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">确认密码</label>
+            <div class="layui-input-inline">
+              <input type="password" name="password2" required  lay-verify="pass" placeholder="请再次输入管理员密码" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">所属分组</label>
+            <div class="layui-input-inline">
+              <select name="group_id">
+                <?php if(is_array($groups)): $i = 0; $__LIST__ = $groups;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$g): $mod = ($i % 2 );++$i;?><option value="<?php echo ($g["id"]); ?>"><?php echo ($g["title"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+              </select>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-inline">
+               <input type="checkbox" value="1" checked="" name="status" lay-skin="switch" lay-filter="switchTest" lay-text="开启|锁定">
             </div>
           </div>
 
@@ -203,10 +238,35 @@ layui.use('element', function(){
         var layer = layui.layer
         ,form = layui.form();
 
+        //表单验证
+        form.verify({
+          pass: function(value){
+            if(value !== $('.password').val()){
+              return '两次密码不一致';
+            }
+          }
+        }); 
+
+        form.on('switch(status)', function(data){
+          var id = $(data.elem).data('id');
+          var status = 0;
+          if(data.elem.checked) status = 1;
+
+          $.ajax({
+            url: '<?php echo U("admin/updateStatus");?>',
+            type: 'post',
+            dataType: 'json',
+            data: {'id': id,'status': status},
+            success: function(res){
+              layer.msg(res.msg,{icon:1});
+            }
+          });
+        });  
+
         //监听提交
         form.on('submit(formDemo)', function(data){
           $.ajax({
-            url: '<?php echo U("Admin/addGroup");?>',
+            url: '<?php echo U("Admin/add");?>',
             type: 'post',
             dataType: 'json',
             data: $(data.form).serialize(),
@@ -214,7 +274,7 @@ layui.use('element', function(){
               if(res.status == 1){
                 layer.alert(res.msg,{icon:1});   
                 window.setTimeout(function(){
-                  window.location.href = "<?php echo U('Admin/group');?>";
+                  window.location.href = "<?php echo U('Admin/index');?>";
                 },1500);
               }else{
                 layer.alert(res.msg,{icon:2}); 
@@ -227,16 +287,14 @@ layui.use('element', function(){
           return false;
         });
 });
-
-
-    //删除单个用户组
+    //删除单个管理员
     $(function(){
         $('.delOneLink').on('click',function(){
                 $trEle = $(this).parents('tr');//当前的tr节点
-                var url = "<?php echo U('Admin/delGroup');?>";//提交删除的地址
+                var url = "<?php echo U('Admin/del');?>";//提交删除的地址
                 var eleId = $trEle.data('id');//当前的id
                 //提示
-                layer.confirm('确定要删除该管理员组？', {icon: 3, title:'提示'}, function(index){
+                layer.confirm('确定要删除该用户？', {icon: 3, title:'提示'}, function(index){
                 ajaxDeleteElems(eleId,url,'post',$trEle);
             });
         });
@@ -247,10 +305,42 @@ layui.use('element', function(){
           type: 1,
           title: '添加管理员组',
           closeBtn: 1,
-          area: ['460px', 'auto'],
+          area: ['360px', 'auto'],
           shadeClose: true,
           content: $('#addWrap'),
         });
+    });
+
+    //验证用户名是否存在
+    $(function(){
+      $('.password').on('focus',function(){
+        var uname = $('#uname').val();
+        if($.trim(uname).length < 3){
+            $('#uname').focus();
+            layer.tips('用户名长度必须大于2且不能为空!', '#uname', {
+              tips: [4, '#FF5722']
+            });
+          return false;
+        }
+        $.ajax({
+          url: '<?php echo U("admin/checkUname");?>',
+          type: 'POST',
+          dataType: 'json',
+          data: {'uname': uname},
+          success: function(res){
+            if(res.status == 1){
+              layer.tips(res.msg, '#uname', {
+                tips: [4, '#78BA32']
+              });
+            }else{
+              $('#uname').focus();
+              layer.tips(res.msg, '#uname', {
+                tips: [4, '#FF5722']
+              });
+            }
+          },
+        });
+      });
     });
 
 </script>

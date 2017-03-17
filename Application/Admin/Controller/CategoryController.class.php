@@ -67,10 +67,15 @@
 					$this -> ajaxReturn(array('status'=>'0','msg'=>'修改失败!'));
 				}
 			}else{
+				//获取模版文件
+				$path = APP_PATH . 'Home/View/Template';
+				$templates = getTemplates($path);
+
 				$id = I('get.id');
 				$this -> cate = M('Category') -> find($id);
 				$category = M('Category')->field('id,catname,pid')->order('sort ASC')-> select();
 				$this -> categories = reorgnCates($category,'├');
+				$this -> templates = $templates;
 				$this -> display();
 			}
 		}
