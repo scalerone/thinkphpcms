@@ -1,7 +1,0 @@
-[ 2017-03-12T21:50:28+08:00 ] 127.0.0.1 /index.php/Admin/Category/add.html
-INFO: [ app_begin ] --START--
-INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
-INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
-SQL: SHOW COLUMNS FROM `cms_category` [ RunTime:0.0140s ]
-SQL: INSERT INTO `cms_category` (`pid`,`catname`,`type`,`content`,`url`,`thumb`,`status`,`summary`,`alias`,`addtime`) VALUES ('55','创课教育','2','1111','','','1','111','','1489326628') [ RunTime:0.0020s ]
-

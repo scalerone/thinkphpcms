@@ -11,12 +11,26 @@ return array(
 
     //数据库备份还原
     'DB_BACKUP_PATH'     => './Public/backup/',     //数据库备份路径必须以 / 结尾；
-   
+    
+    //显示调试信息
     'SHOW_PAGE_TRACE'       =>  true, 
 
+    //开启静态缓存
+    'HTML_CACHE_ON' => true, 
+    // 开启静态缓存
+    'HTML_CACHE_TIME' => 60, // 全局静态缓存有效期（秒）
+    'HTML_FILE_SUFFIX' => '.html', // 设置静态缓存文件后缀
+    'HTML_CACHE_RULES' => array(
+            'Home:index' => array('index',0),
+            'List:index' => array('list/{:action}_{id}',0),
+            'Page:index' => array('page/{:action}_{id}',0),
+            'Show:index' => array('show/{:action}_{id}',0),
+        ),
+
+    //加载其他配置文件
     'LOAD_EXT_CONFIG'		=>	'system.config',//加载站点信息配置文件
 
-    //路由相关
+    //设置路由相关
     'URL_MODEL'             =>  2,
     'URL_ROUTER_ON'         =>  true,   // 是否开启URL路由
     'URL_ROUTE_RULES'       =>  array(
@@ -24,9 +38,10 @@ return array(
             'page/:id\d' => 'Home/Page/index',
             'show/:id\d' => 'Home/Show/index',
 
-    ), // 默认路由规则 针对模块
+    ), 
 
-    'URL_HTML_SUFFIX'       =>  'html',  // URL伪静态后缀设置
+    //伪静态
+    //'URL_HTML_SUFFIX'       =>  'html',  // URL伪静态后缀设置
 
     //权限认证
     'AUTH_CONFIG'=>array(

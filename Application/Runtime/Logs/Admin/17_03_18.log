@@ -1,0 +1,22 @@
+[ 2017-03-18T16:53:33+08:00 ] 127.0.0.1 /Admin/Cache/index.html?time=0.7294537758645645
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2017-03-18T17:25:04+08:00 ] 127.0.0.1 /Admin/Login/index.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2048] Declaration of Admin\Model\AdminModel::check() should be compatible with Think\Model::check($value, $rule, $type = 'regex') D:\phpStudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 5 行.
+SQL: SHOW COLUMNS FROM `cms_admin` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant md5 - assumed 'md5' D:\phpStudy\WWW\thinkphpcms\Application\Admin\Model\AdminModel.class.php 第 20 行.
+SQL: SELECT * FROM `cms_admin` WHERE `username` = 'admin' AND `password` = 'e00cf25ad42683b3df678c61f42c6bda' LIMIT 1   [ RunTime:0.0000s ]
+SQL: UPDATE `cms_admin` SET `username`='admin',`password`='e00cf25ad42683b3df678c61f42c6bda',`email`='',`lastlogintime`='1489829104',`lastloginip`='127.0.0.1',`status`='1' WHERE `id` = 1 [ RunTime:0.0000s ]
+
+[ 2017-03-18T17:25:12+08:00 ] 127.0.0.1 /Admin/System/backup.html?action=backup
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2] mkdir(): File exists D:\phpStudy\WWW\thinkphpcms\Application\Admin\Controller\SystemController.class.php 第 54 行.
+NOTIC: [8192] Function mysql_list_tables() is deprecated D:\phpStudy\WWW\thinkphpcms\ThinkPHP\Library\Org\Db\MySQLReback.class.php 第 125 行.
+

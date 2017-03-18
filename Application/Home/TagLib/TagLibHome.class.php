@@ -16,7 +16,29 @@
 			'position' => array(
 					'close' => '0',
 				),
+			'ads'	=> array(
+					'attr'	=> 'plate_id,num,order',
+				),
 		);
+
+		//调用广告
+		public function _ads($attr,$content){
+			if('' == $attr['plate_id']) return '';
+			$num = ($attr['num']==''?'6':$attr['num']);
+			$order = ($attr['order']==''?'createtime DESC':$attr['order']);
+			$sql = "M('ads_plate_list')->where(array('plate_id'=>".$attr['plate_id']."))->order('".$order."')->limit(".$num.")->select();";
+
+			$str = '<?php ';
+			$str .= '$list =' . $sql;
+			$str .= 'foreach($list as $val): ';
+			$str .= 'extract($val); ';
+			$str .= '?>';
+			$str .= $content;
+			$str .='<?php endforeach; ?>';
+
+			//p($str);die;
+			return $str;
+		}
 
 		//定位
 		public function _position($attr,$content) {

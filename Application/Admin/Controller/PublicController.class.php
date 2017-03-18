@@ -54,6 +54,19 @@
 			$result = upload($config);
 			$this -> ajaxReturn($result);
 		}
+
+		public function uploadThumb() {
+			$config = array(
+				'size' 		=> '2097152',
+				'type'		=> 	array('gif','png','jpg','jpeg'),
+				'rootPath'	=>	'./Uploads/', 
+				'file'		=>	'file',
+				'autoSub'	=>  true,
+				'outPath'	=>	'/Uploads/',	
+			);
+			$result = upload($config);
+			$this -> ajaxReturn($result);
+		}
 	}
 
 ?>

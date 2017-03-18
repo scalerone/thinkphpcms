@@ -16,7 +16,7 @@ return array (
   'SITE_DESCRIPTION' => '网站描述',
   'FILE_SIZE' => '2097152',
   'FILE_TYPE' => 'jpg|png|jpeg|rar|zip|doc|docx|gif|ppt|xsl|txt|mp3|mp4|avi',
-  'WATE_OPEN' => '2',
+  'WATE_OPEN' => '1',
   'WATE_TYPE' => '1',
   'WATE_POSITION' => '1',
   'WATE_THUMB' => '',

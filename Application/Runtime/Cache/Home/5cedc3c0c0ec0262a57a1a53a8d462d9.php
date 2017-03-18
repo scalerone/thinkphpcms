@@ -48,8 +48,7 @@
 		</header>
 		<section class="flexslider">
 			<ul class="slides">
-				<li style="background:url(/Public/images/banner01.jpg) 50% 0 no-repeat;"></li>
-				<li style="background:url(/Public/images/banner01.jpg) 50% 0 no-repeat;"></li>
+				<?php $list =M('ads_plate_list')->where(array('plate_id'=>1))->order('createtime ASC')->limit(3)->select();foreach($list as $val): extract($val); ?><li alt="<?php echo ($alt); ?>" style="background:url(<?php echo ($thumb); ?>) 50% 0 no-repeat;"></li><?php endforeach; ?>
 			</ul>
 		</section>
 		<div class="row">

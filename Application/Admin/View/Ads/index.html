@@ -22,6 +22,7 @@
                       <thead>
                         <tr>
                             <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
+                            <th width="6%">ID</th>
                             <th>板块名称</th>
                             <th width="20%">添加时间</th>
                             <th width="26%">操作</th>
@@ -31,13 +32,14 @@
                     <volist name="plate" id="vo">
                         <tr data-id={$vo.id}>
                             <td><input class="set" type="checkbox" lay-skin="primary" value="{$vo.id}"></td>
+                            <td>{$vo.id}</td>
                             <td>{$vo.name}
                             </td>
                             <td>{$vo.addtime|date='Y-m-d H:i:s',###}
                             </td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a title="添加广告" class="editPlate layui-btn layui-btn-small" href="javascript:;" data-id="{$vo.id}">
+                                    <a title="添加广告" class="addAds layui-btn layui-btn-small" href="javascript:;" data-id="{$vo.id}">
                                        添加广告
                                     </a>
                                     <a title="广告列表" class="layui-btn layui-btn-small plateList" href="javascript:;" data-id="{$vo.id}">
@@ -109,8 +111,28 @@
             form.render('checkbox');
           });
 
-          //修改
-          var index = $('.editPlate').on('click',function(){
+          //广告列表
+          $('.plateList').on('click',function(){
+            var id = $(this).data('id');
+            window.location.href= '/Admin/Ads/adsList/plate_id/' + id;
+          });
+
+          //添加广告
+          $('.addAds').on('click',function(){
+            var id = $(this).data('id');
+            layer.open({
+              type: 2,
+              title: '添加广告',
+              fixed: false, //不固定
+              maxmin: true,
+              area: ['500px', '350px'],
+              content: '/Admin/Ads/addAds/plate_id/' + id //iframe的url
+            }); 
+          });
+
+
+          //修改板块
+          $('.editPlate').on('click',function(){
             var id = $(this).data('id');
             layer.open({
               type: 2,
@@ -122,7 +144,7 @@
             }); 
           });
 
-           //添加
+           //添加板块
             form.on('submit(formDemo)', function(data){
               $.ajax({
                 url: '{:U("Ads/addPlate")}',
@@ -145,7 +167,7 @@
               });
               return false;
             });
-        //删除
+        //删除板块
         $('.batchDel').on('click',function(){
                 //获取所有选中项
                 $trs = $('.result-content table tbody tr input:checked');
@@ -168,7 +190,7 @@
                     ajaxDeleteElems(ids,url,'post','',$elems);
             });
         });
-        //删除单个
+        //删除单个板块
         $('.delOnePlate').on('click',function(){
             var id = $(this).data('id');
             var url = '{:U("Ads/delPlate")}';
@@ -179,7 +201,7 @@
            
         });
     
-    //添加板块
+    //显示添加板块界面
     $('.addPlate').click(function(){
         layer.open({
           type: 1,

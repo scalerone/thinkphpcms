@@ -83,64 +83,67 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a>首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">系统设置</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">广告管理</span></div>
         </div>
 
         <div class="result-wrap">
-            <div class="result-content" style="max-height: 600px;overflow: auto;">
-              <div class="result-title">
-                  <div class="result-list">
-                      <div class="layui-btn-group">
-                        <a class="layui-btn back" href="javascript:;">立即备份</a>
-                      </div>
-                  </div>
-              </div>
-              <fieldset class="layui-elem-field" style="min-height: 100px;">
-                <div class="layui-inline">
-                  <div class="layui-field-box">
-                      <table class="layui-table" lay-even="" lay-skin="row">
-                        <thead>
-                          <tr>
-                            <th width="6%">序号</th>
-                            <th>文件名</th>
-                            <th width="15%">备份时间</th>
-                            <th>文件大小</th>
-                            <th width="20%">操作</th>
-                          </tr>
-                        </head>
-                        <tbody>
-                            <?php if(!empty($lists)): if(is_array($lists)): foreach($lists as $key=>$row): if($key > 1): ?><tr>
-                                            <td><?php echo ($key-1); ?></td>
-                                            <td style="text-align: left"><a href="<?php echo U('System/backup',array('action'=>'download','file'=>$row));?>"><?php echo ($row); ?></a></td>
-                                            <td><?php echo (getfiletime($row,$datadir)); ?></td>
-                                            <td><?php echo (getfilesize($row,$datadir)); ?></td>
-                                            <td>
-                                              <div class="layui-btn-group">
-                                                <a title="下载" href="<?php echo U('System/backup',array('action'=>'download','file'=>$row));?>" class="layui-btn">
-                                                  <i class="layui-icon">&#xe601;</i>
-                                                </a>
-                                                <a title="还原" data-file="<?php echo ($row); ?>" href="javascript:;" class="layui-btn rl">
-                                                  <i class="iconfont">&#xe634;</i>
-                                                </a>
-                                                <a title="删除" data-file="<?php echo ($row); ?>" href="javascript:;" class="layui-btn layui-btn-danger del">
-                                                  <i class="layui-icon">&#xe640;</i>
-                                                </a>
-                                              </div>
-                                            </td>
-                                        </tr><?php endif; endforeach; endif; ?>
-                                <?php else: ?>
-                                <tr>
-                                    <td colspan="7">没有找到相关数据。</td>
-                                </tr><?php endif; ?>
-                        </tbody>
-                    </table>
-                  </div>
+            <form method="post" action="#" class="sortForm layui-form">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a href="<?php echo U('Ads/index');?>" ><i class="iconfont">&#xe762;</i>查看板块</a>
+                        <a href="javascript:;" class="addAds"><i class="iconfont">&#xe762;</i>新增广告</a>
+                        <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                        <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
+                    </div>
                 </div>
-              </fieldset>
-            </div>
+                <div class="result-content" style="max-height: 850px;overflow: auto;">
+                    <table class="layui-table">
+                      <thead>
+                        <tr>
+                            <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
+                            <th>标题</th>
+                            <th width="20%">缩略图</th>
+                            <th width="26%">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    <?php if(is_array($adsList)): $i = 0; $__LIST__ = $adsList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id="<?php echo ($vo["id"]); ?>">
+                            <td><input class="set" type="checkbox" lay-skin="primary" value="<?php echo ($vo["id"]); ?>"></td>
+                            <td><?php echo ($vo["title"]); ?>
+                            </td>
+                            <td>
+                            <?php if(empty($vo["thumb"])): ?><font color="#F7B824">暂无缩略图</font><?php else: ?> <img src="<?php echo ($vo["thumb"]); ?>" height="50px" width="auto"><?php endif; ?> 
+                            </td>
+                            <td>
+                                <div class="layui-btn-group">
+                                    <a title="添加广告" class="addAds layui-btn layui-btn-small" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                       添加广告
+                                    </a>
+                                    <a title="修改" class="layui-btn layui-btn-small editAds" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                        修改
+                                    </a>
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOnePlate" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                        删除
+                                    </a>
+                                </div>
+                            </td>
+                        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                      </tbody>
+                    </table>
+                    <div class="result-title">
+                        <div class="result-list">
+                            <a href="<?php echo U('Ads/index');?>" ><i class="iconfont">&#xe762;</i>查看板块</a>
+                            <a href="javascript:;" class="addAds"><i class="iconfont">&#xe762;</i>新增广告</a>
+                            <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                            <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <!--/main-->
+</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -193,63 +196,80 @@ layui.use('element', function(){
 </script>
 <script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['layer','form'], function(){
+    layui.use(['form','layer'], function(){
         var layer = layui.layer
         ,form = layui.form();
+        //全选
+          form.on('checkbox(allChoose)', function(data){
+            var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+            child.each(function(index, item){
+              item.checked = data.elem.checked;
+            });
+            form.render('checkbox');
+          });
 
-  });
-      $('.rl').on('click',function(){
-          var url = "<?php echo U('System/backup');?>";
-          var file = $(this).data('file');
-          layer.confirm('是否还原该数据库文件!', {icon: 3, title:'提示'}, function(index){
-            
-            $.get(url,{'action':'RL','file':file},function(res){
-              if(res.status == 1){
-                layer.msg('还原成功!',{icon:1});
-                 window.setTimeout(function(){
-                  window.location.href = url;
-                },1500);
-              }else{
-                layer.msg('还原出错!',{icon:2});
-              }
-            },'json');
-            layer.close(index);
+          //修改板块
+          $('.editAds').on('click',function(){
+            var id = $(this).data('id');
+            layer.open({
+              type: 2,
+              title: '修改广告',
+              fixed: false, //不固定
+              maxmin: true,
+              area: ['500px', '350px'],
+              content: '/Admin/Ads/editAds/id/' + id //iframe的url
+            }); 
           });
-          
-      });
-      $('.back').on('click',function(){
-          var url = "<?php echo U('System/backup');?>";
-          $.get(url,{'action':'backup'},function(res){
-            if(res.status == 1){
-              layer.msg('备份成功!',{icon:1});
-              window.setTimeout(function(){
-                window.location.href = url;
-              },1500);
-            }else{
-              layer.msg('备份出错!',{icon:2});
-            }
-          },'json');
-          layer.close(index);
-          
-      });
-      $('.del').on('click',function(){
-          var url = "<?php echo U('System/backup');?>";
-          var file = $(this).data('file');
-          layer.confirm('是否删除该数据库文件!', {icon: 3, title:'提示'}, function(index){
-            $.get(url,{'action':'Del','file':file},function(res){
-              if(res.status == 1){
-                layer.msg('删除成功!',{icon:1});
-                 window.setTimeout(function(){
-                  window.location.href = url;
-                },1500);
-              }else{
-                layer.msg('删除失败!',{icon:2});
-              }
-            },'json');
-            layer.close(index);
+
+          //添加广告
+          $('.addAds').on('click',function(){
+            var id = $(this).data('id');
+            layer.open({
+              type: 2,
+              title: '添加广告',
+              fixed: false, //不固定
+              maxmin: true,
+              area: ['500px', '350px'],
+              content: '/Admin/Ads/addAds/plate_id/' + <?php echo ($plate_id); ?> //iframe的url
+            }); 
           });
-         
-      });
+
+        //删除单个板块
+        $('.delOnePlate').on('click',function(){
+            var id = $(this).data('id');
+            var url = '<?php echo U("Ads/delAds");?>';
+            var $elems = $(this).parents('tr');
+            layer.confirm('确定要删除选中的广告吗？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(id,url,'post','',$elems);
+            });
+           
+        });  
+        //删除多个广告
+        $('.batchDel').on('click',function(){
+                //获取所有选中项
+                $trs = $('.result-content table tbody tr input:checked');
+                if(!$trs.length){
+                    layer.alert('请选中需要删除的广告!', {icon: 2});
+                    return;
+                }
+                //获取选中的ID
+                var ids = [];
+                $trs.filter(function(index) {
+                    return ids.push($($trs[index]).val());
+                });
+
+                var url = '<?php echo U("Ads/delAds");?>';
+                ids = ids.join(',');
+                var $elems = $trs.parents('tr');
+                console.log($elems);
+                debugger;
+                layer.confirm('确定要删除选中的广告吗？', {icon: 3, title:'提示'}, function(index){
+                    ajaxDeleteElems(ids,url,'post','',$elems);
+            });
+        });  
+
+});
+   
 </script>
 </body>
 </html>

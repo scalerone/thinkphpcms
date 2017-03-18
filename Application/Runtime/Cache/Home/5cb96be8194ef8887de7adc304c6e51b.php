@@ -48,8 +48,7 @@
 		</header>
 		<section class="flexslider">
 			<ul class="slides">
-				<li style="background:url(/Public/images/banner01.jpg) 50% 0 no-repeat;"></li>
-				<li style="background:url(/Public/images/banner01.jpg) 50% 0 no-repeat;"></li>
+				<?php $list =M('ads_plate_list')->where(array('plate_id'=>1))->order('createtime ASC')->limit(3)->select();foreach($list as $val): extract($val); ?><li alt="<?php echo ($alt); ?>" style="background:url(<?php echo ($thumb); ?>) 50% 0 no-repeat;"></li><?php endforeach; ?>
 			</ul>
 		</section>
 		<div class="position">
@@ -66,7 +65,7 @@
 					<p>
 						<i class="icon-home"></i>
 						<a href="/">首页</a>>
-						
+						<a href="/list/58.html">新闻资讯</a>&gt;
 					</p>
 				</div>
 			</div>

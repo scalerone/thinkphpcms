@@ -42,7 +42,7 @@
                         <dd><a href="<?php echo U('Contact/index');?>"><i class="iconfont">&#xe61b;</i>留言管理</a></dd>
                         <dd><a href="<?php echo U('Comment/index');?>"><i class="iconfont">&#xe621;</i>评论管理</a></dd>
                         <dd><a href="<?php echo U('Links/index');?>"><i class="iconfont">&#xe636;</i>友情链接</a></dd>
-                        <dd><a href="<?php echo U('Banner/index');?>"><i class="iconfont">&#xe622;</i>广告管理</a></dd>
+                        <dd><a href="<?php echo U('Ads/index');?>"><i class="iconfont">&#xe622;</i>广告管理</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -70,7 +70,6 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="iconfont">&#xe60e;</i>扩展功能</a>
                     <dl class="layui-nav-child pdleft">
-                        <dd><a href="system.html"><i class="iconfont">&#xe641;</i>静态页面</a></dd>
                         <dd><a href="system.html"><i class="iconfont">&#xe64f;</i>语言设置</a></dd>
                     </dl>
                 </li>
