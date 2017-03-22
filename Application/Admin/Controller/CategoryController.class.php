@@ -18,6 +18,8 @@
 				$category = M('Category');
 				$post['addtime'] = time();
 				$post['content'] = htmlspecialchars_decode(I('post.content'));
+
+
 				if(!isset($post['app_sub'])) $post['app_sub'] = 0;
 				
 				if($category -> add($post)){
@@ -59,7 +61,16 @@
 					$post['status'] = 2;
 				}
 				$post['content'] = htmlspecialchars_decode(I('post.content'));
-				$result = M('Category') -> save($post);
+				if(isset($post['app_sub']) && 1 == $post['app_sub']){
+					//设置子栏目的模版文件
+					$model = M('category');
+					$cates = $model->field('id,pid')->select();
+					$child = getChildsById($cates,$post['id']);
+					foreach ($child as $id) {
+						$model->where(array('id'=>$id['id']))->setField('template',$post['template']);
+					}
+				}
+				$result = $model -> save($post);
 				//p($result);die;
 				if($result !== false){
 					$this -> ajaxReturn(array('status'=>'1','msg'=>'修改成功!'));
