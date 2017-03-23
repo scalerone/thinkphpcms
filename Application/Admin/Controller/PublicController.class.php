@@ -5,7 +5,7 @@
 	class PublicController extends CommonController {
 		public function uploadLogo() {
 			$config = array(
-				'size' 		=> '2097152',
+				'size' 		=> C('FILE_SIZE'),
 				'type'		=> 	array('jpg','jpeg','png','gif'),
 				'rootPath'	=>	'./Uploads/System/Logo/', 
 				'file'		=>	'file',
@@ -18,7 +18,7 @@
 
 		public function uploadIco() {
 			$config = array(
-				'size' 		=> '2097152',
+				'size' 		=> C('FILE_SIZE'),
 				'type'		=> 	array('ico'),
 				'rootPath'	=>	'./Uploads/System/Ico/', 
 				'file'		=>	'file',
@@ -31,7 +31,7 @@
 
 		public function uploadWateThumb() {
 			$config = array(
-				'size' 		=> '2097152',
+				'size' 		=> C('FILE_SIZE'),
 				'type'		=> 	array('gif','png'),
 				'rootPath'	=>	'./Uploads/System/Wate/', 
 				'file'		=>	'file',
@@ -44,7 +44,7 @@
 
 		public function uploadWateContent() {
 			$config = array(
-				'size' 		=> '2097152',
+				'size' 		=> C('FILE_SIZE'),
 				'type'		=> 	array('gif','png'),
 				'rootPath'	=>	'./Uploads/System/Wate/', 
 				'file'		=>	'file',
@@ -57,7 +57,7 @@
 
 		public function uploadThumb() {
 			$config = array(
-				'size' 		=> '2097152',
+				'size' 		=> C('FILE_SIZE'),
 				'type'		=> 	array('gif','png','jpg','jpeg'),
 				'rootPath'	=>	'./Uploads/', 
 				'file'		=>	'file',

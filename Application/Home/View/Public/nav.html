@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{$Think.config.SITE_TITLE}</title>
+		<meta name="keywords" content="{$Think.config.SITE_KEYWORDS}">
+		<meta name="description" content="{$Think.config.SITE_DESCRIPTION}">
+		<link rel="stylesheet" href="__PUBLIC__/css/common.css" />
+		<link rel="stylesheet" href="__PUBLIC__/css/header.css" />
+		<link rel="stylesheet" href="__PUBLIC__/css/page.css" />
+		<link rel="stylesheet" href="__PUBLIC__/css/footer.css">
+		<link rel="stylesheet" href="__PUBLIC__/css/login.css">
+		<!--[if lt IE 9]>
+        	<script src="__PUBLIC__/js/html5shiv.min.js"></script>
+			<script src="__PUBLIC__/js/respond.min.js"></script>
+        <![endif]-->
+	</head>
+	<body>
+		<header>
+			<div class="container clear">
+				<div class="logo float_l">
+					<a href="/">
+						<img alt="{$Think.config.SITE_TITLE}" src="{$Think.config.SITE_LOGO}" width="150px" height="115px" />
+					</a>
+				</div>	
+				<div class="nav float_l">
+					<nav>
+						<ul>
+							<li class="{$cate['id']==''?'active':''}"><a href="/">首页</a></li>
+							<category catid="0" length="20" order="sort ASC" empty="">
+								<li class="{$cate['id']==$id?'active':''}"><a href="{$url}">{$catname}</a></li>
+							</category>
+						</ul>
+					</nav>
+				</div>
+				<div class="user float_r">
+					<a href="javascript:;">
+						<i class="icon-user"></i>
+					</a>
+					<a href="javascript:;" id="user-dowm">
+						<i class="icon-dowm"></i>
+					</a>
+					<div class="user-box">
+						<ul>
+							<li><a href="{:U('User/index')}">登录</a></li>
+							<li><a href="{:U('User/register')}">注册</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>

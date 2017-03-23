@@ -138,7 +138,7 @@
 		//上传文章缩略图
 		public function upload() {
 			$upload = new \Think\Upload();// 实例化上传类 
-			$upload->maxSize = 2097152;// 设置附件上传大小 
+			$upload->maxSize = C('FILE_SIZE');// 设置附件上传大小 
 			$upload->exts = array('jpg','jpeg','png','gif','bmp');// 设置附件上传类型 
 			$upload->rootPath = './Uploads/'; // 设置附件上传根目录 // 上传单个文件
 			$info = $upload->uploadOne($_FILES['file']); 
@@ -154,7 +154,7 @@
 		//编辑器图片上传
 		public function editImgUpload(){
 			$upload = new \Think\Upload();// 实例化上传类 
-			$upload->maxSize = 2097152 ;// 设置附件上传大小 
+			$upload->maxSize = C('FILE_SIZE') ;// 设置附件上传大小 
 			$upload->exts = array('jpg','jpeg','png','gif','bmp');// 设置附件上传类型 
 			$upload->rootPath = './Uploads/'; // 设置附件上传根目录 // 上传单个文件
 			$info = $upload->uploadOne($_FILES['file']); 

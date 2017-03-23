@@ -83,41 +83,40 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">权限管理</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">留言管理</span></div>
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="" class="sortForm">
+            <form method="post" action="<?php echo U('Links/updateSort');?>" class="sortForm layui-form">
                 <div class="result-title">
                     <div class="result-list">
-                        <a class="addRule" href="javascript:;"><i class="iconfont">&#xe762;</i>添加权限</a>
+                        <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                        <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
                     </div>
                 </div>
-                <div class="result-content" style="max-height: 600px;overflow: auto;">
+                <div class="result-content" style="max-height: 850px;overflow: auto;">
                     <table class="layui-table">
                       <thead>
                         <tr>
-                            <th width="5%">ID</th>
-                            <th width="15%">名称</th>
-                            <th width="25%">规则</th>
-                            <th width="15%">添加时间</th>
-                            <th width="10%">状态</th>
-                            <th width="10%">操作</th>
+                            <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
+                            <th>标题</th>
+                            <th width="10%">姓名</th>
+                            <th width="15%">留言时间</th>
+                            <th width="14%">操作</th>
                         </tr>
                       </thead>
                       <tbody>
-                    <?php if(is_array($rules)): $i = 0; $__LIST__ = $rules;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?> data-pid="<?php echo ($vo["pid"]); ?>">
-                            <td><?php echo ($vo["id"]); ?></td>
-                            <td><?php echo ($vo["html"]); echo ($vo["title"]); ?></td>
+                    <?php if(is_array($contacts)): $i = 0; $__LIST__ = $contacts;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
+                            <td><input class="set" type="checkbox" lay-skin="primary" value="<?php echo ($vo["id"]); ?>"></td>
+                            <td><?php echo ($vo["title"]); ?></td>
                             <td><?php echo ($vo["name"]); ?></td>
-                            <td><?php echo (date('Y-m-d H:i:s',$vo["createtime"])); ?></td>
-                            <td class="layui-form">
-                              <input type="checkbox" value="<?php echo ($vo["status"]); ?>" name="status" lay-filter="status" lay-skin="switch" lay-text="开启|关闭"<?php echo ($vo['status']=='1'?'checked="checked"':''); ?>>
-                            </td>
+                            <td><?php echo (date('Y-m-d H:i:s',$vo["addtime"])); ?></td>
                             <td>
                                 <div class="layui-btn-group">
-                                    
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOne" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="<?php echo U('Links/edit',array('id'=>$vo['id']));?>">
+                                        <i class="layui-icon">&#xe642;</i>
+                                    </a>
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
                                         <i class="layui-icon">&#xe640;</i>
                                     </a>
                                 </div>
@@ -127,55 +126,16 @@
                     </table>
                     <div class="result-title">
                         <div class="result-list">
-                            <a class="addRule" href="#"><i class="iconfont">&#xe762;</i>添加权限</a>
+                            <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                            <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
-        <form class="layui-form" action="">
-
-          <div class="layui-form-item">
-            <label class="layui-form-label ">上级权限</label>
-            <div class="layui-input-inline ">
-              <select name="pid" lay-verify="required">
-                <option value="0">==顶级权限==</option>
-                <?php if(is_array($topRule)): $i = 0; $__LIST__ = $topRule;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$top): $mod = ($i % 2 );++$i;?><option value="<?php echo ($top["id"]); ?>"><?php echo ($top["title"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
-              </select>
-            </div>
-          </div>
-
-          <div class="layui-form-item">
-            <label class="layui-form-label ">名称</label>
-            <div class="layui-input-inline ">
-              <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-
-          <div class="layui-form-item">
-            <label class="layui-form-label ">规则</label>
-            <div class="layui-input-inline ">
-              <input type="text" name="name" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-
-          <div class="layui-form-item">
-            <label class="layui-form-label ">状态</label>
-            <div class="layui-input-inline ">
-                <input type="checkbox" lay-text="启动|关闭" value="1" name="status" lay-skin="switch" checked="checked">
-            </div>
-          </div>
-
-          <div class="layui-form-item">
-            <div class="layui-input-block">
-              <button class="layui-btn" lay-submit lay-filter="formDemo" >立即添加</button>
-            </div>
-          </div>
-        </form>
-    </div>
     <!--/main-->
+</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -232,104 +192,56 @@ layui.use('element', function(){
         var layer = layui.layer
         ,form = layui.form();
 
-        //监听开关时间
-        form.on('switch(status)', function(data){
-          var id = $(data.elem).parents('tr').data('id');
-          var status = 0;
-          var url = "<?php echo U('Rule/updateStatus');?>";
-          if(data.elem.checked){
-            status = 1;
-          }
-          $.ajax({
-              url: url,
-              type: 'post',
-              dataType: 'json',
-              data: {'id': id,'status':status},
-              success: function(res){
-                if(res.status == 1){
-                  layer.msg(res.msg,{icon:1});
-                }else{
-                  layer.msg(res.msg,{icon:2});
-                }
-              },
-              error: function(res){
-                layer.msg('出现错误!',{icon:2});
-              }
-            });
-        });  
-
-        //监听提交
-        form.on('submit(formDemo)', function(data){
-          $.ajax({
-            url: '<?php echo U("Rule/add");?>',
-            type: 'post',
-            dataType: 'json',
-            data: $(data.form).serialize(),
-            success: function(res){
-              if(res.status == 1){
-                layer.alert(res.msg,{icon:1});   
-                window.setTimeout(function(){
-                  window.location.href = "<?php echo U('Rule/index');?>";
-                },1500);
-              }else{
-                layer.alert(res.msg,{icon:2}); 
-              }
-            },
-            error: function(res){
-              console.log(res);
-            }
-          });
-          return false;
+        //全选
+      form.on('checkbox(allChoose)', function(data){
+        var child = $(data.elem).parents('table').find('tbody .set');
+        child.each(function(index, item){
+          item.checked = data.elem.checked;
         });
+        form.render('checkbox');
+      });
+
 });
-
-
     //删除
+    $('.batchDel').on('click',function(){
+        //获取所有选中的文章
+        $trs = $('.result-content table tbody tr input:checked');
+        if(!$trs.length){
+            layer.alert('请选中需要删除的链接!', {icon: 2});
+            return;
+        }
+        //获取选中的ID
+        var ids = [];
+        $trs.filter(function(index) {
+            return ids.push($($trs[index]).val());
+        });
+
+        var url = '<?php echo U("Links/del");?>';
+        ids = ids.join(',');
+        var $elems = $trs.parents('tr');
+        layer.confirm('确定要删除选中的链接吗？', {icon: 3, title:'提示'}, function(index){
+            ajaxDeleteElems(ids,url,'post',$elems);
+        });
+    });
+    //更新排序
+    $('.updateOrd').on('click',function(){
+        $('.sortForm').submit();
+        return false;
+    });
+
+    //删除单个
     $(function(){
-        $('.delOne').on('click',function(){
-                var $trEle = $(this).parents('tr');//当前的tr节点
-                var url = "<?php echo U('Rule/del');?>";//提交删除的地址
+        $('.delOneLink').on('click',function(){
+                $trEle = $(this).parents('tr');//当前的tr节点
+                var url = "<?php echo U('Links/del');?>";//提交删除的地址
                 var eleId = $trEle.data('id');//当前的id
-
-                var $trs = $('.result-content table tbody tr');//获取所有的栏目所在的tr节点
-                var $deltrs = getChildsById($trs,eleId);//获取当前栏目的子栏目所在tr节点
-                console.log($deltrs);
-                debugger;
-                //递归获取当前栏目的所有子栏目的节点数组
-                /**
-                 * [getChildsById description]
-                 * @param  {[array]} trs [tr节点数组]
-                 * @param  {[int]} pid [tr节点父栏目ID]
-                 * @return {[array]}     [重组后的array]
-                 */
-                function getChildsById(trs,pid) {
-                    var arr = [],length = trs.length;
-
-                    for (var i = 0; i < length; i++) {
-                        if($(trs[i]).data('pid') == pid){
-                            arr.push(trs[i]);
-                            arr = arr.concat(getChildsById(trs,$(trs[i]).data('id')));
-                        }
-                    }
-                    return arr;
-                }
                 //提示
-                layer.confirm('确定要删除该权限吗？', {icon: 3, title:'提示'}, function(index){
-                ajaxDeleteElems(eleId,url,'post',$deltrs,$trEle);
+                layer.confirm('确定要删除该链接？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(eleId,url,'post',$trEle);
             });
         });
     });
-    //添加权限
-    $('.addRule').click(function(){
-        layer.open({
-          type: 1,
-          title: '添加权限',
-          closeBtn: 1,
-          area: ['380px', 'auto'],
-          shadeClose: true,
-          content: $('#addWrap'),
-        });
-    });
+    
 </script>
 </body>
 </html>

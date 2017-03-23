@@ -1,0 +1,89 @@
+<include file="Public:header"/>
+<div class="">
+    <div class="crumb-wrap">
+        <div class="crumb-list"><i class="iconfont">&#xe6ad;</i><span>欢迎{$Think.session.uname}登录，上次登录时间：{$Think.session.logintime|date='Y年m月d日 H:i:s',###}，登录IP：{$Think.session.ip}</span></div>
+    </div>
+    <div class="result-wrap">
+        <div class="result-title">
+            <h1>快捷操作</h1>
+        </div>
+        <div class="result-content">
+            <div class="short-wrap">
+                <a href="{:U('Article/add')}"><i class="iconfont">&#xe762;</i>添加内容</a>
+                <a href="{:U('Category/add')}"><i class="iconfont">&#xe762;</i>添加栏目</a>
+                <a href="{:U('Article/index')}"><i class="iconfont">&#xe685;</i>内容管理</a>
+                <a href="{:U('Category/index')}"><i class="iconfont">&#xe60d;</i>栏目管理</a>
+                <a href="{:U('System/index')}"><i class="iconfont">&#xe646;</i>系统设置</a>
+            </div>
+        </div>
+    </div>
+    <div class="result-wrap">
+        <div class="result-title">
+            <h1>系统基本信息</h1>
+        </div>
+        <div class="result-content">
+            <ul class="sys-info-list">
+                <li>
+                    <label class="res-lab">操作系统：</label><span class="res-info">{$system.name}</span>
+                </li>
+                <li>
+                    <label class="res-lab">运行环境：</label><span class="res-info">{$system.hj}</span>
+                </li>
+                <li>
+                    <label class="res-lab">服务器上传附件限制：</label><span class="res-info ">{$system.uploadSize}</span>
+                </li>
+                <li>
+                    <label class="res-lab">北京时间：</label><span class="res-info" id="time"></span>
+                </li>
+                <li>
+                    <label class="res-lab">服务器域名：</label><span class="res-info">{$system.siteUrl}</span>
+                </li>
+                <li>
+                    <label class="res-lab">IP：</label><span class="res-info">{$system.host}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="result-wrap">
+        <div class="result-title">
+            <h1>使用帮助</h1>
+        </div>
+        <div class="result-content">
+            <ul class="sys-info-list">
+                <li>
+                    <label class="res-lab">客服QQ：</label><span class="res-info">Tech3@OkServer.cn</span>
+                </li>
+                <li>
+                    <label class="res-lab">微信：</label><span class="res-info">Tech3@OkServer.cn</span>
+                </li>
+                <li>
+                    <label class="res-lab">E-mail：</label><span class="res-info">Tech3@OkServer.cn</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<include file="Public:footer"/>
+<script type="text/javascript">
+    $(function(){
+        //获取当前时间
+        var t = null;
+        t = setTimeout(time,1000);//开始执行
+        function time()
+        {
+           clearTimeout(t);//清除定时器
+           dt = new Date();
+           var yy = dt.getYear();   
+            if(yy<1900) yy = yy+1900;   
+            var MM = dt.getMonth()+1;   
+            if(MM<10) MM = '0' + MM;   
+            var dd = dt.getDate();   
+            if(dd<10) dd = '0' + dd; 
+           var h=dt.getHours();
+           var m=dt.getMinutes();
+           var s=dt.getSeconds();
+           document.getElementById("time").innerHTML =  yy+"年"+MM+"月"+dd+"日 "+h+":"+m+":"+s;
+           t = setTimeout(time,1000); //设定定时器，循环执行             
+        } 
+    });
+</script>

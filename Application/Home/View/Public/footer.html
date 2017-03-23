@@ -51,5 +51,30 @@
 <script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.min.js" ></script>
 <script type="text/javascript" src="__PUBLIC__/js/jquery.flexslider-min.js" ></script>
 <script type="text/javascript" src="__PUBLIC__/js/index.js" ></script>
+<script type="text/javascript" src="__PUBLIC__/js/layer/layer.js" ></script>
+<script type="text/javascript">
+	//提交留言
+	$('#message').on('click',function(){
+		//var $form = $('.form');
+		$.ajax({
+			url: '{:U("Contact/cont")}',
+			type: 'post',
+			dataType: 'json',
+			data: $('.message_form').serialize(),
+			success:function(res){
+				console.log(res);
+				if(res.status == 1){
+					layer.msg(res.msg,{icon:1});
+				}else{
+					layer.msg(res.msg,{icon:0});
+				}
+			},
+			error: function(res){
+				layer.msg(res.msg,{icon:1});
+			}
+		});
+		return false;
+	});
+</script>
 </body>
 </html>

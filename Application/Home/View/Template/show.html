@@ -22,7 +22,7 @@
 			<div class="container">
 				<div class="new_title">
 					<h2>{$article.title}</h2>
-					<span class="date">发布日期：{$article.addtime|date='Y-m-d H:i:s',###}    编辑：{$article.author}</span>
+					<span class="date">发布日期：{$article.addtime|date='Y-m-d H:i:s',###}    编辑：{$article.author} 点击数:<span id="hits"></span></span>
 				</div>
 				<div class="con">
 					{$article.content}
@@ -50,3 +50,9 @@
 			with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
 		</script>
 <include file="Public:footer" />
+<script type="text/javascript">
+	var article_id = {$article['id']};
+	$.get('{:U("Show/getHits")}', {id:article_id},function(data) {
+		$('#hits').text(data);
+	});
+</script>

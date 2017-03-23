@@ -5,6 +5,7 @@
 	class ContactController extends CommonController {
 
 		public function index() {
+			$this -> contacts = M('contact')->select();
 			$this -> display();
 		}
 

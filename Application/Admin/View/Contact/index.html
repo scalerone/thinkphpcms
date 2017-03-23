@@ -1,9 +1,122 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+<include file="Public:header"/>
+<div class="container clearfix">
+    <include file="Public:left"/>
+    <!--/sidebar-->
+    <div class="main-wrap">
 
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="{:U('Index/index')}">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">留言管理</span></div>
+        </div>
+
+        <div class="result-wrap">
+            <form method="post" action="{:U('Links/updateSort')}" class="sortForm layui-form">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                        <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
+                    </div>
+                </div>
+                <div class="result-content" style="max-height: 850px;overflow: auto;">
+                    <table class="layui-table">
+                      <thead>
+                        <tr>
+                            <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
+                            <th>标题</th>
+                            <th width="10%">姓名</th>
+                            <th width="15%">留言时间</th>
+                            <th width="14%">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    <volist name="contacts" id="vo">
+                        <tr data-id={$vo.id}>
+                            <td><input class="set" type="checkbox" lay-skin="primary" value="{$vo.id}"></td>
+                            <td>{$vo.title}</td>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.addtime|date='Y-m-d H:i:s',###}</td>
+                            <td>
+                                <div class="layui-btn-group">
+                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="{:U('Links/edit',array('id'=>$vo['id']))}">
+                                        <i class="layui-icon">&#xe642;</i>
+                                    </a>
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="{$vo.id}">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </volist>
+                      </tbody>
+                    </table>
+                    <div class="result-title">
+                        <div class="result-list">
+                            <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                            <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+<include file="Public:footer"/>
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form','layer'], function(){
+        var layer = layui.layer
+        ,form = layui.form();
+
+        //全选
+      form.on('checkbox(allChoose)', function(data){
+        var child = $(data.elem).parents('table').find('tbody .set');
+        child.each(function(index, item){
+          item.checked = data.elem.checked;
+        });
+        form.render('checkbox');
+      });
+
+});
+    //删除
+    $('.batchDel').on('click',function(){
+        //获取所有选中的文章
+        $trs = $('.result-content table tbody tr input:checked');
+        if(!$trs.length){
+            layer.alert('请选中需要删除的链接!', {icon: 2});
+            return;
+        }
+        //获取选中的ID
+        var ids = [];
+        $trs.filter(function(index) {
+            return ids.push($($trs[index]).val());
+        });
+
+        var url = '{:U("Links/del")}';
+        ids = ids.join(',');
+        var $elems = $trs.parents('tr');
+        layer.confirm('确定要删除选中的链接吗？', {icon: 3, title:'提示'}, function(index){
+            ajaxDeleteElems(ids,url,'post',$elems);
+        });
+    });
+    //更新排序
+    $('.updateOrd').on('click',function(){
+        $('.sortForm').submit();
+        return false;
+    });
+
+    //删除单个
+    $(function(){
+        $('.delOneLink').on('click',function(){
+                $trEle = $(this).parents('tr');//当前的tr节点
+                var url = "{:U('Links/del')}";//提交删除的地址
+                var eleId = $trEle.data('id');//当前的id
+                //提示
+                layer.confirm('确定要删除该链接？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(eleId,url,'post',$trEle);
+            });
+        });
+    });
+    
+</script>
 </body>
 </html>
