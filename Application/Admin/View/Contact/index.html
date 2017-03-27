@@ -13,7 +13,7 @@
                 <div class="result-title">
                     <div class="result-list">
                         <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
-                        <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
+                        <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
                     </div>
                 </div>
                 <div class="result-content" style="max-height: 850px;overflow: auto;">
@@ -36,11 +36,11 @@
                             <td>{$vo.addtime|date='Y-m-d H:i:s',###}</td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="{:U('Links/edit',array('id'=>$vo['id']))}">
-                                        <i class="layui-icon">&#xe642;</i>
-                                    </a>
+                                   <a title="查看" class="lookContact layui-btn layui-btn-small" href="javascript:;" data-id="{$vo.id}">
+                                       查看
+                                   </a>
                                     <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="{$vo.id}">
-                                        <i class="layui-icon">&#xe640;</i>
+                                        删除
                                     </a>
                                 </div>
                             </td>
@@ -51,7 +51,7 @@
                     <div class="result-title">
                         <div class="result-list">
                             <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
-                            <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
+                            <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,6 @@
     <!--/main-->
 </div>
 <include file="Public:footer"/>
-<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
     layui.use(['form','layer'], function(){
         var layer = layui.layer
@@ -82,7 +81,7 @@
         //获取所有选中的文章
         $trs = $('.result-content table tbody tr input:checked');
         if(!$trs.length){
-            layer.alert('请选中需要删除的链接!', {icon: 2});
+            layer.alert('请选中需要删除的留言!', {icon: 2});
             return;
         }
         //获取选中的ID
@@ -91,29 +90,42 @@
             return ids.push($($trs[index]).val());
         });
 
-        var url = '{:U("Links/del")}';
+        var url = '{:U("Contact/del")}';
         ids = ids.join(',');
         var $elems = $trs.parents('tr');
-        layer.confirm('确定要删除选中的链接吗？', {icon: 3, title:'提示'}, function(index){
+        layer.confirm('确定要删除选中的留言吗？', {icon: 3, title:'提示'}, function(index){
             ajaxDeleteElems(ids,url,'post',$elems);
         });
-    });
-    //更新排序
-    $('.updateOrd').on('click',function(){
-        $('.sortForm').submit();
-        return false;
     });
 
     //删除单个
     $(function(){
         $('.delOneLink').on('click',function(){
                 $trEle = $(this).parents('tr');//当前的tr节点
-                var url = "{:U('Links/del')}";//提交删除的地址
+                var url = "{:U('Contact/del')}";//提交删除的地址
                 var eleId = $trEle.data('id');//当前的id
                 //提示
-                layer.confirm('确定要删除该链接？', {icon: 3, title:'提示'}, function(index){
+                layer.confirm('确定要删除该留言？', {icon: 3, title:'提示'}, function(index){
                 ajaxDeleteElems(eleId,url,'post',$trEle);
             });
+        });
+    });
+
+    //查看
+    $(function(){
+        $('.lookContact').on('click',function(){
+                var url = "{:U('Contact/look')}";//提交删除的地址
+                var eleId = $(this).data('id');//当前的id
+                //提示
+                layer.open({
+                  type: 2,
+                  title: '查看留言',
+                  shadeClose: true,
+                  shade: 0.8,
+                  area: ['460px', '80%'],
+                  content: '{:U("Contact/look","","")}'+'/id/'+eleId
+                }); 
+            
         });
     });
     

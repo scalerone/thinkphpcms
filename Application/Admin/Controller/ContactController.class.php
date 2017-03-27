@@ -9,7 +9,10 @@
 			$this -> display();
 		}
 
-		public function add() {
+		//查看留言
+		public function look() {
+			$contact = M('Contact')->find(I('get.id'));
+			$this -> contact = $contact;
 			$this -> display();
 		}
 
@@ -18,11 +21,18 @@
 		}
 
 		public function del() {
-			p($_GET);die;
-			$this -> display();
+			if(IS_POST){
+				$ids = I('id');
+				if(!empty($ids)){
+					$result = M('Contact')->delete($ids);
+					if($result){
+						$this -> ajaxReturn(array('status'=>1,'msg'=>'删除留言成功!'));
+					}else{
+						$this -> ajaxReturn(array('status'=>0,'msg'=>'删除留言出错!'));
+					}
+				}
+			}
 		}
-
-		
 
 	}
 
