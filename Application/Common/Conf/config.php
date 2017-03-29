@@ -67,4 +67,8 @@ return array(
 
     //自定义标签相关
     'TAGLIB_BUILD_IN' => 'cx,Home\TagLib\TagLibHome',
+
+    //'TMPL_EXCEPTION_FILE'=>'./Application/Common/Common/error.html' // 定义公共错误模板
+    //'ERROR_PAGE'=>'/Admin/index.html' // 定义错误跳转页面URL地址
+    
 );

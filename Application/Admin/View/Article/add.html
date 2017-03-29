@@ -30,6 +30,12 @@
                       <input type="text" name="title" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
                     </div>
                   </div>
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">摘要：</label>
+                    <div class="layui-input-block w500">
+                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"></textarea>
+                    </div>
+                  </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label ">内容：</label>
                     <div class="layui-input-block">
@@ -56,12 +62,7 @@
                       <input type="checkbox" name="is_hot" title="热门" value="1">
                     </div>
                   </div>
-                  <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">摘要：</label>
-                    <div class="layui-input-block w500">
-                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"></textarea>
-                    </div>
-                  </div>
+                  
                   <div class="layui-form-item">
                     <div class="layui-inline">
                       <label class="layui-form-label">添加日期：</label>
@@ -83,9 +84,27 @@
                     </div>
                   </div>
                   
-                   <div class="layui-form-item">
+                  <div class="layui-form-item files_dom">
+                    <label class="layui-form-label">附件：</label>
+                    <div class="layui-inline">
+                        <input style="width: 300px;" type="text" lay-verify="required" autocomplete="off" class="layui-input" value="">
+                    </div>
+                    <div class="layui-inline">
+                        <input type="text" lay-verify="required" autocomplete="off" class="layui-input" value="">
+                    </div>
+                    <div class="layui-inline" style="width:auto;">
+                        <label class="layui-btn">
+                          附件上传<input type="file" name="files[]" value="附件" style="width:1px;opacity: 0;height: 1;display: none;">
+                        </label>
+                    </div>
+                    <div class="layui-inline nextadd">
+                        <a class="addbtn layui-btn ">继续添加</a>
+                    </div>
+                  </div>
+
+                   <div class="layui-form-item addfilebox">
                     <div class="layui-input-block">
-                      <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
+                      <a type="submit" class="layui-btn submit" lay-submit="" >添加</a>
                     </div>
                   </div>
                 </form>
@@ -113,7 +132,22 @@
           //调用上传方法
           fileUpload(options,'#_thumb','{:U("Article/upload")}');
         });
+
+        //继续添加附件
+        $('.addbtn').on('click',function(){
+          var $pare = $(this).parents('.files_dom');
+          var $dom = $pare.clone();
+          $dom.find('.nextadd').remove();
+          $dom.append('<div class="layui-inline"><a class="delbtn layui-btn layui-btn-danger">删除</a></div>');
+          $pare.after($dom);
+
+          $('.delbtn').on('click',function(){
+            $(this).parents('.files_dom').remove();
+          });
+        });
+       
     });
+
 </script>
 <script type="text/javascript">
   var ue = UE.getEditor('content');
