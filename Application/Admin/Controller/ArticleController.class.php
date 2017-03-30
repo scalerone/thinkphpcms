@@ -24,10 +24,34 @@
 		public function add() {
 			if(IS_POST){
 				$post = I('post.');
+				
 				$post['addtime'] = strtotime(I('post.addtime'));
 				$post['content'] = htmlspecialchars_decode(I('post.content'));
+				
+				//p($post);die;
+
 				$article = M('Article');
-				if($article -> add($post)){
+				$result = $article -> add($post);
+				$len = count($post['article_files']);
+
+				if($result){
+					if($len>0){
+						$file = M('Article_files');
+						for ($i=0; $i < $len; $i++) { 
+							//添加附件
+							$data = array(
+									'article_id' => $result,
+									'filename' => $post['files_name'][$i],
+									'filetype' => $post['files_type'][$i],
+									'fileurl'=> $post['article_files'][$i],
+									'filesize'=> $post['files_size'][$i],
+									'addtime' => time(),
+								);
+							$file->add($data);
+						}
+						
+					}
+
 					$this -> success('添加成功!',U('Article/index'));
 				}else{
 					$this -> error('添加失败!');
@@ -175,6 +199,30 @@
 					);
 			}
 			$this -> ajaxReturn($res);
+		}
+
+		//文章附件上传
+		public function uploadFiles() {
+
+			$upload = new \Think\Upload();// 实例化上传类 
+			$upload->maxSize = C('FILE_SIZE');// 设置附件上传大小 
+			$type = C('FILE_TYPE');
+			$type = explode('|',$type);
+			
+			$upload->exts = $type;// 设置附件上传类型 
+			$upload->rootPath = './Uploads/'; // 设置附件上传根目录 // 上传单个文件
+			
+			$info = $upload->uploadOne($_FILES['articleFiles']); 
+			if(!$info) {// 上传错误提示错误信息 
+				$res = $upload->getError();
+			}else{// 上传成功 获取上传文件信息 
+				$res['status'] = '1';
+				$res['url'] = '/Uploads/' . $info['savepath'].$info['savename'];
+				$res['name'] = $info['savename'];
+				$res['size'] = $info['size'];
+			}
+			$this -> ajaxReturn($res);
+
 		}
 	}
 ?>

@@ -96,6 +96,14 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{di
     color: #333;
     font-size: 12px;
 }
+#pages a.next{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#pages a.prev{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
 #pages .current{
     background-color: #009688;
     border-color: #009688;

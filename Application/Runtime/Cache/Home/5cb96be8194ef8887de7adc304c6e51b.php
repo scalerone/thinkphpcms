@@ -56,51 +56,42 @@
 				<div class="left float_l">
 					<p>
 						<span class="h2">
-							<?php $cates= M("category")->where("status=1")->order("sort ASC")->select();$cates=cateSort2Child($cates,76);foreach($cates as $key=>$cate_val): extract($cate_val);$index=$key+1;if($type==1) $url=U("/list/".$id);if($type==2) $url=U("/page/".$id); endforeach;?>
+							<?php echo ($cate['catname']); ?>
 						</span>
-						<span class="h4"><?php echo ($article["alias"]); ?></span>
+						<span class="h4"><?php echo ($cate['alias']); ?></span>
 					</p>
 				</div>
 				<div class="right float_r">
 					<p>
 						<i class="icon-home"></i>
 						<a href="/">首页</a>>
-						<a href="/list/61.html">成功案例</a>&gt;
+						<a href="/list/58.html">新闻资讯</a>&gt;
 					</p>
 				</div>
 			</div>
 		</div>
-		<div class="content">
+		<div class="content list service">
 			<div class="container">
-				<div class="new_title">
-					<h2><?php echo ($article["title"]); ?></h2>
-					<span class="date">发布日期：<?php echo (date('Y-m-d H:i:s',$article["addtime"])); ?>    编辑：<?php echo ($article["author"]); ?> 点击数:<span id="hits"></span></span>
-				</div>
-				<div class="con">
-					<?php echo ($article["content"]); ?>
-				</div>
-				<div class="fenx mt50">
-					<div class="bdsharebuttonbox" data-tag="share_1">
-						<a class="bds_qzone" data-cmd="qzone" href="#"></a>
-						<a class="bds_tsina" data-cmd="tsina"></a>
-						<a class="bds_baidu" data-cmd="baidu"></a>
-						<a class="bds_renren" data-cmd="renren"></a>
-						<a class="bds_tqq" data-cmd="tqq"></a>
-						<a class="bds_more" data-cmd="more">更多</a>
-						<a class="bds_count" data-cmd="count"></a>
-					</div>
-				</div>
-				<div class="pages plu">
-					<p>
-						<a href=""><</a>
-						<a href="">></a>
-					</p>
+				<ul>
+				<?php $arr = get_article($cate["id"],$fields='*',$limit='1',$order='sort ASC',$page=true,$pageSize='1'); ?>
+				<?php if(is_array($arr['list'])): foreach($arr['list'] as $key=>$vo): ?><li class="clear">
+						<div class="img float_l">
+							<a href="<?php echo U('/show/'.$vo['id']);?>">
+								<img src="<?php echo ($vo["thumb"]); ?>" alt="<?php echo ($vo["title"]); ?>" height="230px" width="345px">
+							</a>
+						</div>
+						<div class="text float_l">
+							<h2><a href="<?php echo U('/show/'.$vo['id']);?>"><?php echo ($vo["title"]); ?></a></h2>
+							<p><?php echo ($vo["summary"]); ?></p>
+							<span class="date"><?php echo (date('Y-m-d',$vo['addtime'])); ?></span>
+						</div>
+					</li><?php endforeach; endif; ?>
+				</ul>
+				<div class="pages">
+					<?php echo ($arr['page']); ?>
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript">
-			with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-		</script>
 <footer>
 	<div class="container clear">
 		<div class="stu float_l">
@@ -176,9 +167,3 @@
 </script>
 </body>
 </html>
-<script type="text/javascript">
-	var article_id = <?php echo ($article['id']); ?>;
-	$.get('<?php echo U("Show/getHits");?>', {id:article_id},function(data) {
-		$('#hits').text(data);
-	});
-</script>
