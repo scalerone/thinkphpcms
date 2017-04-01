@@ -24,11 +24,8 @@
 		public function add() {
 			if(IS_POST){
 				$post = I('post.');
-				
 				$post['addtime'] = strtotime(I('post.addtime'));
 				$post['content'] = htmlspecialchars_decode(I('post.content'));
-				
-				//p($post);die;
 
 				$article = M('Article');
 				$result = $article -> add($post);
@@ -36,9 +33,11 @@
 
 				if($result){
 					if($len>0){
+						//存在附件
 						$file = M('Article_files');
+						//添加附件
 						for ($i=0; $i < $len; $i++) { 
-							//添加附件
+							
 							$data = array(
 									'article_id' => $result,
 									'filename' => $post['files_name'][$i],
@@ -49,9 +48,7 @@
 								);
 							$file->add($data);
 						}
-						
 					}
-
 					$this -> success('添加成功!',U('Article/index'));
 				}else{
 					$this -> error('添加失败!');
@@ -65,7 +62,19 @@
 
 		//删除文章
 		public function del() {
-			$result = M('Article') -> delete(I('get.id'));
+			$ids = I('get.id');
+			//删除文章
+			$result = M('Article') -> delete($ids);
+
+			$file = M('Article_files');
+			$ids = explode(',',$ids);
+			//删除附件
+			if(isset($ids)){
+				foreach ($ids as $key => $id) {
+					$file ->where(array('article_id'=>$id))->delete();
+				}
+			}
+			//返回结果
 			if($result){
 				$this -> ajaxReturn(array('status'=>1));
 			}else{
@@ -89,15 +98,45 @@
 				$post['addtime'] = strtotime(I('post.addtime'));
 				$post['content'] = htmlspecialchars_decode(I('post.content'));
 				$result = M('Article')->save($post);
+
+				//p($post);die;
+				$len = count($post['article_files']);
+
 				if($result !== false){
-					$this -> success('修改成功!',U('Article/index'));
+					$file = M('Article_files');
+					//删除之前的附件
+					$file->where(array('article_id'=>$post['id']))->delete();
+					if($len>0){
+
+						//更新附件
+						for ($i=0; $i < $len; $i++) { 
+							$data = array(
+									'article_id' => $post['id'],
+									'filename' => $post['files_name'][$i],
+									'filetype' => $post['files_type'][$i],
+									'fileurl'=> $post['article_files'][$i],
+									'filesize'=> $post['files_size'][$i],
+									'addtime' => time(),
+								);
+							$file->add($data);
+						}
+					}
+					$this -> success('保存成功!',U('Article/index'));
 				}else{
-					$this -> error('修改失败!');
+					$this -> error('保存失败!');
 				}
+
 			}else{
+				//获取栏目
+				$id = I('get.id');
 				$category = M('Category')->field('id,catname,pid')->order('sort ASC')-> select();
 				$this -> categories = reorgnCates($category,'├');
-				$this -> article = M('Article')->find(I('get.id'));
+				//获取文章
+				$article = M('Article')->find($id);
+				$article['files'] = M('article_files')->where(array('article_id'=>$id))->select();
+				//p($article);die;
+				//获取文章的附件
+				$this -> article = $article;
 				$this -> display();
 			}
 		}

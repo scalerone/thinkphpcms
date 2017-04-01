@@ -1,0 +1,13 @@
+lynx 127.0.0.1/phpinfo.php 访问网址
+
+ls -al //列出所有的文件，包括隐藏文件
+df    //查看磁盘使用情况
+pwd   //显示当前路径
+cd ..  //移动到上级目录
+cd .   //移动到当前目录
+cd     //移动到根目录
+cp filepath file2path  //复制文件
+rm -r  filepath  //递归删除文件夹或文件，包括其子目录
+cat filepath    //查看文件
+vim|vi     //查看，编辑文件 :wq  保存并退出  :q!强制保存退出
+ps	   //显示当前在运行的进程

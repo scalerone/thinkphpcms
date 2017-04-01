@@ -107,6 +107,12 @@
                       <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="<?php echo ($article["title"]); ?>">
                     </div>
                   </div>
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">摘要：</label>
+                    <div class="layui-input-block w500">
+                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"><?php echo ($article["summary"]); ?></textarea>
+                    </div>
+                  </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label ">内容：</label>
                     <div class="layui-input-block">
@@ -125,20 +131,15 @@
                         <button class="del-thumb layui-btn layui-btn-primary <?php echo ($article['thumb']==''?'hide':''); ?>">删除</button>
                     </div>
                   </div>
-                  <div class="layui-form-item">
+                  <div class="layui-form-item" pane="">
                     <label class="layui-form-label">状态：</label>
                     <div class="layui-input-block">
-                      <input type="checkbox" name="is_top" title="置顶" value="1" <?php echo ($article['is_top']=='1'?'checked=""':''); ?>>
-                      <input type="checkbox" name="is_rec" title="推荐" <?php echo ($article['is_rec']=='1'?'checked=""':''); ?> value="1">
-                      <input type="checkbox" name="is_hot" title="热门" value="1" <?php echo ($article['is_hot']=='1'?'checked=""':''); ?>>
+                      <input type="checkbox" lay-skin="primary" name="is_top" title="置顶" value="1" <?php echo ($article['is_top']=='1'?'checked=""':''); ?>>
+                      <input type="checkbox" lay-skin="primary" name="is_rec" title="推荐" <?php echo ($article['is_rec']=='1'?'checked=""':''); ?> value="1">
+                      <input type="checkbox" lay-skin="primary" name="is_hot" title="热门" value="1" <?php echo ($article['is_hot']=='1'?'checked=""':''); ?>>
                     </div>
                   </div>
-                  <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">摘要：</label>
-                    <div class="layui-input-block w500">
-                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"><?php echo ($article["summary"]); ?></textarea>
-                    </div>
-                  </div>
+                  
                   <div class="layui-form-item">
                     <div class="layui-inline">
                       <label class="layui-form-label">添加日期：</label>
@@ -159,6 +160,60 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">附件：</label>
+
+                    <div class="layui-inline files_dom" style="width:auto;">
+                        <div class="layui-btn-group">
+                          <label class="layui-btn">
+                            选择文件<input type="file" multiple class="selectFile" name="article_file" value="附件" style="width:1px;opacity: 0;height: 1;display: none;">
+                          </label>
+                          <a class="layui-btn layui-btn-primary uploadBtn" style="width:auto;display: none;">开始上传</a>
+                        </div>
+                      <?php if(!empty($article["files"])): ?><table class="fileTable layui-table" lay-even="" lay-skin="row">   
+                            <colgroup>    
+                              <col width="300">    
+                              <col width="80">    
+                              <col width="130">    
+                              <col width="360">    
+                              <col width="100">    
+                              <col>   
+                            </colgroup>   
+                          <thead>
+                            <tr>
+                              <th>文件名</th>
+                              <th>类型</th>
+                              <th>大小</th>
+                              <th>进度</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <?php if(is_array($article["files"])): foreach($article["files"] as $key=>$f): ?><tr>
+                              <td>
+                                <input type="hidden" name="files_id[]" value="<?php echo ($f["id"]); ?>">
+                                <input type="hidden" name="files_name[]" value="<?php echo ($f["filename"]); ?>">
+                                <input type="hidden" class="hid_file" name="article_files[]" value="<?php echo ($f["fileurl"]); ?>"><?php echo ($f["filename"]); ?>
+                              </td>
+                              <td>
+                                <input type="hidden" class="hid_file_type" name="files_type[]" value="<?php echo ($f["filetype"]); ?>"><?php echo ($f["filetype"]); ?>
+                              </td>
+                              <td>
+                                <input type="hidden" class="hid_file_size" name="files_size[]" value="<?php echo ($f["filesize"]); ?>"><?php echo ($f["filesize"]); ?>
+                              </td>
+                              <td>
+                                <div class="layui-progress">
+                                  <div class="layui-progress-bar" lay-percent="100%"></div>
+                                </div>
+                              </td>
+                              <td>
+                                <a class="layui-btn layui-btn-danger layui-btn-mini delfilebtn">删除</a>
+                              </td>
+                            </tr><?php endforeach; endif; ?>
+                          </tbody>
+                        </table><?php endif; ?>
+                    </div>
                   
                    <div class="layui-form-item">
                     <div class="layui-input-block">
@@ -178,6 +233,7 @@
 <script type="text/javascript" src="/./Application/Admin/Public/layui/layui.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/common.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/function.js"></script>
+<script type="text/javascript" src="/./Application/Admin/Public/js/upload/ajaxfileupload.js"></script>
 <script type="text/javascript">
 	$('.logout').on('click',function(){
 	    //询问框
@@ -238,10 +294,42 @@ layui.use('element', function(){
           //调用上传方法
           fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
         });
+
+        
     });
 </script>
 <script type="text/javascript">
   var ue = UE.getEditor('content');
+  (function(){
+    //上传文件附件
+    ajaxUploadArticleFiles("<?php echo U('Article/uploadFiles');?>");
+
+    $('.delfilebtn').on('click',function(){
+        var del = $('.delfilebtn');
+        var oTr = $(this).parents("tr");
+        var index = oTr.index();
+        var table = $(this).parents('.fileTable');
+        
+        if(del && del.length==1){
+          table.remove();
+          $('.uploadBtn').hide();
+
+          if(flieList && sizeObj){
+            flieList.empty(); //删除数据
+            sizeObj.empty(); //删除文件大小数组中的项
+          }
+        }else{
+          
+          oTr.remove();   //删除这一行
+          if(flieList && sizeObj){
+            flieList.splice(index,1); //删除数据
+            sizeObj.splice(index,1);  //删除文件大小数组中的项
+          }
+         
+        }
+
+      });
+  })()
 </script>
 </body>
 </html>

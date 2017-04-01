@@ -1,0 +1,26 @@
+VPN账号名: Power_1335
+密码是 V7g0t$dp
+
+172.16.9.115
+
+用户: opuser ; 密码: p0weruser
+用户: root ; 密码: passw0rd
+在您第一次登录的时候,系统会强制您修改密码.
+
+
+webVR:
+
+UnityScript是由JavaScript衍生的工具，能够用于Unity游戏和应用脚本。
+
+WebVR 是一款实验性的API，他使用Three.JS或WebGL在Firefox或Chromium浏览器中能看到VR网站。
+
+A-Frame是一款MozVR中心的标记语言，能用HTML格式的语言为基于浏览器的VR设备做出VR内容来。
+
+
+
+作者：iCocos
+链接：https://www.zhihu.com/question/29304759/answer/116910676
+来源：知乎
+著作权归作者所有，转载请联系作者获得授权。
+
+OkServercn0318
