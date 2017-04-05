@@ -1,0 +1,97 @@
+html,body,div,a,input,h3{margin:0;padding:0;}
+body{font-size: 14px;font-family: 'Microsoft YaHei';color: #333;}
+#bg_wrap{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+#bg_wrap div{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+#bg_wrap div img{
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity 5s;
+	overflow: hidden;
+}
+#bg_wrap div img:nth-of-type(1){
+	opacity: 1;
+}
+.verify{
+	cursor: pointer;
+}
+#login_wrap{
+	position: relative;
+	width: 270px;
+	height: 300px;
+	margin: 160px auto;
+	z-index: 999;
+}
+#login_wrap p{
+	width: 100%;
+}
+#login_wrap input.input{
+	width: 100%;
+	outline: none;
+	height: 42px;
+	margin-bottom: 20px;
+	line-height: 42px;
+	color: #fff;
+	border: 1px solid rgba(255,255,255,.2);
+	box-shadow: 1px 2px 3px 1px rgba(41, 38, 38,.2) inset;
+	text-indent: 10px;
+	border-radius: 5px;
+	background-color: rgba(0, 0, 0, 0.25);
+}
+#login_wrap input.input.login{
+	text-align: center;
+	background-color: rgba(239, 55, 4, 0.8);
+	font-size: 16px;
+	cursor: pointer;
+}
+input{
+	display: block;
+}
+input::-webkit-input-placeholder{color: #fff;}
+
+#login_wrap p.move{
+	display: inline-block;
+	position: absolute;
+	top: -700px;
+}
+#login_wrap input.code{
+	width: 120px;
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+}
+
+#login_wrap h3{
+	position: relative;
+	top: -200px;
+}
+#login_wrap h3.move{
+	font-weight: 400;
+	margin-bottom: 30px;
+	font-size: 30px;
+	line-height: 38px;
+	text-align: center;
+	color: #fff;
+}
+#login_wrap img{
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	vertical-align: middle;
+	border-radius: 5px;
+}

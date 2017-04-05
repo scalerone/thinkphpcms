@@ -17,7 +17,7 @@
 				}
 				$this -> ajaxReturn($result);
 			}else{
-				$this -> display();
+				$this -> display('login2');
 			}
 		}
 			

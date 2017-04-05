@@ -178,6 +178,7 @@
 <script type="text/javascript" src="/./Application/Admin/Public/layui/layui.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/common.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/function.js"></script>
+<script type="text/javascript" src="/./Application/Admin/Public/js/upload/ajaxfileupload.js"></script>
 <script type="text/javascript">
 	$('.logout').on('click',function(){
 	    //询问框

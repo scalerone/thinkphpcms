@@ -28,9 +28,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/ueditor.all.min.js"> </script>
-<script type="text/javascript" charset="utf-8" src="/./Application/Admin/Public/plugin/ueditor/lang/zh-cn/zh-cn.js"></script>
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <!-- <div class="sidebar-title">
@@ -87,103 +84,55 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/index');?>">文章管理</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="<?php echo U('Article/add');?>">添加文章</a></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">留言管理</span></div>
         </div>
 
         <div class="result-wrap">
-            <div class="result-content">
-               <form class="layui-form" action="<?php echo U('Article/add');?>" method="post" enctype="multipart/form-data" id="addForm">
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">栏目：</label>
-                    <div class="layui-input-block w200" >
-                      <select name="catid" lay-verify="required">
-                        <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><option value="<?php echo ($c["id"]); ?>" <?php echo ($c['id']==$pid?'selected="selected"':''); ?>><?php echo ($c["html"]); echo ($c["catname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
-                      </select>
+            <form method="post" action="<?php echo U('Links/updateSort');?>" class="sortForm layui-form">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                        <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
                     </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label ">标题：</label>
-                    <div class="layui-input-block w500">
-                      <input type="text" name="title" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
-                    </div>
-                  </div>
-                  <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">摘要：</label>
-                    <div class="layui-input-block w500">
-                      <textarea name="summary" placeholder="文章摘要..." class="layui-textarea"></textarea>
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label ">内容：</label>
-                    <div class="layui-input-block">
-                      <textarea name="content" id="content" style="height: 450px;"></textarea>
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">缩略图：</label>
-                    <div class="layui-input-block">
-                        <img src="" class="hide thumb-img" height="100px" width="auto">
-                        <input type="hidden" name="thumb" class="thumb-input" value="">
-                        <input type="file" id="_thumb" class="hide">
-                        <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
-                          <i class="layui-icon">&#xe608;</i> 文章缩略图
-                        </button>
-                        <button class="del-thumb layui-btn layui-btn-primary hide">删除</button>
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item" pane="">
-                    <label class="layui-form-label">状态：</label>
-                    <div class="layui-input-block">
-                      <input type="checkbox" lay-skin="primary" name="is_top" title="置顶" value="1">
-                      <input type="checkbox" lay-skin="primary" name="is_rec" title="推荐" value="1">
-                      <input type="checkbox" lay-skin="primary" name="is_hot" title="热门" value="1">
-                    </div>
-                  </div>
-                  
-                  <div class="layui-form-item">
-                    <div class="layui-inline">
-                      <label class="layui-form-label">添加日期：</label>
-                      <div class="layui-input-block">
-                        <input type="text" name="addtime" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD'})">
-                      </div>
-                    </div>
-                    <div class="layui-inline">
-                      <label class="layui-form-label">作者：</label>
-                      <div class="layui-input-block">
-                        <input type="tel" name="author" autocomplete="off" class="layui-input">
-                      </div>
-                    </div>
-                    <div class="layui-inline">
-                      <label class="layui-form-label">别名：</label>
-                      <div class="layui-input-block">
-                        <input type="tel" name="alias" autocomplete="off" class="layui-input">
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">附件：</label>
-
-                    <div class="layui-inline files_dom" style="width:auto;">
-                        <div class="layui-btn-group">
-                          <label class="layui-btn">
-                            选择文件<input type="file" multiple class="selectFile" name="article_file" value="附件" style="width:1px;opacity: 0;height: 1;display: none;">
-                          </label>
-                          <a class="layui-btn layui-btn-primary uploadBtn" style="width:auto;display: none;">开始上传</a>
+                </div>
+                <div class="result-content" style="max-height: 850px;overflow: auto;">
+                    <table class="layui-table">
+                      <thead>
+                        <tr>
+                            <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
+                            <th>标题</th>
+                            <th width="10%">姓名</th>
+                            <th width="15%">留言时间</th>
+                            <th width="14%">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    <?php if(is_array($contacts)): $i = 0; $__LIST__ = $contacts;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
+                            <td><input class="set" type="checkbox" lay-skin="primary" value="<?php echo ($vo["id"]); ?>"></td>
+                            <td><?php echo ($vo["title"]); ?></td>
+                            <td><?php echo ($vo["name"]); ?></td>
+                            <td><?php echo (date('Y-m-d H:i:s',$vo["addtime"])); ?></td>
+                            <td>
+                                <div class="layui-btn-group">
+                                   <a title="查看" class="lookContact layui-btn layui-btn-small" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                       查看
+                                   </a>
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                        删除
+                                    </a>
+                                </div>
+                            </td>
+                        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                      </tbody>
+                    </table>
+                    <div class="result-title">
+                        <div class="result-list">
+                            <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                            <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
                         </div>
                     </div>
-
-                    
-                  </div>
-
-                   <div class="layui-form-item addfilebox">
-                    <div class="layui-input-block">
-                      <button type="submit" class="layui-btn submit" lay-submit="" >添加</button>
-                    </div>
-                  </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
     <!--/main-->
@@ -240,30 +189,73 @@ layui.use('element', function(){
 });
 </script>
 <script type="text/javascript">
-    layui.use(['form', 'layedit', 'laydate','element'], function(){
-      var form = layui.form()
-      ,layedit = layui.layedit
-      ,element = layui.element
-      ,laydate = layui.laydate;
+    layui.use(['form','layer'], function(){
+        var layer = layui.layer
+        ,form = layui.form();
 
-        //文章缩略图上传
-        $('#_thumb').bind('change',function(){
-          //限制文件类型与大小
-          var options = {
-            'id'      : '#_thumb',
-            'filePath': $(this).val(),
-            'fileSize': <?php echo (C("FILE_SIZE")); ?>,
-          };
-          //调用上传方法
-          fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
+        //全选
+      form.on('checkbox(allChoose)', function(data){
+        var child = $(data.elem).parents('table').find('tbody .set');
+        child.each(function(index, item){
+          item.checked = data.elem.checked;
+        });
+        form.render('checkbox');
+      });
+
+});
+    //删除
+    $('.batchDel').on('click',function(){
+        //获取所有选中的文章
+        $trs = $('.result-content table tbody tr input:checked');
+        if(!$trs.length){
+            layer.alert('请选中需要删除的留言!', {icon: 2});
+            return;
+        }
+        //获取选中的ID
+        var ids = [];
+        $trs.filter(function(index) {
+            return ids.push($($trs[index]).val());
         });
 
-        //上传文件附件
-        ajaxUploadArticleFiles("<?php echo U('Article/uploadFiles');?>");
+        var url = '<?php echo U("Contact/del");?>';
+        ids = ids.join(',');
+        var $elems = $trs.parents('tr');
+        layer.confirm('确定要删除选中的留言吗？', {icon: 3, title:'提示'}, function(index){
+            ajaxDeleteElems(ids,url,'post',$elems);
+        });
     });
-</script>
-<script type="text/javascript">
-  var ue = UE.getEditor('content');
+
+    //删除单个
+    $(function(){
+        $('.delOneLink').on('click',function(){
+                $trEle = $(this).parents('tr');//当前的tr节点
+                var url = "<?php echo U('Contact/del');?>";//提交删除的地址
+                var eleId = $trEle.data('id');//当前的id
+                //提示
+                layer.confirm('确定要删除该留言？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(eleId,url,'post',$trEle);
+            });
+        });
+    });
+
+    //查看
+    $(function(){
+        $('.lookContact').on('click',function(){
+                var url = "<?php echo U('Contact/look');?>";//提交删除的地址
+                var eleId = $(this).data('id');//当前的id
+                //提示
+                layer.open({
+                  type: 2,
+                  title: '查看留言',
+                  shadeClose: true,
+                  shade: 0.8,
+                  area: ['460px', '80%'],
+                  content: '<?php echo U("Contact/look","","");?>'+'/id/'+eleId
+                }); 
+            
+        });
+    });
+    
 </script>
 </body>
 </html>
