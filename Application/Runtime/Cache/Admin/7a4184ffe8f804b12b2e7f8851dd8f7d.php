@@ -129,7 +129,7 @@
                             <th width="3%"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
                             <th width="5%">排序</th>
                             <th>标题</th>
-                            <th width="6%">点击</th>
+                            <th width="15%">所属栏目</th>
                             <th width="15%">添加时间</th>
                             <th width="12%">状态</th>
                             <th width="12%">操作</th>
@@ -143,8 +143,8 @@
                                 <?php if($a["thumb"] != '' ): ?><i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="<?php echo ($a["thumb"]); ?>">&#xe64a;</i>
                                 <?php else: endif; ?>
                                 </td>
-                                <td><?php echo ($a["hits"]); ?></td>
-                                <td><?php echo (date("Y-m-d h:m:s",$a["addtime"])); ?></td>
+                                <td><?php echo ($a["cate_name"]); ?></td>
+                                <td><?php echo (date("Y-m-d H:m:i",$a["addtime"])); ?></td>
                                 <td>
                                     <?php echo ($a['is_rec']==1?'<span class="text-info">推荐</span>':''); ?>
                                     <?php echo ($a['is_top']==1?'<span class="text-success">置顶</span>':''); ?>

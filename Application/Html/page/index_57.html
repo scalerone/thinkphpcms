@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>创客教育</title>
+		<meta name="keywords" content="关键字，关键字2">
+		<meta name="description" content="网站描述">
+		<link rel="stylesheet" href="/Public/css/common.css" />
+		<link rel="stylesheet" href="/Public/css/header.css" />
+		<link rel="stylesheet" href="/Public/css/page.css" />
+		<link rel="stylesheet" href="/Public/css/footer.css">
+		<!--[if lt IE 9]>
+        	<script src="/Public/js/html5shiv.min.js"></script>
+			<script src="/Public/js/respond.min.js"></script>
+        <![endif]-->
+	</head>
+	<body>
+		<header>
+			<div class="container clear">
+				<div class="logo float_l">
+					<a href="/">
+						<img alt="创客教育" src="/Uploads/System/Logo/58c5f1c6df1eb.jpg" width="150px" height="115px" />
+					</a>
+				</div>	
+				<div class="nav float_l">
+					<nav>
+						<ul>
+							<li class=""><a href="/">首页</a></li>
+							<li class=""><a href="/page/55.html">关于我们</a></li><li class="active"><a href="/page/57.html">创客教育</a></li><li class=""><a href="/list/58.html">新闻资讯</a></li><li class=""><a href="/list/59.html">下载中心</a></li><li class=""><a href="/page/60.html">服务支持</a></li><li class=""><a href="/list/61.html">成功案例</a></li><li class=""><a href="/list/62.html">在线留言</a></li>						</ul>
+					</nav>
+				</div>
+				<div class="user float_r">
+					<a href="javascript:;">
+						<i class="icon-user"></i>
+					</a>
+					<a href="javascript:;" id="user-dowm">
+						<i class="icon-dowm"></i>
+					</a>
+					<div class="user-box">
+						<ul>
+							<li><a href="">登录</a></li>
+							<li><a href="">注册</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section class="flexslider">
+			<ul class="slides">
+				<li alt="alt" style="background:url(/Uploads/2017-03-18/58ccc9ef81f16.jpg) 50% 0 no-repeat;"></li><li alt="" style="background:url(/Uploads/2017-03-18/58ccc9fe5dc5f.jpg) 50% 0 no-repeat;"></li>			</ul>
+		</section>
+	<div class="position sub_nav">
+		<div class="container">
+			<p>
+			<a class="" href="/page/65.html">中小学创客空间</a><a class="" href="/page/66.html">高效创客空间</a><a class="" href="/page/67.html">社会创客空间</a>			</p>
+		</div>
+	</div>
+	<div class="content mb50">
+		<div class="container">
+			<h2 style="margin: 0px; padding: 10px 0px; color: rgb(51, 51, 51); font-size: 24px; font-weight: 100; font-family: &quot;microsoft yahei&quot;, arial; white-space: normal; background-color: rgb(255, 255, 255);">中小学创客空间</h2><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;, arial; font-size: 13px; white-space: normal; background-color: rgb(255, 255, 255);">创客教室空间用于培养学生的创新能力，让学生的新奇创意思维变成现实。</p><p><img src="/Uploads/images/20170315/1489553718604295.jpg" title="1489553718604295.jpg" alt="show_ck01.jpg"/></p>		</div>
+	</div>
+<footer>
+	<div class="container clear">
+		<div class="stu float_l">
+			<h2 class="h2">
+				<a href="/cate/57.html">创客教育</a>
+			</h2>
+			<p><a href="/page/65.html">中小学创客空间</a></p><p><a href="/page/66.html">高效创客空间</a></p><p><a href="/page/67.html">社会创客空间</a></p>		</div>
+		<div class="contact float_l">
+			<h2 class="h2">
+				<a href="/cate/62.html">在线留言</a>
+			</h2>
+			<p>热线：0755-8888-8888</p>
+			<p>邮箱：postmaster@szqcmaker.com</p>
+			<p>地址: 深圳市龙华新区明治街道上塘综路722室</p>
+		</div>
+		<div class="about float_l">
+			<h2 class="h2">
+				关于我们			</h2>
+			<p class="i">
+				<a href="">
+					<i class="icon-botton icon-qq"></i>
+				</a>
+				<a href="">
+					<i class="icon-botton icon-weixin"></i>
+				</a>
+				<a href="">
+					<i class="icon-botton icon-sina"></i>
+				</a>
+				<a href="">
+					<i class="icon-botton icon-face"></i>
+				</a>
+			</p>
+			<p>版权所有：2016-2026 启航创客教育</p>
+		</div>
+		<div class="qcode float_r">
+			<img src="/Public/images/code.jpg">
+			<p>扫一扫，关注我们！</p>
+		</div>
+	</div>
+</footer>
+<script type="text/javascript" src="/Public/js/jquery-1.11.min.js" ></script>
+<script type="text/javascript" src="/Public/js/jquery.flexslider-min.js" ></script>
+<script type="text/javascript" src="/Public/js/index.js" ></script>
+<script type="text/javascript" src="/Public/js/layer/layer.js" ></script>
+<script type="text/javascript">
+	//提交留言
+	$('#message').on('click',function(){
+		//var $form = $('.form');
+		$.ajax({
+			url: '/home/contact/cont.html',
+			type: 'post',
+			dataType: 'json',
+			data: $('.message_form').serialize(),
+			success:function(res){
+				console.log(res);
+				if(res.status == 1){
+					layer.msg(res.msg,{icon:1});
+				}else{
+					layer.msg(res.msg,{icon:0});
+				}
+			},
+			error: function(res){
+				layer.msg(res.msg,{icon:1});
+			}
+		});
+		return false;
+	});
+</script>
+</body>
+</html>

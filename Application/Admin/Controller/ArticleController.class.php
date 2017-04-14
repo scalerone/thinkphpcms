@@ -7,14 +7,16 @@
 		public function index() {
 			$category = M('Category')->field('id,catname,pid')->order('sort ASC')-> select();
 			//分页
-			$model = M('Article');
+			$model = D('ArticleView');
+			
 			$count = $model -> count();
+
 			$Page = new \Think\Page($count,10);
 			$Page -> setConfig('prev','上一页');
 			$Page -> setConfig('next','下一页');
 			$show = $Page -> show();
 
-			$this -> articles = $model->field('id,sort,thumb,title,hits,author,addtime,is_top,is_rec,is_hot')->order('sort ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
+			$this -> articles = $model->order('sort ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
 			$this -> page = $show;
 			$this -> categories = reorgnCates($category,'├');
 			$this -> display();

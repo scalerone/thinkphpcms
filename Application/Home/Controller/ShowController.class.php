@@ -7,6 +7,8 @@
 			$id = I('get.id');
 			$model = M('Article');
 			$article = $model->find($id);
+			$files = M('Article_files')->where(array('article_id'=>$id))->select();
+			$article['files'] = $files;
 			//增加点击数
 			$model ->where(array('id'=>$id))-> setInc('hits');
 			$this -> article = $article;

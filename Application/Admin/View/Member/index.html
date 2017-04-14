@@ -22,6 +22,9 @@
                             <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
                             <th width="10%">用户名</th>
                             <th>邮箱</th>
+                            <th>注册时间</th>
+                            <th>最后登录时间</th>
+                            <th>最后登录IP</th>
                             <th width="14%">操作</th>
                         </tr>
                       </thead>
@@ -35,6 +38,17 @@
                                 <else /></if>
                             </td>
                             <td>{$vo.email}</td>
+                            <td>
+                              <notempty name="vo.registertime">
+                                {$vo.registertime|date="Y-m-d H:i:s",###}
+                              </notempty>
+                            </td>
+                            <td>
+                              <notempty name="vo.lastlogintime">
+                                {$vo.lastlogintime|date="Y-m-d H:i:s",###}
+                              </notempty>
+                            </td>
+                            <td>{$vo.lastloginip}</td>
                             <td>
                                 <div class="layui-btn-group">
                                     <a title="修改" class="editLink layui-btn layui-btn-small" href="{:U('Member/edit',array('id'=>$vo['id']))}">

@@ -84,17 +84,14 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">广告管理</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">会员管理</span></div>
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="#" class="sortForm layui-form">
+            <form method="post" action="" class="sortForm layui-form">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="<?php echo U('Ads/index');?>" ><i class="iconfont">&#xe762;</i>查看板块</a>
-                        <a href="javascript:;" class="addAds"><i class="iconfont">&#xe762;</i>新增广告</a>
-                        <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
-                        <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
+                        <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加会员</a>
                     </div>
                 </div>
                 <div class="result-content" style="max-height: 850px;overflow: auto;">
@@ -102,29 +99,36 @@
                       <thead>
                         <tr>
                             <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
-                            <th>标题</th>
-                            <th width="20%">缩略图</th>
-                            <th width="26%">操作</th>
+                            <th width="10%">用户名</th>
+                            <th>邮箱</th>
+                            <th>注册时间</th>
+                            <th>最后登录时间</th>
+                            <th>最后登录IP</th>
+                            <th width="14%">操作</th>
                         </tr>
                       </thead>
                       <tbody>
-                    <?php if(is_array($adsList)): $i = 0; $__LIST__ = $adsList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id="<?php echo ($vo["id"]); ?>">
-                            <td><input class="set" type="checkbox" lay-skin="primary" value="<?php echo ($vo["id"]); ?>"></td>
-                            <td><?php echo ($vo["title"]); ?>
+                    <?php if(is_array($members)): $i = 0; $__LIST__ = $members;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
+                            <td><input class="set" type="checkbox" value="<?php echo ($vo["id"]); ?>" lay-skin="primary"></td>
+                            <td><?php echo ($vo["name"]); ?>
+                                <?php if($vo["avatar"] != '' ): ?><i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="<?php echo ($vo["avatar"]); ?>">&#xe64a;</i>
+                                <?php else: endif; ?>
+                            </td>
+                            <td><?php echo ($vo["email"]); ?></td>
+                            <td>
+                              <?php if(!empty($vo["registertime"])): echo (date("Y-m-d H:i:s",$vo["registertime"])); endif; ?>
                             </td>
                             <td>
-                            <?php if(empty($vo["thumb"])): ?><font color="#F7B824">暂无缩略图</font><?php else: ?> <img src="<?php echo ($vo["thumb"]); ?>" height="50px" width="auto"><?php endif; ?> 
+                              <?php if(!empty($vo["lastlogintime"])): echo (date("Y-m-d H:i:s",$vo["lastlogintime"])); endif; ?>
                             </td>
+                            <td><?php echo ($vo["lastloginip"]); ?></td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a title="添加广告" class="addAds layui-btn layui-btn-small" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
-                                       添加广告
+                                    <a title="修改" class="editLink layui-btn layui-btn-small" href="<?php echo U('Member/edit',array('id'=>$vo['id']));?>">
+                                        <i class="layui-icon">&#xe642;</i>
                                     </a>
-                                    <a title="修改" class="layui-btn layui-btn-small editAds" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
-                                        修改
-                                    </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOnePlate" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
-                                        删除
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                        <i class="layui-icon">&#xe640;</i>
                                     </a>
                                 </div>
                             </td>
@@ -133,18 +137,64 @@
                     </table>
                     <div class="result-title">
                         <div class="result-list">
-                            <a href="<?php echo U('Ads/index');?>" ><i class="iconfont">&#xe762;</i>查看板块</a>
-                            <a href="javascript:;" class="addAds"><i class="iconfont">&#xe762;</i>新增广告</a>
-                            <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
-                            <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
+                            <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加会员</a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
+        <form class="layui-form" action="">
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">用户名</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="name" required  lay-verify="required" placeholder="请输入标用户名" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">密码</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="pass" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">邮箱</label>
+            <div class="layui-input-block margin-left80">
+              <input type="text" name="email" required  lay-verify="" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label wid_auto">头像</label>
+            <div class="layui-input-block margin-left80">
+                <img src="" class="hide thumb-img" height="80px" width="auto">
+                <input type="hidden" name="avatar" class="thumb-input" value="">
+                <input type="file" id="_thumb" class="hide">
+                <button class="layui-btn upload-btn" onclick="_thumb.click();return false;">
+                  <i class="layui-icon">&#xe608;</i> 上传头像
+                </button>
+                <button class="del-thumb layui-btn layui-btn-primary hide">删除</button>
+            </div>
+          </div>
+
+          <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label wid_auto">简介</label>
+            <div class="layui-input-block margin-left80">
+              <textarea name="intro" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>
+            </div>
+          </div>
+        </form>
+    </div>
     <!--/main-->
-</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -201,77 +251,75 @@ layui.use('element', function(){
     layui.use(['form','layer'], function(){
         var layer = layui.layer
         ,form = layui.form();
+
         //全选
-          form.on('checkbox(allChoose)', function(data){
-            var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
-            child.each(function(index, item){
-              item.checked = data.elem.checked;
-            });
-            form.render('checkbox');
+        form.on('checkbox(allChoose)', function(data){
+          var child = $(data.elem).parents('table').find('tbody .set');
+          child.each(function(index, item){
+            item.checked = data.elem.checked;
           });
+          form.render('checkbox');
+        });
 
-          //修改板块
-          $('.editAds').on('click',function(){
-            var id = $(this).data('id');
-            layer.open({
-              type: 2,
-              title: '修改广告',
-              fixed: false, //不固定
-              maxmin: true,
-              area: ['500px', '350px'],
-              content: '/Admin/Ads/editAds/id/' + id //iframe的url
-            }); 
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+          $.ajax({
+            url: '<?php echo U("Member/add");?>',
+            type: 'post',
+            dataType: 'json',
+            data: $(data.form).serialize(),
+            success: function(res){
+              if(res.status == 1){
+                layer.alert(res.msg,{icon:1});   
+                window.setTimeout(function(){
+                  window.location.href = "<?php echo U('Member/index');?>";
+                },1500);
+              }else{
+                layer.alert(res.msg,{icon:2}); 
+              }
+            },
+            error: function(res){
+              console.log(res);
+            }
           });
-
-          //添加广告
-          $('.addAds').on('click',function(){
-            var id = $(this).data('id');
-            layer.open({
-              type: 2,
-              title: '添加广告',
-              fixed: false, //不固定
-              maxmin: true,
-              area: ['500px', '350px'],
-              content: '/Admin/Ads/addAds/plate_id/' + <?php echo ($plate_id); ?> //iframe的url
-            }); 
-          });
-
-        //删除单个板块
-        $('.delOnePlate').on('click',function(){
-            var id = $(this).data('id');
-            var url = '<?php echo U("Ads/delAds");?>';
-            var $elems = $(this).parents('tr');
-            layer.confirm('确定要删除选中的广告吗？', {icon: 3, title:'提示'}, function(index){
-                ajaxDeleteElems(id,url,'post','',$elems);
-            });
-           
-        });  
-        //删除多个广告
-        $('.batchDel').on('click',function(){
-                //获取所有选中项
-                $trs = $('.result-content table tbody tr input:checked');
-                if(!$trs.length){
-                    layer.alert('请选中需要删除的广告!', {icon: 2});
-                    return;
-                }
-                //获取选中的ID
-                var ids = [];
-                $trs.filter(function(index) {
-                    return ids.push($($trs[index]).val());
-                });
-
-                var url = '<?php echo U("Ads/delAds");?>';
-                ids = ids.join(',');
-                var $elems = $trs.parents('tr');
-                console.log($elems);
-                debugger;
-                layer.confirm('确定要删除选中的广告吗？', {icon: 3, title:'提示'}, function(index){
-                    ajaxDeleteElems(ids,url,'post','',$elems);
-            });
-        });  
-
+          return false;
+        });
 });
-   
+
+    //文章缩略图上传
+    $('#_thumb').bind('change',function(){
+      //限制文件类型与大小
+      var options = {
+        'filePath': $(this).val()
+      };
+      //调用上传方法
+      fileUpload(options,'#_thumb','<?php echo U("Article/upload");?>');
+    });
+
+    //删除单个
+    $(function(){
+        $('.delOneLink').on('click',function(){
+                $trEle = $(this).parents('tr');//当前的tr节点
+                var url = "<?php echo U('Member/del');?>";//提交删除的地址
+                var eleId = $trEle.data('id');//当前的id
+                //提示
+                layer.confirm('确定要删除该用户？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(eleId,url,'post',$trEle);
+            });
+        });
+    });
+    //添加会员
+    $('.addMember').click(function(){
+        layer.open({
+          type: 1,
+          title: '添加会员',
+          closeBtn: 1,
+          area: ['460px', 'auto'],
+          shadeClose: true,
+          content: $('#addWrap'),
+        });
+    });
+
 </script>
 </body>
 </html>

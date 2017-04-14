@@ -4,9 +4,8 @@
 
 	class ArticleViewModel extends ViewModel {
 		public $viewFields = array(
-			'article' => array('id','sort','thumb','title','hits','is_top','is_rec','is_hot'),
-			'category' => array('catname'=>'cate_name', '_on'=>'article.catid=category.id'),
-			'article_files' => array('_on'=>'article.id=article_files.article_id'),
+			'Article' => array('id','sort','thumb','addtime','title','hits','is_top','is_rec','is_hot'),
+			'Category' => array('catname'=>'cate_name', '_on'=>'Article.catid=Category.id'),
 		);
 	}
 ?>

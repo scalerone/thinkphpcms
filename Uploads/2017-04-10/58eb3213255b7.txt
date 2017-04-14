@@ -1,0 +1,16 @@
+远程文件强行覆盖本地文件：
+git fetch --all  
+git reset --hard origin/master 
+git pull
+
+克隆远程仓库:
+git clone git@github.com:TankCJZ/admin.git
+
+提交修改到缓存中
+git add mode.html
+
+查看状态
+git status
+
+添加一次修改:
+git commit -m "修改的描述"
