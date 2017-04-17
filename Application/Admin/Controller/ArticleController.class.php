@@ -56,7 +56,11 @@
 					$this -> error('添加失败!');
 				}
 			}else{
-				$category = M('Category')->field('id,catname,pid')->order('sort ASC')-> select();
+				$category = M('Category')
+					->field('id,catname,pid')
+					->where('type=1')
+					->order('sort ASC')
+					-> select();
 				$this -> categories = reorgnCates($category,'├');
 				$this -> display();	
 			}

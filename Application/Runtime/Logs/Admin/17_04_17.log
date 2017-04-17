@@ -1,0 +1,25 @@
+[ 2017-04-17T22:11:35+08:00 ] 127.0.0.1 /Admin/System/backup.html?action=RL&file=thinkphpcms_20170414174853_401983333.sql
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
+NOTIC: [2] mkdir(): File exists D:\phpStudy\WWW\thinkphpcms\Application\Admin\Controller\SystemController.class.php 第 54 行.
+
+[ 2017-04-17T22:11:41+08:00 ] 127.0.0.1 /Admin/System/backup.html?action=Del&file=thinkphpcms_20170330170247_913018557.sql
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] mkdir(): File exists D:\phpStudy\WWW\thinkphpcms\Application\Admin\Controller\SystemController.class.php 第 54 行.
+
+[ 2017-04-17T22:14:38+08:00 ] 127.0.0.1 /Admin/Member/add.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `cms_member` [ RunTime:0.0140s ]
+SQL: INSERT INTO `cms_member` (`name`,`pass`,`email`,`avatar`,`intro`,`registertime`) VALUES ('test','cc03e747a6afbbcbf8be7668acfebee5','test@qq.com','','','1492438477') [ RunTime:0.0010s ]
+
+[ 2017-04-17T22:40:48+08:00 ] 127.0.0.1 /Admin/Article/upload.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given D:\phpStudy\WWW\thinkphpcms\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+

@@ -101,7 +101,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label ">密码：</label>
                     <div class="layui-input-block w500">
-                      <input type="text" name="pass" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input" value="">
+                      <input type="text" name="pass"  lay-verify="" placeholder="密码" autocomplete="off" class="layui-input" value="">
                     </div>
                   </div>
 
@@ -131,6 +131,11 @@
                     <div class="layui-input-block w500">
                       <textarea name="intro" placeholder="个人简介..." class="layui-textarea"><?php echo ($member["intro"]); ?></textarea>
                     </div>
+                  </div>
+
+                   <div class="layui-form-item layui-form-text">
+                      <label class="layui-form-label">状态：</label>
+                      <input type="checkbox" <?php echo ($member["status"]==0?'checked=""':''); ?> name="status" data-id="<?php echo ($member["id"]); ?>" value="<?php echo ($member["status"]); ?>" lay-skin="switch" lay-filter="status" lay-text="正常|锁定">
                   </div>
                   
                    <div class="layui-form-item">
