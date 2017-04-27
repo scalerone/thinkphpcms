@@ -1,0 +1,1 @@
+a:7:{i:0;s:2:"id";i:1;s:7:"loginip";i:2;s:12:"loginaddress";i:3;s:3:"num";i:4;s:6:"status";s:3:"_pk";s:2:"id";s:5:"_type";a:5:{s:2:"id";s:21:"mediumint(8) unsigned";s:7:"loginip";s:11:"varchar(25)";s:12:"loginaddress";s:11:"varchar(55)";s:3:"num";s:12:"mediumint(1)";s:6:"status";s:11:"smallint(1)";}}
