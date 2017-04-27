@@ -20,6 +20,18 @@
                                 </td>
                             </tr>
                             <tr>
+                                <th>所属管理员组：</th>
+                                <td>
+                                    <div class="layui-input-inline">
+                                      <select {$admin['group_id']!=='1'?'disabled="true" ':''} name="group_id" class="common-text disabled" style="width:390px;height:32px;">
+                                        <volist name="groups" id="g">
+                                          <option class="common-text" {$admin['group_id']==$g['id']?'selected="selected"':''} value="{$g.id}">{$g.title}</option>
+                                        </volist>
+                                      </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>新密码：</th>
                                 <td><input id="pwd" class="common-text" name="password" size="50" value="" type="text"></td>
                             </tr>

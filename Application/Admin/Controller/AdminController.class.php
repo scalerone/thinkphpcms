@@ -15,16 +15,36 @@
 		public function edit() {
 			if(IS_POST){
 				$admin = M('Admin');
-				$data['password'] = I('post.password','',md5);
-				$result = $admin->where(array('id'=>I('id')))->save($data); 
-				$msg = array('status'=>'1','msg'=>'修改成功!');
-				if($result == false){
-					$msg['status'] = "0";
-					$msg['msg'] = "修改失败!";
+				$access = M('Auth_group_access');
+
+				$pass = I('password');
+				$uid = I('id');
+				$group_id = I('group_id');
+				//p($_POST);die;
+				if(!empty($pass)){
+					$data['password'] = md5($pass);
+					$data['id'] = $uid;
+					$access->where(array('uid'=>$uid))->setField('group_id',$group_id);
+					
+					$result = $admin->save($data); 
+
+					$msg = array('status'=>'1','msg'=>'修改成功!');
+					if($result === false){
+						$msg['status'] = "0";
+						$msg['msg'] = "修改失败!";
+					}
+				}else{
+					$msg = array('status'=>'1','msg'=>'修改失败!');
 				}
+
 				$this -> ajaxReturn($msg);
 			}else{
-				$this -> admin = M('Admin')->field('username,id') ->where(array('id'=>I('get.id'))) -> find();
+				$admin = D('AdminRelation')->field('username,id')->relation(true)->where(array('id'=>I('get.id'))) -> find();
+				$admin['group_id'] = $admin['auth_group'][0]['id'];
+				$admin['group_title'] = $admin['auth_group'][0]['title'];
+
+				$this -> admin = $admin;
+				$this -> groups = M('auth_group')->field('id,title,status') -> select();
 				$this -> display();
 			}
 		}
@@ -33,7 +53,6 @@
 		public function add() {
 			if(IS_POST){
 				$group_id = I('post.group_id');
-
 				$post = I('post.');
 				unset($post['password2']);
 				$post['password'] = I('post.password','',md5);

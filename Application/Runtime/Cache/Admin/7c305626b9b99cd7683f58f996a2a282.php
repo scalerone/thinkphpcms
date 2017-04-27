@@ -82,53 +82,41 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">栏目管理</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">留言管理</span></div>
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="<?php echo U('Category/updateSort');?>" class="catesForm layui-form">
+            <form method="post" action="<?php echo U('Links/updateSort');?>" class="sortForm layui-form">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="<?php echo U('Category/add');?>"><i class="iconfont">&#xe762;</i>新增栏目</a>
-                        <!-- <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a> -->
-                        <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
+                        <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                        <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
                     </div>
                 </div>
                 <div class="result-content" style="max-height: 850px;overflow: auto;">
                     <table class="layui-table">
                       <thead>
                         <tr>
-                            <th width="3%"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
-                            <th width="6%">排序</th>
-                            <th>名称</th>
-                            <th width="8%" align="center">栏目类型</th>
-                            <th width="6%">状态</th>
+                            <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
+                            <th>标题</th>
+                            <th width="10%">姓名</th>
+                            <th width="15%">留言时间</th>
                             <th width="14%">操作</th>
                         </tr>
                       </thead>
                       <tbody>
-                    <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?> data-pid="<?php echo ($vo["pid"]); ?>">
-                            <td><input class="set" type="checkbox" lay-skin="primary"></td>
-                            <td><input class="common-text common-text-center" size="3" type="text" value="<?php echo ($vo["sort"]); ?>" name="<?php echo ($vo["id"]); ?>"></td>
-                            <td><?php echo ($vo["html"]); echo ($vo["catname"]); ?></td>
-                            <td>
-                                <?php switch($vo["type"]): case "1": ?>栏目<?php break;?>
-                                    <?php case "2": ?>单篇<?php break;?>
-                                    <?php case "3": ?>链接<?php break; endswitch;?>
-                            </td>
-                            <td class="layui-form">
-                                <input type="checkbox" <?php echo ($vo["status"]==1?'checked=""':''); ?> name="status" data-id="<?php echo ($vo["id"]); ?>" value="1" lay-skin="switch" lay-filter="status" lay-text="开启|关闭">
-                            </td>
+                    <?php if(is_array($contacts)): $i = 0; $__LIST__ = $contacts;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
+                            <td><input class="set" type="checkbox" lay-skin="primary" value="<?php echo ($vo["id"]); ?>"></td>
+                            <td><?php echo ($vo["title"]); ?></td>
+                            <td><?php echo ($vo["name"]); ?></td>
+                            <td><?php echo (date('Y-m-d H:i:s',$vo["addtime"])); ?></td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a title="添加子栏目" href="<?php echo U('Category/add',array('pid'=>$vo['id']));?>" class="layui-btn layui-btn-small">
-                                        <i class="layui-icon">&#xe654;</i>
-                                    </a>
-                                    <a title="修改" class="layui-btn layui-btn-small" href="<?php echo U('Category/edit',array('id'=>$vo['id']));?>">
-                                        <i class="layui-icon">&#xe642;</i>
-                                    </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOne" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
-                                        <i class="layui-icon">&#xe640;</i>
+                                   <a title="查看" class="lookContact layui-btn layui-btn-small" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                       查看
+                                   </a>
+                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                        删除
                                     </a>
                                 </div>
                             </td>
@@ -137,9 +125,8 @@
                     </table>
                     <div class="result-title">
                         <div class="result-list">
-                            <a href="<?php echo U('Article/add');?>"><i class="iconfont">&#xe762;</i>新增栏目</a>
-                            <!-- <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a> -->
-                            <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
+                            <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a>
+                            <!-- <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a> -->
                         </div>
                     </div>
                 </div>
@@ -199,35 +186,12 @@ layui.use('element', function(){
   var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
 });
 </script>
-<script src="/./Application/Admin/Public/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
     layui.use(['form','layer'], function(){
         var layer = layui.layer
         ,form = layui.form();
 
-      //更新栏目status状态
-      form.on('switch(status)', function(data){
-            var elem = data.elem;
-            var id = $(elem).attr('data-id');
-            var status = 2;//默认不显示1为显示
-            if(elem.checked){
-                status = 1;//显示
-            }
-            //ajax更新栏目状态
-            $.ajax({
-                url: '<?php echo U("Category/updateStatus");?>', 
-                data: {'id':id,'status':status},
-                datatype: 'json',
-                type: 'post',
-                success: function(res){
-                    layer.msg(res.msg);
-                },
-                error: function(res) {
-                    layer.msg('出现错误！');
-                }                   
-            }); 
-        });
-      //全选
+        //全选
       form.on('checkbox(allChoose)', function(data){
         var child = $(data.elem).parents('table').find('tbody .set');
         child.each(function(index, item){
@@ -235,74 +199,61 @@ layui.use('element', function(){
         });
         form.render('checkbox');
       });
+
 });
-    $(function(){
-        //更新排序
-        $('.updateOrd').on('click',function(){
-            $('.catesForm').submit();
-            return false;
+    //删除
+    $('.batchDel').on('click',function(){
+        //获取所有选中的文章
+        $trs = $('.result-content table tbody tr input:checked');
+        if(!$trs.length){
+            layer.alert('请选中需要删除的留言!', {icon: 2});
+            return;
+        }
+        //获取选中的ID
+        var ids = [];
+        $trs.filter(function(index) {
+            return ids.push($($trs[index]).val());
         });
 
-        //删除单个栏目
-        $('.delOne').on('click',function(){
-            var $id = $(this).data('id');//获取当前栏目ID
-            var $deltr = $(this).parents('tr');//获取当前栏目所在的tr节点
-            var $trs = $('.result-content table tbody tr');//获取所有的栏目所在的tr节点
-            var $deltrs = getChildsById($trs,$id);//获取当前栏目的子栏目所在tr节点
-            
-            //递归获取当前栏目的所有子栏目的节点数组
-            /**
-             * [getChildsById description]
-             * @param  {[array]} trs [tr节点数组]
-             * @param  {[int]} pid [tr节点父栏目ID]
-             * @return {[array]}     [重组后的array]
-             */
-            function getChildsById(trs,pid) {
-                var arr = [],length = trs.length;
-
-                for (var i = 0; i < length; i++) {
-                    if($(trs[i]).attr('data-pid') == pid){
-                        arr.push(trs[i]);
-                        arr = arr.concat(getChildsById(trs,$(trs[i]).attr('data-id')));
-                    }
-                }
-                return arr;
-            }
-            //提示
-            layer.confirm('确定要删除栏目已经其子栏目？', {icon: 3, title:'提示'}, function(index){
-                    //删除并移除已经删除的节点
-                    doDel($id);
-                    layer.close(index);
-            });
-            /**
-             * ajax删除并移除已经删除的节点方法
-             * @param  {[栏目ID]} id [description]
-             * @return {[null]}    [无返回值]
-             */
-            function doDel(id){
-                var url = '<?php echo U("Category/del");?>';
-                $.ajax({
-                    type: 'get',
-                    url: url,
-                    data: {'id':id},
-                    datatype: 'json',
-                    success: function(res){
-                        if(res.status == 1){
-                            layer.msg(res.msg,{icon:1});
-                            //移除已经删除的节点
-                            $deltr.remove();
-                            $($deltrs).remove();
-                        }else{
-                            layer.msg(res.msg,{icon:2});
-                        }
-                    },
-                    error: function(res){
-                        layer.msg('出现错误！',{icon:2});
-                    }
-                }); 
-            }
+        var url = '<?php echo U("Contact/del");?>';
+        ids = ids.join(',');
+        var $elems = $trs.parents('tr');
+        layer.confirm('确定要删除选中的留言吗？', {icon: 3, title:'提示'}, function(index){
+            ajaxDeleteElems(ids,url,'post',$elems);
         });
     });
+
+    //删除单个
+    $(function(){
+        $('.delOneLink').on('click',function(){
+                $trEle = $(this).parents('tr');//当前的tr节点
+                var url = "<?php echo U('Contact/del');?>";//提交删除的地址
+                var eleId = $trEle.data('id');//当前的id
+                //提示
+                layer.confirm('确定要删除该留言？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(eleId,url,'post',$trEle);
+            });
+        });
+    });
+
+    //查看
+    $(function(){
+        $('.lookContact').on('click',function(){
+                var url = "<?php echo U('Contact/look');?>";//提交删除的地址
+                var eleId = $(this).data('id');//当前的id
+                //提示
+                layer.open({
+                  type: 2,
+                  title: '查看留言',
+                  shadeClose: true,
+                  shade: 0.8,
+                  area: ['460px', '80%'],
+                  content: '<?php echo U("Contact/look","","");?>'+'/id/'+eleId
+                }); 
+            
+        });
+    });
+    
 </script>
 </body>
 </html>

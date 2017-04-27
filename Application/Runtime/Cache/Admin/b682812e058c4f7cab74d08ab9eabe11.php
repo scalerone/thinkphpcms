@@ -82,54 +82,45 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">栏目管理</span></div>
+            <div class="crumb-list"><i class="iconfont">&#xe607;</i><a href="<?php echo U('Index/index');?>">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">管理员</span></div>
         </div>
 
         <div class="result-wrap">
-            <form method="post" action="<?php echo U('Category/updateSort');?>" class="catesForm layui-form">
+            <form method="post" action="" class="sortForm">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="<?php echo U('Category/add');?>"><i class="iconfont">&#xe762;</i>新增栏目</a>
-                        <!-- <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a> -->
-                        <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
+                        <a class="addMember" href="#"><i class="iconfont">&#xe762;</i>添加管理员</a>
                     </div>
                 </div>
                 <div class="result-content" style="max-height: 850px;overflow: auto;">
                     <table class="layui-table">
                       <thead>
                         <tr>
-                            <th width="3%"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
-                            <th width="6%">排序</th>
+                            <th width="5%">ID</th>
                             <th>名称</th>
-                            <th width="8%" align="center">栏目类型</th>
-                            <th width="6%">状态</th>
-                            <th width="14%">操作</th>
+                            <th width="10%">所属用户组</th>
+                            <th width="10%">状态</th>
+                            <th width="15%">操作</th>
                         </tr>
                       </thead>
                       <tbody>
-                    <?php if(is_array($categories)): $i = 0; $__LIST__ = $categories;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?> data-pid="<?php echo ($vo["pid"]); ?>">
-                            <td><input class="set" type="checkbox" lay-skin="primary"></td>
-                            <td><input class="common-text common-text-center" size="3" type="text" value="<?php echo ($vo["sort"]); ?>" name="<?php echo ($vo["id"]); ?>"></td>
-                            <td><?php echo ($vo["html"]); echo ($vo["catname"]); ?></td>
-                            <td>
-                                <?php switch($vo["type"]): case "1": ?>栏目<?php break;?>
-                                    <?php case "2": ?>单篇<?php break;?>
-                                    <?php case "3": ?>链接<?php break; endswitch;?>
-                            </td>
+                      <?php if(is_array($admins)): $i = 0; $__LIST__ = $admins;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr data-id=<?php echo ($vo["id"]); ?>>
+                            <td width="3%"><?php echo ($vo["id"]); ?></td>
+                            <td><?php echo ($vo["username"]); ?></td>
+                            <td><?php echo ($vo['auth_group'][0]['title']); ?></td>
                             <td class="layui-form">
-                                <input type="checkbox" <?php echo ($vo["status"]==1?'checked=""':''); ?> name="status" data-id="<?php echo ($vo["id"]); ?>" value="1" lay-skin="switch" lay-filter="status" lay-text="开启|关闭">
+                            <?php if($vo["status"] == 1 ): ?><input data-id="<?php echo ($vo["id"]); ?>" type="checkbox" checked="" name="status" lay-skin="switch" lay-filter="status" lay-text="正常|锁定" value="1">
+                            <?php else: ?>
+                                  <input data-id="<?php echo ($vo["id"]); ?>" type="checkbox" name="status" lay-skin="switch" lay-filter="status" lay-text="正常|锁定" value="0"><?php endif; ?>
                             </td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a title="添加子栏目" href="<?php echo U('Category/add',array('pid'=>$vo['id']));?>" class="layui-btn layui-btn-small">
-                                        <i class="layui-icon">&#xe654;</i>
-                                    </a>
-                                    <a title="修改" class="layui-btn layui-btn-small" href="<?php echo U('Category/edit',array('id'=>$vo['id']));?>">
+                                    <a title="编辑" class="editLink layui-btn layui-btn-small" href="<?php echo U('Admin/edit',array('id'=>$vo['id']));?>">
                                         <i class="layui-icon">&#xe642;</i>
                                     </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOne" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
+                                <?php if($vo["id"] != 1 ): ?><a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="<?php echo ($vo["id"]); ?>">
                                         <i class="layui-icon">&#xe640;</i>
-                                    </a>
+                                    </a><?php endif; ?>
                                 </div>
                             </td>
                         </tr><?php endforeach; endif; else: echo "" ;endif; ?>
@@ -137,17 +128,60 @@
                     </table>
                     <div class="result-title">
                         <div class="result-list">
-                            <a href="<?php echo U('Article/add');?>"><i class="iconfont">&#xe762;</i>新增栏目</a>
-                            <!-- <a class="batchDel" href="javascript:void(0)"><i class="iconfont">&#xe6d3;</i>批量删除</a> -->
-                            <a class="updateOrd" href="javascript:void(0)"><i class="iconfont">&#xe611;</i>更新排序</a>
+                            <a class="addMember" href="javascript:;"><i class="iconfont">&#xe762;</i>添加管理员</a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <div id="addWrap" style="display: none; padding-top:10px;padding-right:10px;padding-bottom: 10px;">
+        <form class="layui-form" action="">
+          <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-inline">
+              <input type="username" name="username" required  lay-verify="required" placeholder="请输入管理员帐号" autocomplete="off" class="layui-input" id="uname">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+              <input type="password" name="password" required  lay-verify="required" placeholder="请输入管理员密码" autocomplete="off" class="layui-input password">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">确认密码</label>
+            <div class="layui-input-inline">
+              <input type="password" name="password2" required  lay-verify="pass" placeholder="请再次输入管理员密码" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">所属分组</label>
+            <div class="layui-input-inline">
+              <select name="group_id">
+                <?php if(is_array($groups)): $i = 0; $__LIST__ = $groups;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$g): $mod = ($i % 2 );++$i;?><option value="<?php echo ($g["id"]); ?>"><?php echo ($g["title"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+              </select>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-inline">
+               <input type="checkbox" value="1" checked="" name="status" lay-skin="switch" lay-filter="switchTest" lay-text="开启|锁定">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>
+            </div>
+          </div>
+        </form>
+    </div>
     <!--/main-->
-</div>
 <script type="text/javascript" src="/./Application/Admin/Public/js/libs/modernizr.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/jquery-1.11.min.js"></script>
 <script type="text/javascript" src="/./Application/Admin/Public/js/layer/layer.js"></script>
@@ -205,104 +239,117 @@ layui.use('element', function(){
         var layer = layui.layer
         ,form = layui.form();
 
-      //更新栏目status状态
-      form.on('switch(status)', function(data){
-            var elem = data.elem;
-            var id = $(elem).attr('data-id');
-            var status = 2;//默认不显示1为显示
-            if(elem.checked){
-                status = 1;//显示
+        //表单验证
+        form.verify({
+          pass: function(value){
+            if(value !== $('.password').val()){
+              return '两次密码不一致';
             }
-            //ajax更新栏目状态
-            $.ajax({
-                url: '<?php echo U("Category/updateStatus");?>', 
-                data: {'id':id,'status':status},
-                datatype: 'json',
-                type: 'post',
-                success: function(res){
-                    layer.msg(res.msg);
-                },
-                error: function(res) {
-                    layer.msg('出现错误！');
-                }                   
-            }); 
+          }
+        }); 
+
+        form.on('switch(status)', function(data){
+          var id = $(data.elem).data('id');
+          var status = 0;
+          if(data.elem.checked) status = 1;
+
+          $.ajax({
+            url: '<?php echo U("admin/updateStatus");?>',
+            type: 'post',
+            dataType: 'json',
+            data: {'id': id,'status': status},
+            success: function(res){
+              layer.msg(res.msg,{icon:1});
+            }
+          });
+        });  
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+          $.ajax({
+            url: '<?php echo U("Admin/add");?>',
+            type: 'post',
+            dataType: 'json',
+            data: $(data.form).serialize(),
+            success: function(res){
+              if(res.status == 1){
+                layer.alert(res.msg,{icon:1});   
+                window.setTimeout(function(){
+                  window.location.href = "<?php echo U('Admin/index');?>";
+                },1500);
+              }else{
+                layer.alert(res.msg,{icon:2}); 
+              }
+            },
+            error: function(res){
+              console.log(res);
+            }
+          });
+          return false;
         });
-      //全选
-      form.on('checkbox(allChoose)', function(data){
-        var child = $(data.elem).parents('table').find('tbody .set');
-        child.each(function(index, item){
-          item.checked = data.elem.checked;
-        });
-        form.render('checkbox');
-      });
 });
+    //删除单个管理员
     $(function(){
-        //更新排序
-        $('.updateOrd').on('click',function(){
-            $('.catesForm').submit();
-            return false;
-        });
-
-        //删除单个栏目
-        $('.delOne').on('click',function(){
-            var $id = $(this).data('id');//获取当前栏目ID
-            var $deltr = $(this).parents('tr');//获取当前栏目所在的tr节点
-            var $trs = $('.result-content table tbody tr');//获取所有的栏目所在的tr节点
-            var $deltrs = getChildsById($trs,$id);//获取当前栏目的子栏目所在tr节点
-            
-            //递归获取当前栏目的所有子栏目的节点数组
-            /**
-             * [getChildsById description]
-             * @param  {[array]} trs [tr节点数组]
-             * @param  {[int]} pid [tr节点父栏目ID]
-             * @return {[array]}     [重组后的array]
-             */
-            function getChildsById(trs,pid) {
-                var arr = [],length = trs.length;
-
-                for (var i = 0; i < length; i++) {
-                    if($(trs[i]).attr('data-pid') == pid){
-                        arr.push(trs[i]);
-                        arr = arr.concat(getChildsById(trs,$(trs[i]).attr('data-id')));
-                    }
-                }
-                return arr;
-            }
-            //提示
-            layer.confirm('确定要删除栏目已经其子栏目？', {icon: 3, title:'提示'}, function(index){
-                    //删除并移除已经删除的节点
-                    doDel($id);
-                    layer.close(index);
+        $('.delOneLink').on('click',function(){
+                $trEle = $(this).parents('tr');//当前的tr节点
+                var url = "<?php echo U('Admin/del');?>";//提交删除的地址
+                var eleId = $trEle.data('id');//当前的id
+                //提示
+                layer.confirm('确定要删除该用户？', {icon: 3, title:'提示'}, function(index){
+                ajaxDeleteElems(eleId,url,'post',$trEle);
             });
-            /**
-             * ajax删除并移除已经删除的节点方法
-             * @param  {[栏目ID]} id [description]
-             * @return {[null]}    [无返回值]
-             */
-            function doDel(id){
-                var url = '<?php echo U("Category/del");?>';
-                $.ajax({
-                    type: 'get',
-                    url: url,
-                    data: {'id':id},
-                    datatype: 'json',
-                    success: function(res){
-                        if(res.status == 1){
-                            layer.msg(res.msg,{icon:1});
-                            //移除已经删除的节点
-                            $deltr.remove();
-                            $($deltrs).remove();
-                        }else{
-                            layer.msg(res.msg,{icon:2});
-                        }
-                    },
-                    error: function(res){
-                        layer.msg('出现错误！',{icon:2});
-                    }
-                }); 
-            }
         });
     });
+    //添加会员
+    $('.addMember').click(function(){
+        layer.open({
+          type: 1,
+          title: '添加管理员组',
+          closeBtn: 1,
+          area: ['360px', 'auto'],
+          shadeClose: true,
+          content: $('#addWrap'),
+        });
+    });
+
+    //验证用户名是否存在
+    $(function(){
+      $('.password').on('focus',function(){
+        var uname = $('#uname').val();
+        if($.trim(uname).length < 3){
+            $('#uname').focus();
+            layer.tips('用户名长度必须大于2且不能为空!', '#uname', {
+              tips: [4, '#FF5722']
+            });
+          return false;
+        }
+        $.ajax({
+          url: '<?php echo U("admin/checkUname");?>',
+          type: 'POST',
+          dataType: 'json',
+          data: {'uname': uname},
+          success: function(res){
+            if(res.status == 1){
+              layer.tips(res.msg, '#uname', {
+                tips: [4, '#78BA32']
+              });
+            }else{
+              $('#uname').focus();
+              if(res.msg){
+                layer.tips(res.msg, '#uname', {
+                  tips: [4, '#FF5722']
+                });
+              }else{
+                layer.tips(res.info, '#uname', {
+                  tips: [4, '#FF5722']
+                });
+              }
+            }
+          },
+        });
+      });
+    });
+
 </script>
 </body>
 </html>

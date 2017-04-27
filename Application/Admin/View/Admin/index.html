@@ -216,9 +216,15 @@
               });
             }else{
               $('#uname').focus();
-              layer.tips(res.msg, '#uname', {
-                tips: [4, '#FF5722']
-              });
+              if(res.msg){
+                layer.tips(res.msg, '#uname', {
+                  tips: [4, '#FF5722']
+                });
+              }else{
+                layer.tips(res.info, '#uname', {
+                  tips: [4, '#FF5722']
+                });
+              }
             }
           },
         });

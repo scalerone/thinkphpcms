@@ -57,16 +57,16 @@ return array(
         'Index/index',
         'Index/logout',
         'Admin/edit',
-        'Admin/checkUname',
+        'Admin/checkuname',
         'Cache/index',
-        'Public/uploadLogo',
-        'Public/uploadIco',
-        'Public/uploadWateThumb',
-        'Public/uploadWateContent',
-        'Public/uploadThumb',
+        'Public/uploadlogo',
+        'Public/uploadico',
+        'Public/uploadwatethumb',
+        'Public/uploadwatecontent',
+        'Public/uploadthumb',
         'Article/upload',
-        'Article/editImgUpload',
-        'Article/uploadFiles'
+        'Article/editimgupload',
+        'Article/uploadfiles'
     ),
 
 

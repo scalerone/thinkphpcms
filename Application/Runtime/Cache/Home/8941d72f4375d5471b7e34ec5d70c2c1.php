@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="baidu-site-verification" content="M5xAYOapFT" />
-  <title>金融</title>
-  <meta name="keywords" content="关键字，关键字2">
-  <meta name="description" content="网站描述">
+  <title><?php echo (C("SITE_TITLE")); ?></title>
+  <meta name="keywords" content="<?php echo (C("SITE_KEYWORDS")); ?>">
+  <meta name="description" content="<?php echo (C("SITE_DESCRIPTION")); ?>">
   <link rel="stylesheet" type="text/css" href="/Public/css/css.css" />
   <link rel="stylesheet" href="/Public/css/lrtk.css" type="text/css" />
   <link rel="stylesheet" type="text/css" href="/Public/css/highslide.css" />
@@ -25,8 +25,9 @@
           <tr style="font-family:'微软雅黑', '黑体'">
             <td style="line-height:0px;"><img src="/Public/images/wico03.png" /></td>
 
-            <td class="login-bar" style="overflow:hidden"> <b>客服电话</b> <b style="font-size:16px;">0755-8888-8888 &nbsp;&nbsp;<b style="font-size:12px"><a class="cd-signin" target="_blank">登录</a>&nbsp;|&nbsp;<a target="_blank" class="cd-signup">注册</a> </b></td>
-             
+            <?php if(empty($_SESSION['member_name'])): ?><td class="login-bar" style="overflow:hidden"> <b>客服电话</b> <b style="font-size:16px;"><?php echo (C("SITE_TELPHONE")); ?> &nbsp;&nbsp;<b style="font-size:12px"><a class="cd-signin" target="_blank">登录</a>&nbsp;|&nbsp;<a target="_blank" class="cd-signup">注册</a> </b></td>
+            <?php else: ?>
+                <td class="" style="overflow:hidden"> <b>客服电话</b> <b style="font-size:16px;"><?php echo (C("SITE_TELPHONE")); ?>  &nbsp;&nbsp;<b style="font-size:12px"><a class="cd-signin" target="_blank"><?php echo (session('member_name')); ?></a>&nbsp;&nbsp;<a href="<?php echo U('Home/User/logout');?>" target="_blank" class="cd-signup">退出</a> </b></td><?php endif; ?> 
           </tr>
         </tbody>
       </table>
@@ -43,11 +44,13 @@
   </div>
   <div class="toplogonavbg">
     <div class="toplogonav">
-      <a href="/"><img src="/Uploads/System/Logo/58fef4d504d93.jpg" width="266" height="79" class="f-left" /></a>
+      <a href="/"><img src="<?php echo (C("SITE_LOGO")); ?>" width="266" height="79" class="f-left" /></a>
       <div class="toplogoright">
         <a href="/">首页</a>&nbsp; | &nbsp;
-        <a href="/list/85.html">视频中心</a>&nbsp; | &nbsp;
-        <a href="/list/86.html">文件下载</a>
+        <?php
+ $cate = M('category')->where("status=1")->find(intval(85)); extract($cate); ?><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a>&nbsp; | &nbsp;
+        <?php
+ $cate = M('category')->where("status=1")->find(intval(86)); extract($cate); ?><a href="<?php echo ($url); ?>"><?php echo ($catname); ?></a>
       </div>
       <br clear="all" />
     </div>
@@ -144,7 +147,8 @@
   <div class="banner">
     <div class="flexslider">
       <ul class="slides">
-      <li style="background:url(/Uploads/2017-04-25/58febf05631b3.jpg) 50% 0 no-repeat;"></li><li style="background:url(/Uploads/2017-04-25/58febefb63b2f.jpg) 50% 0 no-repeat;"></li>      </ul>
+      <?php $list =M('ads_plate_list')->where(array('plate_id'=>1))->order('createtime DESC')->limit(8)->select();foreach($list as $val): extract($val); ?><li style="background:url(<?php echo ($thumb); ?>) 50% 0 no-repeat;"></li><?php endforeach; ?>
+      </ul>
     </div>
   </div>
   <div style="background:#ececef; max-width:1920px;
@@ -161,71 +165,42 @@
     </div> -->
     <div class="incontent">
       <dl class="inconrights01" style="width:983px; padding:25px 0 25px 20px;">
-            <dd>
+      <?php  $id = I('id'); $articles = get_article($id,'id,title,summary,content,catid,addtime,thumb,is_top,is_rec,is_hot,hits','10','sort ASC',$page=true,$pageSize='10'); ?>
+      <?php if(is_array($articles['list'])): foreach($articles['list'] as $key=>$vo): ?><dd>
           <dl class="subproslists">
             <dt>
-              1111            </dt>
+              <?php echo ($vo["title"]); ?>
+            </dt>
             <dd>
               <div style="height:250px; overflow:hidden;">
-                <img src="/Uploads/2017-04-27/590152773d70b.jpg" width="250" height="260">
+                <img src="<?php echo ($vo["thumb"]); ?>" width="250" height="260">
               </div>
               <div class="desc">
-                <p>1111</p>
+                <p><?php echo ($vo["summary"]); ?></p>
               </div>
               <div class="time">
-                时间：2017-04-27              </div>
+                时间：<?php echo (date('Y-m-d',$vo['addtime'])); ?>
+              </div>
               <div style="padding:10px 0 0 0;">
-                <a id="movie_id" data-id="99"  href="javascript:;" style="width:150px; text-align:center; display:block; margin:0 auto; height:35px; line-height:35px; color:#FFF; font-size:16px; font-family:微软雅黑; background:#828282;">立即观看</a>
+                <a id="movie_id" data-id="<?php echo ($vo["id"]); ?>"  href="javascript:;" style="width:150px; text-align:center; display:block; margin:0 auto; height:35px; line-height:35px; color:#FFF; font-size:16px; font-family:微软雅黑; background:#828282;">立即观看</a>
               </div>
             </dd>
           </dl>
-        </dd>        <dd class="more">
-           <div>
-              <a href="/list/85.html">查看更多>></a>
+        </dd><?php endforeach; endif; ?>
+        <?php
+ $cate = M('category')->where("status=1")->find(intval(85)); extract($cate); ?><dd class="more">
+           <div class="pages">
+              <?php echo $articles['page']; ?>
           </div>
         </dd>
-      </dl>
-      <br clear="all" />
-     
-    </div>
-
-    <div class="incontent">
-      <dl class="inconrights fileList">
-        <a href="javascript:;">
-          <dt style="padding-bottom: 10px; background: url(cn/images/dot.gif) left bottom repeat-x;">
-            文件下载
-          </dt>
-        </a>
-        <dd>
-                <div class="innewslist">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tbody>
-                <tr>
-                  <td width="125" height="95" rowspan="2">
-                    <a><img src="/Uploads/2017-04-27/5901523463965.png" width="117" height="94" /></a>
-                  </td>
-                  <td height="35"><strong style="font-size:13px;"><a >文件下载测试01</a></strong></td>
-                </tr>
-                <tr>
-                  <td height="60" valign="top">
-                    <a>阿斯打扫打扫</a>
-                    <a data-id="100" href="javascript:;" class="down">立即下载</a>
-                    <span class="file_time">发布时间：2017-04-27</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>        </dd>
-        <div class="file_more">
-          <a href="/list/86.html">查看更多>></a>
-        </div>
       </dl>
       <br clear="all" />
     </div>
   </div>
  <div class="infoots">
     <div class="infoottext">
-        <p style="text-align: center;"><span>Copyright &copy; 2017 | &nbsp;深圳 版权所有 | <a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action" target="_blank"><span style="color:#ffffff;">粤ICP备：号</span></a>         </span>       </p>    </div>
+        <?php echo (htmlspecialchars_decode(C("SITE_CR"))); ?>
+    </div>
   </div>
 
   <div class="cd-user-modal">
@@ -275,7 +250,7 @@
           <p class="fieldset">
             <label class="image-replace cd-password" for="reg-code">验证码</label>
             <input name="code" style="width:25%;" class="full-width has-padding has-border" id="reg-code" type="text" placeholder="输入验证码">
-            <img id="verify" src="/home/user/verify.html" style="border:1px solid #eee; height: 45px;width: 180px;display:inline-block;*zoom:1;*display:inline;vertical-align: middle;">
+            <img id="verify" src="<?php echo U('Home/User/Verify');?>" style="border:1px solid #eee; height: 45px;width: 180px;display:inline-block;*zoom:1;*display:inline;vertical-align: middle;">
           </p>
 
           <!--  <p class="fieldset">
@@ -308,8 +283,8 @@
       (function(){
         $('.innewslist table tr td .down').on('click',function(){
           var that = $(this);
-          var check_login_url = '/home/file/check_login.html';
-          //var file_url = '/home/file/index.html';
+          var check_login_url = '<?php echo U("File/check_login");?>';
+          //var file_url = '<?php echo U("File/index");?>';
           $.ajax({
             url: check_login_url,
             type: 'post',
@@ -337,7 +312,7 @@
       })();
       //查看视频
       $('.inconrights01 div a').on('click', function () {
-        var check_login_url = '/home/show/check_login.html';
+        var check_login_url = '<?php echo U("Show/check_login");?>';
         $.ajax({
           url: check_login_url,
           type: 'post',
@@ -372,13 +347,13 @@
     //更换验证码
     (function(){
       $('#verify').on('click',function(){
-        $(this).attr('src',"/home/user/verify.html");
+        $(this).attr('src',"<?php echo U('Home/User/Verify');?>");
       });
     })();
     //登录
     (function(){
       $('#login').on('click',function(){
-        var url = "/home/user/login.html";
+        var url = "<?php echo U('Home/User/login');?>";
         var uname = $.trim($('#signin-username').val());
         var password = $.trim($('#signin-password').val());
         if(!(uname.match(/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/) || uname.match(/^[1][3|5|8|7][0-9]{9}$/))){
@@ -449,7 +424,7 @@
         function showMsg(str){
           layer.msg(str,{icon:2});
         }
-        var url = "/home/user/register.html";
+        var url = "<?php echo U('Home/User/register');?>";
         var register_from = $('.register-form');
         $.ajax({
           url: url,
