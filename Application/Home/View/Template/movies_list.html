@@ -1,0 +1,42 @@
+<include file="Public:header" />
+    <div class="incontent">
+      <dl class="inconrights01" style="width:983px; padding:25px 0 25px 20px;">
+      <?php    
+        $id = I('id');
+        $articles = get_article($id,'id,title,summary,content,catid,addtime,thumb,is_top,is_rec,is_hot,hits','10','sort ASC',$page=true,$pageSize='10');
+      ?>
+      <foreach name="articles['list']" item="vo" >
+        <dd>
+          <dl class="subproslists">
+            <dt>
+              {$vo.title}
+            </dt>
+            <dd>
+              <div style="height:250px; overflow:hidden;">
+                <img src="{$vo.thumb}" width="250" height="260">
+              </div>
+              <div class="desc">
+                <p>{$vo.summary}</p>
+              </div>
+              <div class="time">
+                时间：{$vo['addtime']|date='Y-m-d',###}
+              </div>
+              <div style="padding:10px 0 0 0;">
+                <a id="movie_id" data-id="{$vo.id}"  href="javascript:;" style="width:150px; text-align:center; display:block; margin:0 auto; height:35px; line-height:35px; color:#FFF; font-size:16px; font-family:微软雅黑; background:#828282;">立即观看</a>
+              </div>
+            </dd>
+          </dl>
+        </dd>
+        </foreach>
+        <getCate catid="85">
+        <dd class="more">
+           <div class="pages">
+              <?php echo $articles['page']; ?>
+          </div>
+        </dd>
+        </getCate>
+      </dl>
+      <br clear="all" />
+    </div>
+  </div>
+<include file="Public:footer" />

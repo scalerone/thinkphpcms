@@ -64,6 +64,10 @@
 
 		//删除管理员并删除关联表信息
 		public function del() {
+			if(I('post.id') == '1'){
+				$this -> ajaxReturn(array('status'=>0,'msg'=>'默认管理员禁止删除!'));	
+				die;
+			}
 			$result = D('AdminRelation')->relation(true)->delete(I('post.id'));
 			if($result !== false){
 				$this -> ajaxReturn(array('status'=>1,'msg'=>'删除成功!'));
@@ -72,7 +76,7 @@
 			}
 		}
 
-		//更新状态
+		//更新管理员状态
 		public function updateStatus(){
 			if(IS_POST){
 				M('Admin')->where(array('id'=>I('post.id')))->setField('status',I('post.status'));
@@ -101,6 +105,7 @@
 		//删除分组
 		public function delGroup() {
 			if(IS_POST){
+
 				$result = D('AuthGroup') -> doDelete();
 				$this -> ajaxReturn($result);
 			}
@@ -116,9 +121,9 @@
 					->where(array('id'=>I('post.group_id')))
 					->setField('rules',$post);
 					if($result !== false){
-						$this -> ajaxReturn(array('status'=>0,'msg'=>'设置权限成功！'));
+						$this -> ajaxReturn(array('status'=>1,'msg'=>'设置权限成功！'));
 					}else{
-						$this -> ajaxReturn(array('status'=>1,'msg'=>'设置权限失败！'));
+						$this -> ajaxReturn(array('status'=>0,'msg'=>'设置权限失败！'));
 					}
 				}else{
 					$this -> ajaxReturn(array('status'=>0,'msg'=>'未选中权限！'));

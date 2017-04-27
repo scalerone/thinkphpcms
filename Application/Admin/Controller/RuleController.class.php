@@ -3,6 +3,7 @@
 	use Admin\Controller;
 
 	class RuleController extends CommonController {
+		//显示权限列表
 		public function index() {
 			$model = M('auth_rule');
 			$rules = $model -> order('id ASC')->select();
@@ -11,20 +12,40 @@
 			$this -> display();
 		}
 
+		//添加权限
 		public function add() {
 			if(IS_POST){
-				$post = I('post.');
-				$post['createtime'] = time();
-				if(!isset($post['status'])) $post['status'] = 0;
-				$result = M('auth_rule')->add($post);
-				if($result){
-					$this -> ajaxReturn(array('status'=>1,'msg'=>'添加成功!'));
+				$msg = array('status'=>0,'msg'=>'添加失败,未知错误!');
+
+				$b = $this->check_add_rule(array(
+						'name' => I('name'),
+						'title' => I('title')
+					));
+				if($b){
+					$msg = array('status'=>0,'msg'=>'该权限已经存在,请勿重复添加!');
 				}else{
-					$this -> ajaxReturn(array('status'=>0,'msg'=>'添加失败!'));
+					$post = I('post.');
+					$post['createtime'] = time();
+					if(!isset($post['status'])) $post['status'] = 0;
+					$result = M('auth_rule')->add($post);
+
+					if($result){
+						$msg = array('status'=>1,'msg'=>'添加成功!');
+					}else{
+						$msg = array('status'=>0,'msg'=>'添加失败!');
+					}
 				}
+				
+				$this -> ajaxReturn($msg);
 			}
 		}
 
+		//验证规则是否重复
+		private function check_add_rule($arr){
+			return M('auth_rule')->where($arr)->find();
+		}
+
+		//删除权限
 		public function del() {
 			if(IS_POST){
 				$id = I('post.id');

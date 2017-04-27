@@ -2,12 +2,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>ThinkphpCms</title>
+    <title>{$Think.config.SITE_TITLE}-后台管理</title>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/fonts/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/layui/css/layui.css" media="all" />
-    
+    <style type="text/css">
+        .uname a{color:#fff;}
+    </style>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -20,6 +22,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
+                <li class="uname"><a target="_blank">管理员:[{$Think.session.uname}]</a></li>
                 <li><a href="/" target="_blank"><i class="iconfont">&#xe6fa;</i>前台首页</a></li>
                 <li><a href="javascript:;" class="clearCache"><i class="iconfont">&#xe6fa;</i>更新缓存</a></li>
                 <li><a href="{:U('Admin/edit',array('id' => $_SESSION['uid']))}"><i class="iconfont">&#xe691;</i>修改密码</a></li>

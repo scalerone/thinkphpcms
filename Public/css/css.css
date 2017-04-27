@@ -1,0 +1,261 @@
+/* CSS Document */
+body{margin:0;padding:0;font-size:12px; background:url(../images/logonavbg.jpg) center top repeat-x;color:#4d4d4d; overflow-x:hidden; font-family: "微软雅黑", "黑体" ;}
+dl,dd,dt,ul,li,form,p{margin:0;padding:0;}
+img{border:0;}
+.tevialign{ vertical-align:middle;}
+a:link {color: #4d4d4d;text-decoration: none;} /* 未访问的链接 */
+a:visited {color: #4d4d4d;text-decoration: none;} /* 已访问的链接 */
+a:hover {color:#F60;text-decoration: none;} /* 鼠标在链接上 */ 
+a:active {color: #4d4d4d;text-decoration: none;} /* 点击激活链接 */
+.clearall{clear:both;height:1px;overflow:hidden;}
+.f-left{float:left;}
+.f-right{float:right;}
+ul,li{list-style: none;}
+
+
+/*-------------------------------------------index----------------------------------------------------------*/
+.toplines{
+	max-width:1920px;
+	min-width:1003px;
+	height:3px;
+	background-color: #b1120d;
+	color: #fff;
+	}
+.toplines a{
+	color: #c4c4c4;
+}
+.pages a,.pages span{
+	padding: 5px 10px;
+	border: 1px solid #eee;
+}
+.pages .current{
+	background-color: #b1120d;
+	border-color: #b1120d;
+	color: #fff;
+}
+.subproslists .desc{
+	padding: 10px;
+	height: 35px;
+    overflow: hidden;
+}
+.subproslists .time{
+	padding: 5px 10px;
+}
+.toplogonavbg{
+	height:84px;
+	max-width:1920px;
+	min-width:1003px;
+	background:url(../images/topbgs.jpg) left top repeat-x;
+	}
+.toplogonav{
+	width:1003px;
+	height:84px;
+	margin:0 auto;
+	}
+.toplogoright{
+	width:570px;
+	padding:35px 0 0 0;
+	color:#828282;
+	font-family:微软雅黑;
+	text-align:right;
+	font-size:16px;
+	float:right;
+	overflow:hidden;
+	}
+.toplogoright a:link {color: #828282;text-decoration: none;} /* 未访问的链接 */
+.toplogoright a:visited {color: #828282;text-decoration: none;} /* 已访问的链接 */
+.toplogoright a:hover {color:#F60;text-decoration: none;} /* 鼠标在链接上 */ 
+.toplogoright a:active {color: #828282;text-decoration: none;} /* 点击激活链接 */
+
+.inbanners{
+	
+	height:414px;
+	max-width:1920px;
+	min-width:1003px;
+	text-align:center;
+	}
+.inicos{
+	height:129px;
+	background:url(../images/icobgs.png) left top repeat-x;
+	width:100%;
+	}
+.inicoconent{
+	width:1001px;
+	height:121px;
+	margin:0 auto;
+	list-style:none;
+	padding:0 1px;
+	overflow:hidden;
+	background:url(../images/icoleftline.jpg) left top no-repeat;
+	}
+.inicoconent li{
+	width:166px;
+	float:left;
+	height:107px;
+	text-align:center;
+	font-family:微软雅黑;
+	color:#006a76;
+	padding:14px 0 0 0;
+	background:url(../images/icoleftline.jpg) right top no-repeat;
+	}
+.incontent{
+	width:1003px;
+	padding:10px 0 15px 0;
+	margin:0 auto;
+	overflow:hidden;
+	}
+.inconlefts{
+	width:513px;
+	float:left;
+	}
+.inconlefttop{
+	width:511px;
+	height:344px;
+	background:#d6e8eb;
+	margin-bottom:10px;
+	border:1px solid #bedcdc;
+	}
+.inconleftbtm{
+	width:511px;
+	height:520px;
+	border-bottom:3px solid #3a7179;
+	border-left:1px solid #bedcdc;
+	border-right:1px solid #bedcdc;
+	border-top:1px solid #bedcdc;
+	background:url(../images/tablebg.jpg) left top repeat-x;
+	}
+.inconrights{
+	width:100%;
+	float:right;
+	height:878px;
+	background:#FFF;
+	border:1px solid #d6d6d6;
+	}
+.inconrights01{
+	background:#FFF;
+	padding:25px 25px;
+	width:790px;
+	float:right;
+	border:1px solid #d6d6d6;
+	}
+.inconrights01 dd{
+	float: left;
+}
+dd.more{
+	width: 100%;
+    text-align: center;
+    padding-top: 10px;
+}
+dd.more a{
+	padding: 6px 10px;
+	color: rgb(177, 18, 13);
+	font-size: 14px;
+}
+.inconrights dt{
+	padding:25px 25px 2px 25px;
+	font-family:微软雅黑;
+	font-size:16px;
+	color:#017c85;
+	}
+.inconrights dd{
+	padding:0 25px 25px 25px;
+	}
+.innewslist{
+	padding:17px 0;
+	background:url(../images/dot.gif) left bottom repeat-x;
+	}
+.innewslist table tr td{
+	position: relative;
+}
+.inconrights.fileList{
+	position: relative;
+}
+.inconrights.fileList .file_more{
+	position: absolute;
+	bottom: 20px;
+	width: 100%;
+	text-align: center;
+}
+.inconrights.fileList .file_more a{
+	color: rgb(177, 18, 13);
+}
+.innewslist table tr td .down{
+	position: absolute;
+    right: 10px;
+    bottom: 40px;
+    padding: 5px 10px;
+    background: rgb(177, 18, 13);
+    color: #fff;
+}
+.inmores{
+	color:#c00132;
+	padding:18px 0 0 0;
+	text-align:right;
+	}
+.inmores a:link {color: #c00132;text-decoration: none;} /* 未访问的链接 */
+.inmores a:visited {color: #c00132;text-decoration: none;} /* 已访问的链接 */
+.inmores a:hover {color:#F60;text-decoration: none;} /* 鼠标在链接上 */ 
+.inmores a:active {color: #c00132;text-decoration: none;} /* 点击激活链接 */
+.infoots{
+	background:#b1120d;
+	border-top:5px solid #b1120d;
+	max-width:1920px;
+	min-width:1003px;
+	}
+.infoottext{
+	width:1003px;
+	margin:0 auto;
+	color:#FFF;
+	padding:18px 0 20px 0;
+	}
+.subnavs{
+	padding:0 0 10px 0;
+	list-style:none;
+	overflow:hidden;
+	float:left;
+	}
+.subnavs li{
+	padding:0 2px 3px 0;
+	font-weight: bolder;
+	}
+.subnavs li a{
+	display:block;
+	height:30px;
+	line-height:30px;
+	padding:8px 5px;
+	width:140px;
+	text-align:center;
+	font-family:微软雅黑;
+	font-size:14px;
+	}
+.subnavs li a:link {color: #444444; background:#FFF; border-bottom:1px solid #c9c9cb;text-decoration: none;} /* 未访问的链接 */
+.subnavs li a:visited {color: #444444; background:#FFF; border-bottom:1px solid #c9c9cb;text-decoration: none;} /* 已访问的链接 */
+.subnavs li a:hover {color:#019794; background:#FFF; border-bottom:1px solid #00716e;text-decoration: none;} /* 鼠标在链接上 */ 
+.subnavs li a:active {color: #444444; background:#FFF; border-bottom:1px solid #c9c9cb;text-decoration: none;} /* 点击激活链接 */
+.subproslists{
+	width:300px;
+	float:left;
+	/* height:395px; */
+	margin:0 10px 10px 10px;
+	}
+.subproslists dt{
+	width: 264px;
+	height:55px;
+	background:#b1120d;
+	color:#FFF;
+	line-height:55px;
+	font-size:18px;
+	font-weight:bold;
+	font-family:微软雅黑;
+	padding:0 18px;
+	}
+.subproslists dd{
+	min-height: 300px;
+	background:#eeeeee;
+	padding:15px 18px;
+	}
+.file_time{
+	position: absolute;
+	left: 0;
+	bottom: 10px;
+}

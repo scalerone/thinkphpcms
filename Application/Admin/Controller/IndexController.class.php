@@ -16,8 +16,10 @@
 
 		public function logout() {
 			//清除session
-			session_unset();
-			session_destroy();
+			session('uid',null);
+			session('uname',null);
+			session('logintime',null);
+			session('ip',null);
 		}
 	}
 ?>

@@ -157,7 +157,7 @@
                             <div class="layui-input-block">
                               <input type="text" name="FILE_SIZE" autocomplete="off" class="layui-input" value="{$Think.config.FILE_SIZE}">
                             </div>
-                            <div class="layui-word-aux" align="center">单位KB</div>
+                            <div class="layui-word-aux" align="center">单位Byte</div>
                           </div> 
                           <div class="layui-form-item">
                             <label class="layui-form-label">允许类型</label>
@@ -388,7 +388,11 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">开启</label>
                           <div class="layui-input-block">
-                             <input type="checkbox" lay-skin="primary" value="true" name="HTML_CACHE_ON" value="1" title="是" checked="checked">
+                          <empty name="Think.config.HTML_CACHE_ON">
+                            <input type="checkbox" lay-skin="primary" value="true" name="HTML_CACHE_ON" value="0" title="是">
+                          <else />
+                            <input type="checkbox" lay-skin="primary" value="true" name="HTML_CACHE_ON" value="1" title="是" checked="checked">
+                          </empty>
                           </div>
                         </div>
                         <div class="layui-form-item">

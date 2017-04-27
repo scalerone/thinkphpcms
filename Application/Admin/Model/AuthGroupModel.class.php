@@ -6,7 +6,9 @@
 
 		public function doDelete(){
 			$group_id = I('post.id');
-
+			if($group_id == '1'){
+				$msg = array('status'=>0,'msg'=>'默认分组，静止删除!');
+			}
 			$data = M('auth_group_access')
 				->where(array('group_id'=>$group_id))
 				->select();

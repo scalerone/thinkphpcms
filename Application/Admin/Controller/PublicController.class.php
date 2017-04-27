@@ -43,9 +43,10 @@
 		}
 
 		public function uploadWateContent() {
+			$file = explode('|',C('FILE_TYPE'));
 			$config = array(
 				'size' 		=> C('FILE_SIZE'),
-				'type'		=> 	array('gif','png'),
+				'type'		=> 	$file,
 				'rootPath'	=>	'./Uploads/System/Wate/', 
 				'file'		=>	'file',
 				'autoSub'	=>  false,

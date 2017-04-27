@@ -12,19 +12,19 @@
     <div><img src="__PUBLIC__/images/bg03.jpg"></div>
 </div>
 <div id="login_wrap">
-    <h3 class="move">Admin login</h3>
+    <h3 class="move" style="top:40px;">Admin login</h3>
     <form action="{:U('index')}" method="post" class="loginForm">
-        <p class="move">
-            <input type="text" name="username" id="username" class="input" placeholder="Username">
+        <p class="move" style="top:95px;">
+            <input type="text" name="username" id="username" class="input" placeholder="管理员">
         </p>
-        <p class="move">
-            <input type="password" name="password" id="pwd" class="input" placeholder="Password">
+        <p class="move" style="top:150px;">
+            <input type="password" name="password" id="pwd" class="input" placeholder="密码">
         </p>
-        <p class="move">
-            <input type="text" name="code" id="code" class="code input" placeholder="verify" maxlength="4">
+        <p class="move" style="top:205px;">
+            <input type="text" name="code" id="code" class="code input" placeholder="验证码" maxlength="4">
             <img title="点击图片更换验证码" class="verify" src="{:U('verify')}" width="138px">
         </p>
-        <p class="move">
+        <p class="move" style="top:260px;">
             <input type="submit" value="Login in" class="input login">
         </p>
     </form>
@@ -88,8 +88,8 @@
             return false;
         });
     });
-
-    window.onload = function(){
+    //动画
+   /* window.onload = function(){
         (function(){
             var oImg = document.querySelectorAll('#bg_wrap img');
             var len = oImg.length;
@@ -145,7 +145,7 @@
                 },20);
             }
         })();
-    };
+    };*/
 </script>
 </body>
 </html>

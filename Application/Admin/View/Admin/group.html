@@ -35,9 +35,12 @@
                                     <a title="配置权限" class="editLink layui-btn layui-btn-small" href="{:U('Admin/setRules',array('id'=>$vo['id']))}">
                                         <i class="layui-icon">&#xe642;</i>
                                     </a>
-                                    <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="{$vo.id}">
+                                <if condition="$vo.id neq 1 ">
+                                     <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="{$vo.id}">
                                         <i class="layui-icon">&#xe640;</i>
                                     </a>
+                                 </if>
+                                   
                                 </div>
                             </td>
                         </tr>

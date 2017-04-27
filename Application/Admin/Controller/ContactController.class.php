@@ -3,7 +3,7 @@
 	use Think\Controller;
 
 	class ContactController extends CommonController {
-
+		//显示所有的留言
 		public function index() {
 			$this -> contacts = M('contact')->select();
 			$this -> display();
@@ -16,10 +16,12 @@
 			$this -> display();
 		}
 
-		public function edit() {
+		//编辑留言
+		/*public function edit() {
 			$this -> display();
 		}
-
+*/
+		//删除留言
 		public function del() {
 			if(IS_POST){
 				$ids = I('id');

@@ -9,9 +9,7 @@
 			//获取当前栏目信息
 			$cate = M('category')->find($catid);
 			$tmp = getTemplateName($cate['template']);
-			if('' == $tmp){
-				$tmp = 'list';
-			}
+			if('' == $tmp) $tmp = 'list';
 			
 			$this -> cate = $cate;//显示栏目
 			

@@ -6,6 +6,7 @@
 		//登录
 		public function index() {
 			if(IS_POST){
+				
 				$admin = D('Admin');
 				$result = $admin ->check();
 				//登陆成功

@@ -1,4 +1,0 @@
-[ 2017-04-17T22:44:05+08:00 ] 127.0.0.1 /home/List/index/p/2.html
-ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') ) ORDER BY sort ASC LIMIT 1' at line 1
- [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM `cms_article` WHERE ( status<>0 AND catid in() ) ORDER BY sort ASC LIMIT 1  
-

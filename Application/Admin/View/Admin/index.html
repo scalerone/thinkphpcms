@@ -33,16 +33,22 @@
                             <td>{$vo.username}</td>
                             <td>{$vo['auth_group'][0]['title']}</td>
                             <td class="layui-form">
-                              <input data-id="{$vo.id}" type="checkbox" checked="" name="status" lay-skin="switch" lay-filter="status" lay-text="正常|锁定">
+                            <if condition="$vo.status eq 1 ">
+                                <input data-id="{$vo.id}" type="checkbox" checked="" name="status" lay-skin="switch" lay-filter="status" lay-text="正常|锁定" value="1">
+                            <else/>
+                                  <input data-id="{$vo.id}" type="checkbox" name="status" lay-skin="switch" lay-filter="status" lay-text="正常|锁定" value="0">
+                            </if>
                             </td>
                             <td>
                                 <div class="layui-btn-group">
                                     <a title="编辑" class="editLink layui-btn layui-btn-small" href="{:U('Admin/edit',array('id'=>$vo['id']))}">
                                         <i class="layui-icon">&#xe642;</i>
                                     </a>
+                                <if condition="$vo.id neq 1 ">
                                     <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneLink" href="javascript:;" data-id="{$vo.id}">
                                         <i class="layui-icon">&#xe640;</i>
                                     </a>
+                                 </if>
                                 </div>
                             </td>
                         </tr>

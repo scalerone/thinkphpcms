@@ -1,0 +1,46 @@
+<include file="Public:header" />
+
+    <div class="incontent">
+      <dl class="inconrights fileList">
+        <a href="javascript:;">
+          <dt style="padding-bottom: 10px; background: url(cn/images/dot.gif) left bottom repeat-x;">
+            文件下载
+          </dt>
+        </a>
+        <dd>
+        <?php  
+        $id = I('id');  
+        $file = get_article($id,'id,title,summary,content,catid,addtime,thumb,is_top,is_rec,is_hot,hits','10','sort ASC',$page=true,$pageSize='10');
+      ?>
+        <foreach name="file['list']" item="vo" >
+          <div class="innewslist">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td width="125" height="95" rowspan="2">
+                    <a><img src="{$vo.thumb}" width="117" height="94" /></a>
+                  </td>
+                  <td height="35"><strong style="font-size:13px;"><a >{$vo.title}</a></strong></td>
+                </tr>
+                <tr>
+                  <td height="60" valign="top">
+                    <a>{$vo.summary}</a>
+                    <a data-id="{$vo.id}" href="javascript:;" class="down">立即下载</a>
+                    <span class="file_time">发布时间：{$vo['addtime']|date='Y-m-d',###}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </foreach>
+        </dd>
+        <getCate catid="86">
+        <div class="file_more pages">
+          <?php echo $file['page']; ?>
+        </div>
+        </getCate>
+      </dl>
+      <br clear="all" />
+    </div>
+  </div>
+<include file="Public:footer" />

@@ -1,57 +1,171 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>{$Think.config.SITE_TITLE}</title>
-		<meta name="keywords" content="{$Think.config.SITE_KEYWORDS}">
-		<meta name="description" content="{$Think.config.SITE_DESCRIPTION}">
-		<link rel="stylesheet" href="__PUBLIC__/css/common.css" />
-		<link rel="stylesheet" href="__PUBLIC__/css/header.css" />
-		<link rel="stylesheet" href="__PUBLIC__/css/page.css" />
-		<link rel="stylesheet" href="__PUBLIC__/css/footer.css">
-		<!--[if lt IE 9]>
-        	<script src="__PUBLIC__/js/html5shiv.min.js"></script>
-			<script src="__PUBLIC__/js/respond.min.js"></script>
-        <![endif]-->
-	</head>
-	<body>
-		<header>
-			<div class="container clear">
-				<div class="logo float_l">
-					<a href="/">
-						<img alt="{$Think.config.SITE_TITLE}" src="{$Think.config.SITE_LOGO}" width="150px" height="115px" />
-					</a>
-				</div>	
-				<div class="nav float_l">
-					<nav>
-						<ul>
-							<li class="{$cate['id']==''?'active':''}"><a href="/">首页</a></li>
-							<category catid="0" length="20" order="sort ASC" empty="">
-								<li class="{$cate['id']==$id?'active':''}"><a href="{$url}">{$catname}</a></li>
-							</category>
-						</ul>
-					</nav>
-				</div>
-				<div class="user float_r">
-					<a href="javascript:;">
-						<i class="icon-user"></i>
-					</a>
-					<a href="javascript:;" id="user-dowm">
-						<i class="icon-dowm"></i>
-					</a>
-					<div class="user-box">
-						<ul>
-							<li><a href="">登录</a></li>
-							<li><a href="">注册</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</header>
-		<section class="flexslider">
-			<ul class="slides">
-				<ads plate_id="1" num="3" order="createtime ASC">
-					<li alt="{$alt}" style="background:url({$thumb}) 50% 0 no-repeat;"></li>
-				</ads>
-			</ul>
-		</section>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="baidu-site-verification" content="M5xAYOapFT" />
+  <title>{$Think.config.SITE_TITLE}</title>
+  <meta name="keywords" content="{$Think.config.SITE_KEYWORDS}">
+  <meta name="description" content="{$Think.config.SITE_DESCRIPTION}">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/css.css" />
+  <link rel="stylesheet" href="__PUBLIC__/css/lrtk.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/highslide.css" />
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css">
+  <style type="text/css">
+    .highslide img {
+      cursor: url(cn/highslide/graphics/zoomin.cur), pointer !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="toplines" style="height:35px;color: #c4c4c4;  line-height: 30px;">
+    <div style=" width:1003px;margin:0 auto;">
+      <table>
+        <tbody>
+          <tr style="font-family:'微软雅黑', '黑体'">
+            <td style="line-height:0px;"><img src="__PUBLIC__/images/wico03.png" /></td>
+
+            <empty name="Think.session.member_name">
+                <td class="login-bar" style="overflow:hidden"> <b>客服电话</b> <b style="font-size:16px;">{$Think.config.SITE_TELPHONE} &nbsp;&nbsp;<b style="font-size:12px"><a class="cd-signin" target="_blank">登录</a>&nbsp;|&nbsp;<a target="_blank" class="cd-signup">注册</a> </b></td>
+            <else />
+                <td class="" style="overflow:hidden"> <b>客服电话</b> <b style="font-size:16px;">{$Think.config.SITE_TELPHONE}  &nbsp;&nbsp;<b style="font-size:12px"><a class="cd-signin" target="_blank">{$Think.session.member_name}</a>&nbsp;&nbsp;<a href="{:U('Home/User/logout')}" target="_blank" class="cd-signup">退出</a> </b></td>
+            </empty> 
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="hidden" onclick="$(this).attr('style','display:none');$('#hiddenimg').attr('style','display:none');" style="display:none; opacity:1; background:#000  position:fixed;width:1440px; height:100%; text-align:center;">
+    </div>
+    <div id="hiddenimg">
+      
+      <div id="hiddenimg2" style=" height:100px; background:#ddd; display:none; text-align:center; line-height:36px;">
+        打开微信，点击底部的″发现″，使用″扫一扫″
+        <br />即可关注xxxx官方微信。
+      </div>
+    </div>
+  </div>
+  <div class="toplogonavbg">
+    <div class="toplogonav">
+      <a href="/"><img src="{$Think.config.SITE_LOGO}" width="266" height="79" class="f-left" /></a>
+      <div class="toplogoright">
+        <a href="/">首页</a>&nbsp; | &nbsp;
+        <getCate catid="85">
+          <a href="{$url}">{$catname}</a>&nbsp; | &nbsp;
+        </getCate>
+        <getCate catid="86">
+          <a href="{$url}">{$catname}</a>
+        </getCate>
+      </div>
+      <br clear="all" />
+    </div>
+  </div>
+  <style type="text/css">
+    /* banner S */
+    
+    .banner {
+      height: 604px;
+    }
+    
+    .banner .flexslider {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      background: url(../images/loading.gif) 50% no-repeat;
+    }
+    
+    .banner .slides {
+      position: relative;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    .banner .slides li {
+      height: 100%;
+    }
+    
+    .banner .flex-control-nav {
+      position: absolute;
+      bottom: 10px;
+      z-index: 2;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .banner .flex-control-nav li {
+      margin: 0 5px;
+      display: inline-block;
+      *zoom: 1;
+      *display: inline;
+      width: 15px;
+      height: 15px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: #fff;
+      line-height: 13px;
+    }
+    
+    .banner .flex-control-nav a {
+      display: inline-block;
+      *zoom: 1;
+      *display: inline;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      -moz-border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+      text-indent: 100px;
+    }
+    
+    .banner .flex-control-nav .flex-active {
+      background-color: #b1120d;
+    }
+    
+    .banner .flex-direction-nav {
+      position: absolute;
+      z-index: 3;
+      width: 100%;
+      top: 45%;
+    }
+    
+    .banner .flex-direction-nav li a {
+      display: block;
+      width: 50px;
+      height: 50px;
+      overflow: hidden;
+      cursor: pointer;
+      position: absolute;
+    }
+    
+    .banner .flex-direction-nav li a.flex-prev {
+      left: 40px;
+      background: url(../images/prev.png) center center no-repeat;
+    }
+    
+    .banner .flex-direction-nav li a.flex-next {
+      right: 40px;
+      background: url(../images/next.png) center center no-repeat;
+    }
+    /* banner E */
+  </style>
+  <div class="banner">
+    <div class="flexslider">
+      <ul class="slides">
+      <ads plate_id="1" num="8">
+        <li style="background:url({$thumb}) 50% 0 no-repeat;"></li>
+      </ads>
+      </ul>
+    </div>
+  </div>
+  <div style="background:#ececef; max-width:1920px;
+	min-width:1003px;">
+    <!-- <div class="inicos">
+      <ul class="inicoconent">
+        <li><img src="images/ico01.jpg" width="80" height="59" /><br /> 无抵押无担保<br /> 0担保，纯信用 </li>
+        <li><img src="images/ico02.jpg" width="80" height="59" /><br /> 门槛低<br /> 月入4000元即可申请</li>
+        <li><img src="images/ico03.jpg" width="80" height="59" /><br /> 额度最高50万 </li>
+        <li><img src="images/ico04.jpg" width="80" height="59" /><br /> 最长可贷48个月 </li>
+        <li><img src="images/ico05.jpg" width="80" height="59" /><br /> 简单、快速<br /> 最快1天放款</li>
+        <li><img src="images/ico06.jpg" width="80" height="59" /><br /> 还款压力小、借款10万元<br /> 月供最低仅需三千</li>
+      </ul>
+    </div> -->

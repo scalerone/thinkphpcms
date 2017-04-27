@@ -21,8 +21,25 @@
 
 
 				if(!isset($post['app_sub'])) $post['app_sub'] = 0;
+				//p(C('URL_ROUTE_RULES')['list/:id\d']);die;
 				
-				if($category -> add($post)){
+				$id = $category -> add($post);
+				//p($id);die;
+				if($id){
+					$url = '';
+					//设置栏目的url
+					switch ($post['type']) {
+						case '1':
+							$url = '/list/' .$id . C('HTML_FILE_SUFFIX');
+							break;
+						case '2':
+							$url = '/page/' .$id . C('HTML_FILE_SUFFIX');
+						    break;
+						case '3':
+							$url = '/show/' .$id . C('HTML_FILE_SUFFIX');
+							break;
+					}
+					$category ->where(array('id'=>$id))-> setField('url',$url);
 					$this -> ajaxReturn(array('status'=>'1','msg'=>'添加成功!'));
 				}else{
 					$this -> ajaxReturn(array('status'=>'0','msg'=>'添加失败,请重新添加!'));
@@ -93,22 +110,27 @@
 
 		//更新排序
 		public function updateSort() {
-			$post = I('post.');
-			unset($post['status']);
-			$category = M('Category');
-			foreach ($post as $id => $value) {
-				$category -> where(array('id'=>$id)) -> setField('sort',$value);
+
+			if(IS_POST){
+				$post = I('post.');
+				unset($post['status']);
+				$category = M('Category');
+				foreach ($post as $id => $value) {
+					$category -> where(array('id'=>$id)) -> setField('sort',$value);
+				}
+				$this -> success('更新排序成功!',U('Category/index'));
 			}
-			$this -> success('更新排序成功!',U('Category/index'));
 		}
 
 		//更新栏目状态
 		public function updateStatus() {
-			$result = M('Category') -> save(I('get.'));
-			if($result !== false){
-				$this -> ajaxReturn(array('status'=>1,'msg'=>'操作成功!'));
-			}else{
-				$this -> ajaxReturn(array('status'=>0,'msg'=>'操作失败!'));
+			if(IS_POST){
+				$result = M('Category') -> save(I('post.'));
+				if($result !== false){
+					$this -> ajaxReturn(array('status'=>1,'msg'=>'操作成功!'));
+				}else{
+					$this -> ajaxReturn(array('status'=>0,'msg'=>'操作失败!'));
+				}
 			}
 		}
 

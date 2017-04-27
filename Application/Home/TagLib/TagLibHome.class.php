@@ -11,7 +11,7 @@
 					'attr' => 'catid',
 				),
 			'list'	=> array(
-					'attr'	=> 'catid,order,length,empty',
+					'attr'	=> 'catid,order,length,empty,type',
 				),
 			'position' => array(
 					'close' => '0',
@@ -82,20 +82,25 @@
 
 		//文章列表循环
 		public function _list($attr,$content) {
-			//获取栏目catid
-			$id = $attr['catid'];
-			if('' == $id) $id = I('get.id');
-			//获取子栏目ID
-			$cates = M('Category')->field('id,pid')->select();
-			$cates = getChildsById($cates,$id);
-			$ids = implode(',',$cates[0]);
-			if(empty($ids)) $ids = $id;
 			//设置属性的默认值
 			$length = !empty($attr['length'])?$attr['length']:'60';
 			$empty = !empty($attr['empty'])?$attr['empty']:'';
 			$order = !empty($attr['order'])?$attr['order']:'sort ASC';
-
-			$sql = 'M("article")->query("select * from cms_article where (catid in('.$ids.') and status<>0)");';
+			$attr = !empty($attr['order'])?$attr['type']:'is_hot=0';//'is_hot=0'
+			//获取栏目catid
+			$id = $attr['catid'];
+			//id为0则查询所有分类的文章
+			if($id == 0){
+				$sql = 'M("article")->query("select * from cms_article where ('.$attr.' and status<>0)");';
+			}else{
+				if('' == $id) $id = I('get.id');
+				//获取子栏目ID
+				$cates = M('Category')->field('id,pid')->select();
+				$cates = getChildsById($cates,$id);
+				$ids = implode(',',$cates[0]);
+				if(empty($ids)) $ids = $id;
+				$sql = 'M("article")->query("select * from cms_article where (catid in('.$ids.') and '.$attr.' and status<>0)");';
+			}
 
 			$str = '<?php ';
 			$str .= '$list='.$sql;
@@ -131,8 +136,6 @@
 			$str .= 'foreach($cates as $key=>$cate_val): ';
 			$str .= 'extract($cate_val);';
 			$str .= '$index=$key+1;';
-			$str .= 'if($type==1) $url=U("/list/".$id);';
-			$str .= 'if($type==2) $url=U("/page/".$id);';
 			$str .= '?>';
 			$str .= $content;
 			$str .='<?php endforeach;?>';
@@ -147,7 +150,6 @@
 <?php
 			\$cate = M('category')->where("status=1")->find(intval({$attr['catid']}));
 			extract(\$cate);
-			\$url = U('/cate/'.\$id);	
 ?>
 str;
 			$str .= $content;

@@ -34,12 +34,13 @@
 				$len = count($post['article_files']);
 
 				if($result){
+					//存在附件
 					if($len>0){
-						//存在附件
 						$file = M('Article_files');
+
 						//添加附件
 						for ($i=0; $i < $len; $i++) { 
-							
+							$document_path = $_SERVER['DOCUMENT_ROOT'] . $post['article_files'][$i];
 							$data = array(
 									'article_id' => $result,
 									'filename' => $post['files_name'][$i],
@@ -47,6 +48,7 @@
 									'fileurl'=> $post['article_files'][$i],
 									'filesize'=> $post['files_size'][$i],
 									'addtime' => time(),
+									'filesavepath' => $document_path,
 								);
 							$file->add($data);
 						}
@@ -116,6 +118,7 @@
 
 						//更新附件
 						for ($i=0; $i < $len; $i++) { 
+							$document_path = $_SERVER['DOCUMENT_ROOT'] . $post['article_files'][$i];
 							$data = array(
 									'article_id' => $post['id'],
 									'filename' => $post['files_name'][$i],
@@ -123,7 +126,9 @@
 									'fileurl'=> $post['article_files'][$i],
 									'filesize'=> $post['files_size'][$i],
 									'addtime' => time(),
+									'filesavepath' => $document_path,
 								);
+
 							$file->add($data);
 						}
 					}

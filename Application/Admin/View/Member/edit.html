@@ -56,7 +56,12 @@
 
                    <div class="layui-form-item layui-form-text">
                       <label class="layui-form-label">状态：</label>
-                      <input type="checkbox" {$member["status"]==0?'checked=""':''} name="status" data-id="{$member.id}" value="{$member.status}" lay-skin="switch" lay-filter="status" lay-text="正常|锁定">
+                      <if condition="$member.status eq 1">
+                        <input type="checkbox" checked="checked" name="status[]" data-id="1" value="{$member.status}" lay-skin="switch" lay-filter="status" lay-text="正常|锁定">
+                      <else/>
+                        <input type="checkbox" name="status[]" data-id="{$member.id}" value="0" lay-skin="switch" lay-filter="status" lay-text="正常|锁定">
+                      </if>
+                      
                   </div>
                   
                    <div class="layui-form-item">
@@ -76,6 +81,15 @@
 <script type="text/javascript">
     layui.use(['form'], function(){
       var form = layui.form();
+
+        form.on('switch(status)', function(data){
+            var elem = data.elem;
+            if(elem.checked){
+              elem.value = '1';
+            }else{
+              elem.value = '0';
+            }
+        });
         //文章缩略图上传
         $('#_thumb').bind('change',function(){
           //限制文件类型与大小

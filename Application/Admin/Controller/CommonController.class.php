@@ -13,13 +13,15 @@
 			$rule_arr = C('AUTH_NOT_ACTION');
 			//当前rule
 			$rule = CONTROLLER_NAME .'/'. ACTION_NAME;
-			/*if(in_array($rule,$rule_arr)){
+
+			//开始验证权限
+			if(in_array($rule,$rule_arr)){
 				return true;
 			}else{
 				if(!$auth->check(CONTROLLER_NAME .'/'. ACTION_NAME,session('uid'))){
 		            $this->error('没有权限!');
 		       	}
-			}*/
+			}
 		}
 	}
 ?>

@@ -2,8 +2,8 @@
 return array(
 	/* 数据库设置 */
     'DB_TYPE'               =>  'mysql',     // 数据库类型
-    'DB_HOST'               =>  'localhost', // 服务器地址
-    'DB_NAME'               =>  'thinkphpcms',          // 数据库名
+    'DB_HOST'               =>  '127.0.0.1', // 服务器地址
+    'DB_NAME'               =>  'jingrongtest',          // 数据库名
     'DB_USER'               =>  'root',      // 用户名
     'DB_PWD'                =>  'root',          // 密码
     'DB_PORT'               =>  '3306',        // 端口
@@ -13,7 +13,7 @@ return array(
     'DB_BACKUP_PATH'     => './Public/backup/',     //数据库备份路径必须以 / 结尾；
     
     //显示调试信息
-    'SHOW_PAGE_TRACE'       =>  true, 
+
 
     // 开启静态缓存
     'HTML_CACHE_TIME' => 60, // 全局静态缓存有效期（秒）
@@ -31,9 +31,9 @@ return array(
     'URL_MODEL'             =>  2,
     'URL_ROUTER_ON'         =>  true,   // 是否开启URL路由
     'URL_ROUTE_RULES'       =>  array(
-            'list/:id\d' => 'Home/List/index',
-            'page/:id\d' => 'Home/Page/index',
-            'show/:id\d' => 'Home/Show/index',
+            'list/:id\d' => 'Home/List/index',//列表页0
+            'page/:id\d' => 'Home/Page/index',//单页面1
+            'show/:id\d' => 'Home/Show/index',//详情页面2
 
     ), 
 
@@ -52,23 +52,25 @@ return array(
 
     //不需要认证的方法
     'AUTH_NOT_ACTION' => array(
+        'Login/index',
+        'Login/verify',
         'Index/index',
         'Index/logout',
         'Admin/edit',
+        'Admin/checkUname',
         'Cache/index',
         'Public/uploadLogo',
         'Public/uploadIco',
         'Public/uploadWateThumb',
         'Public/uploadWateContent',
+        'Public/uploadThumb',
         'Article/upload',
         'Article/editImgUpload',
+        'Article/uploadFiles'
     ),
 
 
     //自定义标签相关
     'TAGLIB_BUILD_IN' => 'cx,Home\TagLib\TagLibHome',
-
-    //'TMPL_EXCEPTION_FILE'=>'./Application/Common/Common/error.html' // 定义公共错误模板
-    //'ERROR_PAGE'=>'/Admin/index.html' // 定义错误跳转页面URL地址
     
 );

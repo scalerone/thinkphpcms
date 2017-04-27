@@ -1,80 +1,261 @@
-<footer>
-	<div class="container clear">
-		<div class="stu float_l">
-			<h2 class="h2">
-				<getCate catid="57">
-					<a href="{$url}">{$catname}</a>
-				</getCate>
-			</h2>
-			<category catid="57" length="3" order="sort ASC">
-				<p><a href="{$url}">{$catname}</a></p>
-			</category>
-		</div>
-		<div class="contact float_l">
-			<h2 class="h2">
-				<getCate catid="62">
-					<a href="{$url}">{$catname}</a>
-				</getCate>
-			</h2>
-			<p>热线：{$Think.config.SITE_TELPHONE}</p>
-			<p>邮箱：{$Think.config.SITE_EMAIL}</p>
-			<p>地址: {$Think.config.SITE_ADDRESS}</p>
-		</div>
-		<div class="about float_l">
-			<h2 class="h2">
-				<getCate catid="55">
-					{$catname}
-				</getCate>
-			</h2>
-			<p class="i">
-				<a href="">
-					<i class="icon-botton icon-qq"></i>
-				</a>
-				<a href="">
-					<i class="icon-botton icon-weixin"></i>
-				</a>
-				<a href="">
-					<i class="icon-botton icon-sina"></i>
-				</a>
-				<a href="">
-					<i class="icon-botton icon-face"></i>
-				</a>
-			</p>
-			<p>{$Think.config.SITE_CR}</p>
-		</div>
-		<div class="qcode float_r">
-			<img src="__PUBLIC__/images/code.jpg">
-			<p>扫一扫，关注我们！</p>
-		</div>
-	</div>
-</footer>
-<script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.min.js" ></script>
-<script type="text/javascript" src="__PUBLIC__/js/jquery.flexslider-min.js" ></script>
-<script type="text/javascript" src="__PUBLIC__/js/index.js" ></script>
-<script type="text/javascript" src="__PUBLIC__/js/layer/layer.js" ></script>
-<script type="text/javascript">
-	//提交留言
-	$('#message').on('click',function(){
-		//var $form = $('.form');
-		$.ajax({
-			url: '{:U("Contact/cont")}',
-			type: 'post',
-			dataType: 'json',
-			data: $('.message_form').serialize(),
-			success:function(res){
-				console.log(res);
-				if(res.status == 1){
-					layer.msg(res.msg,{icon:1});
-				}else{
-					layer.msg(res.msg,{icon:0});
-				}
-			},
-			error: function(res){
-				layer.msg(res.msg,{icon:1});
-			}
-		});
-		return false;
-	});
-</script>
+ <div class="infoots">
+    <div class="infoottext">
+        {$Think.config.SITE_CR|htmlspecialchars_decode}
+    </div>
+  </div>
+
+  <div class="cd-user-modal">
+    <div class="cd-user-modal-container">
+      <ul class="cd-switcher">
+        <li><a href="#0">用户登录</a></li>
+        <li><a href="#0">注册新用户</a></li>
+      </ul>
+
+      <div id="cd-login">
+        <!-- 登录表单 -->
+        <form class="cd-form login-from">
+          <p class="fieldset">
+            <label class="image-replace cd-username" for="signin-username">用户名或手机</label>
+            <input name="name" class="full-width has-padding has-border" id="signin-username" type="text" placeholder="用户名或手机">
+          </p>
+
+          <p class="fieldset">
+            <label class="image-replace cd-password" for="signin-password">密码</label>
+            <input name="pass" class="full-width has-padding has-border" id="signin-password" type="password" placeholder="输入密码">
+          </p>
+
+          <!-- <p class="fieldset">
+            <input type="checkbox" id="remember-me" checked>
+            <label for="remember-me">记住登录状态</label>
+          </p> -->
+
+          <p class="fieldset">
+            <input id="login" class="full-width2" type="submit" value="登 录">
+          </p>
+        </form>
+      </div>
+
+      <div id="cd-signup">
+        <!-- 注册表单 -->
+        <form class="cd-form register-form">
+          <p class="fieldset">
+            <label class="image-replace cd-username" for="reg-username">用户名或手机</label>
+            <input name="telphone" class="full-width has-padding has-border" id="reg-username" type="text" placeholder="输入邮箱或手机号码">
+          </p>
+
+          <p class="fieldset">
+            <label class="image-replace cd-password" for="reg-password">密码</label>
+            <input name="pass" class="full-width has-padding has-border" id="reg-password" type="password" placeholder="输入密码">
+          </p>
+
+          <p class="fieldset">
+            <label class="image-replace cd-password" for="reg-code">验证码</label>
+            <input name="code" style="width:25%;" class="full-width has-padding has-border" id="reg-code" type="text" placeholder="输入验证码">
+            <img id="verify" src="{:U('Home/User/Verify')}" style="border:1px solid #eee; height: 45px;width: 180px;display:inline-block;*zoom:1;*display:inline;vertical-align: middle;">
+          </p>
+
+          <!--  <p class="fieldset">
+           <input type="checkbox" id="accept-terms">
+           <label for="accept-terms">我已阅读并同意 <a href="#0">用户协议</a></label>
+         </p> -->
+
+          <p class="fieldset">
+            <input id="register" class="full-width2" type="submit" value="注册新用户">
+          </p>
+        </form>
+      </div>
+
+      <a href="javascript:;" class="cd-close-form">关闭</a>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.min.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/js/login.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/js/jquery.flexslider-min.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/js/plugin/layer/layer.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.flexslider').flexslider({
+        directionNav: false,
+        pauseOnAction: false
+      });
+
+      //下载文件
+      (function(){
+        $('.innewslist table tr td .down').on('click',function(){
+          var that = $(this);
+          var check_login_url = '{:U("File/check_login")}';
+          //var file_url = '{:U("File/index")}';
+          $.ajax({
+            url: check_login_url,
+            type: 'post',
+            dataType: 'json',
+            success: function(response){
+              if(response.status == 1){
+                //文件下载
+                var id = that.data('id');
+                console.log(id);
+                window.location.href = '/Home/File/index/id/' + id;
+              }else{
+                  layer.msg(response.msg,{icon:2});
+                  setTimeout(function(){
+                    $('.cd-signin').trigger('click');
+                  },3000);
+              }
+            },
+            error: function(response){
+              layer.msg('发生错误!',{icon:2});
+            }
+          });
+          
+          return false;
+        });
+      })();
+      //查看视频
+      $('.inconrights01 div a').on('click', function () {
+        var check_login_url = '{:U("Show/check_login")}';
+        $.ajax({
+          url: check_login_url,
+          type: 'post',
+          dataType: 'json',
+          success:function(response){
+            if(response.status == 1){
+              //查看视频
+              var url = '/show/' + $('#movie_id').data('id') + '.html';
+              layer.open({
+                type: 1,
+                title: '观看视频',
+                area: ['560px', '360px'],
+                shade: 0.8,
+                closeBtn: 1,
+                maxmin: true,
+                shadeClose: true,
+                content: "<video width='100%' height='100%' src="+url+" controls autobuffer></video>"
+              });
+            }else{
+              layer.msg(response.msg,{icon:2});
+              setTimeout(function(){
+                $('.cd-signin').trigger('click');
+              },3000);
+            }
+          },
+          error: function(response){
+            layer.msg('请先登录后再操作！',{icon:2});
+          }
+        });
+      });
+    });
+    //更换验证码
+    (function(){
+      $('#verify').on('click',function(){
+        $(this).attr('src',"{:U('Home/User/Verify')}");
+      });
+    })();
+    //登录
+    (function(){
+      $('#login').on('click',function(){
+        var url = "{:U('Home/User/login')}";
+        var uname = $.trim($('#signin-username').val());
+        var password = $.trim($('#signin-password').val());
+        if(!(uname.match(/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/) || uname.match(/^[1][3|5|8|7][0-9]{9}$/))){
+          showMsg('用户名格式不正确!');
+          $('#signin-username').focus();
+          return false;
+        }
+        if(password.length < 6){
+          showMsg('密码格式错误!');
+          $('#signin-password').focus();
+          return false;
+        }
+        $.ajax({
+          url: url,
+          type: 'post',
+          dataType: 'json',
+          data: $('.login-from').serialize(),
+          beforeSend: function(){
+            $('#login').removeAttr('disabled','true');
+          },
+          success: function(response){
+            if(response.status == 1){
+              layer.msg(response.msg,{icon:1});
+              setTimeout(function(){
+                document.location.reload();
+              },2000);//重新加载当前页面
+            }else{
+              layer.msg(response.msg,{icon:0})
+            }
+          },
+          error: function(response){
+            layer.msg('登录失败!',{icon:2});
+            console.log(response);
+          },
+          complete: function(){
+            $('#login').removeAttr('disabled');
+          }
+        });
+
+        function showMsg(str){
+          layer.msg(str,{icon:2});
+        }
+        
+        return false;
+      });
+    })();
+    //注册
+    (function(){
+      $('#register').on('click',function(){
+        var uname = $.trim($('#reg-username').val());
+        var pass = $.trim($('#reg-password').val());
+        if(!(uname.match(/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/) || uname.match(/^[1][3|5|8|7][0-9]{9}$/))){
+          showMsg('手机号码或者邮箱格式不正确!');
+          $('#reg-username').focus();
+          return false;
+        }
+        if(pass.length < 6){
+          showMsg('密码长度必须大于6位数!');
+          $('#reg-password').focus();
+          return false;
+        }
+        if($('#reg-code').val() == ''){
+          showMsg('请输入验证码!');
+          $('#reg-code').focus();
+          return false;
+        }
+
+        function showMsg(str){
+          layer.msg(str,{icon:2});
+        }
+        var url = "{:U('Home/User/register')}";
+        var register_from = $('.register-form');
+        $.ajax({
+          url: url,
+          type: 'post',
+          dataType: 'json',
+          data: register_from.serialize(),
+          beforeSend: function(){
+            $('#register').attr('disabled',"true");
+          },
+          success: function(response){
+            if(response.status == 1){
+              layer.msg(response.msg,{icon:1});
+              setTimeout(function(){
+                document.location.reload();
+              },2000);//重新加载当前页面
+            }else{
+              layer.msg(response.msg,{icon:0})
+            }
+          },
+          error: function(response){
+            layer.msg('出现错误!',{icon:2});
+            console.log(response);
+          },
+          complete: function(){
+            $('#register').removeAttr('disabled');
+          }
+        });
+        return false;
+      });
+    })();
+  </script>
 </body>
 </html>

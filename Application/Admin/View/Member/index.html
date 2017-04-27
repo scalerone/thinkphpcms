@@ -20,12 +20,12 @@
                       <thead>
                         <tr>
                             <th width="3%"><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
-                            <th width="10%">用户名</th>
-                            <th>邮箱</th>
-                            <th>注册时间</th>
-                            <th>最后登录时间</th>
-                            <th>最后登录IP</th>
-                            <th width="14%">操作</th>
+                            <th width="20%">用户名</th>
+                            <th width="20%">邮箱</th>
+                            <th width="15%">注册时间</th>
+                            <th width="15%">最后登录时间</th>
+                            <th width="15%">最后登录IP</th>
+                            <th width="10%">操作</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -77,21 +77,21 @@
           <div class="layui-form-item">
             <label class="layui-form-label wid_auto">用户名</label>
             <div class="layui-input-block margin-left80">
-              <input type="text" name="name" required  lay-verify="required" placeholder="请输入标用户名" autocomplete="off" class="layui-input">
+              <input type="text" name="name" required  lay-verify="required" placeholder="请输入标用户名" autocomplete="off" class="layui-input" id="check_uname">
             </div>
           </div>
 
           <div class="layui-form-item">
             <label class="layui-form-label wid_auto">密码</label>
             <div class="layui-input-block margin-left80">
-              <input type="text" name="pass" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+              <input type="text" name="pass" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" id="check_pass">
             </div>
           </div>
 
           <div class="layui-form-item">
             <label class="layui-form-label wid_auto">邮箱</label>
             <div class="layui-input-block margin-left80">
-              <input type="text" name="email" required  lay-verify="" placeholder="" autocomplete="off" class="layui-input">
+              <input type="text" name="email" required placeholder="" autocomplete="off" class="layui-input" lay-verify="email" id="check_email">
             </div>
           </div>
 
@@ -196,6 +196,29 @@
           shadeClose: true,
           content: $('#addWrap'),
         });
+    });
+
+    //验证用户名是否存在
+    $('#check_pass').on('focus',function(){
+      var uname = $('#check_uname').val();
+      uname = $.trim(uname)
+      if(uname === '' || uname.length<3){
+        layer.tips('用户名长度必须大于等于3', '#check_uname', {
+          tips: [4, '#2b2e37']
+        });
+        $('#check_uname').focus();
+      }
+    });
+
+    $('#check_email').on('focus',function(){
+      var pass = $('#check_pass').val();
+      pass = $.trim(pass)
+      if(pass === '' || pass.length<6){
+        layer.tips('密码长度必须大于等于6', '#check_pass', {
+          tips: [4, '#2b2e37']
+        });
+        $('#check_pass').focus();
+      }
     });
 
 </script>

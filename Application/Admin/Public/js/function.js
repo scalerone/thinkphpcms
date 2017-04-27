@@ -152,7 +152,7 @@ function fileUpload(opt,id,url){
        * @return {[null]}     []
        */
       function ajaxDeleteElems(ids,url,method,elem,elem2) {
-        debugger;
+       // debugger;
            $.ajax({
               type: method,
               url: url,

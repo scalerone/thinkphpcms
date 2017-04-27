@@ -2,12 +2,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>ThinkphpCms</title>
+    <title><?php echo (C("SITE_TITLE")); ?>-后台管理</title>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/fonts/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="/./Application/Admin/Public/layui/css/layui.css" media="all" />
-    
+    <style type="text/css">
+        .uname a{color:#fff;}
+    </style>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -20,6 +22,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
+                <li class="uname"><a target="_blank">管理员:[<?php echo (session('uname')); ?>]</a></li>
                 <li><a href="/" target="_blank"><i class="iconfont">&#xe6fa;</i>前台首页</a></li>
                 <li><a href="javascript:;" class="clearCache"><i class="iconfont">&#xe6fa;</i>更新缓存</a></li>
                 <li><a href="<?php echo U('Admin/edit',array('id' => $_SESSION['uid']));?>"><i class="iconfont">&#xe691;</i>修改密码</a></li>
@@ -40,8 +43,8 @@
                     <dl class="layui-nav-child pdleft">
                         <dd><a href="<?php echo U('Article/index');?>"><i class="iconfont">&#xe66a;</i>文章管理</a></dd>
                         <dd><a href="<?php echo U('Category/index');?>"><i class="iconfont">&#xe60d;</i>栏目管理</a></dd>
-                        <dd><a href="<?php echo U('Contact/index');?>"><i class="iconfont">&#xe61b;</i>留言管理</a></dd>
-                        <dd><a href="<?php echo U('Comment/index');?>"><i class="iconfont">&#xe621;</i>评论管理</a></dd>
+                        <dd style="display: none;"><a href="<?php echo U('Contact/index');?>"><i class="iconfont">&#xe61b;</i>留言管理</a></dd>
+                        <dd style="display: none;"><a href="#"><i class="iconfont">&#xe621;</i>评论管理</a></dd>
                         <dd><a href="<?php echo U('Links/index');?>"><i class="iconfont">&#xe636;</i>友情链接</a></dd>
                         <dd><a href="<?php echo U('Ads/index');?>"><i class="iconfont">&#xe622;</i>广告管理</a></dd>
                     </dl>
@@ -68,12 +71,7 @@
                         <dd><a href="<?php echo U('System/backup');?>"><i class="iconfont">&#xe634;</i>数据备份</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="iconfont">&#xe60e;</i>扩展功能</a>
-                    <dl class="layui-nav-child pdleft">
-                        <dd><a href="system.html"><i class="iconfont">&#xe64f;</i>语言设置</a></dd>
-                    </dl>
-                </li>
+               
             </ul>
 
 
@@ -123,49 +121,49 @@
                     </div>
                 </div>
                 <div class="result-content">
-                    <table class="layui-table layui-form">
-                      <thead>
-                        <tr>
-                            <th width="3%"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
-                            <th width="5%">排序</th>
-                            <th>标题</th>
-                            <th width="15%">所属栏目</th>
-                            <th width="15%">添加时间</th>
-                            <th width="12%">状态</th>
-                            <th width="12%">操作</th>
-                        </tr> 
-                      </thead>
-                      <tbody>
-                        <?php if(is_array($articles)): $i = 0; $__LIST__ = $articles;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$a): $mod = ($i % 2 );++$i;?><tr data-id="<?php echo ($a["id"]); ?>">
-                                <td><input class="set" value="<?php echo ($a["id"]); ?>" type="checkbox" lay-skin="primary"></td>
-                                <td><input class="common-text common-text-center" size="3" type="text" value="<?php echo ($a["sort"]); ?>" name="<?php echo ($a["id"]); ?>"></td>
-                                <td><?php echo (substr($a["title"],0,27)); ?>
-                                <?php if($a["thumb"] != '' ): ?><i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="<?php echo ($a["thumb"]); ?>">&#xe64a;</i>
-                                <?php else: endif; ?>
-                                </td>
-                                <td><?php echo ($a["cate_name"]); ?></td>
-                                <td><?php echo (date("Y-m-d H:m:i",$a["addtime"])); ?></td>
-                                <td>
-                                    <?php echo ($a['is_rec']==1?'<span class="text-info">推荐</span>':''); ?>
-                                    <?php echo ($a['is_top']==1?'<span class="text-success">置顶</span>':''); ?>
-                                    <?php echo ($a['is_hot']==1?'<span class="text-hot">热门</span>':''); ?>
-                                </td>
-                                <td>
-                                    <div class="layui-btn-group">
-                                        <a title="修改" class="layui-btn layui-btn-small" href="<?php echo U('Article/edit',array('id'=>$a['id']));?>">
-                                            <i class="layui-icon">&#xe642;</i>
-                                        </a>
-                                        <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneArticle" href="javascript:;">
-                                            <i class="layui-icon">&#xe640;</i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr><?php endforeach; endif; else: echo "" ;endif; ?>
-                      </tbody>
-                    </table>
-                    <div id="pages">
-                        <?php echo ($page); ?>
-                    </div>
+                    <?php if(!empty($articles)): ?><table class="layui-table layui-form">
+                            <thead>
+                                <tr>
+                                    <th width="3%"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+                                    <th width="6%">排序</th>
+                                    <th>标题</th>
+                                    <th width="15%">所属栏目</th>
+                                    <th width="15%">添加时间</th>
+                                    <th width="12%">状态</th>
+                                    <th width="12%">操作</th>
+                                </tr> 
+                            </thead>
+                            <tbody>
+                                <?php if(is_array($articles)): $i = 0; $__LIST__ = $articles;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$a): $mod = ($i % 2 );++$i;?><tr data-id="<?php echo ($a["id"]); ?>">
+                                        <td><input class="set" value="<?php echo ($a["id"]); ?>" type="checkbox" lay-skin="primary"></td>
+                                        <td><input class="common-text common-text-center" size="3" type="text" value="<?php echo ($a["sort"]); ?>" name="<?php echo ($a["id"]); ?>"></td>
+                                        <td><?php echo (substr($a["title"],0,27)); ?>
+                                        <?php if($a["thumb"] != '' ): ?><i style="cursor: pointer;vertical-align: middle;" class="layui-icon icon-thumb" data-src="<?php echo ($a["thumb"]); ?>">&#xe64a;</i>
+                                        <?php else: endif; ?>
+                                        </td>
+                                        <td><?php echo ($a["cate_name"]); ?></td>
+                                        <td><?php echo (date("Y-m-d H:m:i",$a["addtime"])); ?></td>
+                                        <td>
+                                            <?php echo ($a['is_rec']==1?'<span class="text-info">推荐</span>':''); ?>
+                                            <?php echo ($a['is_top']==1?'<span class="text-success">置顶</span>':''); ?>
+                                            <?php echo ($a['is_hot']==1?'<span class="text-hot">热门</span>':''); ?>
+                                        </td>
+                                        <td>
+                                            <div class="layui-btn-group">
+                                                <a title="修改" class="layui-btn layui-btn-small" href="<?php echo U('Article/edit',array('id'=>$a['id']));?>">
+                                                    <i class="layui-icon">&#xe642;</i>
+                                                </a>
+                                                <a title="删除" class="layui-btn layui-btn-small layui-btn-danger delOneArticle" href="javascript:;">
+                                                    <i class="layui-icon">&#xe640;</i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                            </tbody>
+                        </table>
+                        <div id="pages">
+                            <?php echo ($page); ?>
+                        </div><?php endif; ?>
                 </div>
             </form>
         </div>
